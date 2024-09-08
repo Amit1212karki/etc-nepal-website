@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,8 @@ INSTALLED_APPS = [
     'video',
     'publication',
     'team',
-    'contact'
+    'contact',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +65,7 @@ ROOT_URLCONF = 'etcportfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,9 +126,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# URL to use when referring to static files (in templates, etc.)
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Directory where Django will look for static files during development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Directory where static files will be collected for production (when running 'collectstatic')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 
@@ -139,3 +148,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SITE_TITLE = 'ETC'
+
+JAZZMIN_SETTINGS = {
+
+    "site_title": "ETC",
+    "site_header": "ETC",
+    "site_brand": "ETC",
+    "copyright": "Developed by Hunchha Digital PVT. LTD",
+    
+}
+
+APPEND_SLASH = False
+
+RECAPTCHA_PUBLIC_KEY = '6LeyfQ4qAAAAADZRq0llG77QeLWzU_G7BC954p8I'
+RECAPTCHA_PRIVATE_KEY = '6LeyfQ4qAAAAAPEo4sBUxphXd73c6c_cjitRFVTe'
+
+RECAPTCHA_DEFAULT_ERROR_MESSAGE = 'Invalid reCAPTCHA. Please try again.'
