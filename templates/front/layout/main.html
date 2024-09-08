@@ -14,12 +14,12 @@
 
 <body class="bg-gray-100">
     <nav class="bg-white border-b-1 fixed w-full z-10">
-        <div class="logo-contact flex justify-between px-10 py-5">
-            <div class="logo">
-                <h1>Logo</h1>
+        <div class="logo-contact grid grid-cols-2 px-14 py-5">
+            <div class="logo flex items-center col-span-1">
+                <img src="{% static 'front/assets/images/logo.png' %}" width="70%" alt="etc nepal logo">
             </div>
-            <div class="contact">
-                <ul>
+            <div class="contact flex items-center justify-end gap-10 col-span-1">
+                <ul class="text-base">
                     <li class="flex gap-2 items-center"><svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -59,7 +59,10 @@
                         </svg> Itahari, Sunsari</li>
                 </ul>
                 <div class="contact">
-                    <a href="">Apply For Admission</a>
+                    <a class="bg-yellow-600 text-white font-bold px-4 py-3 border border-yellow-600 transition duration-300 ease-in-out hover:bg-white hover:text-yellow-600 hover:border-yellow-600"
+                        href="#">
+                        Apply For Admission
+                    </a>
                 </div>
             </div>
         </div>
