@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # URL to use when referring to static files (in templates, etc.)
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Directory where Django will look for static files during development
 STATICFILES_DIRS = [
