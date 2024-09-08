@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'video',
     'publication',
     'team',
-    'contact'
+    'contact',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SITE_TITLE = 'ETC'
+
+JAZZMIN_SETTINGS = {
+
+    "site_title": "ETC",
+    "site_header": "ETC",
+    "site_brand": "ETC",
+    "copyright": "Developed by Hunchha Digital PVT. LTD",
+    
+}
+
+APPEND_SLASH = False
+
+RECAPTCHA_PUBLIC_KEY = '6LeyfQ4qAAAAADZRq0llG77QeLWzU_G7BC954p8I'
+RECAPTCHA_PRIVATE_KEY = '6LeyfQ4qAAAAAPEo4sBUxphXd73c6c_cjitRFVTe'
+
+RECAPTCHA_DEFAULT_ERROR_MESSAGE = 'Invalid reCAPTCHA. Please try again.'
