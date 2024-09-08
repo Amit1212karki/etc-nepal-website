@@ -26,6 +26,8 @@ urlpatterns = [
     path('', index),
     path('publications/', include('publication.urls')),
     path('news/', include('news.urls')),
+    path('projects/', include('project.urls')),
+
 
 
 ]
