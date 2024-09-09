@@ -87,7 +87,6 @@
     </section>
 </section>
 
-
 <section class="affiliation">
     <div class="py-14">
         <div class="max-w-screen-xl mx-auto px-4 md:px-8">
@@ -146,6 +145,7 @@
         </div>
     </div>
 </section>
+
 <section class="projects" x-data="{ openTab: 1 }">
     <div class="header px-14 py-10 flex items-center justify-between">
         <div class="title-content">
@@ -205,7 +205,6 @@
                 {% for completed in project_completed %}
                 <article class="overflow-hidden rounded-sm border border-gray-100 bg-white border border-gray-200">
                     <img alt="{{ completed.title }}" src="{{ completed.image.url }}" class="h-56 w-full object-cover" />
-
                     <div class="p-4 sm:p-6">
                         <a href="#">
                             <h3 class="text-lg font-medium text-gray-900">
@@ -234,9 +233,6 @@
     </div>
 </section>
 
-
-
-
 <section class="news">
     <div class="header px-14 py-14">
         <div class="title-content">
@@ -251,15 +247,17 @@
             <div class="col">
                 <a href="">
                     <div
-                        class="flex flex-col bg-white border hover:border-yellow-600 transition duration-300 rounded-sm ">
-                        <img class="w-full h-auto rounded-t-sm"
-                            src="{{news.image.url}}" alt="{{news.title}}">
+                        class="flex flex-col bg-white border hover:border-yellow-600 transition duration-300 rounded-sm">
+                        <div class="relative w-full h-64">
+                            <img class="absolute inset-0 w-full h-full object-cover rounded-t-sm"
+                                src="{{ news.image.url }}" alt="{{ news.title }}">
+                        </div>
                         <div class="p-4 md:p-5">
                             <h3 class="text-lg text-gray-800">
-                                {{news.title}}
+                                {{ news.title }}
                             </h3>
                             <p class="mt-1 text-gray-500 dark:text-neutral-400">
-                                {{news.description|truncatewords:20 }}
+                                {{ news.description|truncatewords:20 }}
                             </p>
                             <p class="mt-5 text-xs text-gray-500 dark:text-neutral-500">
                                 Uploaded {{ news.created_at|timesince }} ago
@@ -269,7 +267,6 @@
                 </a>
             </div>
             {% endfor %}
-
         </div>
     </div>
     {% else %}

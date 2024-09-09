@@ -12,7 +12,7 @@ class Image(models.Model):
 
 # Model to store multiple images related to a single Image
 class Images(models.Model):
-    image = models.ForeignKey(Image, related_name='images', on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, related_name='multiple_images', on_delete=models.CASCADE)
     images = models.FileField(upload_to='image_multiple_images/')
 
     def __str__(self):
