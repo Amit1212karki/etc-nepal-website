@@ -5,7 +5,7 @@ from django.db import models
 class Project(models.Model):
     STATUS_CHOICES = [
         ('Ongoing', 'Ongoing'),
-        ('complete', 'complete')
+        ('Complete', 'Complete')
     ]
     title = models.CharField(max_length=255)
     image = models.FileField(upload_to='project_image/')

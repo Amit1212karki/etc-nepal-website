@@ -1,0 +1,28 @@
+/* Add this to your global CSS file or in a <style> tag in your HTML */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-container {
+    animation: marquee 30s linear infinite;
+}
+
+.marquee-container:hover {
+    animation-play-state: paused;
+}
+
+.notice-item {
+    position: relative;
+}
+
+.notice-item:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Adjust if needed */
+    width: 100%;
+    height: 2px; /* Adjust if needed */
+    background-color: currentColor;
+    transition: height 0.3s ease;
+}

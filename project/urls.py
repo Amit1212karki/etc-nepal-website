@@ -3,5 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index , name='publication_list')
+    path('ongoing/', onGoing),
+    path('completed/', completed)
+
 ]

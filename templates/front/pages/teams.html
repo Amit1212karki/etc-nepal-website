@@ -1,0 +1,49 @@
+{% extends 'front/layout/main.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-yellow-600">Teams Members</h1>
+        <span class="text-gray-500">Following are our team member of ETC Nepal</span>
+    </div>
+</div>
+
+<div class="news-container px-14">
+    <!-- Team -->
+    <div class="max-w-10xl px-2 py-10 sm:px-6 lg:px-8 lg:py-14 ">
+        <!-- Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12">
+            {% if team %}
+            {% for team in team %}
+            <div class="text-center">
+                <img class="rounded-full size-24 mx-auto"
+                    src="{{team.image.url}}" alt="Avatar">
+                <div class="mt-2 sm:mt-4">
+                    <h3 class="font-medium text-gray-800">
+                        {{team.name}}
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                        {{ team.category.title }}
+                    </p>
+                </div>
+            </div>
+            <!-- End Col -->
+            {% endfor %}
+            {% else %}
+            <div class="col-span-full text-center py-8">
+                <p class="text-gray-500">No team members are available at the moment.</p>
+            </div>
+        {% endif %}
+        </div>
+        <!-- End Grid -->
+    </div>
+    <!-- End Team -->
+</div>
+
+
+
+
+
+{% endblock %}

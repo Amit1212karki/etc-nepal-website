@@ -8,6 +8,7 @@ tailwind.config = {
             fontFamily: {
                 sans: ['DM Sans', 'sans-serif'], // Setting font style to DM Sans
             },
+           
         }
     }
 }
