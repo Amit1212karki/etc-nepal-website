@@ -184,13 +184,16 @@
                             {{ ongoing.description|truncatewords:20 }} <!-- Optionally truncate the description -->
                         </p>
 
-                        <a href="#"
-                            class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-yellow-600">
-                            Find out more
-                            <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
-                                &rarr;
-                            </span>
-                        </a>
+                        <div class="flex items-center justify-between mt-4">
+                            <a href="#"
+                                class="group inline-flex items-center gap-1 text-sm font-medium text-yellow-600">
+                                Find out more
+                                <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
+                                    &rarr;
+                                </span>
+                            </a>
+                            <span class="text-sm text-gray-600">Project duration: {{ ongoing.project_duration }} years</span>
+                        </div>
                     </div>
                 </article>
                 {% empty %}
@@ -216,13 +219,16 @@
                             {{ completed.description|truncatewords:20 }} <!-- Optionally truncate the description -->
                         </p>
 
-                        <a href="#"
-                            class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-yellow-600">
-                            Find out more
-                            <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
-                                &rarr;
-                            </span>
-                        </a>
+                        <div class="flex items-center justify-between mt-4">
+                            <a href="#"
+                                class="group inline-flex items-center gap-1 text-sm font-medium text-yellow-600">
+                                Find out more
+                                <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
+                                    &rarr;
+                                </span>
+                            </a>
+                            <span class="text-sm text-gray-600">Project duration: {{ completed.project_duration }} years</span>
+                        </div>
                     </div>
                 </article>
                 {% empty %}
