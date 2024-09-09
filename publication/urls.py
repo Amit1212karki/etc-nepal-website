@@ -3,6 +3,5 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index , name='publication-index'),
-    path('search-publications/', publication_list, name='publication_list'), 
+    path('', index , name='publication_list')
 ]

@@ -3,40 +3,24 @@ from .models import *
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
-
-def index(request):
-    search_query = request.GET.get('search', '')
-    publications = Publication.objects.filter(title__icontains=search_query)
-    
-    paginator = Paginator(publications, 5)  # Show 5 publications per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'publications': page_obj,
-        'search_query': search_query,
-    }
-
-    return render(request, 'front/pages/publications.html', context)
+from django.db.models import Q
 
 @csrf_exempt
-def publication_list(request):
-    if request.method == 'POST':
-        search_query = request.POST.get('search', '')
-        publications = Publication.objects.filter(title__icontains=search_query)
-        
-        paginator = Paginator(publications, 5)  # Show 5 publications per page
-        page_number = request.POST.get('page', 1)  # Default to the first page
-        page_obj = paginator.get_page(page_number)
-        
-        publication_list = list(page_obj.object_list.values('title', 'id'))
-        
-        return JsonResponse({
-            'publications': publication_list,
-            'page_number': page_obj.number,
-            'num_pages': paginator.num_pages,
-            'has_previous': page_obj.has_previous(),
+def index(request):
+    publications = Publication.objects.all()
+    paginator = Paginator(publications, 6) 
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = {
+            'publications': list(page_obj.object_list.values('title', 'short_description', 'pdf')),  # Adjust fields as needed
             'has_next': page_obj.has_next(),
-        })
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
+            'has_previous': page_obj.has_previous(),
+            'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+            'previous_page_number': page_obj.previous_page_number() if page_obj.has_previous() else None
+        }
+        return JsonResponse(data)
+    
+    return render(request, 'front/pages/publications.html', {'publications': page_obj})
