@@ -29,6 +29,10 @@ urlpatterns = [
     path('projects/', include('project.urls')),
     path('notice/', include('notice.urls')),
     path('teams/', include('team.urls')),
+    path('image/', include('image.urls')),
+    path('video/', include('video.urls')),
+
+
 ]
 
 if settings.DEBUG:
