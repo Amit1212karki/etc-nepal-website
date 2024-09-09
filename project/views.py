@@ -12,7 +12,7 @@ def onGoing(request):
     return render(request, 'front/pages/ongoing_projects.html', {'page_obj': page_obj})
 
 def completed(request):
-    completed_project = Project.objects.filter(status='complete')
+    completed_project = Project.objects.filter(status='Complete')
     paginator = Paginator(completed_project, 6)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
