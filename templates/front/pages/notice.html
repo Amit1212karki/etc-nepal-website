@@ -37,17 +37,19 @@
             </tr>
         </thead>
         <tbody>
+            {% for notice in all_notice %}
             <tr class="bg-white border-b hover:bg-gray-50">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                    Apple MacBook Pro 17"
+                    {{notice.title}}
                 </th>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                    2024-09-01
+                    {{ notice.created_at|timesince }}
                 </th>
                 <td class="px-6 py-4">
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>
                 </td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

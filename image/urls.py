@@ -3,6 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index, name='image-index')
+    path('', index, name='image-index'),
+    path('image/<int:id>/', singlePageImage, name="single-image")
 
 ]

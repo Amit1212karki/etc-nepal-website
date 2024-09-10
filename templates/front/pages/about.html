@@ -1,0 +1,172 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}
+{{ block.super }} - About
+{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-yellow-600">About Us</h1>
+        <span class="text-gray-500">Find out our publications published by our team members</span>
+    </div>
+    <nav class="absolute  bg-yellow-600 bg-opacity-50 text-white p-3 rounded-md m-4 w-max"
+        aria-label="breadcrumb">
+        <ol class="list-reset flex text-left">
+            <li><a href="/" class="hover:text-blue-300">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/about/" class="hover:text-blue-300">About</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li>About etc </li>
+        </ol>
+    </nav>
+</div>
+
+<div>
+    <section class="px-12 mt-6 p-6 space-y-8 md:px-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <h1 class="text-3xl font-bold" id="intro1">A brief introduction of ETC.</h1>
+                <p class="text-muted-foreground mt-4" id="desc1">
+                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus. <br> <br>
+
+                </p>
+
+            </div>
+
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/hero1.jpg' %}" alt="ETC"
+                    class="w-full h-auto rounded-lg object-cover" style="border: 5px solid #f59e0b;">
+            </div>
+
+        </div>
+        <p class="text-justify mt-4" id="desc2">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/about.jpg' %}" alt="ETC"
+                    class="w-full h-auto rounded-lg object-cover" style="border: 5px solid #f59e0b;">
+            </div>
+
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <p class="text-muted-foreground mt-4" id="desc3">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus. <br> <br>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus. <br> <br>
+
+                </p>
+
+            </div>
+        </div>
+        <p class="text-justify mt-4" id="desc4">  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus. <br> <br>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus..</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <h1 class="text-3xl font-bold" id="intro2">ETC Description</h1>
+                <p class="text-muted-foreground mt-4" id="2desc1">
+                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta excepturi, impedit minima suscipit ut enim similique Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea aliquid placeat inventore et asperiores, minima eum, consequatur maxime vel quo ipsam, voluptates velit? Soluta, veritatis temporibus perspiciatis eos atque blanditiis! <br> <br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, quod labore. Officia enim distinctio placeat fugiat voluptatibus, nihil aspernatur incidunt ab deleniti temporibus doloribus, laborum non? Cupiditate explicabo eaque consequuntur. <br> <br>
+
+                </p>
+
+            </div>
+
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/home.jpg' %}" alt="ETC"
+                    class="w-full h-auto rounded-lg object-cover" style="border: 5px solid #f59e0b;">
+            </div>
+        </div>
+        <p class="text-justify mt-4" id="2desc2"> A Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptate earum suscipit alias? Nam enim quos perspiciatis minima tenetur ipsa eos suscipit repellat at amet, omnis similique nesciunt. Temporibus, tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi exercitationem cumque sunt id a molestias, ipsa laudantium corrupti tempora voluptatibus magni possimus temporibus accusamus porro dolorem minima obcaecati quos ad. lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis debitis explicabo illum illo voluptatum rerum omnis corrupti totam, quisquam libero sit quia mollitia iste nisi nam sapiente ipsum dignissimos!Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ornare orci ut libero cursus malesuada. Integer ultricies ex sit amet dolor consectetur, at sollicitudin ligula porttitor. Nam tincidunt viverra ex ac posuere. Nulla at nisl sed metus feugiat egestas. Morbi suscipit lorem et nulla malesuada, ac fermentum eros pellentesque. Vestibulum gravida, tortor ac hendrerit viverra, augue lacus luctus velit, sit amet dapibus urna turpis sed augue. Donec at tempor ante, quis efficitur felis. Pellentesque dapibus dictum justo, in aliquam metus.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/hero2.jpg' %}" alt="ETC"
+                    class="w-full h-auto rounded-lg object-cover" style="border: 5px solid #f59e0b;">
+            </div>
+
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <p class="text-muted-foreground mt-4" id="2desc3">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio animi iusto aliquam error unde, minima sed nihil eius dignissimos veritatis maiores, atque, quo mollitia? Sit maxime officia amet ducimus atque.<br> <br>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quasi cupiditate fugiat illum eaque tenetur sunt laboriosam soluta! Ea necessitatibus delectus saepe fugiat reiciendis temporibus nobis eos et aperiam ex! <br> <br>
+                    Social surveys indicate that Sanyak descendants are involved in professions
+                    ranging from police and military service (including in India, the UK, and
+                    Singapore) to various businesses, although fewer have attained senior
+                    positions. <br> <br>
+                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ea tenetur quis veniam eum quae provident totam hic pariatur similique aliquam adipisci, ipsa numquam eius tempore asperiores iure eaque doloribus!
+                </p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mt-8">
+            <div class="bg-blue-100 p-6 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-6 h-6 text-blue-600">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                    <h2 class="text-xl font-semibold" id="our_goal">Our Goal</h2>
+                </div>
+                <p class="mt-4 text-muted-foreground" id="our_goal_desc">
+                    To safeguard and promote the rich historical heritage of the Sanyak Limbu descendants through
+                    comprehensive research, preservation, and advocacy, while uniting all Sanyak Limbu descendants
+                    worldwide
+                    for social renaissance via genealogical documentation, welfare and advancing socio-economic
+                    activities to
+                    empower and foster community development.
+                </p>
+            </div>
+            <div class="bg-green-100 p-6 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-6 h-6 text-green-600">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <h2 class="text-xl font-semibold" id="our_objectives">Our Objective</h2>
+                </div>
+                <ul class="mt-4 space-y-2 text-muted-foreground list-disc list-inside">
+                    <li id="our_objectives_desc1">
+                        To preserve and promote the historical, social and cultural locations and geography related to
+                        Sanyak
+                        Limbu descendants.
+                    </li>
+                    <li id="our_objectives_desc2">
+                        To study, research and preserve the social, cultural, religious and linguistic aspects of the
+                        Sanyak
+                        Limbu descendant.
+                    </li>
+                    <li id="our_objectives_desc3">
+                        To protect and promote places and objects of historical and archaeological importance related to
+                        Sanyak
+                        Limbu.
+                    </li>
+                    <li id="our_objectives_desc4">
+                        Constructing a genealogy of the Sanyak Limbu descendants and conveying it for information
+                        sharing among
+                        Sanyak community who are living inside and outside the country.
+                    </li>
+                    <li id="our_objectives_desc5">
+                        Conducting the empowerment activities via educational, health related and community welfare for
+                        Sanyak
+                        Limbu descendants for their capacity development.
+                    </li>
+                    <li id="our_objectives_desc6">To foster brotherhood within Sanyak Limbu, other ethnic groups and
+                        within the human race.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

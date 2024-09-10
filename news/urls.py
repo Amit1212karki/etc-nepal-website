@@ -3,5 +3,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index)
+    path('', index, name='news-index'),
+    path('single-news/<int:id>/', singlePage, name='single-page')
 ]

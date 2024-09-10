@@ -4,5 +4,5 @@ from .models import *
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'video')  # Customize the fields displayed in the list view
+    list_display = ('title', 'link')  # Customize the fields displayed in the list view
     search_fields = ('title',) 

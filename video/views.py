@@ -3,8 +3,8 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    videos = Video.objects.all()
+    link = Video.objects.all()
     context = {
-        'videos': videos
+        'link': link
     }
     return render(request, 'front/pages/videos.html', context )
