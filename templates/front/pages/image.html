@@ -10,19 +10,29 @@
             members.</span>
     </div>
 </div>
+
 <div class="news-container px-14">
     <div class="flex flex-wrap">
+        {% if images %}
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             {% for image in images %}
-            <div class="relative overflow-hidden rounded-lg h-72 group">
-                <img class="object-cover w-full h-full" src="{{ image.cover.url }}" alt="{{ image.title }}">
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p class="text-white text-lg font-bold text-center mb-2">{{ image.title|truncatechars:100 }}</p>
-                    <p class="text-white text-sm absolute bottom-4 right-4">{{ image.created_at|date:"M d, Y" }}</p>
+            <a href="/image/image/{{ image.id }}/">
+                <div class="relative overflow-hidden rounded-lg h-72 group">
+                    <img class="object-cover w-full h-full" src="{{ image.cover.url }}" alt="{{ image.title }}">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-lg font-bold absolute top-4 left-4">{{ image.title|truncatechars:50 }}</p>
+                        <p class="text-white text-sm absolute bottom-4 left-4">{{ image.created_at|date:"M d, Y" }}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="flex justify-center items-center w-full py-8">
+            <p class="text-lg text-gray-600">No images available at the moment.</p>
+        </div>
+        {% endif %}
     </div>
-    {% endblock %}
+</div>
+
+{% endblock %}

@@ -9,7 +9,7 @@ class Project(models.Model):
     ]
     title = models.CharField(max_length=255)
     image = models.FileField(upload_to='project_image/')
-    description = models.CharField(max_length=255)
+    description = models.TextField()
     partner = models.CharField(max_length=255)
     project_location = models.CharField(max_length=255)
     project_duration = models.IntegerField()

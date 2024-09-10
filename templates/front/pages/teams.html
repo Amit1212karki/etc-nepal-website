@@ -18,8 +18,7 @@
             {% if team %}
             {% for team in team %}
             <div class="text-center">
-                <img class="rounded-full size-24 mx-auto"
-                    src="{{team.image.url}}" alt="Avatar">
+                <img class="rounded-full object-cover size-32 mx-auto" src="{{team.image.url}}" alt="Avatar">
                 <div class="mt-2 sm:mt-4">
                     <h3 class="font-medium text-gray-800">
                         {{team.name}}

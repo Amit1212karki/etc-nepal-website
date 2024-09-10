@@ -1,11 +1,10 @@
 {% extends 'front/layout/main.html' %}
-
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <section class="hero-section">
-    <section
-        class="bg-[url(https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=2670&auto=format&fit=crop)] bg-cover bg-top bg-no-repeat h-[70vh]">
+    <section class="bg-[url('{% static 'images/hero1.jpg' %}')] bg-cover bg-top bg-no-repeat h-[70vh]">
         <div class="bg-black/50 py-[20vh] px-20 h-full">
             <div class="text-left">
                 <h2 class="text-2xl font-bold text-white sm:text-3xl md:text-2xl">Expert Technical College Nepal</h2>
@@ -56,8 +55,9 @@
         <div class="max-w-screen-xl mx-auto md:px-8">
             <div class="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                 <div class="flex-1 sm:hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-                        class="md:max-w-lg sm:rounded-lg" alt="">
+                    <!-- Replace with your static image path -->
+                    <img src="{% static 'images/expert.jpg' %}"
+                        class="w-full h-[300px] object-cover sm:rounded-lg" alt="">
                 </div>
                 <div class="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                     <h3 class="text-yellow-600 font-semibold">
@@ -174,7 +174,7 @@
                     <img alt="{{ ongoing.title }}" src="{{ ongoing.image.url }}" class="h-56 w-full object-cover" />
 
                     <div class="p-4 sm:p-6">
-                        <a href="#">
+                        <a href="/projects/single-ongoing-project/{{ ongoing.id }}/">
                             <h3 class="text-lg font-medium text-gray-900">
                                 {{ ongoing.title }}
                             </h3>
@@ -185,7 +185,7 @@
                         </p>
 
                         <div class="flex items-center justify-between mt-4">
-                            <a href="#"
+                            <a href="/projects/single-ongoing-project/{{ ongoing.id }}/"
                                 class="group inline-flex items-center gap-1 text-sm font-medium text-yellow-600">
                                 Find out more
                                 <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
@@ -209,7 +209,7 @@
                 <article class="overflow-hidden rounded-sm border border-gray-100 bg-white border border-gray-200">
                     <img alt="{{ completed.title }}" src="{{ completed.image.url }}" class="h-56 w-full object-cover" />
                     <div class="p-4 sm:p-6">
-                        <a href="#">
+                        <a href="/projects/single-completed-project/{{ completed.id }}/">
                             <h3 class="text-lg font-medium text-gray-900">
                                 {{ completed.title }}
                             </h3>
@@ -220,7 +220,7 @@
                         </p>
 
                         <div class="flex items-center justify-between mt-4">
-                            <a href="#"
+                            <a href="/projects/single-completed-project/{{ completed.id }}/"
                                 class="group inline-flex items-center gap-1 text-sm font-medium text-yellow-600">
                                 Find out more
                                 <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
@@ -251,7 +251,7 @@
         <div class="grid grid-cols-4 gap-3">
             {% for news in news %}
             <div class="col">
-                <a href="">
+                <a href="/news/single-news/{{news.id}}/">
                     <div
                         class="flex flex-col bg-white border hover:border-yellow-600 transition duration-300 rounded-sm">
                         <div class="relative w-full h-64">
@@ -263,7 +263,7 @@
                                 {{ news.title }}
                             </h3>
                             <p class="mt-1 text-gray-500 dark:text-neutral-400">
-                                {{ news.description|truncatewords:20 }}
+                                {{ news.description|truncatewords:10 }}
                             </p>
                             <p class="mt-5 text-xs text-gray-500 dark:text-neutral-500">
                                 Uploaded {{ news.created_at|timesince }} ago

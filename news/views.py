@@ -12,3 +12,14 @@ def index(request):
         'page_obj':page_obj
     }
     return render(request,'front/pages/news.html', context)
+
+
+def singlePage(request, id):
+    single_news = News.objects.get(id=id)
+    related_news = News.objects.exclude(id=id)[:10]
+
+    context = {
+        'single_news':single_news,
+        'related_news': related_news
+    }
+    return render(request, 'front/pages/singlepagenews.html', context)
