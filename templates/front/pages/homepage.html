@@ -56,8 +56,8 @@
             <div class="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                 <div class="flex-1 sm:hidden lg:block">
                     <!-- Replace with your static image path -->
-                    <img src="{% static 'images/expert.jpg' %}"
-                        class="w-full h-[300px] object-cover sm:rounded-lg" alt="">
+                    <img src="{% static 'images/expert.jpg' %}" class="w-full h-[300px] object-cover sm:rounded-lg"
+                        alt="">
                 </div>
                 <div class="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                     <h3 class="text-yellow-600 font-semibold">
@@ -146,6 +146,40 @@
     </div>
 </section>
 
+<section class="message-from-ceo header px-14 py-10 flex items-center justify-between">
+    <div class="grid grid-cols-3 gap-10">
+        <!-- Image Section -->
+
+        <!-- Text Section -->
+        <div class="col text-justify col-span-2 gap-10">
+            <h1 class="text-3xl font-bold" id="intro2">Message from CEO</h1>
+            <p class="text-muted-foreground mt-4" id="2desc3">
+
+                Expert Technical College, from its very inception has focused in specializing in technical education and
+                trainings. Over the several years, the College has developed unparallel expertise in providing technical
+                Education and training programmes to Nepali students. The college has now becomes a one Stop Solution
+                for technical education and Research and cureer Development.
+<br>
+                We strive for "Change" and are continuousaly reasearching on how technical education can become a tool
+                for development of the nation. We aspire for production of internationally competitve technical human
+                resource through innovative teaching methodologies, integration of academic and real time enviroment and
+                continuous research and development in the TEVT sectors. In order to achive these objectives, we have
+                sufficient resources such as three college blocks, state of the art labs, competent and renowned
+                faculties and well equipped liabrary.
+                student should consider
+<br>
+                Expert if they wish to become part of the "Change"
+                by fostering innovation and excellence in the field of<br> <br>
+            </p>
+        </div>
+
+        <div class="col flex items-center">
+            <img src="https://landingfoliocom.imgix.net/store/collection/saasui/images/testimonial/1/woman-smiling.png" alt="ETC" class="w-full h-auto rounded-lg object-cover"
+                style="border: 5px solid #f59e0b;">
+        </div>
+    </div>
+</section>
+
 <section class="projects" x-data="{ openTab: 1 }">
     <div class="header px-14 py-10 flex items-center justify-between">
         <div class="title-content">
@@ -192,7 +226,8 @@
                                     &rarr;
                                 </span>
                             </a>
-                            <span class="text-sm text-gray-600">Project duration: {{ ongoing.project_duration }} years</span>
+                            <span class="text-sm text-gray-600">Project duration: {{ ongoing.project_duration }}
+                                years</span>
                         </div>
                     </div>
                 </article>
@@ -227,7 +262,8 @@
                                     &rarr;
                                 </span>
                             </a>
-                            <span class="text-sm text-gray-600">Project duration: {{ completed.project_duration }} years</span>
+                            <span class="text-sm text-gray-600">Project duration: {{ completed.project_duration }}
+                                years</span>
                         </div>
                     </div>
                 </article>
