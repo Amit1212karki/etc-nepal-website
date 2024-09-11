@@ -3,29 +3,19 @@
 {% block title %}Publications{% endblock %}
 
 {% block content %}
-
 <div class="header px-14 py-14">
     <div class="title-content">
         <h1 class="text-3xl font-bold text-yellow-600">Publications</h1>
         <span class="text-gray-500">Find out our publications published by our team members</span>
     </div>
-    <nav class="absolute  bg-yellow-600 bg-opacity-50 text-white p-3 rounded-md m-4 w-max"
-        aria-label="breadcrumb">
-        <ol class="list-reset flex text-left">
-            <li><a href="/" class="hover:text-blue-300">Home</a></li>
-            <li><span class="mx-2">/</span></li>
-            <li><a href="/about/" class="hover:text-blue-300">About</a></li>
-            <li><span class="mx-2">/</span></li>
-            <li>About etc </li>
-        </ol>
-    </nav>
+
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg px-14 py-10">
+<div class="relative overflow-x-auto sm:rounded-lg px-10">
     <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
         <label for="table-search" class="sr-only">Search</label>
         <div class="relative">
-            <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+            <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -46,84 +36,84 @@
             </tr>
         </thead>
         <tbody id="publications-table-body">
-            {% for publication in publications %}
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ publication.title }}
-                </th>
-                <td class="px-6 py-4"><a href="{{ publication.pdf.url }}"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a></td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="2" class="px-6 py-4 text-center">No publications found.</td>
-            </tr>
-            {% endfor %}
+            <!-- Content will be injected here by JavaScript -->
         </tbody>
     </table>
 
     <!-- Pagination -->
     <div class="flex justify-between mt-4" id="pagination-controls">
-        <div class="flex items-center">
-            <span class="text-gray-500">Page {{ publications.number }} of {{ publications.paginator.num_pages }}</span>
-        </div>
-        <div class="flex space-x-2">
-            {% if publications.has_previous %}
-            <a href="javascript:void(0);" class="px-4 py-2 bg-blue-500 text-white rounded"
-                onclick="searchPublications({{ publications.previous_page_number }})">Previous</a>
-            {% endif %}
-            {% if publications.has_next %}
-            <a href="javascript:void(0);" class="px-4 py-2 bg-blue-500 text-white rounded"
-                onclick="searchPublications({{ publications.next_page_number }})">Next</a>
-            {% endif %}
-        </div>
+        <!-- Pagination controls will be injected here by JavaScript -->
+    </div>
+</div>
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-            function searchPublications(page = 1) {
-                const query = document.getElementById('table-search').value;
-                axios.post('/publications/', {
-                    search: query,
-                    page: page
-                }, {
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                })
-                    .then(response => {
-                        const data = response.data;
-                        const publications = data.publications;
-                        const tableBody = document.getElementById('publications-table-body');
-                        tableBody.innerHTML = '';
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    let 
+     = 1;
+    let searchQuery = '';
 
-                        if (publications.length === 0) {
-                            tableBody.innerHTML = '<tr><td colspan="2" class="px-6 py-4 text-center">No publications found.</td></tr>';
-                        } else {
-                            publications.forEach(publication => {
-                                const row = document.createElement('tr');
-                                row.classList.add('bg-white', 'border-b', 'hover:bg-gray-50');
-                                row.innerHTML = `
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            ${publication.title}
-                        </th>
-                        <td class="px-6 py-4">
-                            <a href="${publication.pdf}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a>
-                        </td>
-                    `;
-                                tableBody.appendChild(row);
-                            });
-                        }
-
-                        // Update pagination controls
-                        const paginationControls = document.getElementById('pagination-controls');
-                        paginationControls.innerHTML = '';
-                        if (data.has_previous) {
-                            paginationControls.innerHTML += `<a href="javascript:void(0);" class="px-4 py-2 bg-blue-500 text-white rounded" onclick="searchPublications(${data.previous_page_number})">Previous</a>`;
-                        }
-                        if (data.has_next) {
-                            paginationControls.innerHTML += `<a href="javascript:void(0);" class="px-4 py-2 bg-blue-500 text-white rounded" onclick="searchPublications(${data.next_page_number})">Next</a>`;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching publications:', error);
-                    });
+    function fetchPublications(page = 1, query = '') {
+        axios.get('/publications/', {
+            params: {
+                search: query,
+                page: page
+            },
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
             }
-        </script>
-        {% endblock %}
+        })
+        .then(response => {
+            const data = response.data;
+            const tableBody = document.getElementById('publications-table-body');
+            const paginationControls = document.getElementById('pagination-controls');
+            
+            // Clear previous data
+            tableBody.innerHTML = '';
+            paginationControls.innerHTML = '';
+
+            // Populate table with new data
+            data.publications.forEach(publication => {
+                const row = document.createElement('tr');
+                row.className = 'bg-white border-b hover:bg-gray-50';
+                row.innerHTML = `
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${publication.title}</th>
+                    <td class="px-6 py-4"><a href="${publication.pdf}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Handle pagination
+            if (data.has_previous) {
+                const prevButton = document.createElement('a');
+                prevButton.href = 'javascript:void(0);';
+                prevButton.className = 'px-4 py-2 bg-blue-500 text-white rounded';
+                prevButton.innerText = 'Previous';
+                prevButton.onclick = () => fetchPublications(data.previous_page_number, searchQuery);
+                paginationControls.appendChild(prevButton);
+            }
+
+            if (data.has_next) {
+                const nextButton = document.createElement('a');
+                nextButton.href = 'javascript:void(0);';
+                nextButton.className = 'px-4 py-2 bg-blue-500 text-white rounded';
+                nextButton.innerText = 'Next';
+                nextButton.onclick = () => fetchPublications(data.next_page_number, searchQuery);
+                paginationControls.appendChild(nextButton);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching publications:', error);
+        });
+    }
+
+    function searchPublications() {
+        searchQuery = document.getElementById('table-search').value;
+        fetchPublications(
+            , searchQuery);
+    }
+
+    // Initial fetch
+    fetchPublications(
+        , searchQuery);
+</script>
+{% endblock %}

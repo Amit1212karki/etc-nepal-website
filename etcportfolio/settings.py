@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'team',
     'contact',
     'django_recaptcha',
+    'document'
 ]
 
 MIDDLEWARE = [
