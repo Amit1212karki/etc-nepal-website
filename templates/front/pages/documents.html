@@ -6,7 +6,7 @@
 <div class="header px-14 py-14">
     <div class="title-content">
         <h1 class="text-3xl font-bold text-yellow-600">Documents</h1>
-        <span class="text-gray-500">Find our documents published by our team members</span>
+        <span class="text-gray-500">Find the documents uploaded by our team members</span>
     </div>
 </div>
 
@@ -24,14 +24,13 @@
             </div>
             <input type="text" id="table-search"
                 class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search for items" onkeyup="searchDocuments()">
+                placeholder="Search for documents" onkeyup="searchDocuments()">
         </div>
     </div>
-
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3">Document Title</th>
+                <th scope="col" class="px-6 py-3">Document title</th>
                 <th scope="col" class="px-6 py-3">Action</th>
             </tr>
         </thead>
@@ -45,16 +44,13 @@
         <!-- Pagination controls will be injected here by JavaScript -->
     </div>
 </div>
-
-<!-- Include Axios for handling AJAX requests -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 <script>
     let currentPage = 1;
     let searchQuery = '';
 
     function fetchDocuments(page = 1, query = '') {
-        axios.get('/document/', {
+        axios.get('/etc_document/', {
             params: {
                 search: query,
                 page: page
@@ -67,7 +63,7 @@
             const data = response.data;
             const tableBody = document.getElementById('documents-table-body');
             const paginationControls = document.getElementById('pagination-controls');
-
+            
             // Clear previous data
             tableBody.innerHTML = '';
             paginationControls.innerHTML = '';
@@ -78,9 +74,7 @@
                 row.className = 'bg-white border-b hover:bg-gray-50';
                 row.innerHTML = `
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${document.title}</th>
-                    <td class="px-6 py-4">
-                        <a href="/media/${document.document}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a>
-                    </td>
+                    <td class="px-6 py-4"><a href="${document.document}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a></td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -117,5 +111,4 @@
     // Initial fetch
     fetchDocuments(currentPage, searchQuery);
 </script>
-
 {% endblock %}

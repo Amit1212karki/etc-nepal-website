@@ -32,9 +32,7 @@ urlpatterns = [
     path('teams/', include('team.urls')),
     path('image/', include('image.urls')),
     path('video/', include('video.urls')),
-    path('document/', include('document.urls')),
-
-
+    path('etc_document/', include('document.urls')),
 
 ]
 
