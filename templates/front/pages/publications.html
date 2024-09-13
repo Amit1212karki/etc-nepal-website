@@ -8,7 +8,6 @@
         <h1 class="text-3xl font-bold text-yellow-600">Publications</h1>
         <span class="text-gray-500">Find out our publications published by our team members</span>
     </div>
-
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg px-10">
@@ -48,8 +47,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    let 
-     = 1;
+    let currentPage = 1;
     let searchQuery = '';
 
     function fetchPublications(page = 1, query = '') {
@@ -108,12 +106,10 @@
 
     function searchPublications() {
         searchQuery = document.getElementById('table-search').value;
-        fetchPublications(
-            , searchQuery);
+        fetchPublications(currentPage, searchQuery);
     }
 
     // Initial fetch
-    fetchPublications(
-        , searchQuery);
+    fetchPublications(currentPage, searchQuery);
 </script>
 {% endblock %}
