@@ -20,3 +20,19 @@ def index(request):
 
 def about(request):
     return render(request, 'front/pages/about.html')
+
+
+def vission(request):
+    return render(request, 'front/pages/vission.html')
+
+def mission(request):
+    return render(request, 'front/pages/mission.html')
+
+def goal(request):
+    return render(request, 'front/pages/goal.html')
+
+def hrDiagram(request):
+    return render(request, 'front/pages/hrdiagram.html')
+
+def objective(request):
+    return render(request, 'front/pages/objective.html')
