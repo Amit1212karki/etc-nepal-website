@@ -17,7 +17,8 @@
 
 <body class="bg-gray-100">
     <nav class="bg-white border-b-1 w-full z-10">
-        <div class="notice-section px-20 py-3 border-b-[1px] border-yellow-600 text-yellow-600 flex justify-between items-center">
+        <div
+            class="notice-section px-20 py-3 border-b-[1px] border-yellow-600 text-yellow-600 flex justify-between items-center">
             <ul class="flex gap-5 ">
                 <li class="border-r-2 border-yellow-600 pr-4"><a href="/notice/">Notices</a></li>
                 <li><a href="/news/">News</a></li>
@@ -136,8 +137,10 @@
                     <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
                         class="project-dropdown bg-yellow-600 text-white absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
                         <ul class="space-y-4">
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/projects/ongoing/">Ongoing Project</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/projects/completed/">Completed Project</a>
+                            <li class="hover:text-blue-900 transition duration-300"><a href="/projects/ongoing/">Ongoing
+                                    Project</a></li>
+                            <li class="hover:text-blue-900 transition duration-300"><a
+                                    href="/projects/completed/">Completed Project</a>
                             </li>
                         </ul>
                     </div>
@@ -202,11 +205,113 @@
 
 
     <footer class="bg-white mt-[20vh]">
-        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="grid grid-cols-5 gap-10 mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 ">
+            <div class="col-span-2">
+                <!-- <div class="text-xl text-green-600 font-bold">About Us</div> -->
+
+                <!-- <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div> -->
+
+                <a href="/" class="flex items-center mt-10 my-5 block">
+                    <img src="{% static 'front/assets/images/logo.png' %}" class="h-[10vh] me-3" alt="FlowBite Logo" />
+                </a>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eligendi ratione aut quos omnis nam?
+                    <a class="text-blue-400" href="/about">Read More>></a>
+                </p>
+            </div>
+            <div>
+                <div class="text-xl text-green-600 font-bold">Quick Link</div>
+                <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div>
+                <p class="space-y-5">
+                <div class="my-2">
+                    <a href="http://">About Us</a>
+                </div>
+                <hr>
+                <div class="my-2">
+                    <a href="">Annual Report</a>
+                </div>
+                <hr>
+                <div class="my-2">
+                    <a href="">Donation</a>
+                </div>
+                <hr>
+                <div class="my-2">
+
+                    <a href="">Ongoing Projects</a>
+                </div>
+                </p>
+            </div>
+            <div>
+                <div class="text-xl text-green-600 font-bold">
+                    Contact Info
+                </div>
+                <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div>
+
+                <p class="space-y-5">
+                <div class="my-2">
+                    <a href="http://">About Us</a>
+                </div>
+                <hr>
+                <div class="my-2">
+                    <a href="">Annual Report</a>
+                </div>
+                <hr>
+                <div class="my-2">
+                    <a href="">Donation</a>
+                </div>
+                <hr>
+                <div class="my-2">
+
+                    <a href="">Ongoing Projects</a>
+                </div>
+                </p>
+            </div>
+            <div>
+                <div class="text-xl text-green-600 font-bold">
+                    Social Media
+                </div>
+                <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div>
+                <p class="space-y-5">
+                <div class="my-2">
+                    <a href="http://">About Us</a>
+                </div>
+                <hr>
+                <div class="my-2">
+                    <a href="">Annual Report</a>
+                </div>
+                <hr>
+                <div class="my-2">
+                    <a href="">Donation</a>
+                </div>
+                <hr>
+                <div class="my-2">
+
+                    <a href="">Ongoing Projects</a>
+                </div>
+                </p>
+            </div>
+
+
+        </div>
+        <hr class="my-6 border-gray-200 mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="">
+           <p class="text-center">
+            Made with love by hunchha digital
+           </p>
+            <!-- <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+                    class="hover:underline">ETC Nepal</a>. All Rights Reserved.
+            </span>
+            <div class="flex mt-4 sm:justify-center sm:mt-0">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">Developed By <a
+                        href="https://hunchhadigital.com/" class="hover:underline">Hunchha Digital Pvt Ltd</a>
+                </span>
+            </div> -->
+        </div>
+        <!-- <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="/" class="flex items-center">
-                        <img src="{% static 'front/assets/images/logo.png' %}" class="h-[10vh] me-3" alt="FlowBite Logo" />
+                        <img src="{% static 'front/assets/images/logo.png' %}" class="h-[10vh] me-3"
+                            alt="FlowBite Logo" />
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -252,11 +357,11 @@
                 </span>
                 <div class="flex mt-4 sm:justify-center sm:mt-0">
                     <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">Developed By <a
-                        href="https://hunchhadigital.com/" class="hover:underline">Hunchha Digital Pvt Ltd</a>
-                </span>
+                            href="https://hunchhadigital.com/" class="hover:underline">Hunchha Digital Pvt Ltd</a>
+                    </span>
                 </div>
             </div>
-        </div>
+        </div> -->
     </footer>
 </body>
 

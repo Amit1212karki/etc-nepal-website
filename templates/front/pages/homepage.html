@@ -633,7 +633,100 @@
     </div>
     {% endif %}
 </section>
+<section class="counts mt-10">
+    <div class="px-14">
+        <div class="grid grid-cols-3 gap-10">
+            <div class="bg-gray-200 flex flex-col justify-center items-center p-5 rounded-sm">
+                <span
+                    class="flex tabular-nums text-slate-900 text-7xl font-extrabold mb-2 transition-[_--num] duration-[3s] ease-out [counter-set:_num_var(--num)] supports-[counter-set]:before:content-[counter(num)]"
+                    x-data="{ shown: false }" x-intersect="shown = true" :class="shown && '[--num:40]'">
+                    <span class="supports-[counter-set]:sr-only">40</span>K+
+                </span>
 
+                <span class="inline-flex font-semibold text-3xl text-green-600 mb-2">
+                    Graduated
+                </span>
+                <span
+                    class="inline-flex font-semibold mb-2 text-center">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure esse accusamus ipsum
+                    cupiditate commodi obcaecati, eos adipisci enim explicabo beatae quia ex culpa a cumque
+                    doloribus! Laborum unde aperiam voluptate?
+                </span>
+            </div>
+
+            <div class="bg-gray-200 flex flex-col justify-center items-center p-5 rounded-sm">
+                <span
+                    class="flex tabular-nums text-slate-900 text-7xl font-extrabold mb-2 transition-[_--num] duration-[3s] ease-out [counter-set:_num_var(--num)] supports-[counter-set]:before:content-[counter(num)]"
+                    x-data="{ shown: false }" x-intersect="shown = true" :class="shown && '[--num:40]'">
+                    <span class="supports-[counter-set]:sr-only">40</span>K+
+                </span>
+
+                <span class="inline-flex font-semibold text-3xl text-green-600 mb-2">
+                    Graduated
+                </span>
+                <span
+                    class="inline-flex font-semibold mb-2 text-center">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure esse accusamus ipsum
+                    cupiditate commodi obcaecati, eos adipisci enim explicabo beatae quia ex culpa a cumque
+                    doloribus! Laborum unde aperiam voluptate?
+                </span>
+            </div>
+
+            <div class="bg-gray-200 flex flex-col justify-center items-center p-5 rounded-sm">
+                <span
+                    class="flex tabular-nums text-slate-900 text-7xl font-extrabold mb-2 transition-[_--num] duration-[3s] ease-out [counter-set:_num_var(--num)] supports-[counter-set]:before:content-[counter(num)]"
+                    x-data="{ shown: false }" x-intersect="shown = true" :class="shown && '[--num:40]'">
+                    <span class="supports-[counter-set]:sr-only">40</span>K+
+                </span>
+
+                <span class="inline-flex font-semibold text-3xl text-green-600 mb-2">
+                    Graduated
+                </span>
+                <span
+                    class="inline-flex font-semibold mb-2 text-center">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure esse accusamus ipsum
+                    cupiditate commodi obcaecati, eos adipisci enim explicabo beatae quia ex culpa a cumque
+                    doloribus! Laborum unde aperiam voluptate?
+                </span>
+            </div>
+        </div>
+    </div>
+    <h2>
+
+    </h2>
+</section>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+
+<style>
+    @property --num {
+        syntax: '<integer>';
+        initial-value: 0;
+        inherits: false;
+    }
+</style>
+
+<style>
+    @property --num {
+        syntax: '<integer>';
+        initial-value: 0;
+        inherits: false;
+    }
+
+    @keyframes counter {
+        from {
+            --num: 0;
+        }
+
+        to {
+            --num: 40;
+        }
+    }
+</style>
 
 
 {% endblock %}
