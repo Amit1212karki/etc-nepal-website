@@ -5,7 +5,7 @@
 {% block content %}
 <div class="header px-14 py-14">
     <div class="title-content">
-        <h1 class="text-3xl font-bold text-yellow-600">Documents</h1>
+        <h1 class="text-3xl font-bold text-blue-800">Documents</h1>
         <span class="text-gray-500">Find the documents uploaded by our team members</span>
     </div>
 </div>
@@ -69,12 +69,12 @@
             paginationControls.innerHTML = '';
 
             // Populate table with new data
-            data.documents.forEach(document => {
+            data.documents.forEach(etc_document => {
                 const row = document.createElement('tr');
                 row.className = 'bg-white border-b hover:bg-gray-50';
                 row.innerHTML = `
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${document.title}</th>
-                    <td class="px-6 py-4"><a href="${document.document}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a></td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${etc_document.title}</th>
+                    <td class="px-6 py-4"><a href="${etc_document.document}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a></td>
                 `;
                 tableBody.appendChild(row);
             });

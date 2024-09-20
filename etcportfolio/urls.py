@@ -25,6 +25,11 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('', index),
     path('about/', about, name='about'),
+    path('vission/', vission, name='vission'),
+    path('mission/', mission, name='mission'),
+    path('goal/', goal, name='goal'),
+    path('objective/', objective, name='objective'),
+    path('hr-diagram/', hrDiagram, name='hr-diagram'),
     path('publications/', include('publication.urls')),
     path('news/', include('news.urls')),
     path('projects/', include('project.urls')),
@@ -33,6 +38,8 @@ urlpatterns = [
     path('image/', include('image.urls')),
     path('video/', include('video.urls')),
     path('etc_document/', include('document.urls')),
+    path('course/', include('course.urls')),
+
 
 ]
 

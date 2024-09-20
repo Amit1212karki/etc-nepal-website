@@ -1,0 +1,52 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}
+{{ block.super }} - About
+{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-800">Mission</h1>
+        <span class="text-gray-500">Find out our publications published by our team members</span>
+    </div>
+    <nav class="absolute  bg-blue-800 bg-opacity-50 text-white p-3 rounded-md m-4 w-max" aria-label="breadcrumb">
+        <ol class="list-reset flex text-left">
+            <li><a href="/" class="hover:text-yellow-300">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/mission/" class="hover:text-yellow-300">Mission</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li>About etc </li>
+        </ol>
+    </nav>
+</div>
+<div>
+    <section class="px-12 mt-6 p-6 space-y-8 md:px-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <h1 class="text-3xl font-bold" id="intro2">Mission</h1>
+                <p class="text-muted-foreground mt-4" id="2desc1">
+
+                    Committed in upgrading the social, organizational and technical skills of
+                    the local people and conducting research, capacity building, vocational
+                    skill training and employment activities with high professional ethics in
+                    different sectors with modern technologies to contribute to the efforts of
+                    overall nation building in a sustainable manner. Main vision is to reduce
+                    poverty of country's people by providing different types of vocational skill
+                    training.
+                    <br>
+                    <br>
+                </p>
+
+            </div>
+
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/home.jpg' %}" alt="ETC" class="w-full h-auto rounded-lg object-cover"
+                    style="border: 5px solid #2d5281;">
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
