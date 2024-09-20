@@ -13,14 +13,16 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="{% static 'front/css/app.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 
 <body class="bg-gray-100">
-    <nav class="bg-white border-b-1 w-full z-10">
+    <nav class="bg-white border-b-1 relative z-50 ">
         <div
-            class="notice-section px-20 py-3 border-b-[1px] border-yellow-600 text-yellow-600 flex justify-between items-center">
+            class="notice-section px-20 py-3 border-b-[1px] border-blue-800 text-blue-800 flex justify-between items-center">
             <ul class="flex gap-5 ">
-                <li class="border-r-2 border-yellow-600 pr-4"><a href="/notice/">Notices</a></li>
+                <li class="border-r-2 border-blue-800 pr-4"><a href="/notice/">Notices</a></li>
                 <li><a href="/news/">News</a></li>
 
             </ul>
@@ -59,7 +61,7 @@
                             <g id="SVGRepo_iconCarrier">
                                 <path
                                     d="M3 5.5C3 14.0604 9.93959 21 18.5 21C18.8862 21 19.2691 20.9859 19.6483 20.9581C20.0834 20.9262 20.3009 20.9103 20.499 20.7963C20.663 20.7019 20.8185 20.5345 20.9007 20.364C21 20.1582 21 19.9181 21 19.438V16.6207C21 16.2169 21 16.015 20.9335 15.842C20.8749 15.6891 20.7795 15.553 20.6559 15.4456C20.516 15.324 20.3262 15.255 19.9468 15.117L16.74 13.9509C16.2985 13.7904 16.0777 13.7101 15.8683 13.7237C15.6836 13.7357 15.5059 13.7988 15.3549 13.9058C15.1837 14.0271 15.0629 14.2285 14.8212 14.6314L14 16C11.3501 14.7999 9.2019 12.6489 8 10L9.36863 9.17882C9.77145 8.93713 9.97286 8.81628 10.0942 8.64506C10.2012 8.49408 10.2643 8.31637 10.2763 8.1317C10.2899 7.92227 10.2096 7.70153 10.0491 7.26005L8.88299 4.05321C8.745 3.67376 8.67601 3.48403 8.55442 3.3441C8.44701 3.22049 8.31089 3.12515 8.15802 3.06645C7.98496 3 7.78308 3 7.37932 3H4.56201C4.08188 3 3.84181 3 3.63598 3.09925C3.4655 3.18146 3.29814 3.33701 3.2037 3.50103C3.08968 3.69907 3.07375 3.91662 3.04189 4.35173C3.01413 4.73086 3 5.11378 3 5.5Z"
-                                    stroke="#ffc800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    stroke="#2d5281" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 </path>
                             </g>
                         </svg> 9852833011</li>
@@ -70,7 +72,7 @@
                             <g id="SVGRepo_iconCarrier">
                                 <path
                                     d="M3 8L8.44992 11.6333C9.73295 12.4886 10.3745 12.9163 11.0678 13.0825C11.6806 13.2293 12.3194 13.2293 12.9322 13.0825C13.6255 12.9163 14.2671 12.4886 15.5501 11.6333L21 8M6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V8.2C21 7.0799 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19Z"
-                                    stroke="#ffc800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    stroke="#2d5281" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 </path>
                             </g>
                         </svg> etcnepal.com.np</li>
@@ -81,30 +83,30 @@
                             <g id="SVGRepo_iconCarrier">
                                 <path
                                     d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z"
-                                    stroke="#ffc800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    stroke="#2d5281" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 </path>
                                 <path
                                     d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#ffc800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    stroke="#2d5281" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 </path>
                             </g>
                         </svg> Itahari, Sunsari</li>
                 </ul>
                 <div class="contact">
-                    <a class="bg-yellow-600 text-white font-bold px-4 py-3 border border-yellow-600 transition duration-300 ease-in-out hover:bg-white hover:text-yellow-600 hover:border-yellow-600"
+                    <a class="bg-blue-800 text-white font-bold px-4 py-3 border border-blue-800 transition duration-300 ease-in-out hover:bg-yellow-600 hover:text-white hover:border-blue-800"
                         href="#">
                         Apply For Admission
                     </a>
                 </div>
             </div>
         </div>
-        <div class="bg-yellow-600 py-4 flex justify-evenly items-center relative">
+        <div class="bg-blue-800 py-4 flex justify-evenly items-center relative">
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-6 font-bold">
-                <a href="/" class="text-white hover:text-blue-900 transition duration-300 ">Home </a>
+                <a href="/" class="text-white hover:text-yellow-600 transition duration-300 ">Home </a>
                 <div x-data="{ open: false }" class="relative">
                     <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class="text-white hover:text-blue-900 transition duration-300 flex items-center">
+                        class="text-white hover:text-yellow-600 transition duration-300 flex items-center">
                         Company
                         <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -115,21 +117,27 @@
                         </svg>
                     </a>
                     <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-yellow-600 text-white absolute px-5 py-6  top-6 w-64 transition-opacity duration-300">
+                        class="project-dropdown bg-blue-800 text-white absolute px-5 py-6  top-6 w-64 transition-opacity duration-300">
                         <ul class="space-y-4">
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/about/">Introduction</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/vission/">Vission</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/mission/">mission</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/goal/">Goal</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/objective/">Objective</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/hr-diagram/">HR Diagram</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/teams/">Our Team</a></li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/about/">Introduction</a>
+                            </li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/vission/">Vision</a>
+                            </li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/mission/">Mission</a>
+                            </li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/goal/">Goal</a></li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a
+                                    href="/objective/">Objective</a></li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/hr-diagram/">HR
+                                    Diagram</a></li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/teams/">Our Team</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div x-data="{ open: false }" class="relative">
                     <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class="text-white hover:text-blue-900 transition duration-300 flex items-center">
+                        class="text-white hover:text-yellow-600 transition duration-300 flex items-center">
                         Projects
                         <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -140,21 +148,23 @@
                         </svg>
                     </a>
                     <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-yellow-600 text-white absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
+                        class="project-dropdown bg-blue-800 text-white absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
                         <ul class="space-y-4">
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/projects/ongoing/">Ongoing
+                            <li class="hover:text-yellow-600 transition duration-300"><a
+                                    href="/projects/ongoing/">Ongoing
                                     Project</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a
+                            <li class="hover:text-yellow-600 transition duration-300"><a
                                     href="/projects/completed/">Completed Project</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <a href="/etc_document/" class="text-white hover:text-blue-900 transition duration-300">Documents</a>
-                <a href="/publications/" class="text-white hover:text-blue-900 transition duration-300">Publications</a>
+                <a href="/etc_document/" class="text-white hover:text-yellow-600 transition duration-300">Documents</a>
+                <a href="/publications/"
+                    class="text-white hover:text-yellow-600 transition duration-300">Publications</a>
                 <div x-data="{ open: false }" class="relative">
                     <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class="text-white hover:text-blue-900 transition duration-300 flex items-center">
+                        class="text-white hover:text-yellow-600 transition duration-300 flex items-center">
                         Media
                         <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -165,16 +175,19 @@
                         </svg>
                     </a>
                     <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-yellow-600 text-white absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
+                        class="project-dropdown bg-blue-800 text-white absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
                         <ul class="space-y-4">
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/news/">News</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/image/">Images</a></li>
-                            <li class="hover:text-blue-900 transition duration-300"><a href="/video/">Videos</a>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/news/">News</a></li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/image/">Images</a></li>
+                            <li class="hover:text-yellow-600 transition duration-300"><a href="/video/">Videos</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <a href="/contact/" class="text-white hover:text-blue-900 transition duration-300">Contact</a>
+                <a href="/course/" class="text-white hover:text-yellow-600 transition duration-300">Course</a>
+                <a href="/contact/" class="text-white hover:text-yellow-600 transition duration-300">Certificate</a>
+
+                <a href="/contact/" class="text-white hover:text-yellow-600 transition duration-300">Contact</a>
             </div>
             <!-- Mobile Menu Button -->
             <button id="menu-btn" class="block md:hidden text-gray-700 focus:outline-none">
@@ -212,48 +225,49 @@
     <footer class="bg-white mt-[20vh]">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 ">
             <div class="lg:col-span-2">
-                <!-- <div class="text-xl text-green-600 font-bold">About Us</div> -->
+                <!-- <div class="text-xl text-blue-800 font-bold">About Us</div> -->
 
                 <!-- <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div> -->
 
                 <a href="/" class="flex items-center mt-10 my-5 block">
                     <img src="{% static 'front/assets/images/logo.png' %}" class="h-[10vh] me-3" alt="FlowBite Logo" />
                 </a>
-                <p>Expert Technical College, from its very inception has focused in specializing in technical education and trainings.
-                    <a class="text-blue-400" href="/about">Read More>></a>
+                <p>Expert Technical College, from its very inception has focused in specializing in technical education
+                    and trainings.
+                    <a class="text-blue-400" href="/about/">Read More>></a>
                 </p>
             </div>
             <div class="col-span-1">
-                <div class="text-xl text-green-600 font-bold">Important Link</div>
-                <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div>
+                <div class="text-xl text-blue-800 font-bold">Important Link</div>
+                <div class="h-1 my-3 w-[50%] bg-yellow-600"></div>
                 <p class="space-y-5">
                 <div class="my-2">
-                    <a href="https://ctevt.org.np/">CTEVT</a>
+                    <a href="https://ctevt.org.np/" target="_blank">CTEVT</a>
                 </div>
                 <hr>
                 <div class="my-2">
-                    <a href="https://vsdta.gov.np/">VSDTA</a>
+                    <a href="https://vsdta.gov.np/" target="_blank">VSDTA</a>
                 </div>
                 <hr>
                 <div class="my-2">
-                    <a href="https://www.feb.gov.np/">FEB</a>
+                    <a href="https://www.feb.gov.np/" target="_blank">FEB</a>
                 </div>
                 <hr>
                 <div class="my-2">
-                    <a href="https://www.enssure.org.np/">ENSSURE</a>
+                    <a href="https://www.enssure.org.np/" target="_blank">ENSSURE</a>
                 </div>
                 <hr>
                 <div class="my-2">
-                
-                    <a href="https://ctevt.org.np/nstb">NSTB</a>
+
+                    <a href="https://ctevt.org.np/nstb" target="_blank">NSTB</a>
                 </div>
                 </p>
             </div>
             <div class="col-span-1">
-                <div class="text-xl text-green-600 font-bold">
+                <div class="text-xl text-blue-800 font-bold">
                     Contact Info
                 </div>
-                <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div>
+                <div class="h-1 my-3 w-[50%] bg-yellow-600"></div>
 
                 <p class="space-y-5">
                 <div class="my-2">
@@ -265,20 +279,20 @@
                 </div>
                 <hr>
                 <div class="my-2">
-                    <a >Itahari, Sunsari</a>
+                    <a>Itahari, Sunsari</a>
                 </div>
                 <hr>
-                
+
                 </p>
             </div>
             <div>
-                <div class="text-xl text-green-600 font-bold">
+                <div class="text-xl text-blue-800 font-bold">
                     Social Media
                 </div>
-                <div class="h-1.5 my-3 w-[50%] bg-blue-600"></div>
+                <div class="h-1 my-3 w-[50%] bg-yellow-600"></div>
                 <p class="space-y-5">
                 <div class="my-2">
-                    <a href="https://www.facebook.com/people/ETC-NEPAL/100063674544263/">Facebook</a>
+                    <a href="https://www.facebook.com/people/ETC-NEPAL/100063674544263/" target="_blank">Facebook</a>
                 </div>
                 </p>
             </div>
@@ -286,10 +300,13 @@
 
         </div>
         <hr class="my-6 border-gray-200 mx-auto dark:border-gray-700 lg:my-8" />
-        <div class="">
-           <p class="text-center">
-            Made with love by hunchha digital
-           </p>
+        <div class="text-white py-4" style="background-color: #0a9502;">
+
+            <p class="text-center">
+                Made with <span class="text-red-500">&#10084;</span> by Hunchha Digital PVT. LTD.
+            </p>
+
+
             <!-- <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
                     class="hover:underline">ETC Nepal</a>. All Rights Reserved.
             </span>
@@ -359,5 +376,3 @@
 </body>
 
 </html>
-
-

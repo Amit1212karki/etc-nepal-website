@@ -38,6 +38,8 @@ urlpatterns = [
     path('image/', include('image.urls')),
     path('video/', include('video.urls')),
     path('etc_document/', include('document.urls')),
+    path('course/', include('course.urls')),
+
 
 ]
 

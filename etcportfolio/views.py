@@ -2,6 +2,10 @@ from django.shortcuts import render
 from notice.models import *
 from project.models import *
 from news.models import *
+from partners.models import *
+from records.models import *
+from course.models import *
+
 
 
 def index(request):
@@ -9,12 +13,18 @@ def index(request):
     home_project_ongoing = Project.objects.filter(status='Ongoing')[:3]
     home_project_completed = Project.objects.filter(status='Complete')[:3]
     home_news = News.objects.all()[:4]
+    home_partner = Partner.objects.all()
+    home_items = SuccessHistory.objects.filter(is_active=True)
+    home_course = Course.objects.all()[:4]
 
     context = {
         'notice':home_notice,
         'project_ongoing': home_project_ongoing,
         'project_completed': home_project_completed,
-        'news':home_news
+        'news':home_news,
+        'partner':home_partner,
+        'success_items':home_items,
+        'home_course':home_course
     }
     return render(request,'front/pages/homepage.html', context)
 

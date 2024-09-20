@@ -1,5 +1,5 @@
 {% extends 'front/layout/main.html' %}
-
+{% load static %}
 {% block title %}Contact{% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
                     <!-- Form to contact -->
                     <div class="col-span-6 lg:col-span-4">
                         <div class="block my-3">
-                            <h2 class="text-3xl font-bold text-yellow-600">Contact us</h2>
+                            <h2 class="text-3xl font-bold text-blue-800">Contact us</h2>
                             <p class="text-gray-600 mt-2">If you have any enquiry, feel free to contact us. Leave us
                                 your details and our team will handle the rest.</p>
                         </div>
@@ -67,11 +67,11 @@
                     <div class="col-span-6 lg:col-span-2 bg-blue-50 p-6 rounded-lg">
                         <div class="block mb-3">
                             <h2 class="text-3xl font-bold">Contact Info</h2>
-                            <p class="text-gray-600 mt-2">Or you can use this details and contact us</p>
+                            <p class="text-gray-600 mt-2">Or you can use this details and contact us:</p>
                         </div>
                         <div class="mb-6">
                             <video width="100%" autoplay muted playsinline loop>
-                                <source src="your-video-file.mp4" type="video/mp4">
+                                <source src="{% static 'front/assets/videos/video.mp4' %}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
