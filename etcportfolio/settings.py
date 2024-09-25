@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'course',
     'ckeditor',
     'ckeditor_uploader',
+    'location',
+    'contract',
+    'trainer',
 ]
 
 MIDDLEWARE = [
