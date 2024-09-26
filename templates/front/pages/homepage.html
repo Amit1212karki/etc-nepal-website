@@ -30,9 +30,9 @@
 </section>
 
 
-<section class="recent-notice p-6">
+<section class="recent-notice px-20 py-5">
     <div class="grid grid-cols-5">
-        <div class="col-span-1 bg-blue-800 py-4 px-14 text-2xl text-white">
+        <div class="col-span-1 bg-blue-800 py-4 px-14 text-xl text-white">
             Recent Notice
         </div>
         <div class="col-span-4 flex items-center border-2 border-blue-800 overflow-hidden">
@@ -56,8 +56,8 @@
 </section>
 
 <section class="about">
-    <section class="py-14">
-        <div class="max-w-screen-xl mx-auto md:px-8">
+    <section class="px-20">
+        <div class="py-10">
             <div class="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                 <div class="flex-1 sm:hidden lg:block">
                     <!-- Replace with your static image path -->
@@ -72,10 +72,13 @@
                         Build your technical skills with help from our experts
                     </p>
                     <p class="mt-3 text-gray-600">
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        mollit anim id est laborum, sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque laudantium
+                        Expert Technical College (ETC Nepal) is a newly established institution in Itahari, Koshi
+                        Province, offering vocational courses in hospitality, electrical, mechanical, and overseas
+                        packages. Founded by dynamic professionals, ETC is registered with the Nepal Government and aims
+                        to meet both national and international standards. The college focuses on providing quality,
+                        skill-based education through experienced faculty, with an emphasis on practical exposure. ETC's
+                        mission is to equip students with the skills needed to succeed in the global market and help
+                        them build a bright future by enhancing their knowledge, skills, and attitudes in these fields.
                     </p>
                     <a href="javascript:void(0)"
                         class="inline-flex gap-x-1 items-center text-indigo-500 hover:text-yellow-600  duration-150 font-medium">
@@ -100,11 +103,12 @@
             </h3>
             <div class="mt-6 overflow-hidden">
                 <!-- Slider Container -->
-                <ul class="grid grid-cols-5 items-center">
+                <ul class="grid grid-cols-1 sm:grid-cols-4  items-center">
                     {% for partner in partner %}
-                    <li class="col-span-1 px-4 text-center">
-                        <img src="{{ partner.image.url }}" alt="{{ partner.name }}" class="w-full aspect-[3/1] object-contain mb-3">
-                        <span class="pt-3" >{{partner.name}}</span>
+                    <li class="col-span-1 px-4 text-center my-5 sm:my-0">
+                        <img src="{{ partner.image.url }}" alt="{{ partner.name }}"
+                            class="w-full aspect-[3/1] object-contain mb-3">
+                        <span class="pt-3">{{partner.name}}</span>
                     </li>
                     {% endfor %}
                 </ul>
@@ -113,44 +117,8 @@
     </div>
 </section>
 
-
-
-<section class="message-from-ceo header px-14 py-10 flex items-center justify-between">
-    <div class="grid lg:grid-cols-3 gap-10">
-        <!-- Image Section -->
-
-        <!-- Text Section -->
-        <div class="col text-justify lg:col-span-2 gap-10">
-            <h1 class="text-3xl font-bold" id="intro2">Message from CEO</h1>
-            <p class="text-muted-foreground mt-4" id="2desc3">
-
-                Expert Technical College, from its very inception has focused in specializing in technical education and
-                trainings. Over the several years, the College has developed unparallel expertise in providing technical
-                Education and training programmes to Nepali students. The college has now becomes a one Stop Solution
-                for technical education and Research and cureer Development.
-                <br>
-                We strive for "Change" and are continuousaly reasearching on how technical education can become a tool
-                for development of the nation. We aspire for production of internationally competitve technical human
-                resource through innovative teaching methodologies, integration of academic and real time enviroment and
-                continuous research and development in the TEVT sectors. In order to achive these objectives, we have
-                sufficient resources such as three college blocks, state of the art labs, competent and renowned
-                faculties and well equipped liabrary.
-                student should consider
-                <br>
-                Expert if they wish to become part of the "Change"
-                by fostering innovation and excellence in the field of<br> <br>
-            </p>
-        </div>
-
-        <div class="col flex items-center">
-            <img src="{% static 'front/assets/images/ceo.jpg' %}"
-                alt="ETC"  style="border: 5px solid #2d5281 ;" class="w-full h-[300px] object-cover">
-        </div>
-    </div>
-</section>
-
-<section class="expertise bg-white">
-    <div class="header px-14 py-14">
+<section class="expertise">
+    <div class="header px-20 py-14">
         <div class="title-content">
             <h1 class="text-3xl font-bold text-blue-800">Areas of Expertise</h1>
             <span class="text-gray-500">
@@ -159,32 +127,62 @@
         </div>
 
         <div class="grid lg:grid-cols-3 mt-5 gap-6">
-
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Construction</h5> -->
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Construction</h5>
-
                         <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Mason</li>
-                            <li>Plumber</li>
-                            <li>Furniture</li>
-                            <li>Marker</li>
-                            <li>Professional Plumber</li>
-                            <li>Professional Mason</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Mason</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Plumber</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Furniture</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Marker</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Professional Plumber</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Professional Mason</span>
+                            </li>
                         </ul>
 
                     </li>
@@ -194,31 +192,54 @@
 
             </div>
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Agriculture</h5> -->
-
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Agriculture</h5>
-
                         <img class="size-10" src="{% static 'images/agriculture.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Offseason Vegetable</li>
-                            <li>Assistant Gardener</li>
-                            <li>Community Livestock Assistant</li>
-                            <li>Junior Technical Assistant (Poultry-L2)</li>
-                            <li>Junior Technical Assistant (Vegetable-L2)</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Offseason Vegetable</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Assistant Gardener</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Community Livestock Assistant</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Junior Technical Assistant (Poultry-L2)</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Junior Technical Assistant (Vegetable-L2)</span>
+                            </li>
                         </ul>
                     </li>
 
@@ -227,70 +248,131 @@
 
             </div>
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Electrical</h5> -->
-
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Electrical</h5>
-
                         <img class="size-10" src="{% static 'images/electrical-circuit.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Building Electrician (L1 & L2)</li>
-                            <li>Industrial Wiring</li>
-                            <li>Micro Hydropower Technician</li>
-                            <li>Solar Technician</li>
-                            <li>Mobile Phone Repairer</li>
-                            <li>3 Phase Wiring</li>
-                            <li>Professional Building Electrician</li>
-                            <li>Electric Motor Rewinder</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>3 Phase Wiring</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Professional Building Electrician</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Electric Motor Rewinder</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Building Electrician (L1 & L2)</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Industrial Wiring</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Micro Hydropower Technician</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Solar Technician</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Mobile Phone Repairer</span>
+                            </li>
                         </ul>
-
                     </li>
-
-
                 </ul>
-
             </div>
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Mechanical</h5> -->
-                <div class="flex items-baseline text-gray-900">
-
-                </div>
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Mechanical</h5>
-
                         <img class="size-10" src="{% static 'images/tool-box.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Welder</li>
-                            <li>Arc Welder</li>
-                            <li>Aluminium Fabricator</li>
-                            <li>Refrigeration and Air Condition Mechanic</li>
-                            <li>Motor Rewinder</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Welder</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Arc Welder</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Aluminium Fabricator</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Refrigeration and Air Condition Mechanic</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Motor Rewinder</span>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -299,174 +381,199 @@
 
 
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Electronics</h5> -->
-                <div class="flex items-baseline text-gray-900">
-
-                </div>
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Electronics</h5>
-
                         <img class="size-10" src="{% static 'images/phone-case.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Mobile Phone Repairer</li>
-                            <li>Computer Hardware Technician</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Mobile Phone Repairer</span>
+                            </li>
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Computer Hardware Technician</span>
+                            </li>
                         </ul>
                     </li>
-
-
                 </ul>
-
             </div>
 
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Education</h5> -->
-                <div class="flex items-baseline text-gray-900">
-
-                </div>
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Education</h5>
-
                         <img class="size-10" src="{% static 'images/graduation-cap.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Early Childhood Development</li>
-                            <li>Montessori</li>
+                        <ul class="pl-2text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center mb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Early Childhood Development</span>
+                            </li>
+                            <li class="flex gap-2 items-center">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Montessori</span>
+                            </li>
                         </ul>
-
                     </li>
-
-
                 </ul>
-
             </div>
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Computer</h5> -->
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Computer</h5>
-
                         <img class="size-10" src="{% static 'images/computer.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Computer Operator</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Computer Operator</span>
+                            </li>
                         </ul>
-
                     </li>
-
-
                 </ul>
-
             </div>
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
+            <div class="w-full p-4 bg-white border border-grey-200 rounded-sm sm:p-8">
                 <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Automobile</h5> -->
 
                 <ul role="list" class="space-y-5 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Automobile</h5>
-
                         <img class="size-10" src="{% static 'images/car.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Motorcycle Service Mechanic (L1 and L2)</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Motorcycle Service Mechanic (L1 and L2)</span>
+                            </li>
                         </ul>
-
                     </li>
-
-
                 </ul>
-
             </div>
 
-            <div class="w-full  p-4 bg-gray-200 border border-white-200 rounded-sm shadow sm:p-8">
-                <!-- <h5 class="mb-4 text-xl font-medium text-gray-500">Others</h5> -->
-                <div class="flex items-baseline text-gray-900">
-
-                </div>
-                <ul role="list" class="space-y-5 ">
+            <div class="w-full bg-white border border-grey-200 rounded-sm sm:p-8">
+                <ul role="list" class="space-y-2 ">
                     <li class="flex items-center justify-between">
                         <h5 class="text-xl font-medium text-gray-500">Others</h5>
-
                         <img class="size-10" src="{% static 'images/other.png' %}" alt="" srcset="">
                     </li>
-
-
                     <li class="flex">
-                        <!-- <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                        </svg> -->
-                        <!-- <img class="size-10" src="{% static 'images/worker.png' %}" alt="" srcset=""> -->
-
-                        <ul class="list-disc pl-5 text-base font-normal leading-tight text-gray-500">
-                            <li>Tailor Master</li>
-                            <li>Beautician</li>
-                            <li>Montessori</li>
+                        <ul class="pl-2 text-base font-normal leading-tight text-gray-500">
+                            <li class="flex gap-2 items-center pb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Tailor Master</span>
+                            </li>
+                            <li class="flex gap-2 items-center pb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Beautician</span>
+                            </li>
+                            <li class="flex gap-2 items-center pb-2">
+                                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                                </svg>
+                                <span>Montessori</span>
+                            </li>
                         </ul>
-
                     </li>
-
-
                 </ul>
-
             </div>
-
-
-
         </div>
     </div>
 
 </section>
 
 
-<section class="projects" x-data="{ openTab: 1 }">
-    <div class="header px-14 py-10 flex items-center justify-between">
+<section class="message-from-ceo header px-20 py-10 flex items-center justify-between">
+    <div class="grid lg:grid-cols-4 gap-10">
+        <div class="col-span-2 text-justify lg:col-span-2 gap-10">
+            <h1 class="text-3xl font-bold text-blue-800" id="intro2">Message from CEO</h1>
+            <p class="text-muted-foreground mt-4" id="2desc3">
+
+                Dear all, <br> <br>
+
+                I am honored to bring this notice to you all that our group of professionals has recently established
+                Expert Technical College (ETC Nepal) to shape the emerging youngsters in a new frame and to bridge the
+                gap of unemployment seen in our academia after graduation through varieties of our vocational courses in
+                the field of Hospitality Management, Electronic, Electric, Mechanical & Other Sector. we have got the
+                affiliation from and CTEVT and been already registered to Nepal Government as an institution in
+                hospitality. <br> <br>
+
+                our country has been hardly capable of producing adequate number of skilled manpower . Education policy
+                in Nepal lacks a substantial level of practicality. Our manpower is not being able to compete in the
+                International market. It is also the fact that the emerging youths are becoming the victim of
+                frustration due to lack of sufficient skills to get the job of their choices even in the domestic
+                market. young people are found to be in dilemma even after the completion of their degrees and hence
+                obliged to fly overseas for very risky and less-paid jobs. Considering the very facts, we have aimed to
+                prepare skilled Management through our varieties of programs as vocational training in four major
+                fields: Hospitality, Electrical, Mechanical and Overseas packages. We are also concerned and dedicated
+                to provide quality skill based vocational education from experienced to the demanded market. <br> <br>
+
+                Moreover, this venture is an outcome of hard work and dedication of our entire team ranging from the
+                staffs to the experts. In this sense, our services are the result of our decades of experience,
+                creativity, labour and learning which are likely to benefit you to a large extent. <br> <br>
+
+                I highly encourage you all to join us. I am equally eager to welcome you all for your new journey in
+                Hospitality, Electrical, Mechanical field. <br> <br>
+
+                Expecting tremendous support from all our valued customers, students, guardians and well-wishers! <br>
+                <br>
+                Thank you.
+            </p>
+        </div>
+
+        <div class="col-span-2 flex items-center">
+            <img src="{% static 'front/assets/images/ceo.jpg' %}" alt="ETC"
+                class="w-full h-full object-cover border border-blue-800">
+        </div>
+    </div>
+</section>
+
+
+<section class="projects bg-white px-20" x-data="{ openTab: 1 }">
+    <div class="header py-10 flex items-center justify-between">
         <div class="title-content">
             <h1 class="text-3xl font-bold text-blue-800">Recent Projects</h1>
             <span class="text-gray-500">Find out our publications published by our team members</span>
@@ -484,7 +591,7 @@
         </div>
     </div>
 
-    <div class="px-14">
+    <div class="">
         <!-- Ongoing Projects Tab -->
         <div x-show="openTab === 1">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
@@ -517,7 +624,9 @@
                     </div>
                 </article>
                 {% empty %}
-                <p>No ongoing projects available at the moment.</p>
+                <div class="w-full">
+                    <p class="w-full">No ongoing projects available at the moment.</p>
+                </div>
                 {% endfor %}
             </div>
         </div>
@@ -553,21 +662,23 @@
                     </div>
                 </article>
                 {% empty %}
-                <p>No completed projects available at the moment.</p>
+                <div class="w-full">
+                    <p class="w-full">No ongoing projects available at the moment.</p>
+                </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
 
-<section class="counts bg-white">
-    <div class="header px-14 py-14">
+<section class="counts bg-white px-20">
+    <div class="header py-14">
         <div class="title-content">
             <h1 class="text-3xl font-bold text-blue-800">Our Success History</h1>
             <span class="text-gray-500">Find out our publication published by our team members</span>
         </div>
     </div>
-    <div class="px-14 pb-10">
+    <div class="pb-10">
         <div class="grid lg:grid-cols-3 gap-10">
             {% for item in success_items %}
             <div class="bg-gray-200 flex flex-col justify-center items-center p-5 rounded-sm">
@@ -584,68 +695,76 @@
                     {{ item.description|truncatechars:200 }}
                 </span>
             </div>
+            {% empty %}
+            <div class="w-full">
+                <p class="w-full">No stories available at the moment.</p>
+            </div>
             {% endfor %}
         </div>
     </div>
 </section>
-<section class="other">
-    <div class="header px-14 py-14">
+<section class="other px-20 pb-14">
+    <div class="header py-14">
         <div class="title-content">
             <h1 class="text-3xl font-bold text-blue-800">Our Syallabus</h1>
             <span class="text-gray-500">Find out our publication published by our team members</span>
         </div>
     </div>
-    <div class="px-14 pb-14 grid grid-cols-3 justify-center gap-5">
+    <div class="b-14 grid grid-cols-3 justify-center gap-5">
         <!-- First Card -->
-        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-sky-600 ">
+        <div class="p-6 border border-gray-200 rounded-lg shadow bg-blue-800 relative">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Noteworthy technology
                     acquisitions 2021</h5>
             </a>
-            <p class="mb-3 font-normal text-gray-300 dark:text-black-400">Here are the biggest enterprise technology
+            <p class="mb-14 font-normal text-white dark:text-black-400">Here are the biggest enterprise technology
                 acquisitions of 2021 so far, in reverse chronological order.</p>
 
-            <a href="#"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white  hover:bg-yellow-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Read more
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
+            <div>
+                <a href="#"
+                    class="bg-white text-black py-3 px-2 w-[90%] flex items-center justify-center absolute bottom-3 left-5">
+                    Read more
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
         </div>
 
         <!-- Second Card -->
-        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-sky-600">
+        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-blue-800 relative">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Our Courses</h5>
             </a>
-            <ul class=" mb-3 list-disc pl-5 text-base font-normal leading-tight text-gray-300">
-              {% for course in home_course %}
-               <a href="/course/single-course/{{ course.id }}/" >
-                <li class="hover:text-black">{{course.title}}</li>
-               </a>
+            <ul class=" mb-14 list-disc pl-5 text-base font-normal leading-tight text-gray-300">
+                {% for course in home_course %}
+                <a href="/course/single-course/{{ course.id }}/">
+                    <li class="hover:text-black">{{course.title}}</li>
+                </a>
                 {% endfor %}
             </ul>
-            <a href="/course/"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white hover:bg-yellow-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Read more
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
+            <div>
+                <a href="#"
+                    class="bg-white text-black py-3 px-2 w-[90%] flex items-center justify-center absolute bottom-3 left-5">
+                    Read more
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
         </div>
 
         <!-- Third Card -->
-        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-sky-600">
+        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-blue-800 relative">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Noteworthy technology
                     acquisitions 2021</h5>
             </a>
-            <ul class=" mb-3 list-disc pl-5 text-base font-normal leading-tight text-gray-300">
+            <ul class="mb-14 list-disc pl-5 text-base font-normal leading-tight text-white">
                 <li>Mason</li>
                 <li>Plumber</li>
                 <li>Furniture</li>
@@ -653,15 +772,17 @@
                 <li>Professional Plumber</li>
                 <li>Professional Mason</li>
             </ul>
-            <a href="#"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white hover:bg-yellow-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Read more
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
+            <div>
+                <a href="#"
+                    class="bg-white text-black py-3 px-2 w-[90%] flex items-center justify-center absolute bottom-3 left-5">
+                    Read more
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
 </section>
