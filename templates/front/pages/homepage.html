@@ -57,7 +57,7 @@
 
 <section class="about">
     <section class="px-20">
-        <div class="py-10">
+        <div class="py-14">
             <div class="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                 <div class="flex-1 sm:hidden lg:block">
                     <!-- Replace with your static image path -->
@@ -788,28 +788,35 @@
 </section>
 
 
-<section class="news bg-white">
-    <div class="header px-14 py-14">
+<section class="news bg-white px-20">
+    <div class="header py-14 flex justify-between">
         <div class="title-content">
             <h1 class="text-3xl font-bold text-blue-800">Recent News</h1>
             <span class="text-gray-500">Find out our publication published by out team members</span>
         </div>
+        <a href="/news/"
+        class="group inline-flex items-center gap-1 text-sm font-medium text-blue-900 hover:text-yellow-600">
+        Find out more
+        <span aria-hidden="true"
+            class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
+            &rarr;
+        </span>
+    </a>
     </div>
     {% if news %}
-    <div class="news-container px-14 pb-5 ">
+    <div class="news-container pb-5 ">
         <div class="grid grid-cols-4 gap-3">
             {% for news in news %}
             <div class="col">
                 <a href="/news/single-news/{{news.id}}/">
-                    <div
-                        class="flex flex-col bg-gray-200 border hover:border-blue-800 transition duration-300 rounded-sm">
+                    <div class="border hover:border-blue-800 transition duration-300 rounded-sm">
                         <div class="relative w-full h-64">
                             <img class="absolute inset-0 w-full h-full object-cover rounded-t-sm"
                                 src="{{ news.image.url }}" alt="{{ news.title }}">
                         </div>
                         <div class="p-4 md:p-5 bg-white">
                             <h3 class="text-lg text-gray-800">
-                                {{ news.title }}
+                                {{ news.title|truncatewords:6 }}
                             </h3>
                             <p class="mt-1 text-gray-500">
                                 {{ news.description|truncatewords:10 }}
@@ -818,14 +825,6 @@
                                 <p class="text-xs text-gray-500 dark:text-neutral-500">
                                     Uploaded {{ news.created_at|timesince }} ago
                                 </p>
-                                <a href="/news/single-news/{{news.id}}/"
-                                    class="group inline-flex items-center gap-1 text-sm font-medium text-blue-900 hover:text-yellow-600">
-                                    Find out more
-                                    <span aria-hidden="true"
-                                        class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
-                                        &rarr;
-                                    </span>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -840,8 +839,6 @@
     </div>
     {% endif %}
 </section>
-
-
 
 
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
