@@ -788,7 +788,7 @@
 </section>
 
 
-<section class="news bg-white px-20">
+<section class="news bg-white px-20 pb-14">
     <div class="header py-14 flex justify-between">
         <div class="title-content">
             <h1 class="text-3xl font-bold text-blue-800">Recent News</h1>
@@ -810,16 +810,16 @@
             <div class="col">
                 <a href="/news/single-news/{{news.id}}/">
                     <div class="border hover:border-blue-800 transition duration-300 rounded-sm">
-                        <div class="relative w-full h-64">
+                        <div class="relative w-full h-64 border-b ">
                             <img class="absolute inset-0 w-full h-full object-cover rounded-t-sm"
                                 src="{{ news.image.url }}" alt="{{ news.title }}">
                         </div>
                         <div class="p-4 md:p-5 bg-white">
                             <h3 class="text-lg text-gray-800">
-                                {{ news.title|truncatewords:6 }}
+                                {{ news.title|truncatechars:50 }}
                             </h3>
                             <p class="mt-1 text-gray-500">
-                                {{ news.description|truncatewords:10 }}
+                                {{ news.description|truncatechars:100 }}
                             </p>
                             <div class="flex justify-between items-center mt-5">
                                 <p class="text-xs text-gray-500 dark:text-neutral-500">
