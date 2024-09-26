@@ -100,9 +100,9 @@
             </h3>
             <div class="mt-6 overflow-hidden">
                 <!-- Slider Container -->
-                <ul class="grid grid-cols-5 gap-y-6 items-center">
+                <ul class="grid grid-cols-5 items-center">
                     {% for partner in partner %}
-                    <li class="col-span-1 px-12 text-center">
+                    <li class="col-span-1 px-4 text-center">
                         <img src="{{ partner.image.url }}" alt="{{ partner.name }}" class="w-full aspect-[3/1] object-contain mb-3">
                         <span class="pt-3" >{{partner.name}}</span>
                     </li>
