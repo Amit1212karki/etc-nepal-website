@@ -25,7 +25,8 @@
                 <li class="pr-4"><img src="{% static 'images/back-navbar-logo.jpeg' %}" /></li>
                 <li class="text-white">
                     <a class="flex gap-4 items-center" href="/news/">
-                        <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6">
                             <path fill-rule="evenodd"
                                 d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
                                 clip-rule="evenodd" />
@@ -38,72 +39,24 @@
             </ul>
 
         </div>
-      
+
         <div class="bg-white py-4 flex items-center relative">
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6 font-bold px-10">
-                <a href="/" class=" hover:text-yellow-600 transition duration-300 ">Home </a>
-                <div x-data="{ open: false }" class="relative">
-                    <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class=" hover:text-yellow-600 transition duration-300 flex items-center">
-                        Company
-                        <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180': open }">
-                            <path
-                                d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z"
-                                fill="currentColor" />
-                        </svg>
-                    </a>
-                    <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-blue-800 absolute px-5 py-6  top-6 w-64 transition-opacity duration-300">
-                        <ul class="space-y-4">
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/about/">Introduction</a>
-                            </li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/vission/">Vision</a>
-                            </li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/mission/">Mission</a>
-                            </li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/goal/">Goal</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a
-                                    href="/objective/">Objective</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/hr-diagram/">HR
-                                    Diagram</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/teams/">Our Team</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div x-data="{ open: false }" class="relative">
-                    <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class=" hover:text-yellow-600 transition duration-300 flex items-center">
-                        Projects
-                        <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180': open }">
-                            <path
-                                d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z"
-                                fill="currentColor" />
-                        </svg>
-                    </a>
-                    <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-blue-800  absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
-                        <ul class="space-y-4">
-                            <li class="hover:text-yellow-600 transition duration-300"><a
-                                    href="/projects/ongoing/">Ongoing
-                                    Project</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a
-                                    href="/projects/completed/">Completed Project</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="/etc_document/" class="text-white hover:text-yellow-600 transition duration-300">Documents</a>
+            <div class="hidden md:flex space-x-6 font-bold px-10 ">
+                <a href="/certificate/dashboard/" class=" hover:text-yellow-600 transition duration-300 ">Home </a>
+                <a href="/certificate/contract/" class=" hover:text-yellow-600 transition duration-300 ">Contract </a>
+                <a href="/certificate/batch/" class=" hover:text-yellow-600 transition duration-300 ">Batch </a>
+                <a href="/certificate/trainer/" class=" hover:text-yellow-600 transition duration-300 ">Trainer </a>
+                <a href="/certificate/trainee/" class=" hover:text-yellow-600 transition duration-300 ">Trainee</a>
+                <a href="//certificate/dashboard/" class=" hover:text-yellow-600 transition duration-300 ">Certificate
+                    Generation</a>
+
+                <!-- <a href="/etc_document/" class="hover:text-yellow-600 transition duration-300">Documents</a>
                 <a href="/publications/"
-                    class="text-white hover:text-yellow-600 transition duration-300">Publications</a>
+                    class="hover:text-yellow-600 transition duration-300">Publications</a>
                 <div x-data="{ open: false }" class="relative">
                     <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class="text-white hover:text-yellow-600 transition duration-300 flex items-center">
+                        class="hover:text-yellow-600 transition duration-300 flex items-center">
                         Media
                         <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +67,7 @@
                         </svg>
                     </a>
                     <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-blue-800 text-white absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
+                        class="project-dropdown bg-blue-800 absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
                         <ul class="space-y-4">
                             <li class="hover:text-yellow-600 transition duration-300"><a href="/news/">News</a></li>
                             <li class="hover:text-yellow-600 transition duration-300"><a href="/image/">Images</a></li>
@@ -123,10 +76,13 @@
                         </ul>
                     </div>
                 </div>
-                <a href="/course/" class="text-white hover:text-yellow-600 transition duration-300">Course</a>
-                <a href="/contact/" class="text-white hover:text-yellow-600 transition duration-300">Certificate</a>
+                <a href="/course/" class="hover:text-yellow-600 transition duration-300">Course</a>
+                <a href="/contact/" class="hover:text-yellow-600 transition duration-300">Certificate</a>
 
-                <a href="/contact/" class="text-white hover:text-yellow-600 transition duration-300">Contact</a>
+                <a href="/contact/" class="hover:text-yellow-600 transition duration-300">Contact</a> -->
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'certificate-logout' request.user.id %}" class="hover:text-yellow-600 transition duration-300">Logout</a>
+                {% endif %}
             </div>
             <!-- Mobile Menu Button -->
             <button id="menu-btn" class="block md:hidden text-gray-700 focus:outline-none">
