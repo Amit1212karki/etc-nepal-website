@@ -27,4 +27,4 @@ jobs:
         exclude: |
           templates/certificate/
         passive: true
-        debug: true
+        debug: true  # Enable verbose logging
