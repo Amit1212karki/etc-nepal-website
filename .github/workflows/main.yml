@@ -22,12 +22,8 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.2.0
       with:
         server: 167.235.9.123
-        username: ${{ secrets.FTP_USERNAME }}  # Using the secret for the FTP username
-        password: ${{ secrets.FTP_PASSWORD }} 
+        username: etc@etcnepal.com.np
+        password: Ultimate@22
         exclude: |
-            templates/back/
-            .git/
-            *.pyc
-            __pycache__/
-            *.log
-          passive: true
+          templates/certificate/
+        passive: true
