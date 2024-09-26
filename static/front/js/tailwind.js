@@ -6,7 +6,7 @@ tailwind.config = {
                 secondary: '#005f73', // Custom secondary color (choose your desired secondary color)
             },
             fontFamily: {
-                sans: ['Tahoma', 'sans-serif'], // Setting font style to DM Sans
+                sans: ['DM Sans', 'sans-serif'] // Setting font style to DM Sans
             },
            
         }
