@@ -20,7 +20,7 @@
 
                 <div class="mt-4 sm:mt-8">
                     <a href="#"
-                        class="inline-block bg-blue-800 px-8 py-3 text-sm font-medium text-white transition hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-400">
+                        class="inline-block bg-blue-600 px-8 py-3 text-sm font-medium text-white transition hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-400">
                         Learn More About Etc
                     </a>
                 </div>
@@ -32,10 +32,10 @@
 
 <section class="recent-notice px-20 py-5">
     <div class="grid grid-cols-5">
-        <div class="col-span-1 bg-blue-800 py-4 px-14 text-xl text-white">
+        <div class="col-span-1 bg-blue-600 py-4 px-14 text-xl text-white">
             Recent Notice
         </div>
-        <div class="col-span-4 flex items-center border-2 border-blue-800 overflow-hidden">
+        <div class="col-span-4 flex items-center border-2 border-blue-600 overflow-hidden">
             {% if notice %}
             <div class="whitespace-nowrap flex items-center marquee-container">
                 {% for notice in notice %}
@@ -65,7 +65,7 @@
                         alt="">
                 </div>
                 <div class="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
-                    <h3 class="text-blue-800 font-semibold">
+                    <h3 class="text-blue-600 font-semibold">
                         About ETC
                     </h3>
                     <p class="text-gray-800 text-3xl font-semibold sm:text-4xl">
@@ -120,7 +120,7 @@
 <section class="expertise">
     <div class="header px-20 py-14">
         <div class="title-content">
-            <h1 class="text-3xl font-bold text-blue-800">Areas of Expertise</h1>
+            <h1 class="text-3xl font-bold text-blue-600">Areas of Expertise</h1>
             <span class="text-gray-500">
                 We cover the following categories of technical fields
             </span>
@@ -529,7 +529,7 @@
 <section class="message-from-ceo header px-20 py-10 flex items-center justify-between">
     <div class="grid lg:grid-cols-4 gap-10">
         <div class="col-span-2 text-justify lg:col-span-2 gap-10">
-            <h1 class="text-3xl font-bold text-blue-800" id="intro2">Message from CEO</h1>
+            <h1 class="text-3xl font-bold text-blue-600" id="intro2">Message from CEO</h1>
             <p class="text-muted-foreground mt-4" id="2desc3">
 
                 Dear all, <br> <br>
@@ -566,7 +566,7 @@
 
         <div class="col-span-2 flex items-center">
             <img src="{% static 'front/assets/images/ceo.jpg' %}" alt="ETC"
-                class="w-full h-full object-cover border border-blue-800">
+                class="w-full h-full object-cover border border-blue-600">
         </div>
     </div>
 </section>
@@ -575,16 +575,16 @@
 <section class="projects bg-white px-20" x-data="{ openTab: 1 }">
     <div class="header py-10 flex items-center justify-between">
         <div class="title-content">
-            <h1 class="text-3xl font-bold text-blue-800">Recent Projects</h1>
+            <h1 class="text-3xl font-bold text-blue-600">Recent Projects</h1>
             <span class="text-gray-500">Find out our publications published by our team members</span>
         </div>
         <!-- Tabs Navigation -->
         <div class="flex space-x-4">
-            <button @click="openTab = 1" :class="{ 'bg-blue-800 text-white': openTab === 1 }"
+            <button @click="openTab = 1" :class="{ 'bg-blue-600 text-white': openTab === 1 }"
                 class="py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border rounded-md">
                 Ongoing Projects
             </button>
-            <button @click="openTab = 2" :class="{ 'bg-blue-800 text-white': openTab === 2 }"
+            <button @click="openTab = 2" :class="{ 'bg-blue-600 text-white': openTab === 2 }"
                 class="py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border rounded-md">
                 Completed Projects
             </button>
@@ -674,7 +674,7 @@
 <section class="counts bg-white px-20">
     <div class="header py-14">
         <div class="title-content">
-            <h1 class="text-3xl font-bold text-blue-800">Our Success History</h1>
+            <h1 class="text-3xl font-bold text-blue-600">Our Success History</h1>
             <span class="text-gray-500">Find out our publication published by our team members</span>
         </div>
     </div>
@@ -683,7 +683,7 @@
             {% for item in success_items %}
             <div class="bg-gray-200 flex flex-col justify-center items-center p-5 rounded-sm">
                 <span
-                    class="flex tabular-nums text-blue-800 text-7xl font-extrabold mb-2 transition-[_--num] duration-[3s] ease-out [counter-set:_num_var(--num)] supports-[counter-set]:before:content-[counter(num)]"
+                    class="flex tabular-nums text-blue-600 text-7xl font-extrabold mb-2 transition-[_--num] duration-[3s] ease-out [counter-set:_num_var(--num)] supports-[counter-set]:before:content-[counter(num)]"
                     x-data="{ shown: false }" x-intersect="shown = true" :class="shown && '[--num:{{ item.number }}]'">
                     <span class="supports-[counter-set]:sr-only">{{ item.number }}</span>{{ item.suffix }}
                 </span>
@@ -706,13 +706,13 @@
 <section class="other px-20 pb-14">
     <div class="header py-14">
         <div class="title-content">
-            <h1 class="text-3xl font-bold text-blue-800">Our Syallabus</h1>
+            <h1 class="text-3xl font-bold text-blue-600">Our Syallabus</h1>
             <span class="text-gray-500">Find out our publication published by our team members</span>
         </div>
     </div>
     <div class="b-14 grid grid-cols-3 justify-center gap-5">
         <!-- First Card -->
-        <div class="p-6 border border-gray-200 rounded-lg shadow bg-blue-800 relative">
+        <div class="p-6 border border-gray-200 rounded-lg shadow bg-blue-600 relative">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Noteworthy technology
                     acquisitions 2021</h5>
@@ -734,7 +734,7 @@
         </div>
 
         <!-- Second Card -->
-        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-blue-800 relative">
+        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-blue-600 relative">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Our Courses</h5>
             </a>
@@ -759,7 +759,7 @@
         </div>
 
         <!-- Third Card -->
-        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-blue-800 relative">
+        <div class=" p-6 border border-gray-200 rounded-lg shadow bg-blue-600 relative">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Noteworthy technology
                     acquisitions 2021</h5>
@@ -791,7 +791,7 @@
 <section class="news bg-white px-20 pb-14">
     <div class="header py-14 flex justify-between">
         <div class="title-content">
-            <h1 class="text-3xl font-bold text-blue-800">Recent News</h1>
+            <h1 class="text-3xl font-bold text-blue-600">Recent News</h1>
             <span class="text-gray-500">Find out our publication published by out team members</span>
         </div>
         <a href="/news/"
@@ -809,7 +809,7 @@
             {% for news in news %}
             <div class="col">
                 <a href="/news/single-news/{{news.id}}/">
-                    <div class="border hover:border-blue-800 transition duration-300 rounded-sm">
+                    <div class="border hover:border-blue-600 transition duration-300 rounded-sm">
                         <div class="relative w-full h-64 border-b ">
                             <img class="absolute inset-0 w-full h-full object-cover rounded-t-sm"
                                 src="{{ news.image.url }}" alt="{{ news.title }}">

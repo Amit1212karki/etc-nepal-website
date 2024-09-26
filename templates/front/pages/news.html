@@ -5,7 +5,7 @@
 {% block content %}
 <div class="header px-20 py-14">
     <div class="title-content">
-        <h1 class="text-3xl font-bold text-blue-800">News</h1>
+        <h1 class="text-3xl font-bold text-blue-600">News</h1>
         <span class="text-gray-500">Find out our publication published by out team members</span>
     </div>
 </div>
@@ -18,7 +18,7 @@
         {% for news in page_obj %}
         <div class="col-span-1">
             <a href="/news/single-news/{{news.id}}/">
-                <div class="border hover:border-blue-800 transition duration-300 rounded-sm">
+                <div class="border hover:border-blue-600 transition duration-300 rounded-sm">
                     <div class="relative w-full h-64 border-b ">
                         <img class="absolute inset-0 w-full h-full object-cover rounded-t-sm" src="{{ news.image.url }}"
                             alt="{{ news.title }}">
