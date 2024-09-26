@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,18 @@ INSTALLED_APPS = [
     'video',
     'publication',
     'team',
-    'contact'
+    'contact',
+    'django_recaptcha',
+    'document',
+    'partners',
+    'records',
+    'certificate',
+    'course',
+    'ckeditor',
+    'ckeditor_uploader',
+    'location',
+    'contract',
+    'trainer',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +154,29 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SITE_TITLE = 'ETC'
+
+JAZZMIN_SETTINGS = {
+
+    "site_title": "ETC",
+    "site_header": "ETC",
+    "site_brand": "ETC",
+    "copyright": "Developed by Hunchha Digital PVT. LTD",
+    
+}
+
+APPEND_SLASH = False
+
+RECAPTCHA_PUBLIC_KEY = '6LeyfQ4qAAAAADZRq0llG77QeLWzU_G7BC954p8I'
+RECAPTCHA_PRIVATE_KEY = '6LeyfQ4qAAAAAPEo4sBUxphXd73c6c_cjitRFVTe'
+
+RECAPTCHA_DEFAULT_ERROR_MESSAGE = 'Invalid reCAPTCHA. Please try again.'

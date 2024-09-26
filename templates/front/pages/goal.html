@@ -1,0 +1,123 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}
+{{ block.super }} - About
+{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-800">Goal</h1>
+        <span class="text-gray-500">Find out our publications published by our team members</span>
+    </div>
+    <nav class="absolute  bg-blue-800 bg-opacity-50 text-white p-3 rounded-md m-4 w-max" aria-label="breadcrumb">
+        <ol class="list-reset flex text-left">
+            <li><a href="/" class="hover:text-yellow-300">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/goal/" class="hover:text-yellow-300">Goal</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li>About etc </li>
+        </ol>
+    </nav>
+</div>
+<div>
+    <section class="px-12 mt-6 p-6 space-y-8 md:px-24">
+        <div class="mt-8">
+            <div class="bg-blue-100 p-6 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-6 h-6 text-blue-600">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                    <h2 class="text-xl font-semibold" id="our_goal">Our Goal</h2>
+                </div>
+                <p class="mt-4 text-muted-foreground" id="our_goal_desc">
+                <ul class="mt-4 space-y-2 text-muted-foreground list-disc list-inside">
+                    <li id="our_objectives_desc1">
+                        Provide technical and vocational trainings which are focused for the direct
+                        employment
+                    </li>
+                    <li id="our_objectives_desc2">
+                        Provide quality training which enables the youth to compete with others in current market.
+                    </li>
+                    <li id="our_objectives_desc3">
+                        Increase the employability of the school dropout and unemployed youths through vocational
+                        trainings
+                    </li>
+                    <li id="our_objectives_desc4">
+                        Provide counselling services for unemployed youths to choose a better career path.
+                    </li>
+                    <li id="our_objectives_desc5">
+                        Create employment and livelihood opportunities for unemployed youths.
+                    </li>
+                    <li id="our_objectives_desc7">Provide counselling services for trainees willing to go abroad for
+                        foreign employment.</li>
+                    <li id="our_objectives_desc8">Provide trainings, workshops, seminars on various sectors of
+                        vocational trainings</li>
+                    <li id="our_objectives_desc9">Prepare books, manuals, notes, brochures based on the job market after
+                        the proper research.</li>
+                </ul>
+                </p>
+            </div>
+            <!-- <div class="bg-green-100 p-6 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-6 h-6 text-green-600">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <h2 class="text-xl font-semibold" id="our_objectives">Our Expertise</h2>
+                </div>
+                <ul class="mt-4 space-y-2 text-muted-foreground list-disc list-inside">
+                    <li id="our_objectives_desc1">
+                        <b>Construction: </b>
+                        Mason, Plumber, Furniture, Marker, Professional Plumber, Professional Mason
+                    </li>
+                    <li id="our_objectives_desc2">
+                        <b>Electronics: </b>
+                        Mobile Phone Repairer, Computer Hardware Technician
+                    </li>
+                    <li id="our_objectives_desc3">
+                        <b>Electrical: </b>
+                        Building Electrician (L1 & L2), Industrial Wiring, Micro Hydropower Technician, Solar
+                        Technician, Mobile Phone Repairer, 3 phase wiring, Professional Building Electrician, Electric
+                        Motor Rewinder
+                    </li>
+                    <li id="our_objectives_desc4">
+                        <b>Mechanical: </b>
+                        Welder, Arc Welder, Aluminium Fabricator, Refrigeration and Air Condition Mechanic , Motor
+                        Rewinder
+                    </li>
+                    <li id="our_objectives_desc5">
+                        <b>Education: </b>
+                        Early Childhood Development, Montessori
+                    </li>
+                    <li id="our_objectives_desc6">
+                        <b>Others: </b>
+                        Tailor Master, Beautician, Montessori
+                    </li>
+                    <li id="our_objectives_desc6">
+                        <b>Computer: </b>
+                        Computer Operator
+                    </li>
+
+                    <li id="our_objectives_desc6">
+                        <b>Automobile: </b>
+                        Motorcycle Service Mechanic ( L1 and L2)
+                    </li>
+
+                    <li id="our_objectives_desc6">
+                        <b>Agriculture: </b>
+                        Offseason Vegetable, Assistant Gardener, Community Livestock Assistant, Junior Technical
+                        Assistant (Poultry-L2), Junior Technical Assistant (Vegetable-L2)
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+    </section>
+</div>
+{% endblock %}

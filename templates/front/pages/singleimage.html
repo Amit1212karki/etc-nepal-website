@@ -1,0 +1,37 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}Single Image Page{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-800">Sngle Image Gallery</h1>
+        <span class="text-gray-500">Explore the publications and projects brought to you by our dedicated team
+            members.</span>
+    </div>
+</div>
+
+
+<div class="news-container px-4 mx-auto max-w-4xl">
+    <div class="flex flex-col items-center space-y-4">
+        <!-- Title above the image -->
+        <div class="text-center w-full max-w-5xl">
+            <h6 class="text-2xl font-bold mb-4">{{ single_image.title }}</h6>
+        </div>
+        <div class="w-full max-w-lg">
+            <img class="w-full h-[300px] object-cover rounded-lg" src="{{ single_image.cover.url }}" alt="{{ single_image.title }}">
+        </div>
+        <!-- Display related images in a 5-column grid -->
+        <div class="grid grid-cols-5 gap-4 w-full max-w-5xl">
+            {% for image in related_images %}
+            <div class="flex justify-center">
+                <img class="w-[100px] h-[100px] object-cover rounded-lg" src="{{ image.images.url }}" alt="{{ single_image.title }}">
+            </div>
+            {% empty %}
+            <p>No related images found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

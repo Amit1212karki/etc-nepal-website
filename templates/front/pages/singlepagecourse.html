@@ -1,0 +1,57 @@
+{% extends 'front/layout/main.html' %}
+
+{% block title %}Single Course{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-800">Single Course</h1>
+        <span class="text-gray-500">Explore the details of this course and related courses.</span>
+    </div>
+</div>
+
+<section class="py-6 grid grid-cols-3 px-8 bg-g">
+    <div class="container mx-auto px-6 col-span-2">
+        <div class="bg-white overflow-hidden">
+            <img class="w-full h-96 object-cover" src="{{ single_course.image.url }}" alt="{{ single_course.title }}">
+            <div class="py-6 px-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-3xl font-bold">{{ single_course.title }}</h1>
+                    <p class="text-gray-700">
+                        <strong>Uploaded:</strong> {{ single_course.created_at|timesince }} ago
+                    </p>
+                </div>
+
+                <div class="mt-6">
+                    <p class="p1" style="margin-bottom: 10px; font-size: 14px; line-height: 26px; color: rgb(51, 51, 51); font-family: 'open sans', sans-serif; text-align: justify;">
+                        {{ single_course.description|safe }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white max-h-[100vh] col-span-1">
+        <h2 class="text-2xl font-semibold text-white mb-4 bg-yellow-600 py-4 ps-3 m-0">Other Courses</h2>
+        <div class="overflow-y-auto max-h-[80vh] scrollbar-thin">
+            {% for course in related_course %}
+            <div class="mb-4 pl-16 pr-16 flex items-start space-x-2">
+                <!-- Content -->
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">{{ course.title }}</h3>
+                    <p class="text-gray-600 mb-2">{{ course.description|striptags|slice:":100" }}...</p>
+                    <a href="/course/single-course/{{ course.id }}/" class="text-yellow-500 hover:underline inline-block">Read more</a>
+                </div>
+                <!-- Image -->
+                <div class="w-20 h-20 flex-shrink-0">
+                    <img src="{{ course.image.url }}" alt="{{ course.title }}" class="w-full h-full object-cover rounded">
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-gray-600 mt-1">No related courses available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

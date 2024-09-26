@@ -1,0 +1,106 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}
+{{ block.super }} - About
+{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-800">About Us</h1>
+        <span class="text-gray-500">Find out our publications published by our team members</span>
+    </div>
+    <nav class="absolute  bg-blue-800 bg-opacity-50 text-white p-3 rounded-md m-4 w-max" aria-label="breadcrumb">
+        <ol class="list-reset flex text-left">
+            <li><a href="/" class="hover:text-yellow-300">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/about/" class="hover:text-yellow-300">About</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li>About etc </li>
+        </ol>
+    </nav>
+</div>
+
+<div>
+    <section class="px-12 mt-6 p-6 space-y-8 md:px-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <h1 class="text-3xl font-bold" id="intro1">A brief introduction of ETC.</h1>
+                <p class="text-muted-foreground mt-4" id="desc1">
+
+                    Expert Technical College Nepal (ETC Nepal) Pvt. Ltd.is registered under company act and recognized
+                    by CTEVT to conduct the vocational skill training with a standard training curriculum. In 2071 BS,
+                    it has established its head office in Itahari, Sunsari District. It has one building with two
+                    storied with 10 rooms at its head office. It has practical labs, practical field. Its branch office
+                    has also separate rooms for all trades of training; practical lab and open field for training.
+
+                </p>
+
+            </div>
+
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/hero1.jpg' %}" alt="ETC" class="w-full h-auto rounded-lg object-cover"
+                    style="border: 5px solid #2d5281;">
+            </div>
+
+        </div>
+        <p class="text-justify mt-4" id="desc2">
+            Expert Technical College Nepal (ETC) has aimed to facilitate school leavers, poor and women and marginalized
+            youth providing them skill training with on the Job training (OJT), assisting them to generate
+            self-employment and find employment in domestic and international labour market. Its primary objective is to
+            produce qualified semi-skilled and skilled technical workforce as per the demand of the market placing them
+            in real field of practice like On The Job training (OJT). The main thrusts of the company are quality
+            service delivery, sustainability, competitiveness, innovative technologies, employability and research and
+            development. The training, counselling, promoting, research and development are the means the company uses
+            to mainstream and empower the target group. The school dropouts, out-of-school youths, job aspirant
+            unskilled youths, industrial workers, youths from disadvantaged group (DAG), Dalit, women, conflict affected
+            and internally displaced groups are our primary focus.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/about.jpg' %}" alt="ETC" class="w-full h-auto rounded-lg object-cover"
+                    style="border: 5px solid #2d5281;">
+            </div>
+
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <p class="text-muted-foreground mt-4" id="desc3">
+                    The major objectives of ETC are to assess and update labour market information; to explore
+                    feasibility of new trade of training; to impart training to the unemployed youths as per local and
+                    global market demand; and to support the trainees for placement i.e. wage employment and creation of
+                    self-employment. Up to now, it has been working in thirteen districts of eastern development region
+                    but it aims to work all over Koshi & Madhesh Provence of Nepal. It has been delivering its services
+                    to its targeted population from grassroots to district level for their upliftment through market
+                    oriented skills training. Besides this, it has been providing social services through various lobby,
+                    advocacy, awareness/sensitization and training programs on the issue of women’s human rights.
+
+                    <br>
+                    <br>
+
+                    ETC assesses the demands of the local and global labour market and disseminate information regarding
+                    the market needs. The youths who are in search of vocational skill development for employment come
+                    in touch with ETC and they are enrolled in trades of their choices. Besides this, ETC also works
+                    through local partners i.e. NGOs, DDCs, Rural Municipalities, Municipalities, INGOs, and government
+                    line agencies. Up to now, ETC has collaborated with local governments, HELVETAS Nepal, SaMi,
+                    ENSSURE/ CTEVT, CTEVT province 1 & 2, Ministry of Social Development, Youth creation Sunsari, DDC,
+                    RSDC, Care Nepal/CSP, GIZ, Lutheran World Federation, Nepal Red Cross Society, IRC Nepal, Multi
+                    Skill, The Asia Foundation, NCDC, Karuna Foundation, EVENT/ MoE, VSDTA, Gharelutatha San Udhyog
+                    Udayapur, and Sunsari, Sahara Nepal/RMDC in conducting skill development training in various trades
+                    in different geographical location of the country.
+                </p>
+
+            </div>
+        </div>
+        <p class="text-justify mt-4" id="desc4">
+            <!-- ETC assesses the demands of the local and global labour market and disseminate information regarding the market needs. The youths who are in search of vocational skill development for employment come in touch with ETC and they are enrolled in trades of their choices. Besides this, ETC also works through local partners i.e. NGOs, DDCs, Rural Municipalities, Municipalities, INGOs, and government line agencies. Up to now, ETC has collaborated with local governments, HELVETAS Nepal, SaMi, ENSSURE/ CTEVT, CTEVT province 1 & 2, Ministry of Social Development, Youth creation Sunsari, DDC, RSDC, Care Nepal/CSP, GIZ, Lutheran World Federation, Nepal Red Cross Society, IRC Nepal, Multi Skill, The Asia Foundation, NCDC, Karuna Foundation, EVENT/ MoE, VSDTA, Gharelutatha San Udhyog Udayapur, and Sunsari, Sahara Nepal/RMDC in conducting skill development training in various trades in different geographical location of the country. -->
+       
+
+       
+    </section>
+</div>
+
+{% endblock %}

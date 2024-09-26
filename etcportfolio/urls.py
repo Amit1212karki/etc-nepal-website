@@ -22,12 +22,26 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('contact/', include('contact.urls')),
     path('', index),
+    path('about/', about, name='about'),
+    path('vission/', vission, name='vission'),
+    path('mission/', mission, name='mission'),
+    path('goal/', goal, name='goal'),
+    path('objective/', objective, name='objective'),
+    path('hr-diagram/', hrDiagram, name='hr-diagram'),
     path('publications/', include('publication.urls')),
     path('news/', include('news.urls')),
     path('projects/', include('project.urls')),
     path('notice/', include('notice.urls')),
     path('teams/', include('team.urls')),
+    path('image/', include('image.urls')),
+    path('video/', include('video.urls')),
+    path('etc_document/', include('document.urls')),
+    path('course/', include('course.urls')),
+    path("certificate/", include("certificate.urls")),
+
+
 ]
 
 if settings.DEBUG:

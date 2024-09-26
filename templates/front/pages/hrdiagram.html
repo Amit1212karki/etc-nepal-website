@@ -1,0 +1,56 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}
+{{ block.super }} - About
+{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-800">HR Diagram</h1>
+        <span class="text-gray-500">Find out our publications published by our team members</span>
+    </div>
+    <nav class="absolute  bg-blue-800 bg-opacity-50 text-white p-3 rounded-md m-4 w-max" aria-label="breadcrumb">
+        <ol class="list-reset flex text-left">
+            <li><a href="/" class="hover:text-yellow-300">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/hr-diagram/" class="hover:text-yellow-300">HR Diagram</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li>About etc </li>
+        </ol>
+    </nav>
+</div>
+<div>
+    <section class="px-12 mt-6 p-6 space-y-8 md:px-24">
+        <div class="grid grid-cols-3">
+            <!-- Image Section -->
+
+            <!-- Text Section -->
+            <div class="col text-justify col-span-3 gap-10">
+                <h1 class="text-3xl font-bold" id="intro2">Organizational Chart</h1>
+                <p class="text-muted-foreground mt-4" id="2desc3">
+                    
+                    We have a Managing Director under the Management board who will lead the completely training
+                    programs; also called Project Coordinator for any project. One Training Coordinator will depute
+                    under the Managing Director. District wise field officers will be appointed to work closely
+                    with the instructors, communities and trainees who will coordinate
+                    directly with Training Coordinator. Lead Instructors/Co- instructors will
+                    be managed insuring 2 instructors for a group of 20 trainees in a subject. Administration and
+                    Finance manager will be deputed in the centre to manage all the logistics, administration and
+                    financial activities; an administrative officer and an accountant will work under the direct
+                    supervision of the Project Coordinator. There will be placement and counselling officer, data
+                    base officer, receptionist and office assistants as supporting staff. A Life skill & Business
+                    skill Instructor will be appointed for the outreach activities, gender sensitization, and social
+                    inclusion; counselling and placement supports under the supervision Counsellors and placement
+                    support officers will also work in this unit. <br> <br>
+                </p>
+            </div>
+
+            <div class="col flex items-center col-span-3 ml-5">
+                <img src="{% static 'front/assets/images/organizational_chart.jpg' %}" alt="ETC" class="w-full h-auto rounded-lg object-cover"
+                    style="border: 5px solid #2d5281;">
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
