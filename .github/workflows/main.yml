@@ -19,7 +19,7 @@ jobs:
         python-version: '3.11' 
 
     - name: Upload to FTP server
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      uses: SamKirkland/FTP-Deploy-Action@4.2.0
       with:
         server: 167.235.9.123
         username: etc@etcnepal.com.np
