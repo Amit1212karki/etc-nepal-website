@@ -39,7 +39,7 @@ urlpatterns = [
     path('video/', include('video.urls')),
     path('etc_document/', include('document.urls')),
     path('course/', include('course.urls')),
-    path("certificate/", include("certificate.urls")),
+    path('certificate/', include('certificate.urls')),
 
 
 ]
