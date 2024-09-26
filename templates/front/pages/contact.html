@@ -17,7 +17,19 @@
                             <p class="text-gray-600 mt-2">If you have any enquiry, feel free to contact us. Leave us
                                 your details and our team will handle the rest.</p>
                         </div>
-                        <form action="/store-contact/" method="POST" class="space-y-6">
+                        {% if messages %}
+                        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                            {% for message in messages %}
+                            {% if message.level == 25 %} {# SUCCESS level #}
+                            <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+                            {% elif message.level == 40 %} {# ERROR level #}
+                            <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <form action="/contact/store-contact/" method="POST" class="space-y-6"
+                            enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -29,19 +41,19 @@
                                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                                     <input type="email" name="email" id="email"
                                         class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                               
+
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                    <input type="text" name="phone" id="phone"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                                    <input type="text" name="subject" id="subject"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
                             </div>
-                            <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                                <input type="text" name="phone" id="phone"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
-                                <input type="text" name="subject" id="subject"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            </div>
-                        </div>
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
                                 <textarea name="message" id="message" rows="4"
@@ -55,12 +67,12 @@
                                 {% endif %}
 
                             </div>
-                                <div>
-                                    <button type="submit"
-                                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Send Message
-                                    </button>
-                                </div>
+                            <div>
+                                <button type="submit"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Send Message
+                                </button>
+                            </div>
                         </form>
                     </div>
                     <!-- Contact information -->
@@ -75,7 +87,7 @@
                                 Your browser does not support the video tag.
                             </video>
                         </div>
-                       
+
                         <div class="mt-4 space-y-4">
                             <div class="flex items-center">
                                 <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
@@ -141,4 +153,17 @@
         </div>
     </div>
 </section>
+<script>
+    // Set a timeout to hide the message after 5 seconds (5000 milliseconds)
+    setTimeout(function () {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            messageList.classList.remove('opacity-100');
+            messageList.classList.add('opacity-0');
+            setTimeout(function () {
+                messageList.classList.add('hidden');
+            }, 500);
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 {% endblock %}
