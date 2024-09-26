@@ -43,61 +43,12 @@
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-6 font-bold px-10">
                 <a href="/" class=" hover:text-yellow-600 transition duration-300 ">Home </a>
-                <div x-data="{ open: false }" class="relative">
-                    <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class=" hover:text-yellow-600 transition duration-300 flex items-center">
-                        Company
-                        <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180': open }">
-                            <path
-                                d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z"
-                                fill="currentColor" />
-                        </svg>
-                    </a>
-                    <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-blue-800 absolute px-5 py-6  top-6 w-64 transition-opacity duration-300">
-                        <ul class="space-y-4">
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/about/">Introduction</a>
-                            </li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/vission/">Vision</a>
-                            </li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/mission/">Mission</a>
-                            </li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/goal/">Goal</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a
-                                    href="/objective/">Objective</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/hr-diagram/">HR
-                                    Diagram</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a href="/teams/">Our Team</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div x-data="{ open: false }" class="relative">
-                    <a href="#" @mouseover="open = true" @mouseleave="open = false"
-                        class=" hover:text-yellow-600 transition duration-300 flex items-center">
-                        Projects
-                        <svg class="w-4 h-4 ml-2 transition-transform duration-300" width="18px" height="18px"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180': open }">
-                            <path
-                                d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z"
-                                fill="currentColor" />
-                        </svg>
-                    </a>
-                    <div x-show="open" @mouseover="open = true" @mouseleave="open = false"
-                        class="project-dropdown bg-blue-800  absolute px-5 py-6 top-6 w-64 transition-opacity duration-300">
-                        <ul class="space-y-4">
-                            <li class="hover:text-yellow-600 transition duration-300"><a
-                                    href="/projects/ongoing/">Ongoing
-                                    Project</a></li>
-                            <li class="hover:text-yellow-600 transition duration-300"><a
-                                    href="/projects/completed/">Completed Project</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <a href="/certificate/contract/" class=" hover:text-yellow-600 transition duration-300 ">Contract </a>
+                <a href="/certificate/batch/" class=" hover:text-yellow-600 transition duration-300 ">Batch </a>
+                <a href="/certificate/trainer/" class=" hover:text-yellow-600 transition duration-300 ">Trainer </a>
+                <a href="/certificate/trainee/" class=" hover:text-yellow-600 transition duration-300 ">Trainee</a>
+                <a href="/" class=" hover:text-yellow-600 transition duration-300 ">Certificate Generation</a>
+                
                 <a href="/etc_document/" class="text-white hover:text-yellow-600 transition duration-300">Documents</a>
                 <a href="/publications/"
                     class="text-white hover:text-yellow-600 transition duration-300">Publications</a>
