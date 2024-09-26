@@ -103,7 +103,7 @@
                 <ul class="flex gap-y-6 items-center">
                     {% for partner in partner %}
                     <li class="flex-none px-12 text-center">
-                        <img src="{{ partner.image.url }}" alt="{{ partner.name }}" class="w-28 aspect-[2/2] object-cover mb-3">
+                        <img src="{{ partner.image.url }}" alt="{{ partner.name }}" class="w-full aspect-[2/2] object-cover mb-3">
                         <span class="pt-3" >{{partner.name}}</span>
                     </li>
                     {% endfor %}
