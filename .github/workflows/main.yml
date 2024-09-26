@@ -24,7 +24,4 @@ jobs:
         server: 167.235.9.123
         username: etc@etcnepal.com.np
         password: Ultimate@22
-        exclude: |
-          templates/certificate/
-        passive: true
-        debug: true  # Enable verbose logging
+        
