@@ -31,9 +31,13 @@
                         Sign in to your account
                     </h1>
                     {% if messages %}
-                    <ul>
+                    <ul id="message-list" class="transition-opacity duration-500 opacity-100">
                         {% for message in messages %}
-                        <li class="text-red-500">{{ message }}</li>
+                        {% if message.level == 25 %} {# SUCCESS level #}
+                        <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+                        {% elif message.level == 40 %} {# ERROR level #}
+                        <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                     {% endif %}
@@ -41,7 +45,8 @@
                         {% csrf_token %}
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Your name</label>
-                            <input type="name" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                            <input type="name" name="name" id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                 placeholder="Enter your Username" required="">
                         </div>
                         <div>
@@ -73,5 +78,18 @@
     </section>
 
 </body>
+<script>
+    // Set a timeout to hide the message after 5 seconds (5000 milliseconds)
+    setTimeout(function () {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            messageList.classList.remove('opacity-100');
+            messageList.classList.add('opacity-0');
+            setTimeout(function () {
+                messageList.classList.add('hidden');
+            }, 500);
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
 
 </html>

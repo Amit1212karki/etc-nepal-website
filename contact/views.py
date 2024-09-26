@@ -39,11 +39,10 @@ def storeContact(request):
                 message = message
             )
             newContact.save()
+            messages.success(request, 'Contact saved successfully.') 
+            return redirect('contact')
         except Exception as e:
             print(e)
-            messages.error(request, 'An error occurred while saving the Contact.')
+            messages.error(request, 'An error occurred while saving the Contact !!')
             return redirect('contact')
-
-        return redirect('contact')  # Replace with appropriate redirect after successful form submission
-
     return render(request, 'front/pages/contact.html')    

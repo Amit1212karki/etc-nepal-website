@@ -8,7 +8,7 @@ class Province(models.Model):
         return self.name
 
 class District(models.Model):
-    province_name = models.ForeignKey(Province,on_delete=models.CASCADE, related_name='province')
+    province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province')
     name = models.CharField(max_length=255)
 
     def __str__(self):
