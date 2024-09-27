@@ -40,6 +40,9 @@ urlpatterns = [
     path('etc_document/', include('document.urls')),
     path('course/', include('course.urls')),
     path('certificate/', include('certificate.urls')),
+    path('contract/', include('contract.urls')),
+    path('trainer/', include('trainer.urls')),
+    path('batch/', include('batch.urls')),
 
 
 ]

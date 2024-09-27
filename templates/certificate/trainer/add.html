@@ -60,10 +60,22 @@
     </div>
 
     <section class="bg-white">
+        {% if messages %}
+        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+            {% for message in messages %}
+            {% if message.level == 25 %} {# SUCCESS level #}
+            <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+            {% elif message.level == 40 %} {# ERROR level #}
+            <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="py-8 px-4 mx-auto py-5">
-            <form action="#">
+            <form action="/trainer/store-trainer/" method="POST">
+                {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <div class="sm:col-span-2">
+                    <div class="w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
                             Trainee Name
                         </label>
@@ -72,10 +84,11 @@
                             placeholder="Type trainer name" required="">
                     </div>
                     <div class="w-full">
-                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Trainer Address</label>
-                        <input type="text" name="signed-by" id="signed-by"
+                        <label for="qualification" class="block mb-2 text-sm font-medium text-gray-900">Trainer
+                            Qualification</label>
+                        <input type="text" name="qualification" id="qualification"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Trainer address" required="">
+                            placeholder="Trainer qualification" required="">
                     </div>
                     <div class="w-full">
                         <label for="contact" class="block mb-2 text-sm font-medium text-gray-900">Contact Number</label>
@@ -83,30 +96,17 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Trainer Contact Number" required="">
                     </div>
-                   
                     <div>
-                        <label for="contract-image" class="block mb-2 text-sm font-medium text-gray-900">
-                            Trainee Image
+                        <label for="tot" class="block mb-2 text-sm font-medium text-gray-900">TOT</label>
+                        <label class="inline-flex items-center cursor-pointer">
+                            <!-- Hidden input to send "no" when checkbox is unchecked -->
+                            <input type="hidden" name="tot" value="no">
+                            <input type="checkbox" name="tot" value="yes" class="sr-only peer">
+                            <div
+                                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                            </div>
+                            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable</span>
                         </label>
-                        <input type="file" name="contract-image" id="contract-image"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                         required="">
-                    </div>
-
-                    <div>
-                        <label for="toc" class="block mb-2 text-sm font-medium text-gray-900">
-                            TOC
-                        </label>
-                        <input type="text" name="toc" id="toc"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                         required="">
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label for="description"
-                            class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                        <textarea id="description" rows="8"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Your description here"></textarea>
                     </div>
                 </div>
                 <button type="submit"
