@@ -62,31 +62,82 @@
     </div>
 
     <section class="bg-white">
+        {% if messages %}
+        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+            {% for message in messages %}
+            {% if message.level == 25 %} {# SUCCESS level #}
+            <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+            {% elif message.level == 40 %} {# ERROR level #}
+            <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="py-8 px-4 mx-auto py-5">
-            <form action="#">
+            <form action="/batch/store-batch/" method="POST">
+                {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <div class="sm:col-span-2">
+                    <div class="w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
                             Batch Name
                         </label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Type Contract name" required="">
+                            placeholder="Type batch name" required="">
                     </div>
-                    <div class="sm:col-span-2">
-                        <label for="signed-by" class="block mb-2 text-sm font-medium text-gray-900">Batch Year</label>
-                        <input type="text" name="signed-by" id="signed-by"
+                    <div class="w-full">
+                        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Batch
+                            Duration</label>
+                        <input type="text" name="duration" id="duration"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="People involved in contract" required="">
+                            placeholder="Batch duration" required="">
                     </div>
-                  
-                  
-                    <div class="sm:col-span-2">
-                        <label for="description"
-                            class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                        <textarea id="description" rows="8"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Your description here"></textarea>
+                    <div class="w-full">
+                        <label for="time" class="block mb-2 text-sm font-medium text-gray-900">Batch Time</label>
+                        <input type="time" name="time" id="time"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch time" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="seats" class="block mb-2 text-sm font-medium text-gray-900">Batch
+                            Seats</label>
+                        <input type="number" name="seats" id="seats"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch seats" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="contract" class="block mb-2 text-sm font-medium text-gray-700">Contract</label>
+                        <select name="contract" id="contract"
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select contract</option>
+                            {% for contract in batch_contract %}
+                            <option value="{{ contract.id }}">{{ contract.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if 'batch_trainer' in form.errors %}
+                        <p class="text-red-500 text-sm">{{ form.errors.batch_trainer }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="w-full">
+                        <label for="trainer" class="block mb-2 text-sm font-medium text-gray-900">Trainer</label>
+                        <div id="trainer-fields">
+                            <select name="trainer" id="trainer"
+                                class="block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                                <option value="">Select trainer</option>
+                                {% for trainer in batch_trainer %}
+                                <option value="{{ trainer.id }}">{{ trainer.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="button" onclick="addTrainerField()"
+                            class="mt-2 inline-flex items-center text-blue-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Add another trainer
+                        </button>
                     </div>
                 </div>
                 <button type="submit"
@@ -97,6 +148,34 @@
         </div>
     </section>
 </div>
+<script>
+    function addTrainerField() {
+        var trainerFields = document.getElementById('trainer-fields');
+        var newField = document.createElement('div');
+
+        newField.classList.add('mt-2');
+        newField.innerHTML = `
+      <select name="trainer" class="block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+        <option value="">Select trainer</option>
+        {% for trainer in batch_trainer %}
+          <option value="{{ trainer.id }}">{{ trainer.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="button" onclick="removeTrainerField(this)" class="mt-2 inline-flex items-center text-red-600">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+        Remove
+      </button>
+    `;
+
+        trainerFields.appendChild(newField);
+    }
+
+    function removeTrainerField(button) {
+        button.parentElement.remove();
+    }
+</script>
 
 
 {% endblock %}

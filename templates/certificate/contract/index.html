@@ -59,13 +59,24 @@
             </p>
         </div>
         <div class="">
-            <button onclick="window.location.href='/certificate/contract/add/'" type="button"
+            <button onclick="window.location.href='/contract/add-contract/'" type="button"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Add Contract
             </button>
         </div>
     </div>
     <div class="relative overflow-x-auto bg-white ">
+        {% if messages %}
+            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                {% for message in messages %}
+                {% if message.level == 25 %} {# SUCCESS level #}
+                <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+                {% elif message.level == 40 %} {# ERROR level #}
+                <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
 
@@ -75,13 +86,13 @@
                         Contract Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Signed By
+                        Contract Location
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Signed On
+                        Ocupation
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Image
+                        Donation By
                     </th>
                     <th scope="col" class="px-6 py-3">
                         <span class="sr-only">Actions</span>
@@ -89,21 +100,22 @@
                 </tr>
             </thead>
             <tbody>
+                {% for contract in all_contract %}
                 <tr class="border-b  ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Contract On Bridge Construction
+                        {{contract.name}}
                     </th>
                     <td class="px-6 py-4">
-                        Sonu Dhakal, Amit karki, Veneet Karki
+                       {{contract.location}}
                     </td>
                     <td class="px-6 py-4">
-                        Signed On December 25, 2023
+                      {{contract.occupation}}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">View Contract</a>
-                    </td>
+                        {{contract.donation_by}}
+                      </td>
                     <td class="px-6 py-4 text-right flex gap-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">
+                        <a href="/contract/edit-contract/{{contract.id}}/" class="font-medium text-blue-600 hover:underline">
                             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -112,7 +124,7 @@
                             </svg>
 
                         </a>
-                        <a href="#" class="font-medium text-red-600 hover:underline">
+                        <a href="/contract/delete-contract/{{contract.id}}/" class="font-medium text-red-600 hover:underline">
                             <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -123,110 +135,7 @@
                         <!-- <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a> -->
                     </td>
                 </tr>
-
-                <tr class="border-b  ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Contract On Bridge Construction
-                    </th>
-                    <td class="px-6 py-4">
-                        Sonu Dhakal, Amit karki, Veneet Karki
-                    </td>
-                    <td class="px-6 py-4">
-                        Signed On December 25, 2023
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">View Contract</a>
-                    </td>
-                    <td class="px-6 py-4 text-right flex gap-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">
-                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                            </svg>
-
-                        </a>
-                        <a href="#" class="font-medium text-red-600 hover:underline">
-                            <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                            </svg>
-                        </a>
-                        <!-- <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a> -->
-                    </td>
-                </tr>
-
-                <tr class="border-b  ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Contract On Bridge Construction
-                    </th>
-                    <td class="px-6 py-4">
-                        Sonu Dhakal, Amit karki, Veneet Karki
-                    </td>
-                    <td class="px-6 py-4">
-                        Signed On December 25, 2023
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">View Contract</a>
-                    </td>
-                    <td class="px-6 py-4 text-right flex gap-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">
-                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                            </svg>
-
-                        </a>
-                        <a href="#" class="font-medium text-red-600 hover:underline">
-                            <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                            </svg>
-                        </a>
-                        <!-- <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a> -->
-                    </td>
-                </tr>
-
-                <tr class="border-b  ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Contract On Bridge Construction
-                    </th>
-                    <td class="px-6 py-4">
-                        Sonu Dhakal, Amit karki, Veneet Karki
-                    </td>
-                    <td class="px-6 py-4">
-                        Signed On December 25, 2023
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">View Contract</a>
-                    </td>
-                    <td class="px-6 py-4 text-right flex gap-4">
-                        <a href="/certificate/contract/edit/" class="font-medium text-blue-600 hover:underline">
-                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                            </svg>
-                        </a>
-                        <a onclick="return confirm('Are you sure')" href="/certificate/contract/delete" class="font-medium text-red-600 hover:underline">
-                            <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                            </svg>
-                        </a>
-                        <!-- <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a> -->
-                    </td>
-                </tr>
+                {% endfor %}
 
             </tbody>
         </table>
