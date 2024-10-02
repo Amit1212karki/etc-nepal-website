@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'trainer',
     'batch',
     'trainee',
+    'signatory',
 ]
 
 MIDDLEWARE = [
