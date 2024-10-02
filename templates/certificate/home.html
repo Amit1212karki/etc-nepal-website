@@ -53,13 +53,11 @@
                 <div id="combinedChart"></div>
             </div>
 
-            <div class="bg-white p-6 shadow rounded-lg mb-6">
-                <h3 class="text-lg font-semibold mb-4">Top Perfoming Product</h3>
-                <div id="topSoldProduct"></div>
+            <div class="bg-white p-6 shadow rounded-lg mb-6 h-[60vh]">
+                <h3 class="text-lg font-semibold mb-4">Top Perfoming Batch</h3>
+                <div id="chart" class="h-[60vh]"></div>
             </div>
-
-
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-[60vh]">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -110,193 +108,148 @@
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+
 <script id="sales-data" type="application/json">{{ sales_values|json_script:"sales-data" }}</script>
 <script id="sales-categories" type="application/json">{{ sales_categories|json_script:"sales-categories" }}</script>
 
 <script id="transaction-data" type="application/json">{{ transaction_values|json_script:"transaction-data" }}</script>
 <script id="transaction-categories"
     type="application/json">{{ transaction_categories|json_script:"transaction-categories" }}</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Get sales data
-        var backendPassedDataDiv = document.getElementById('backendPassedData');
-        var salesDataJson = backendPassedDataDiv.textContent.trim();
-        var salesData = JSON.parse(salesDataJson);
-
-        // Get transaction data
-        var backendTransactionPassedDataDiv = document.getElementById('backendTransactionPassedData');
-        var transactionDataJson = backendTransactionPassedDataDiv.textContent.trim();
-        var transactionData = JSON.parse(transactionDataJson);
-
-        // Prepare months array (assuming it's consistent for both sales and transactions)
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-        // Initialize arrays for sales and transactions
-        var sales = months.map(function (month) {
-            var foundItem = salesData.find(function (item) {
-                return item.month === month;
-            });
-            return foundItem ? foundItem.sales : 0;
-        });
-
-        var transactions = months.map(function (month) {
-            var foundItem = transactionData.find(function (item) {
-                return item.month === month;
-            });
-            return foundItem ? foundItem.transactions : 0;
-        });
-
-        // Combine sales and transactions into a single dataset
-        var combinedData = [
-            {
-                name: "Sales",
-                data: sales
-            },
-            {
-                name: "Transactions",
-                data: transactions
-            }
-        ];
-
-        // Options for the combined chart
-        var combinedOptions = {
-            series: combinedData,
-            chart: {
-                height: 350,
-                type: 'line',
-                zoom: {
-                    enabled: true,
-                    type: 'x',
-                    autoScaleYaxis: true
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sample sales and transactions data
+            var salesData = [500, 700, 800, 600, 900, 1200, 1500, 1800, 2100, 1700, 2000, 2300];
+            var transactionData = [300, 400, 500, 450, 600, 800, 900, 1100, 1000, 950, 1200, 1300];
+    
+            // Prepare months array
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+            // Combine sales and transactions into a single dataset
+            var combinedData = [
+                {
+                    name: "Sales",
+                    data: salesData
                 },
-                toolbar: {
-                    autoSelected: 'zoom'
+                {
+                    name: "Transactions",
+                    data: transactionData
                 }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'straight'
-            },
-            tooltip: {
-                shared: true,
-                intersect: false,
-                y: {
-                    formatter: function (value) {
-                        return value.toFixed(2); // Format tooltip values as needed
-                    }
-                }
-            },
-            xaxis: {
-                categories: months,
-                title: {
-                    text: 'Months'
-                }
-            },
-            yaxis: {
-                title: {
-                    text: 'Amount (NPR)'
-                }
-            },
-            title: {
-                text: 'Sales and Transactions by Month',
-                align: 'left'
-            },
-            grid: {
-                borderColor: '#e0e0e0',
-                row: {
-                    colors: ['#f3f3f3', 'transparent'],
-                    opacity: 0.5
-                },
-            },
-            fill: {
-                opacity: 0.8,
-                type: 'solid'
-            },
-            animations: {
-                enabled: true,
-                easing: 'easeinout',
-                speed: 800,
-                animateGradually: {
-                    enabled: true,
-                    delay: 150
-                },
-                dynamicAnimation: {
-                    enabled: true,
-                    speed: 350
-                }
-            },
-            responsive: [{
-                breakpoint: 768,
-                options: {
-                    chart: {
-                        height: 300
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }],
-            legend: {
-                position: 'top',
-                onItemClick: {
-                    toggleDataSeries: true
-                }
-            }
-        };
-
-        // Render the combined chart using ApexCharts
-        var combinedChart = new ApexCharts(document.querySelector("#combinedChart"), combinedOptions);
-        combinedChart.render();
-
-        // Handling top products chart (if needed)
-        var backendTopProductsDataDiv = document.getElementById('backendTopProductsData');
-        if (backendTopProductsDataDiv) {
-            var topProductsDataJson = backendTopProductsDataDiv.textContent.trim();
-            var topProductsData = JSON.parse(topProductsDataJson);
-
-            console.log('Top Products Data:', topProductsData);  // Debug statement
-
-            var topProductsOptions = {
+            ];
+    
+            // Options for the combined chart
+            var combinedOptions = {
+                series: combinedData,
                 chart: {
-                    type: 'donut'
+                    height: 350,
+                    type: 'line',
+                    zoom: {
+                        enabled: true,
+                        type: 'x',
+                        autoScaleYaxis: true
+                    },
+                    toolbar: {
+                        autoSelected: 'zoom'
+                    }
                 },
-                series: topProductsData.values,
-                labels: topProductsData.labels,
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth'  // Changed to 'smooth' for better appearance
+                },
+                tooltip: {
+                    shared: true,
+                    intersect: false,
+                    y: {
+                        formatter: function (value) {
+                            return value.toFixed(2); // Format tooltip values as needed
+                        }
+                    }
+                },
                 xaxis: {
-                    categories: topProductsData.labels // assuming you want to show labels as categories
+                    categories: months,
+                    title: {
+                        text: 'Months'
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Amount (NPR)'
+                    }
+                },
+                title: {
+                    text: 'Sales and Transactions by Month',
+                    align: 'left'
+                },
+                grid: {
+                    borderColor: '#e0e0e0',
+                    row: {
+                        colors: ['#f3f3f3', 'transparent'],
+                        opacity: 0.5
+                    },
+                },
+                fill: {
+                    opacity: 0.8,
+                    type: 'solid'
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 150
+                    },
+                    dynamicAnimation: {
+                        enabled: true,
+                        speed: 350
+                    }
+                },
+                responsive: [{
+                    breakpoint: 768,
+                    options: {
+                        chart: {
+                            height: 300
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }],
+                legend: {
+                    position: 'top',
+                    onItemClick: {
+                        toggleDataSeries: true
+                    }
                 }
             };
-
-            var topProductsChart = new ApexCharts(document.querySelector("#topSoldProduct"), topProductsOptions);
-            topProductsChart.render();
-        } else {
-            console.error('No data found for top products');
-        }
-
-        // Example: Button or timer to trigger data update
-        document.getElementById('updateDataButton').addEventListener('click', function () {
-            // Simulate updating data
-            // Replace with actual data fetching and update logic
-            updateChartData();
+    
+            // Render the combined chart using ApexCharts
+            var combinedChart = new ApexCharts(document.querySelector("#combinedChart"), combinedOptions);
+            combinedChart.render();
         });
 
-        // Example function to fetch and update data
-        function updateChartData() {
-            // Fetch updated sales and transaction data from backend
-            // Update 'salesData' and 'transactionData' arrays
-            // Rebuild 'combinedData' and update chart using ApexCharts methods
-            // For demonstration, let's assume updating sales data only
-            salesData.forEach(function (item, index) {
-                sales[index] = Math.random() * 1000; // Update with new sales data
-            });
+        var options = {
+          series: [44, 55, 41, 17, 15],
+          chart: {
+          type: 'donut',
+          height: '90%'
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
 
-            combinedChart.updateSeries([{ data: sales }]);
-        }
-    });
-
-</script>
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
 
 {% endblock %}
