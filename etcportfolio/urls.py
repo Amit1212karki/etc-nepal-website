@@ -43,8 +43,7 @@ urlpatterns = [
     path('contract/', include('contract.urls')),
     path('trainer/', include('trainer.urls')),
     path('batch/', include('batch.urls')),
-
-
+    path('trainee/', include('trainee.urls')),
 ]
 
 if settings.DEBUG:

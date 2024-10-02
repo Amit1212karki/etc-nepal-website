@@ -6,8 +6,8 @@ from datetime import date
 # Create your models here.
 
 class Trainee(models.Model):
-    contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='trainee_contarct')
-    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='trainee_contarct')
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='trainee_contract')
+    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='trainee_batch')
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='trainee_province')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='trainee_district')
     palika = models.ForeignKey(Palika, on_delete=models.CASCADE, related_name='trainee_palika')
@@ -42,15 +42,10 @@ class Trainee(models.Model):
     phone_no = models.CharField(max_length=15)
     email = models.EmailField()
     qualification = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='trainee/image/')
-    citizenship_front_image = models.ImageField(upload_to='trainee/citizenship_image/front/')
-    citizenship_back_image = models.ImageField(upload_to='trainee/citizenship_image/back/')
+    image = models.FileField(upload_to='trainee/image/')
+    citizenship_front_image = models.FileField(upload_to='trainee/citizenship_image/front/')
+    citizenship_back_image = models.FileField(upload_to='trainee/citizenship_image/back/')
     is_selected = models.BooleanField(default=False)
-
-    @property
-    def age(self):
-        today = date.today()
-        return today.year - self.date_of_birth_ad.year - ((today.month, today.day) < (self.date_of_birth_ad.month, self.date_of_birth_ad.day))
 
     def __str__(self):
         return self.name
