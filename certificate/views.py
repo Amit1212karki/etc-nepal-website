@@ -50,3 +50,6 @@ def traineeEdit(request):
 @login_required
 def traineeCreate(request):
     return render(request, 'certificate/trainee/add.html')
+
+def certificateForm(request):
+    return render(request, "certificate/certificate/certificate-form.html")

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+</head>
+<style>
+    /* Set A4 size in landscape mode */
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+
+    body {
+        width: 297mm;
+        /* A4 width in landscape */
+        height: 210mm;
+        /* A4 height in landscape */
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Ensure the main content fits within the A4 page size */
+    section {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .image-1 {
+        width: auto;
+        height: auto;
+        max-height: 120px;
+    }
+
+    .image-2 {
+        width: auto;
+        height: 50px;
+        max-height: 50px;
+    }
+
+    .signature-image {
+        width: auto;
+        height: 60px;
+        max-height: 60px;
+    }
+
+    .image-passport {
+        width: 80px;
+        height: 100px;
+        object-fit: cover;
+        border: 1px solid #000;
+        border-radius: 2px;
+    }
+
+    .text-red {
+        color: rgb(133, 0, 0);
+        font-weight: 700;
+    }
+
+    .text-blue {
+        color: rgb(0, 0, 88);
+        font-weight: 700;
+    }
+
+    .text-bold {
+        font-weight: 700;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .title {
+        font-size: 34px;
+        font-weight: 700;
+    }
+
+    .sub-title {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .m-1 {
+        margin: 2px !important;
+    }
+
+    .p-1 {
+        padding: 2px !important;
+    }
+
+    .justify-around {
+        justify-content: space-around;
+    }
+
+    .justify-between {
+        justify-content: space-between;
+    }
+
+    .header {
+        height: 170px;
+    }
+
+    .align-center {
+        align-items: center;
+    }
+
+    .signature-line {
+        width: 50%;
+    }
+</style>
+
+<body>
+    <!-- A4 sized certificate container -->
+    <div class="certificate-container">
+        <!-- Header -->
+        <section>
+            <div class="header d-flex justify-around align-center">
+                <div class="">
+                    <img class="image-1" src="./static/Emblem_of_Nepal.svg.png" alt="">
+                </div>
+                <div class="text-center">
+                    <p class="text-red m-1 p-1">नेपाल सरकार</p>
+                    <p class="text-red m-1 p-1">श्रम, रोजगार तथा सामाजिक सुरक्षा मन्त्रालय</p>
+                    <p class="text-blue sub-title m-1 p-1">ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि)</p>
+                    <p class="text-red title m-1 p-1">Vocational Skill Training Completion Certificate</p>
+                </div>
+                <div>
+                    <div>
+                        <!-- <img class="image-2" src="./assets/HEL_Logo_3d_Bangladesh_colour_web.png" alt=""> -->
+                    </div>
+                    <div>
+                        <img class="image image-passport" src="./assets/person.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Body -->
+        <section>
+            <div>
+                <p>यो प्रमाणपत्र यस.प. न. ०३ वडा न. मोरङ जिल्ला निवासी श्री उदय नारायण माझीको छोरा जन्म मिति २०६०/१२/२९
+                    श्री रितेश कुमार माझीले ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि) अन्तर्गत हेल्वेटास नेपालको
+                    प्राविधिक सहयोगमा २०७९ बि.स. भाद्र ६ देखि २०७९ फागुन ११ सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले
+                    विराटनगर महानगरपालिकामा सञ्चालित रेफ्रिजेरेसन एर कन्डिसन जुनियर मेकानिक बिषयमा सिटिभिटिको ३९० घण्टको
+                    पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।
+                </p>
+            </div>
+            <div>
+                <p>This is to certify that Mr. Ritesh Kumar Majhi born on 12 Apr 2003 A.D., son of Mr. Udha Narayan
+                    Majhi and
+                    inhabitant of Biratnagar Metropolitan City Ward No. 03, Morang District has successfully completed
+                    the
+                    vocational skill training on Refrigeration & Air Condition Junior Mechanic from 22 Aug 2022 to 23
+                    Feb 2023
+                    A.D. at Biratnagar Metropolitan City implemented by Expert Technical College Nepal Pvt. Ltd. under
+                    Rural
+                    Enterprises and Remittances Project (RERP)-SAMRIDDHI and with Technical Assistance of Helvetas Nepal
+                    based
+                    on CTEVT curriculum of 390 hours.</p>
+            </div>
+        </section>
+
+        <!-- Signature Section -->
+        <section>
+            <div class="d-flex justify-between p-1">
+                <div class="text-left">
+                    <!-- <img class="signature-image" src="./assets/1200px-Todd_Strasser_signature.png" alt=""> -->
+                    <hr width="260px">
+                    <p class="m-1 p-1 text-bold">Hemraj Dahal</p>
+                    <p class="m-1 p-1">Executive Director</p>
+                    <p class="m-1 p-1">Expert Technical College Nepal Pvt. Ltd</p>
+                    <p class="m-1 p-1">Itahari, Sunsari</p>
+                </div>
+                <div class="text-left">
+                    <!-- <img class="signature-image" src="./assets/1200px-Todd_Strasser_signature.png" alt=""> -->
+                    <hr width="260px">
+                    <p class="m-1 p-1 text-bold">Saroj Prasad Guragain</p>
+                    <p class="m-1 p-1">Project Manager, RERP</p>
+                    <p class="m-1 p-1">Government Of Nepal</p>
+                </div>
+            </div>
+
+        </section>
+
+        <hr>
+        <!-- Footer -->
+        <section>
+            <div class="d-flex justify-around">
+                <div>
+                    <p>Training implemented by:</p>
+                    <!-- <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt=""> -->
+                </div>
+                <div>
+                    <!-- <img class="image-1" src="./assets/Emblem_of_Nepal.svg.png" alt=""> -->
+                </div>
+                <div>
+                    <p>Training Sponsored by:</p>
+                    <!-- <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt=""> -->
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

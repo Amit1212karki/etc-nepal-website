@@ -1,10 +1,13 @@
+import datetime
 from django.shortcuts import render
+from etcportfolio import renderers
 from notice.models import *
 from project.models import *
 from news.models import *
 from partners.models import *
 from records.models import *
 from course.models import *
+from django.template.loader import get_template
 
 
 
@@ -46,3 +49,11 @@ def hrDiagram(request):
 
 def objective(request):
     return render(request, 'front/pages/objective.html')
+
+def pdf_view(request, *args, **kwargs):
+    data = {
+        
+    }
+    
+    
+    return renderers.render_to_pdf_pdfkit('pdfs/certificate/index.html', data)

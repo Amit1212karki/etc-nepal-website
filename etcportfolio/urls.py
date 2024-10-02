@@ -43,7 +43,9 @@ urlpatterns = [
     path('contract/', include('contract.urls')),
     path('trainer/', include('trainer.urls')),
     path('batch/', include('batch.urls')),
-
+    path("signatory/", include("signatory.urls")),
+    path("trainee/", include("trainee.urls")),
+    path("html-to-pdf/", pdf_view),
 
 ]
 
