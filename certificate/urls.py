@@ -7,6 +7,4 @@ urlpatterns = [
      path('logout/<int:id>/', logoutUser, name='certificate-logout'),
      path('dashboard/', home, name='certificate-home'),
      
-     path("certificate-form", certificateForm ),
-    
 ]

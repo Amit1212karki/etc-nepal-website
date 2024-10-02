@@ -39,17 +39,3 @@ def logoutUser(request, id):
         return redirect('/certificate/dashboard/')
     
 
-@login_required
-def traineeIndex(request):
-    return render(request, 'certificate/trainee/index.html')
-
-@login_required
-def traineeEdit(request):
-    return render(request, 'certificate/trainee/edit.html')
-
-@login_required
-def traineeCreate(request):
-    return render(request, 'certificate/trainee/add.html')
-
-def certificateForm(request):
-    return render(request, "certificate/certificate/certificate-form.html")

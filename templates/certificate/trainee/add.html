@@ -6,7 +6,8 @@
 
 {% block content %}
 <div class="container mx-auto">
-    <div class="py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
+    <div
+        class="py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
         <div class="">
             <p>Trainee</p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
@@ -46,64 +47,120 @@
             </p>
         </div>
     </div>
-
     <section class="bg-white">
         <div class="py-8 px-4 mx-auto py-5">
-            <form action="{% url 'trainee-store' %}" method="post" enctype="multipart/form-data">
+            {% if messages %}
+            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                {% for message in messages %}
+                {% if message.level == 25 %} {# SUCCESS level #}
+                <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+                {% elif message.level == 40 %} {# ERROR level #}
+                <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/trainee/store-trainee/" method="POST" enctype="multipart/form-data" >
                 {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <div class="sm:col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Trainee Name</label>
+                    <div class="w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Name
+                        </label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Type trainee name" required>
+                            placeholder="Type trainee name" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Trainee Address</label>
-                        <input type="text" name="address" id="address"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Trainee address" required>
+                        <label for="contract" class="block mb-2 text-sm font-medium text-gray-700">Trainee
+                            Contract</label>
+                        <select name="contract" id="contract" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select Trainee Contract</option>
+                            {% for contract in trainee_contract %}
+                            <option value="{{contract.id}}">{{contract.name}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-
                     <div class="w-full">
-                        <label for="phone_no" class="block mb-2 text-sm font-medium text-gray-900">Contact Number</label>
-                        <input type="tel" name="phone_no" id="phone_no"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Trainee Contact Number" required>
+                        <label for="batch" class="block mb-2 text-sm font-medium text-gray-700">Trainee
+                            Batch</label>
+                        <select name="batch" id="batch" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select Trainee Batch</option>
+                            {% for batch in trainee_batch %}
+                            <option value="{{batch.id}}">{{batch.name}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-
                     <div class="w-full">
-                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Trainee Image</label>
-                        <input type="file" name="image" id="image"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                    </div>
-
-                    <div class="w-full">
-                        <label for="gender" class="block mb-2 text-sm font-medium text-gray-900">Gender</label>
-                        <select name="gender" id="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                            <option value="">Select Gender</option>
+                        <label for="gender" class="block mb-2 text-sm font-medium text-gray-700">Trainee
+                            Gender</label>
+                        <select name="gender" id="gender" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select Trainee Gender</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                             <option value="O">Other</option>
                         </select>
                     </div>
+                    <div class="grid gap-2 sm:grid-cols-2 ">
+                        <div class="w-full">
+                            <label for="dob" class="block mb-2 text-sm font-medium text-gray-900">
+                                Trainee Date Of Birth In AD
+                            </label>
+                            <div class="relative w-full cursor-pointer"
+                                onclick="document.getElementById('dob').focus();">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                    </svg>
+                                </div>
+                                <input id="dob" name="dob" type="date"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Select date" />
+                            </div>
+                        </div>
 
-                    <div class="w-full">
-                        <label for="date_of_birth_ad" class="block mb-2 text-sm font-medium text-gray-900">Date of Birth (AD)</label>
-                        <input type="date" name="date_of_birth_ad" id="date_of_birth_ad"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                        <div class="w-full">
+                            <label for="age" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
+                            <input id="age" name="age" type="number" 
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" 
+                                placeholder="Age will be calculated" readonly />
+                            
+                            <!-- Hidden input field for form submission -->
+                            <input type="hidden" id="age_hidden" name="age_hidden" />
+                        </div>
                     </div>
-
                     <div class="w-full">
-                        <label for="date_of_birth_bs" class="block mb-2 text-sm font-medium text-gray-900">Date of Birth (BS)</label>
-                        <input type="date" name="date_of_birth_bs" id="date_of_birth_bs"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                        <label for="dob_bs" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Date Of Birth In BS
+                        </label>
+                        <input type="date" name="dob_bs" id="dob_bs"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee issue date" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="marital_status" class="block mb-2 text-sm font-medium text-gray-900">Marital Status</label>
-                        <select name="marital_status" id="marital_status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                        <label for="contact" class="block mb-2 text-sm font-medium text-gray-900">Contact Number</label>
+                        <input type="tel" name="contact" id="contact"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Trainee Contact Number" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Image
+                        </label>
+                        <input type="file" name="image" id="image"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="marital_status" class="block mb-2 text-sm font-medium text-gray-700">Marital
+                            Status</label>
+                        <select name="marital_status" id="marital_status" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
                             <option value="">Select Marital Status</option>
                             <option value="S">Single</option>
                             <option value="M">Married</option>
@@ -111,106 +168,150 @@
                             <option value="W">Widowed</option>
                         </select>
                     </div>
-
                     <div class="w-full">
-                        <label for="ethnic_group" class="block mb-2 text-sm font-medium text-gray-900">Ethnic Group</label>
+                        <label for="occupation" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Ocupation
+                        </label>
+                        <input type="text" name="occupation" id="occupation"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee occupation" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="ethnic_group" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Ethnic Group
+                        </label>
                         <input type="text" name="ethnic_group" id="ethnic_group"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee ethnic group" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="mother_name" class="block mb-2 text-sm font-medium text-gray-900">Mother's Name</label>
+                        <label for="mother_name" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Mother Name
+                        </label>
                         <input type="text" name="mother_name" id="mother_name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee mother name" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="father_name" class="block mb-2 text-sm font-medium text-gray-900">Father's Name</label>
+                        <label for="father_name" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Father Name
+                        </label>
                         <input type="text" name="father_name" id="father_name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee father name" required="">
                     </div>
 
                     <div class="w-full">
-                        <label for="citizenship_no" class="block mb-2 text-sm font-medium text-gray-900">Citizenship Number</label>
-                        <input type="text" name="citizenship_no" id="citizenship_no"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                    </div>
-
-                    <div class="w-full">
-                        <label for="issue_date" class="block mb-2 text-sm font-medium text-gray-900">Issue Date</label>
-                        <input type="date" name="issue_date" id="issue_date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                    </div>
-
-                    <div class="w-full">
-                        <label for="issue_district" class="block mb-2 text-sm font-medium text-gray-900">Issue District</label>
-                        <input type="text" name="issue_district" id="issue_district"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                    </div>
-
-                    <div class="w-full">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Email
+                        </label>
                         <input type="email" name="email" id="email"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="example@example.com" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee email" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="qualification" class="block mb-2 text-sm font-medium text-gray-900">Qualification</label>
+                        <label for="qualification" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Qualification
+                        </label>
                         <input type="text" name="qualification" id="qualification"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee qualification" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="contract" class="block mb-2 text-sm font-medium text-gray-900">Contract</label>
-                        <select name="contract" id="contract"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                            <option value="" disabled selected>Select a contract</option>
-                            {% for contract in contract_all %}
-                                <option value="{{ contract.id }}">{{ contract.name }}</option> <!-- Adjust the field names as needed -->
+                        <label for="province" class="block mb-2 text-sm font-medium text-gray-700">Trainee
+                            Province</label>
+                        <select name="province" id="province" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select Trainee Province</option>
+                            {% for province in trainee_province %}
+                            <option value="{{ province.id }}">{{ province.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="w-full">
-                        <label for="batch" class="block mb-2 text-sm font-medium text-gray-900">Batch</label>
-                        <select name="batch" id="batch"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
-                            <option value="" disabled selected>Select a batch</option>
-                            {% for batch in all_batch %}
-                                <option value="{{ batch.id }}">{{ batch.name }}</option> <!-- Adjust the field names as needed -->
+                        <label for="district" class="block mb-2 text-sm font-medium text-gray-700">Trainee
+                            District</label>
+                        <select name="district" id="district" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select Trainee District</option>
+                            {% for district in trainee_district %}
+                            <option value="{{ district.id }}" data-province="{{ district.province_name.id }}">{{district.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    
 
                     <div class="w-full">
-                        <label for="province" class="block mb-2 text-sm font-medium text-gray-900">Province</label>
-                        <input type="text" name="province" id="province"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                        <label for="palika" class="block mb-2 text-sm font-medium text-gray-700">Trainee Palika</label>
+                        <select name="palika" id="palika" required
+                            class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                            <option value="">Select Trainee Palika</option>
+                            {% for palika in trainee_palika %}
+                            <option value="{{ palika.id }}" data-district="{{ palika.district_name.id }}">{{ palika.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="w-full">
+                        <label for="ward_no" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Ward No
+                        </label>
+                        <input type="text" name="ward_no" id="ward_no"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee citizenship no" required="">
                     </div>
 
                     <div class="w-full">
-                        <label for="district" class="block mb-2 text-sm font-medium text-gray-900">District</label>
-                        <input type="text" name="district" id="district"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                        <label for="citizenship_no" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Citizenship No
+                        </label>
+                        <input type="text" name="citizenship_no" id="citizenship_no"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee citizenship no" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="palika" class="block mb-2 text-sm font-medium text-gray-900">Palika</label>
-                        <input type="text" name="palika" id="palika"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                        <label for="issue_date" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Issue Date
+                        </label>
+                        <input type="date" name="issue_date" id="issue_date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee issue date" required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="citizenship_front_image" class="block mb-2 text-sm font-medium text-gray-900">Citizenship Front Image</label>
+                        <label for="issue_district" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Issue District
+                        </label>
+                        <input type="text" name="issue_district" id="issue_district"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee issue district" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="citizenship_front_image" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Citizenship Front Image
+                        </label>
                         <input type="file" name="citizenship_front_image" id="citizenship_front_image"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            required="">
                     </div>
-
                     <div class="w-full">
-                        <label for="citizenship_back_image" class="block mb-2 text-sm font-medium text-gray-900">Citizenship Back Image</label>
+                        <label for="citizenship_back_image" class="block mb-2 text-sm font-medium text-gray-900">
+                            Trainee Citizenship Back Image
+                        </label>
                         <input type="file" name="citizenship_back_image" id="citizenship_back_image"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="is_selected" class="block mb-2 text-sm font-medium text-gray-900">Trainee Is
+                            Selected</label>
+                        <label class="inline-flex items-center cursor-pointer mx-8 my-3">
+                            <!-- Hidden input to send "no" when checkbox is unchecked -->
+                            <input type="hidden" name="is_selected" value="no">
+                            <input type="checkbox" name="is_selected" value="yes" class="sr-only peer">
+                            <div
+                                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                            </div>
+                            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable</span>
+                        </label>
                     </div>
                 </div>
 
@@ -224,4 +325,61 @@
         </div>
     </section>
 </div>
+<script>
+    // Calculate age when a date is selected
+    document.getElementById('dob').addEventListener('change', function () {
+        const dob = new Date(this.value);
+        const today = new Date();
+        if (dob > today) {
+            alert('Date of birth cannot be in the future.');
+            this.value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('age_hidden').value = ''; // Clear hidden input
+            return;
+        }
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        console.log('Calculated age:', age); // Log the calculated age
+        document.getElementById('age').value = age; 
+        document.getElementById('age_hidden').value = age; // Set the hidden input value
+    });
+    document.getElementById('province').addEventListener('change', function () {
+        const provinceId = this.value;
+        const districtOptions = document.querySelectorAll('#district option');
+
+        // Show/Hide districts based on selected province
+        districtOptions.forEach(option => {
+            if (option.getAttribute('data-province') === provinceId || option.value === "") {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+
+        // Reset district and palika dropdowns
+        document.getElementById('district').value = "";
+        document.getElementById('palika').value = "";
+    });
+
+    document.getElementById('district').addEventListener('change', function () {
+        const districtId = this.value;
+        const palikaOptions = document.querySelectorAll('#palika option');
+
+        // Show/Hide palikas based on selected district
+        palikaOptions.forEach(option => {
+            if (option.getAttribute('data-district') === districtId || option.value === "") {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+
+        // Reset palika dropdown
+        document.getElementById('palika').value = "";
+    });
+</script>
 {% endblock %}
