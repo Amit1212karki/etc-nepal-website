@@ -4,7 +4,6 @@ from django.template.loader import get_template
 from django.template.loader import render_to_string
 
 from xhtml2pdf import pisa
-from weasyprint import HTML
 import pdfkit
 
 def render_to_pdf(template_src, context_dict={}):
@@ -15,11 +14,6 @@ def render_to_pdf(template_src, context_dict={}):
     if pdf.err:
         return HttpResponse("Invalid PDF", status_code=400, content_type='text/plain')
     return HttpResponse(result.getvalue(), content_type='application/pdf')
-
-def render_to_pdf_weasy(template_src, context_dict={}):
-    html = render_to_string(template_src, context_dict)  # Use Django's template rendering
-    pdf = HTML(string=html).write_pdf()
-    return HttpResponse(pdf, content_type='application/pdf')
 
 
 

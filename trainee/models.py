@@ -4,13 +4,13 @@ from batch.models import *
 from location.models import *
 from datetime import date
 # Create your models here.
-
 class Trainee(models.Model):
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='trainee_contract')
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='trainee_batch')
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='trainee_province')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='trainee_district')
     palika = models.ForeignKey(Palika, on_delete=models.CASCADE, related_name='trainee_palika')
+    ward_no = models.CharField(max_length=255)
     occupation = models.CharField(max_length=255)
     name = models.CharField(max_length=500)
 

@@ -126,9 +126,12 @@
 
                         <div class="w-full">
                             <label for="age" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
-                            <input id="age" type="text"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                            <input id="age" name="age" type="number" 
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" 
                                 placeholder="Age will be calculated" readonly />
+                            
+                            <!-- Hidden input field for form submission -->
+                            <input type="hidden" id="age_hidden" name="age_hidden" />
                         </div>
                     </div>
                     <div class="w-full">
@@ -331,6 +334,7 @@
             alert('Date of birth cannot be in the future.');
             this.value = '';
             document.getElementById('age').value = '';
+            document.getElementById('age_hidden').value = ''; // Clear hidden input
             return;
         }
         let age = today.getFullYear() - dob.getFullYear();
@@ -339,8 +343,9 @@
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
             age--;
         }
-        document.getElementById('age').value = age;
-
+        console.log('Calculated age:', age); // Log the calculated age
+        document.getElementById('age').value = age; 
+        document.getElementById('age_hidden').value = age; // Set the hidden input value
     });
     document.getElementById('province').addEventListener('change', function () {
         const provinceId = this.value;
