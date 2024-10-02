@@ -6,6 +6,7 @@ from datetime import date
 # Create your models here.
 
 class Trainee(models.Model):
+    id = models.AutoField(primary_key=True)  # This is automatically handled by Django
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='trainee_contarct')
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='trainee_contarct')
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='trainee_province')
