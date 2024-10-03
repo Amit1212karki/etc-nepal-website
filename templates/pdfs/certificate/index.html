@@ -11,12 +11,13 @@
     @page {
         size: A4 landscape;
         margin: 0;
+        
     }
 
     body {
-        width: 297mm;
+       
         /* A4 width in landscape */
-        height: 210mm;
+        
         /* A4 height in landscape */
         margin: 0;
         padding: 20px;
@@ -26,7 +27,7 @@
     /* Ensure the main content fits within the A4 page size */
     section {
         width: 100%;
-        height: 100%;
+        /* height: 100%; */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -121,6 +122,11 @@
     .signature-line {
         width: 50%;
     }
+
+    .certificate-container {
+        border: 4px solid #5e0000;
+        padding: 20px;
+    }
 </style>
 
 <body>
@@ -130,20 +136,21 @@
         <section>
             <div class="header d-flex justify-around align-center">
                 <div class="">
-                    <img class="image-1" src="./static/Emblem_of_Nepal.svg.png" alt="">
+                    <img class="image-1" src="http://127.0.0.1:8000/static/certificate_images/Emblem_of_Nepal.svg.png"
+                        alt="">
                 </div>
                 <div class="text-center">
                     <p class="text-red m-1 p-1">नेपाल सरकार</p>
                     <p class="text-red m-1 p-1">श्रम, रोजगार तथा सामाजिक सुरक्षा मन्त्रालय</p>
-                    <p class="text-blue sub-title m-1 p-1">ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि)</p>
-                    <p class="text-red title m-1 p-1">Vocational Skill Training Completion Certificate</p>
+                    <p class="text-blue sub-title m-1 p-1">{{ title_np }}</p>
+                    <p class="text-red title m-1 p-1">{{ title }}</p>
                 </div>
                 <div>
                     <div>
-                        <!-- <img class="image-2" src="./assets/HEL_Logo_3d_Bangladesh_colour_web.png" alt=""> -->
+                        <img class="image-2" src="{{ sponsor_image }}" alt="">
                     </div>
                     <div>
-                        <img class="image image-passport" src="./assets/person.jpg" alt="">
+                        <img class="image image-passport" src="{{ image }}" alt="">
                     </div>
                 </div>
             </div>
@@ -152,25 +159,24 @@
         <!-- Body -->
         <section>
             <div>
-                <p>यो प्रमाणपत्र यस.प. न. ०३ वडा न. मोरङ जिल्ला निवासी श्री उदय नारायण माझीको छोरा जन्म मिति २०६०/१२/२९
-                    श्री रितेश कुमार माझीले ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि) अन्तर्गत हेल्वेटास नेपालको
-                    प्राविधिक सहयोगमा २०७९ बि.स. भाद्र ६ देखि २०७९ फागुन ११ सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले
-                    विराटनगर महानगरपालिकामा सञ्चालित रेफ्रिजेरेसन एर कन्डिसन जुनियर मेकानिक बिषयमा सिटिभिटिको ३९० घण्टको
+                <p>यो प्रमाणपत्र यस.प. न. {{ ward_no_np }} वडा न. {{ district_np }} जिल्ला निवासी {{ father_name_np }}को
+                    छोरा जन्म मिति {{ date_of_birth_bs }}
+                    {{ trainee_name_np }}ले {{ training_name_np }} अन्तर्गत {{with_np}} {{ start_date_bs }} देखि {{
+                    end_date_bs }} सम्म {{organizer_np}}ले
+                    {{organized_city_np}}मा सञ्चालित{{ under_np }} बिषयमा {{based_on_np}}को
                     पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।
                 </p>
             </div>
             <div>
-                <p>This is to certify that Mr. Ritesh Kumar Majhi born on 12 Apr 2003 A.D., son of Mr. Udha Narayan
-                    Majhi and
-                    inhabitant of Biratnagar Metropolitan City Ward No. 03, Morang District has successfully completed
+                <p>This is to certify that {{ trainee_name }} born on {{ date_of_birth_ad }} A.D., son of {{ father_name }} and
+                    inhabitant of {{ municipality }} City Ward No. {{ ward_no }}, {{ district }} District has
+                    successfully completed
                     the
-                    vocational skill training on Refrigeration & Air Condition Junior Mechanic from 22 Aug 2022 to 23
-                    Feb 2023
-                    A.D. at Biratnagar Metropolitan City implemented by Expert Technical College Nepal Pvt. Ltd. under
-                    Rural
-                    Enterprises and Remittances Project (RERP)-SAMRIDDHI and with Technical Assistance of Helvetas Nepal
+                    {{ training_name }} from {{ start_date_ad }} to {{ end_date_ad }} A.D. at {{ organized_city }}
+                    implemented by {{ organizer }} under
+                    {{under}} and with {{with}}
                     based
-                    on CTEVT curriculum of 390 hours.</p>
+                    on {{based_on}}.</p>
             </div>
         </section>
 
@@ -178,7 +184,8 @@
         <section>
             <div class="d-flex justify-between p-1">
                 <div class="text-left">
-                    <!-- <img class="signature-image" src="./assets/1200px-Todd_Strasser_signature.png" alt=""> -->
+                    <img class="signature-image"
+                        src="http://127.0.0.1:8000/static/certificate_images/1200px-Todd_Strasser_signature.png" alt="">
                     <hr width="260px">
                     <p class="m-1 p-1 text-bold">Hemraj Dahal</p>
                     <p class="m-1 p-1">Executive Director</p>
@@ -186,7 +193,8 @@
                     <p class="m-1 p-1">Itahari, Sunsari</p>
                 </div>
                 <div class="text-left">
-                    <!-- <img class="signature-image" src="./assets/1200px-Todd_Strasser_signature.png" alt=""> -->
+                    <img class="signature-image"
+                        src="http://127.0.0.1:8000/static/certificate_images/1200px-Todd_Strasser_signature.png" alt="">
                     <hr width="260px">
                     <p class="m-1 p-1 text-bold">Saroj Prasad Guragain</p>
                     <p class="m-1 p-1">Project Manager, RERP</p>
@@ -199,17 +207,18 @@
         <hr>
         <!-- Footer -->
         <section>
-            <div class="d-flex justify-around">
+            <div class="d-flex justify-between">
                 <div>
                     <p>Training implemented by:</p>
-                    <!-- <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt=""> -->
+                    <img class="image-2" src="http://127.0.0.1:8000/static/certificate_images/expert_logo.png" alt="">
                 </div>
                 <div>
-                    <!-- <img class="image-1" src="./assets/Emblem_of_Nepal.svg.png" alt=""> -->
+                    <img class="image-1" src="http://127.0.0.1:8000/static/certificate_images/Emblem_of_Nepal.svg.png"
+                        alt="">
                 </div>
                 <div>
                     <p>Training Sponsored by:</p>
-                    <!-- <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt=""> -->
+                    <img class="image-2" src="{{ sponsor_image }}" alt="">
                 </div>
             </div>
         </section>

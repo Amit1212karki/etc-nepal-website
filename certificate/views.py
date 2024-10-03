@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from signatory.models import *;
 
 
 # Create your views here.
@@ -52,4 +53,15 @@ def traineeCreate(request):
     return render(request, 'certificate/trainee/add.html')
 
 def certificateForm(request):
+    # all_signatory = 
+    # context = {
+    # "all_signatory": 
+    # }
     return render(request, "certificate/certificate/certificate-form.html")
+
+def certificateForm2(request):
+    all_signatory = Signatory.objects.all()
+    context = {
+    "all_signatory": all_signatory
+    }
+    return render(request, "certificate/certificate/certificate-form2.html", context)

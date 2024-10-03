@@ -30,7 +30,6 @@ def render_to_pdf_pdfkit(template_src, context_dict={}):
     # Set options for pdfkit with adjusted margins
     options = {
         'page-size': 'A4',  # Standard page size
-        'dpi': 400,
         'orientation': 'Landscape',  # Ensure landscape orientation
         'margin-top': '10px',  # Set to 0px to maximize usable space
         'margin-right': '10px',  # Set a small positive margin instead of negative

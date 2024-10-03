@@ -46,6 +46,7 @@ urlpatterns = [
     path("signatory/", include("signatory.urls")),
     path("trainee/", include("trainee.urls")),
     path("html-to-pdf/", pdf_view),
+    path("html-to-pdf2/", pdf_view2),
 
 ]
 

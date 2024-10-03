@@ -65,7 +65,7 @@
             {% endif %}
 
             <!-- Form for Signatory -->
-            <form action="/signatory/store/" method="POST" enctype="multipart/form-data">
+            <form action="/html-to-pdf/" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="w-full">
@@ -174,6 +174,23 @@
                         <input type="text" name="municipality_np" id="municipality_np"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Eg: विराटनगर महानगरपालिकामा" required="">
+                    </div>
+
+
+                    <div class="w-full">
+                        <label for="ward_no" class="block mb-2 text-sm font-medium text-gray-900">Ward Numer
+                        </label>
+                        <input type="text" name="ward_no" id="ward_no"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Eg: 01" required="">
+                    </div>
+
+                    <div class="w-full">
+                        <label for="ward_no_np" class="block mb-2 text-sm font-medium text-gray-900">Ward Number (Nepali)
+                            (Nepali) </label>
+                        <input type="text" name="ward_no_np" id="ward_no_np"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Eg: 01" required="">
                     </div>
 
                     <div class="w-full">
@@ -319,10 +336,10 @@
                 </div>
 
                 <div class="w-full">
-                    <label for="implemented_by" class="block mb-2 text-sm font-medium text-gray-900">Implemented By</label>
-                    <input type="file" name="implemented_by[]" multiple id="image"
+                    <label for="sponsor_image" class="block mb-2 text-sm font-medium text-gray-900">Sponsor Image</label>
+                    <input type="file" name="sponsor_image" id="image"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                        required="">
+                        required>
                 </div>
             </div>
 
