@@ -7,6 +7,8 @@ from batch.models import *
 from trainee.models import *
 from trainer.models import *
 from certificate.models import *
+from signatory.models import *;
+
 
 # Create your views here.
 
@@ -21,7 +23,6 @@ def loginView(request):
             user = authenticate(request, username=name, password=password)
             if user is not None:
                 auth_login(request, user)
-                messages.success(request, "You have been logged in successfully.")
                 return render(request, 'certificate/home.html')
             else:
                 messages.error(request,'Provided credintial is invalid !!')       
@@ -31,19 +32,7 @@ def loginView(request):
 
 @login_required
 def home(request):
-    home_contract = Contract.objects.count()
-    home_batch = Batch.objects.count()
-    home_trainer = Trainer.objects.count()
-    home_trainee = Trainee.objects.count()
-    home_certificate = Certificate.objects.count()
-    context = {
-        'home_contract':home_contract,
-        'home_batch':home_batch,
-        'home_trainer':home_trainer,
-        'home_trainee':home_trainee,
-        'home_certificate':home_certificate
-    }
-    return render(request, 'certificate/home.html', context)
+    return render(request, 'certificate/home.html')
 
 @login_required
 def logoutUser(request, id):
@@ -56,3 +45,28 @@ def logoutUser(request, id):
         return redirect('/certificate/dashboard/')
     
 
+@login_required
+def traineeIndex(request):
+    return render(request, 'certificate/trainee/index.html')
+
+@login_required
+def traineeEdit(request):
+    return render(request, 'certificate/trainee/edit.html')
+
+@login_required
+def traineeCreate(request):
+    return render(request, 'certificate/trainee/add.html')
+
+def certificateForm(request):
+    # all_signatory = 
+    # context = {
+    # "all_signatory": 
+    # }
+    return render(request, "certificate/certificate/certificate-form.html")
+
+def certificateForm2(request):
+    all_signatory = Signatory.objects.all()
+    context = {
+    "all_signatory": all_signatory
+    }
+    return render(request, "certificate/certificate/certificate-form2.html", context)
