@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from contract.models import *
+from batch.models import *
+from trainee.models import *
+from trainer.models import *
+from certificate.models import *
 from signatory.models import *;
 
 

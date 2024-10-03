@@ -75,5 +75,5 @@ def trainerDelete(request, id):
         return redirect('trainer-index')
     except:
         messages.error(request, 'Trainer not found. Deletion failed !!')
-    return redirect('contract-index')
+    return redirect('trainer-index')
 

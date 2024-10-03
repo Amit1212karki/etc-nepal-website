@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container mx-auto">
     <div class="py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10">
         <div>
@@ -41,49 +40,86 @@
                 </nav>
             </p>
         </div>
-        <div>
-            <button onclick="window.location.href='/certificate/trainee/add/'" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <div class="">
+            <button onclick="window.location.href='/trainee/add-trainee/'" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Add Trainee
             </button>
         </div>
     </div>
+    <div class="relative overflow-x-auto bg-white ">
+        {% if messages %}
+            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                {% for message in messages %}
+                {% if message.level == 25 %} {# SUCCESS level #}
+                <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+                {% elif message.level == 40 %} {# ERROR level #}
+                <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
 
     <div class="relative overflow-x-auto bg-white">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Trainee Name</th>
-                    <th scope="col" class="px-6 py-3">Trainee Image</th>
-                    <th scope="col" class="px-6 py-3">Trainee Address</th>
-                    <th scope="col" class="px-6 py-3">Contact</th>
-                    <th scope="col" class="px-6 py-3"><span class="sr-only">Actions</span></th>
+                    <th scope="col" class="px-6 py-3">
+                        Trainee Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Trainee Image
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Trainee Address
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        Is Selected
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Contact
+                    </th>
+                    
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Actions</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                {% for trainee in trainees %}
-                <tr class="border-b">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ trainee.name }}</th>
+                {% for trainee in all_trainee %}
+                <tr class="border-b  ">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        {{trainee.name}}
+                    </th>
                     <td class="px-6 py-4">
-                        <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="{{ trainee.image.url }}" alt="{{ trainee.name }}'s image">
+                        <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                            src="{% if trainee.image %}{{ trainee.image.url }}{%endif%}" alt="Bordered avatar">
                     </td>
-                    <td class="px-6 py-4">{{ trainee.address }}</td>
-                    <td class="px-6 py-4">{{ trainee.contact }}</td>
+                    <td class="px-6 py-4">
+                       {{trainee.contract}}
+                    </td>
+
+                    <td class="px-6 py-4">
+                        {{trainee.is_selected}}
+                    </td>
+                    <td class="px-6 py-4">
+                       {{trainee.phone_no}}
+
+                     </td>
+
                     <td class="px-6 py-4 text-right flex gap-4">
-                        <a href="{% url 'trainee_edit' trainee.id %}" class="font-medium text-blue-600 hover:underline">
+                        <a href="{% url 'trainee-edit' trainee.id %}" class="font-medium text-blue-600 hover:underline">
                             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                             </svg>
                         </a>
-                        <a href="{% url 'trainee_delete' trainee.id %}" class="font-medium text-red-600 hover:underline">
+                        <a href="/trainee/delete-trainee/{{trainee.id}}/" class="font-medium text-red-600 hover:underline">
                             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                             </svg>
                         </a>
                     </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="px-6 py-4 text-center">No trainees found.</td>
                 </tr>
                 {% endfor %}
             </tbody>
