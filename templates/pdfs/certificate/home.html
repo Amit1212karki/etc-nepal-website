@@ -9,7 +9,7 @@
     <div    class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
         <div class="">
             <p>
-                Trainee
+                Generate Certificate
             </p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
 
@@ -44,12 +44,7 @@
                 </nav>
             </p>
         </div>
-        <div class="">
-            <button onclick="window.location.href='/trainee/add-trainee/'" type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Add Trainee
-            </button>
-        </div>
+     
     </div>
     <div class="relative overflow-x-auto bg-white ">
         {% if messages %}
@@ -91,7 +86,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for trainee in all_trainee %}
+                {% for trainee in certificate_trainee %}
                 <tr class="border-b  ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                         {{trainee.name}}
@@ -103,11 +98,9 @@
                     <td class="px-6 py-4">
                        {{trainee.contract}}
                     </td>
+
                     <td class="px-6 py-4">
-                        <button class="focus:outline-none transition duration-300 ease-in-out transform {{ trainee.is_selected|yesno:'bg-green-500 text-white, bg-gray-300 text-gray-600' }} rounded-lg px-4 py-2"
-                                onclick="toggleSelection({{ trainee.id }})">
-                            {{ trainee.is_selected|yesno:'Selected, Not Selected' }}
-                        </button>
+                        {{trainee.is_selected}}
                     </td>
                     <td class="px-6 py-4">
                        {{trainee.phone_no}}
@@ -132,39 +125,5 @@
         </table>
     </div>
 </div>
-
-<script>
-    function toggleSelection(traineeId) {
-        const button = event.target; // Get the button that was clicked
-        const isSelected = button.innerText === 'Selected'; // Check current status
-
-        // Create AJAX request to update the selection status
-        fetch(`/trainee/toggle-selection/${traineeId}/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token
-            },
-            body: JSON.stringify({ is_selected: !isSelected })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Update button appearance based on new status
-            button.classList.toggle('bg-green-500', !isSelected);
-            button.classList.toggle('text-white', !isSelected);
-            button.classList.toggle('bg-gray-300', isSelected);
-            button.classList.toggle('text-gray-600', isSelected);
-            button.innerText = !isSelected ? 'Selected' : 'Not Selected'; // Update button text
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
 
 {% endblock %}

@@ -6,51 +6,40 @@
 {% block content %}
 <section class="flex justify-center items-center py-4">
     <div class="w-full  mx-auto px-10 py-6">
-        
+
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold mb-4">Dashboard Index Page</h2>
             <h1 class="text-lg font-semibold">Welcome, {{user.username}}!</h1>
         </div>
-       <div class="mb-2">
-        {% if messages %}
-        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
-            {% for message in messages %}
-            {% if message.level == 25 %} {# SUCCESS level #}
-            <li class="text-black bg-green-100 p-2 rounded text-center mx-auto">{{ message }}</li>
-            {% elif message.level == 40 %} {# ERROR level #}
-            <li class="text-black bg-red-100 p-2 rounded text-center mx-auto">{{ message }}</li>
+        <div class="mb-2">
+            {% if messages %}
+            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                {% for message in messages %}
+                {% if message.level == 25 %} {# SUCCESS level #}
+                <li class="text-black bg-green-100 p-2 rounded text-center mx-auto">{{ message }}</li>
+                {% elif message.level == 40 %} {# ERROR level #}
+                <li class="text-black bg-red-100 p-2 rounded text-center mx-auto">{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
             {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
-       </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white p-4 shadow rounded-lg grid grid-cols-2 gap-4 items-center">
-                <h3 class="text-lg font-semibold text-right">Total Contract:</h3>
-                <p class="text-xl font-bold">{{ home_contract }}</p>
-            </div>
-            <div class="bg-white p-4 shadow rounded-lg grid grid-cols-2 gap-4 items-center">
-                <h3 class="text-lg font-semibold text-right">Total Batch:</h3>
-                <p class="text-xl font-bold">{{ home_batch }}</p>
-            </div>
-            <div class="bg-white p-4 shadow rounded-lg grid grid-cols-2 gap-4 items-center">
-                <h3 class="text-lg font-semibold text-right">Total Trainer:</h3>
-                <p class="text-xl font-bold">{{ home_trainer }}</p>
-            </div>
-            <div class="bg-white p-4 shadow rounded-lg grid grid-cols-2 gap-4 items-center">
-                <h3 class="text-lg font-semibold text-right">Total Trainee:</h3>
-                <p class="text-xl font-bold">{{ home_trainee }}</p>
-            </div>
-            <div class="bg-white p-4 shadow rounded-lg grid grid-cols-2 gap-4 items-center">
-                <h3 class="text-lg font-semibold text-right">Total Certificate:</h3>
-                <p class="text-xl font-bold">{{ home_certificate }}</p>
-            </div>
+            {% for item in data_list %}
+            <a href="{{ item.route }}">
+                <div class="bg-white p-4 shadow rounded-lg grid grid-cols-2 gap-4 items-center">
+                    <h3 class="text-lg font-semibold text-right">{{ item.label }}:</h3>
+                    <p class="text-xl font-bold">{{ item.value }}</p>
+                </div>
+            </a>
+            {% endfor %}
+
         </div>
 
         <div class="grid grid-cols-2  gap-x-4">
             <div class="bg-white p-6 shadow rounded-lg mb-6 col-span-2 h-[60vh]">
-                <h3 class="text-lg font-semibold mb-4">Sales and Transactions Chart</h3>
-                <div id="combinedChart"></div>
+                <h3 class="text-lg font-semibold mb-4">Trainees Chart</h3>
+                <div id="traineeChart"></div>
             </div>
 
             <div class="bg-white p-6 shadow rounded-lg mb-6 h-[60vh]">
@@ -97,9 +86,11 @@
 
 
         <div style="display: none;">
-            <div id="backendPassedData">{{ sales_data }}</div>
-            <div id="backendTransactionPassedData">{{ transaction_data }}</div>
+            <div id="total-trainee-data">{{ total_trainee_data }}</div>
+            <div id="selected-trainee-data">{{ selected_trainee_data }}</div>
             <div id="backendTopProductsData">{{ top_products_data }}</div>
+            <div id="chart-data" style="display: none;">{{ chart_data|safe }}</div>
+
         </div>
     </div>
 </section>
@@ -108,148 +99,165 @@
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+<script>
+    var labels = {{ labels|safe }};  
+    var values = {{ values|safe }};
+</script>
 
-<script id="sales-data" type="application/json">{{ sales_values|json_script:"sales-data" }}</script>
-<script id="sales-categories" type="application/json">{{ sales_categories|json_script:"sales-categories" }}</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve JSON data from the script tags
+        var totalTraineesData = JSON.parse(document.getElementById('total-trainee-data').textContent);
+        var selectedTraineesData = JSON.parse(document.getElementById('selected-trainee-data').textContent);
+        
 
-<script id="transaction-data" type="application/json">{{ transaction_values|json_script:"transaction-data" }}</script>
-<script id="transaction-categories"
-    type="application/json">{{ transaction_categories|json_script:"transaction-categories" }}</script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Sample sales and transactions data
-            var salesData = [500, 700, 800, 600, 900, 1200, 1500, 1800, 2100, 1700, 2000, 2300];
-            var transactionData = [300, 400, 500, 450, 600, 800, 900, 1100, 1000, 950, 1200, 1300];
-    
-            // Prepare months array
-            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
-            // Combine sales and transactions into a single dataset
-            var combinedData = [
-                {
-                    name: "Sales",
-                    data: salesData
-                },
-                {
-                    name: "Transactions",
-                    data: transactionData
-                }
-            ];
-    
-            // Options for the combined chart
-            var combinedOptions = {
-                series: combinedData,
-                chart: {
-                    height: 350,
-                    type: 'line',
-                    zoom: {
-                        enabled: true,
-                        type: 'x',
-                        autoScaleYaxis: true
-                    },
-                    toolbar: {
-                        autoSelected: 'zoom'
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'smooth'  // Changed to 'smooth' for better appearance
-                },
-                tooltip: {
-                    shared: true,
-                    intersect: false,
-                    y: {
-                        formatter: function (value) {
-                            return value.toFixed(2); // Format tooltip values as needed
-                        }
-                    }
-                },
-                xaxis: {
-                    categories: months,
-                    title: {
-                        text: 'Months'
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'Amount (NPR)'
-                    }
-                },
-                title: {
-                    text: 'Sales and Transactions by Month',
-                    align: 'left'
-                },
-                grid: {
-                    borderColor: '#e0e0e0',
-                    row: {
-                        colors: ['#f3f3f3', 'transparent'],
-                        opacity: 0.5
-                    },
-                },
-                fill: {
-                    opacity: 0.8,
-                    type: 'solid'
-                },
-                animations: {
-                    enabled: true,
-                    easing: 'easeinout',
-                    speed: 800,
-                    animateGradually: {
-                        enabled: true,
-                        delay: 150
-                    },
-                    dynamicAnimation: {
-                        enabled: true,
-                        speed: 350
-                    }
-                },
-                responsive: [{
-                    breakpoint: 768,
-                    options: {
-                        chart: {
-                            height: 300
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }],
-                legend: {
-                    position: 'top',
-                    onItemClick: {
-                        toggleDataSeries: true
-                    }
-                }
-            };
-    
-            // Render the combined chart using ApexCharts
-            var combinedChart = new ApexCharts(document.querySelector("#combinedChart"), combinedOptions);
-            combinedChart.render();
+
+        // Full list of months
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        // Create a dictionary to map months to trainee counts
+        var totalTraineesMap = {};
+        var selectedTraineesMap = {};
+
+        // Fill the maps with the trainee data
+        totalTraineesData.forEach(function (item) {
+            totalTraineesMap[item.month] = item.total_trainees;
         });
 
-        var options = {
-          series: [44, 55, 41, 17, 15],
-          chart: {
-          type: 'donut',
-          height: '90%'
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
+        selectedTraineesData.forEach(function (item) {
+            selectedTraineesMap[item.month] = item.selected_trainees;
+        });
+
+        // Map the data to the months array, ensuring every month has a value (default to 0)
+        var totalTrainees = months.map(function (month) {
+            return totalTraineesMap[month] || 0;
+        });
+
+        var selectedTrainees = months.map(function (month) {
+            return selectedTraineesMap[month] || 0;
+        });
+
+        var traineeChartOptions = {
+            series: [
+                {
+                    name: "Total Trainees",
+                    data: totalTrainees  
+                },
+                {
+                    name: "Selected Trainees",
+                    data: selectedTrainees  
+                }
+            ],
             chart: {
-              width: 200
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: true,
+                    type: 'x',
+                    autoScaleYaxis: true
+                },
+                toolbar: {
+                    autoSelected: 'zoom'
+                }
             },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function (value) {
+                        return value.toFixed(2);  
+                    }
+                }
+            },
+            xaxis: {
+                categories: months,  
+                title: {
+                    text: 'Months'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Number of Trainees'
+                }
+            },
+            title: {
+                text: 'Total and Selected Trainees by Month',
+                align: 'left'
+            },
+            grid: {
+                borderColor: '#e0e0e0',
+                row: {
+                    colors: ['#f3f3f3', 'transparent'],
+                    opacity: 0.5
+                },
+            },
+            fill: {
+                opacity: 0.8,
+                type: 'solid'
+            },
+            animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+                animateGradually: {
+                    enabled: true,
+                    delay: 150
+                },
+                dynamicAnimation: {
+                    enabled: true,
+                    speed: 350
+                }
+            },
+            responsive: [{
+                breakpoint: 768,
+                options: {
+                    chart: {
+                        height: 300
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }],
             legend: {
-              position: 'bottom'
+                position: 'top',
+                onItemClick: {
+                    toggleDataSeries: true
+                }
             }
-          }
-        }]
         };
+        var traineeChart = new ApexCharts(document.querySelector("#traineeChart"), traineeChartOptions);
+        traineeChart.render();
+    });
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-    </script>
+   
+    var options = {
+        series: values, 
+        chart: {
+            type: 'donut',
+            height: '90%'
+        },
+        labels: labels, 
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
 
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
 {% endblock %}
