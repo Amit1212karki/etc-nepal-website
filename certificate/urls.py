@@ -9,5 +9,6 @@ urlpatterns = [
      
      path("certificate-form/", certificateForm ),
      path("certificate-form2/", certificateForm2 ),
+     path("certificate-form3/", certificateForm3 ),
     
 ]

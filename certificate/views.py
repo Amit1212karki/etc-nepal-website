@@ -70,3 +70,10 @@ def certificateForm2(request):
     "all_signatory": all_signatory
     }
     return render(request, "certificate/certificate/certificate-form2.html", context)
+
+def certificateForm3(request):
+    all_signatory = Signatory.objects.all()
+    context = {
+    "all_signatory": all_signatory
+    }
+    return render(request, "certificate/certificate/certificate-form3.html", context)

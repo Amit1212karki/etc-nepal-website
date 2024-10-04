@@ -11,6 +11,7 @@ from records.models import *
 from course.models import *
 from django.template.loader import get_template
 from django.http import HttpResponse
+from signatory.models import Signatory
 
 
 
@@ -103,7 +104,7 @@ def pdf_view(request, *args, **kwargs):
 
         # Render PDF using PDFKit
         # return HttpResponse(data['sponsor_image'])
-    
+        
         return renderers.render_to_pdf_pdfkit('pdfs/certificate/index.html', data) 
     
 def pdf_view2(request, *args, **kwargs):
@@ -174,5 +175,8 @@ def pdf_view2(request, *args, **kwargs):
 
         # Render PDF using PDFKit
         # return HttpResponse(data['sponsor_image'])
+        signatory = request.POST.getlist('signatory[]')
+        signatory_objects = Signatory.objects.filter(id__in=signatory)
+        data['all_signatory'] = signatory_objects
     
         return renderers.render_to_pdf_pdfkit('pdfs/certificate/certificate_two.html', data) 

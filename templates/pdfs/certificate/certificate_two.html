@@ -188,7 +188,8 @@
         <section>
             <p>{{ sponsor }}, उदयपुरको आर्थिक सहयोग र
                 एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि. इटहरीको प्राविधिक संयोजनमा CTEVT को {{ course }} को पाठ्यक्रम
-                ({{ creditHr }} घण्टा) अनुसार मिति {{ start_date }} देखि {{ end_date }} गते सम्म सञ्चालन भएको तालिममा {{ municipality }} वडा न.
+                ({{ creditHr }} घण्टा) अनुसार मिति {{ start_date }} देखि {{ end_date }} गते सम्म सञ्चालन भएको तालिममा {{
+                municipality }} वडा न.
                 {{ ward_no }},
                 {{ city }} बस्ने {{ parents_name }}को छोरी {{ trainee_name }}ले सहभागी भई तालिममा सफलतापूर्वक सिप हासिल
                 भएकोले यहाँको उत्तरोत्तर प्रगतिको कामना गर्दै यस स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ ।
@@ -203,46 +204,34 @@
                     <hr>
                     <p class="m-1 p-1">प्रशिक्षक </p>
                 </div>
+                {% for signatory in all_signatory %}
                 <div>
                     <div class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt=""></div>
                     <hr>
-                    <p>हेमराज दाहाल</p>
-                    <p class="m-1 p-1">संस्थान प्रमुख</p>
-                    <p class="m-1 p-1"> एक्सपर्ट टेक्निकल कलेज नेपाल</p>
-                    <p class="m-1 p-1"> इटहरी, सुनसरी</p>
+                    <p>{{ signatory.name }}</p>
+                    <p class="m-1 p-1"> {{ signatory.designation }} </p>
+                    <p class="m-1 p-1"> {{ signatory.address }}</p>
                 </div>
-                <div>
-                    <div class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt=""></div>
-                    <hr>
-                    <p class="m-1 p-1"> आनन्द खड्का </p>
-                    <p class="m-1 p-1">स्पोनसरसिप फिल्ड कोअर्डिनेटर </p>
-                    <p class="m-1 p-1">वर्ड भिजन इन्टरनेशनल नेपाल</p>
-                </div>
-                <div>
-                    <div class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt=""></div>
-                    <hr>
-                    <p class="m-1 p-1">शंकर बहादुर थापा</p>
-                    <p class="m-1 p-1">अध्यक्ष</p>
-                    <p class="m-1 p-1">मानव अधिकार र वातावरण विकास केन्द्र उदयपुर</p>
-                </div>
+                {% endfor %}
+
             </div>
 
         </section>
 
         <hr>
         <section>
-            <div class="footer d-flex justify-between align-center">
+            <div style="height: 130px;" class="footer d-flex justify-between align-center">
                 <div>
-                    <img class="image-3" src="{{ sponsor_image1 }}" alt="">
+                    <img style="overflow: hidden;" class="image-3" src="{{ sponsor_image1 }}" alt="">
                 </div>
                 <div>
-                    <img class="image-3" src="{{ sponsor_image2 }}" alt="">
+                    <img style="overflow: hidden;" class="image-3" src="{{ sponsor_image2 }}" alt="">
                 </div>
                 <div>
-                    <p class="text-caption m-1 p-1 text-bold">{{ certified_date }}</p>
+                    <p style="overflow: hidden;" class="text-caption m-1 p-1 text-bold">{{ certified_date }}</p>
                 </div>
                 <div>
-                    <img class="image-3" src="{{ sponsor_image3 }}" alt="">
+                    <img style="overflow: hidden;" class="image-3" src="{{ sponsor_image3 }}" alt="">
                 </div>
             </div>
 
