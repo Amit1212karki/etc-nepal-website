@@ -25,7 +25,7 @@ def signatoryStore(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         designation = request.POST.get('designation')
-        image = request.FILES.get('image')  # For file upload, we use request.FILES
+        image = request.FILES.get('image')  
 
         if name and designation and image:
             signatory = Signatory.objects.create(

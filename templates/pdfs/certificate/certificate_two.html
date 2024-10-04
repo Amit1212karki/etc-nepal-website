@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,13 +177,15 @@
                     <p class=" m-1 p-1 text-red sub-title">प्रमाण-पत्र</p>
                 </div>
                 <div>
+                    {% if image %}
                     <img class="image-passport" src="{{image}}" alt="">
+                    {% endif %}
                 </div>
             </div>
         </section>
 
         <section>
-            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: ____________</p>
+            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: {{certificate_number}}</p>
         </section>
 
         <section>
@@ -191,7 +194,7 @@
                 ({{ creditHr }} घण्टा) अनुसार मिति {{ start_date }} देखि {{ end_date }} गते सम्म सञ्चालन भएको तालिममा {{
                 municipality }} वडा न.
                 {{ ward_no }},
-                {{ city }} बस्ने {{ parents_name }}को छोरी {{ trainee_name }}ले सहभागी भई तालिममा सफलतापूर्वक सिप हासिल
+                {{ city }} बस्ने {{ parents_name }} को {% if gender == "M" %} छोरा {% else %} छोरी{% endif %}  {{ trainee_name }} ले सहभागी भई तालिममा सफलतापूर्वक सिप हासिल
                 भएकोले यहाँको उत्तरोत्तर प्रगतिको कामना गर्दै यस स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ ।
             </p>
         </section>
@@ -204,7 +207,7 @@
                     <hr>
                     <p class="m-1 p-1">प्रशिक्षक </p>
                 </div>
-                {% for signatory in all_signatory %}
+                {% for signatory in signatories %}
                 <div>
                     <div class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt=""></div>
                     <hr>
@@ -222,16 +225,22 @@
         <section>
             <div style="height: 130px;" class="footer d-flex justify-between align-center">
                 <div>
-                    <img style="overflow: hidden;" class="image-3" src="{{ sponsor_image1 }}" alt="">
+                    {% if sponsor_image1 %}
+                    <img style="overflow: hidden;" class="image-3" src="{{MEDIA_URL}}{{ sponsor_image1 }}" alt="Sponsor Image 1">
+                    {% endif %}
                 </div>
                 <div>
-                    <img style="overflow: hidden;" class="image-3" src="{{ sponsor_image2 }}" alt="">
+                    {% if sponsor_image2 %}
+                    <img style="overflow: hidden;" class="image-3" src="{{MEDIA_URL}}{{ sponsor_image2 }}" alt="sponsor_image2">
+                    {% endif %}
                 </div>
                 <div>
                     <p style="overflow: hidden;" class="text-caption m-1 p-1 text-bold">{{ certified_date }}</p>
                 </div>
                 <div>
-                    <img style="overflow: hidden;" class="image-3" src="{{ sponsor_image3 }}" alt="">
+                    {% if sponsor_image3 %}
+                    <img style="overflow: hidden;" class="image-3" src="{{MEDIA_URL}}{{ sponsor_image3 }}" alt="sponsor_image3">
+                    {% endif %}
                 </div>
             </div>
 

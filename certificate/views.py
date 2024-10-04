@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -17,6 +17,11 @@ import mimetypes
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 import json
+from django.template.loader import get_template
+from django.http import HttpResponse
+from signatory.models import Signatory
+from django.conf import settings
+import os
 
 # Create your views here.
 
@@ -105,6 +110,98 @@ def certificatIndex(request):
     }
     return render(request, 'pdfs/certificate/home.html', context)
 
+def generteCertificate1(request, id):
+    generate_certificate = get_object_or_404(Trainee, id=id)
+    signature = Signatory.objects.all()
+
+    if request.method == 'POST':
+        certificates_dir = os.path.join(settings.MEDIA_ROOT, 'certificates')
+        sponsor_images_dir = os.path.join(settings.MEDIA_ROOT, 'sponsor_images')
+
+        if not os.path.exists(certificates_dir):
+            os.makedirs(certificates_dir)
+
+        if not os.path.exists(sponsor_images_dir):
+            os.makedirs(sponsor_images_dir)
+        title = request.POST.get('title')
+        certificate_number = request.POST.get('certificate_number')
+        ctevt_account_number = request.POST.get('ctevt_account_number')
+        pan_number = request.POST.get('pan_number')
+        sponsor = request.POST.get('sponsor')
+        course = request.POST.get('course')
+        creditHr = request.POST.get('creditHr')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        municipality = generate_certificate.palika  # Assuming palika is the municipality
+        ward_no = generate_certificate.ward_no
+        city = generate_certificate.district  # Assuming district can represent the city
+        parents_name = f"{generate_certificate.father_name} & {generate_certificate.mother_name}"
+        trainee_name = generate_certificate.name
+        gender = generate_certificate.gender
+        certified_date = date.today()
+        certified_date = request.POST.get('certified_date')
+        signatory_ids = request.POST.getlist('signatory[]')
+
+        # Handle file uploads if necessary
+        image = generate_certificate.image
+        sponsor_image1 = request.FILES.get('sponsor_image1')
+        sponsor_image2 = request.FILES.get('sponsor_image2')
+        sponsor_image3 = request.FILES.get('sponsor_image3')
+
+        sponsor_image_paths = []
+
+        for sponsor_image in [sponsor_image1, sponsor_image2, sponsor_image3]:
+            if sponsor_image:
+                sponsor_image_path = os.path.join('sponsor_images', sponsor_image.name)  # Create path for each sponsor image
+                with open(os.path.join(settings.MEDIA_ROOT, sponsor_image_path), 'wb+') as destination:
+                    for chunk in sponsor_image.chunks():
+                        destination.write(chunk)
+                sponsor_image_paths.append(sponsor_image_path)
+
+
+        context = {
+            'title': title,
+            'certificate_number': certificate_number,
+            'ctevt_account_number': ctevt_account_number,
+            'pan_number': pan_number,
+            'sponsor': sponsor,
+            'course': course,
+            'creditHr': creditHr,
+            'start_date': start_date,
+            'end_date': end_date,
+            'municipality': municipality,
+            'ward_no': ward_no,
+            'city': city,
+            'parents_name': parents_name,
+            'trainee_name': trainee_name,
+            'certified_date': certified_date,
+            'gender': gender,  
+            'signatories': Signatory.objects.filter(id__in=signatory_ids),
+            'image': f"{settings.MEDIA_URL}{generate_certificate.image}" if generate_certificate.image else None,
+            'sponsor_image1': f"{settings.MEDIA_URL}{sponsor_image_paths[0]}" if len(sponsor_image_paths) > 0 else None,
+            'sponsor_image2': f"{settings.MEDIA_URL}{sponsor_image_paths[1]}" if len(sponsor_image_paths) > 1 else None,
+            'sponsor_image3': f"{settings.MEDIA_URL}{sponsor_image_paths[2]}" if len(sponsor_image_paths) > 2 else None,
+            
+        }
+
+        # Render the certificate template with the form data
+        return render(request, 'pdfs/certificate/certificate_two.html', context)
+
+    context = {
+        'generate_certificate': generate_certificate,
+        'all_signatory': signature,
+    }
+
+    return render(request, 'certificate/certificate/certificate-form2.html', context)
+
+
+
+@login_required
+def generate(request):
+    return render(request, 'pdfs/certificate_safe.html')
+
+
+
 def certificateForm(request):
     # all_signatory = 
     # context = {
@@ -118,8 +215,6 @@ def certificateForm2(request):
     "all_signatory": all_signatory
     }
     return render(request, "certificate/certificate/certificate-form2.html", context)
-
-
 
 def pdf_view(request, *args, **kwargs):
     if request.method == 'POST':

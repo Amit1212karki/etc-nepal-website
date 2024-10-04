@@ -97,7 +97,7 @@
                         {{trainee.name}}
                     </th>
                     <td class="px-6 py-4">
-                        <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                        <img class="w-14 h-14 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
                             src="{% if trainee.image %}{{ trainee.image.url }}{%endif%}" alt="Bordered avatar">
                     </td>
                     <td class="px-6 py-4">
@@ -105,8 +105,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <button class="focus:outline-none transition duration-300 ease-in-out transform {{ trainee.is_selected|yesno:'bg-green-500 text-white, bg-gray-300 text-gray-600' }} rounded-lg px-4 py-2"
-                                onclick="toggleSelection({{ trainee.id }})">
-                            {{ trainee.is_selected|yesno:'Selected, Not Selected' }}
+                                onclick="toggleSelection({{ trainee.id }})">{{ trainee.is_selected|yesno:'Selected, Not Selected' }}
                         </button>
                     </td>
                     <td class="px-6 py-4">

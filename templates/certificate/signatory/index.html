@@ -97,20 +97,21 @@
                 </tr>
             </thead>
             <tbody>
-                {% for signatary in all_signatories %}
+                {% for signatory in all_signatories %}
                 <tr class="border-b  ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        {{signatary.name}}
+                        {{signatory.name}}
                     </th>
                     <td class="px-6 py-4">
-                      <img src="{{ signatory.image.urls }}" alt="image" srcset=""> 
+                        <img class="w-14 h-14 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                        src="{% if signatory.image %}{{ signatory.image.url }}{%endif%}" alt="Bordered avatar">
                     </td>
                     
                     <td class="px-6 py-4">
-                        {{signatary.designation}}
+                        {{signatory.designation}}
                       </td>
                     <td class="px-6 py-4 text-right flex gap-4">
-                        <a href="/signatory/edit/{{signatary.id}}/" class="font-medium text-blue-600 hover:underline">
+                        <a href="/signatory/edit/{{signatory.id}}/" class="font-medium text-blue-600 hover:underline">
                             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -119,7 +120,7 @@
                             </svg>
 
                         </a>
-                        <a href="/signatory/delete/{{signatary.id}}/" class="font-medium text-red-600 hover:underline">
+                        <a href="/signatory/delete/{{signatory.id}}/" class="font-medium text-red-600 hover:underline">
                             <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
