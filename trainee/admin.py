@@ -24,6 +24,4 @@ class TraineeAdmin(admin.ModelAdmin):
             'fields': ('is_selected',)
         }),
     )
-    def age(self, obj):
-        return obj.age  # Call the age property of the trainee instance
-    age.short_description = 'age'
+    

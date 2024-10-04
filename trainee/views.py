@@ -5,9 +5,28 @@ from batch.models import *
 from location.models import *
 from .models import *
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 # Create your views here.
+
+@csrf_exempt  # Use with caution; for production, ensure you handle CSRF properly
+def toggle_selection(request, trainee_id):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        is_selected = data.get('is_selected')
+
+        try:
+            trainee = Trainee.objects.get(id=trainee_id)
+            trainee.is_selected = is_selected
+            trainee.save()
+            return JsonResponse({'status': 'success', 'is_selected': is_selected})
+        except Trainee.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Trainee not found.'}, status=404)
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
 
 @login_required
 def traineeIndex(request):
@@ -17,6 +36,8 @@ def traineeIndex(request):
     }
 
     return render(request, 'certificate/trainee/index.html',context)
+
+
 
 @login_required
 def traineeCreate(request):
