@@ -7,6 +7,8 @@ urlpatterns = [
      path('logout/<int:id>/', logoutUser, name='certificate-logout'),
      path('dashboard/', home, name='certificate-home'),
      
+     # certificate generation urls
+     path('certificate-index/', certificatIndex, name='certificate-index'),
      path("certificate-form/", certificateForm ),
      path("certificate-form2/", certificateForm2 ),
      path("certificate-form3/", certificateForm3 ),

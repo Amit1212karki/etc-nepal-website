@@ -8,5 +8,7 @@ urlpatterns = [
     path('edit-trainee/<int:id>/', traineeEdit, name='trainee-edit'),
     path('update-trainee/<int:id>/', traineeUpdate, name='trainee-update'),
     path('delete-trainee/<int:id>/', traineeDelete, name='trainee-delete'),
+    path('toggle-selection/<int:id>/', toggle_selection, name='trainee-toggle-selection'),
+
 
 ]
