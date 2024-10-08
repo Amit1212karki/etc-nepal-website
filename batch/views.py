@@ -61,10 +61,12 @@ def batchEdit(request, id):
     edit_batch = get_object_or_404(Batch, id=id)
     batch_contract = Contract.objects.all() 
     batch_trainer = Trainer.objects.all()
+    current_trainers = edit_batch.trainer.values_list('id', flat=True)
     context = {
         'edit_batch':edit_batch,
         'batch_contract': batch_contract,
         'batch_trainer': batch_trainer,
+        'current_trainers':current_trainers,
     }
 
     return render(request, 'certificate/batch/edit.html', context)
@@ -87,7 +89,6 @@ def batchUpdate(request, id):
         update_batch.time = time
         update_batch.seats = seats
         update_batch.contract = contract
-
         update_batch.save()
 
         update_batch.trainer.clear() 

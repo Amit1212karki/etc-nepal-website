@@ -2,15 +2,45 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib import messages
-
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 # Create your views here.
 
 @login_required
 def contractIndex(request):
-    all_contract = Contract.objects.all()
+    search_query = request.GET.get('search', '')
+    all_contract = Contract.objects.filter(
+        Q(name__icontains=search_query) | Q(occupation__icontains=search_query)
+    ) if search_query else Contract.objects.all()
+    
+    paginator = Paginator(all_contract, 3)  
+    page_number = request.GET.get('page', 1)
+    contracts = paginator.get_page(page_number)
 
+    # Calculate total entries and index range
+    total_entries = paginator.count
+    total_pages = paginator.num_pages 
+    start_index = contracts.start_index()
+    end_index = contracts.end_index()
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = {
+            'contracts': list(contracts.object_list.values('name', 'location', 'occupation', 'donation_by')),
+            'has_next': contracts.has_next(),
+            'has_previous': contracts.has_previous(),
+            'next_page_number': contracts.next_page_number() if contracts.has_next() else None,
+            'previous_page_number': contracts.previous_page_number() if contracts.has_previous() else None,
+            'total_entries': total_entries,
+            'total_pages': total_pages,
+            'current_page': contracts.number,
+            'start_index': start_index,
+            'end_index': end_index,
+        }
+        return JsonResponse(data)
+    
     context = {
-        'all_contract':all_contract
+        'all_contract':contracts
     }
     return render(request, 'certificate/contract/index.html', context)
 

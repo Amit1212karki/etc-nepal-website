@@ -5,17 +5,13 @@
 {% endblock %}
 
 {% block content %}
-
-
-
-
 <div class="container mx-auto">
 
     <div
         class="py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
         <div class="">
             <p>
-                Batch
+              Edit Batch
             </p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
 
@@ -105,15 +101,25 @@
                     <div class="w-full">
                         <label for="trainer" class="block mb-2 text-sm font-medium text-gray-900">Trainer</label>
                         <div id="trainer-fields">
-                            <select name="trainer" id="trainer"
-                                class="block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
-                                <option value="">Select trainer</option>
-                                {% for trainer in batch_trainer %}
-                                <option value="{{ trainer.id }}"{% if contract.id == edit_batch.contract.id %}selected{% endif %}>{{ trainer.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <button type="button" onclick="addTrainerField()"
+                            {% for trainer in current_trainers %}
+                                <div class="mt-2">
+                                    <select name="trainer" class="block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                                        <option value="">Select trainer</option>
+                                        {% for trainer_option in batch_trainer %}
+                                            <option value="{{ trainer_option.id }}" {% if trainer_option.id == trainer %}selected{% endif %}>
+                                                {{ trainer_option.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="button" onclick="removeTrainerField(this)" class="mt-2 inline-flex items-center text-red-600">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                        Remove
+                                    </button>
+                                </div>
+                            {% endfor %}
+                             <button type="button" onclick="addTrainerField()"
                             class="mt-2 inline-flex items-center text-blue-600">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -122,6 +128,7 @@
                             </svg>
                             Add another trainer
                         </button>
+                        </div>
                     </div>
                 </div>
                 <button type="submit"

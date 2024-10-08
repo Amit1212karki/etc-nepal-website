@@ -42,7 +42,7 @@ def traineeIndex(request):
 @login_required
 def traineeCreate(request):
     trainee_contract = Contract.objects.all()
-    trainee_batch = Batch.objects.all()
+    trainee_batch = Batch.objects.filter(seats__gte=1)
     trainee_province = Province.objects.all()
     trainee_district = District.objects.all()
     trainee_palika = Palika.objects.all()
@@ -96,6 +96,9 @@ def traineeStore(request):
         
         contract = get_object_or_404(Contract, id=contract_id)
         batch = get_object_or_404(Batch, id=batch_id)
+        if batch.seats <= 0:
+            messages.error(request, 'No available seats in this batch. Please select a different batch.')
+            return redirect('trainee-create')
         province = get_object_or_404(Province, id=province_id)
         district = get_object_or_404(District, id=district_id)
         palika = get_object_or_404(Palika, id=palika_id)
@@ -129,6 +132,8 @@ def traineeStore(request):
             is_selected= (is_selected == 'yes')
         )
         store_trainee.save()
+        batch.seats -=1
+        batch.save()
         messages.success(request, 'Trainee added successfully')
         return redirect('trainee-index')
     else:

@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{% static 'front/css/app.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
 </head>
@@ -24,7 +23,7 @@
     <nav class="bg-white border-b-1 relative z-50 ">
         <div class="notice-section px-20 py-3 border-b-[1px] border-blue-800 bg-blue-800">
             <ul class="flex gap-5 flex justify-between items-center">
-                <li class="pr-4 text-white font-bold"><a href="/notice/">Export Technical College Training with OJT</a>
+                <li class="pr-4 text-white font-bold"><a href="/certificate/dashboard/">Export Technical College Training with OJT</a>
                 </li>
                 <li class="pr-4"><img src="{% static 'front/assets/images/logo.png' %}" class="h-16 w-auto" /></li>
                 <li class="text-white">
@@ -48,7 +47,7 @@
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-6 font-bold px-10">
                 <a href="/certificate/dashboard/"
-                    class="hover:text-yellow-600 transition duration-300 flex items-center">
+                    class="hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/certificate/dashboard/' %}text-yellow-600 font-bold{% endif %}">
                     <svg fill="currentColor" class="h-7 w-7 mr-2" version="1.1" id="Capa_1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 495.398 495.398" xml:space="preserve">
@@ -71,7 +70,7 @@
                     </svg>
                     Home
                 </a>
-                <a href="/contract/" class="hover:text-yellow-600 transition duration-300 flex items-center">
+                <a href="/contract/" class="hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/contract/' %}text-yellow-600 font-bold{% endif %}">
                     <svg viewBox="0 0 15 15" class="h-7 w-7 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -85,7 +84,40 @@
                     </svg>
                     Contract
                 </a>
-                <a href="/batch/" class="hover:text-yellow-600 transition duration-300 flex items-center">
+                
+                <a href="/trainer/" class="hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/trainer/' %}text-yellow-600 font-bold{% endif %}">
+                    <svg viewBox="0 0 24.00 24.00" class="h-7 w-7 mr-2" id="Layer_1"
+                        data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                            stroke-width="0.192"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: none;
+                                        stroke: currentColor;
+                                        stroke-miterlimit: 10;
+                                        stroke-width: 2.4;
+                                    }
+                                </style>
+                            </defs>
+                            <path class="cls-1"
+                                d="M10.09,1.5h3.83a2.87,2.87,0,0,1,2.87,2.87V9.15A4.78,4.78,0,0,1,12,13.93h0A4.78,4.78,0,0,1,7.22,9.15V4.37A2.87,2.87,0,0,1,10.09,1.5Z">
+                            </path>
+                            <path class="cls-1"
+                                d="M7.22,5.33h9.57a0,0,0,0,1,0,0v0A2.87,2.87,0,0,1,13.91,8.2H10.09A2.87,2.87,0,0,1,7.22,5.33v0A0,0,0,0,1,7.22,5.33Z">
+                            </path>
+                            <path class="cls-1"
+                                d="M3.39,23.5v-1A8.62,8.62,0,0,1,12,13.93h0a8.62,8.62,0,0,1,8.61,8.61v1"></path>
+                            <circle class="cls-1" cx="12" cy="20.63" r="0.96"></circle>
+                            <line class="cls-1" x1="12.96" y1="23.5" x2="12.96" y2="20.63"></line>
+                            <polyline class="cls-1" points="7.22 13.94 12 19.67 16.78 13.94"></polyline>
+                        </g>
+                    </svg>
+                    Trainer
+                </a>
+                <a href="/batch/" class="hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/batch/' %}text-yellow-600 font-bold{% endif %}">
                     <svg viewBox="0 0 57.505 57.505" class="h-7 w-7 mr-2" xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -153,39 +185,7 @@
                     </svg>
                     Batch
                 </a>
-                <a href="/trainer/" class="hover:text-yellow-600 transition duration-300 flex items-center">
-                    <svg viewBox="0 0 24.00 24.00" class="h-7 w-7 mr-2" id="Layer_1"
-                        data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
-                            stroke-width="0.192"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <defs>
-                                <style>
-                                    .cls-1 {
-                                        fill: none;
-                                        stroke: currentColor;
-                                        stroke-miterlimit: 10;
-                                        stroke-width: 2.4;
-                                    }
-                                </style>
-                            </defs>
-                            <path class="cls-1"
-                                d="M10.09,1.5h3.83a2.87,2.87,0,0,1,2.87,2.87V9.15A4.78,4.78,0,0,1,12,13.93h0A4.78,4.78,0,0,1,7.22,9.15V4.37A2.87,2.87,0,0,1,10.09,1.5Z">
-                            </path>
-                            <path class="cls-1"
-                                d="M7.22,5.33h9.57a0,0,0,0,1,0,0v0A2.87,2.87,0,0,1,13.91,8.2H10.09A2.87,2.87,0,0,1,7.22,5.33v0A0,0,0,0,1,7.22,5.33Z">
-                            </path>
-                            <path class="cls-1"
-                                d="M3.39,23.5v-1A8.62,8.62,0,0,1,12,13.93h0a8.62,8.62,0,0,1,8.61,8.61v1"></path>
-                            <circle class="cls-1" cx="12" cy="20.63" r="0.96"></circle>
-                            <line class="cls-1" x1="12.96" y1="23.5" x2="12.96" y2="20.63"></line>
-                            <polyline class="cls-1" points="7.22 13.94 12 19.67 16.78 13.94"></polyline>
-                        </g>
-                    </svg>
-                    Trainer
-                </a>
-                <a href="/trainee/" class="hover:text-yellow-600 transition duration-300 flex items-center">
+                <a href="/trainee/" class="hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/trainee/' %}text-yellow-600 font-bold{% endif %}">
                     <svg height="200px" width="200px" class="h-7 w-7 mr-2" version="1.1" id="_x32_"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 512 512" xml:space="preserve" fill="currentColor">
@@ -209,7 +209,7 @@
                     </svg>
                     Trainee
                 </a>
-                <a href="/signatory/" class=" hover:text-yellow-600 transition duration-300 flex items-center">
+                <a href="/signatory/" class=" hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/signatory/' %}text-yellow-600 font-bold{% endif %}">
                     <svg viewBox="0 0 28 28" class="h-7 w-7 mr-2" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -230,7 +230,7 @@
                     Signatory
                 </a>
                 <a href="/certificate/certificate-index/"
-                    class="hover:text-yellow-600 transition duration-300 flex items-center">
+                    class="hover:text-yellow-600 transition duration-300 flex items-center {% if request.path == '/certificate/certificate-index/' %}text-yellow-600 font-bold{% endif %}">
                     <svg viewBox="0 0 15 15" class="h-7 w-7 mr-2" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
