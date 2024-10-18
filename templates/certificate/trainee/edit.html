@@ -54,7 +54,6 @@
             {% endif %}
             <form action="/trainee/update-trainee/{{ trainee.id }}/" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{trainee.age}}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Trainee Name</label>
@@ -382,6 +381,25 @@
         // Reset palika dropdown
         document.getElementById('palika').value = "";
     });
+    document.getElementById('contract').addEventListener('change', function () {
+    const contractId = this.value;
+    const batchOptions = document.querySelectorAll('#batch option');
+
+    // Show/Hide batches based on selected contract
+    batchOptions.forEach(option => {
+        if (option.getAttribute('data-contract') === contractId || option.value === "") {
+            option.style.display = 'block';
+        } else {
+            option.style.display = 'none';
+        }
+    });
+
+    // Reset batch dropdown
+    document.getElementById('batch').value = "";
+    if (!batchFound) {
+        alert("No batch available for the selected contract. Please create a batch first.");
+    }
+});
 </script>
 
 

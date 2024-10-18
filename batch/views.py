@@ -32,7 +32,8 @@ def batchStore(request):
     if request.method == "POST":
         name = request.POST.get('name')
         duration = request.POST.get('duration')
-        time = request.POST.get('time')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
         seats = request.POST.get('seats')
         contract_id = request.POST.get('contract')
         trainers = request.POST.getlist('trainer') 
@@ -41,7 +42,8 @@ def batchStore(request):
         batch = Batch.objects.create(
             name=name,
             duration=duration,
-            time=time,
+            start_date = start_date,
+            end_date= end_date,
             seats=seats,
             contract=contract
         )
@@ -78,7 +80,8 @@ def batchUpdate(request, id):
     if request.method == "POST":
         name = request.POST.get('name')
         duration = request.POST.get('duration')
-        time = request.POST.get('time')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
         seats = request.POST.get('seats')
         contract_id = request.POST.get('contract')
         trainers = request.POST.getlist('trainer')  
@@ -86,7 +89,8 @@ def batchUpdate(request, id):
         contract = get_object_or_404(Contract, id=contract_id)
         update_batch.name = name
         update_batch.duration = duration
-        update_batch.time = time
+        update_batch.start_date = start_date
+        update_batch.end_date = end_date
         update_batch.seats = seats
         update_batch.contract = contract
         update_batch.save()

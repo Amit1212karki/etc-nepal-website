@@ -177,23 +177,22 @@
                     <p class=" m-1 p-1 text-red sub-title">प्रमाण-पत्र</p>
                 </div>
                 <div>
-                    {% if image %}
-                    <img class="image-passport" src="{{image}}" alt="">
+                    {% if student.image %}
+                    <img class="image-passport" src="{{student.image.url}}" alt="">
                     {% endif %}
                 </div>
             </div>
         </section>
 
         <section>
-            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: {{certificate_number}}</p>
+            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: {{student.id}}</p>
         </section>
 
         <section>
-            <p>{{ sponsor }}, उदयपुरको आर्थिक सहयोग र
-                एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि. इटहरीको प्राविधिक संयोजनमा CTEVT को {{ course }} को पाठ्यक्रम
-                ({{ creditHr }} घण्टा) अनुसार मिति {{ start_date }} देखि {{ end_date }} गते सम्म सञ्चालन भएको तालिममा {{municipality }} वडा न.
-                {{ ward_no }},
-                {{ city }} बस्ने {{ parents_name }} को {% if gender == "M" %} छोरा {% else %} छोरी{% endif %}  {{ trainee_name }} ले सहभागी भई तालिममा सफलतापूर्वक सिप हासिल
+            <p>{% for sponsor in sponsors %}{{ sponsor.name }}{% if not forloop.last %}, {% endif %}{% endfor %}, उदयपुरको आर्थिक सहयोग र
+                एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि. इटहरीको प्राविधिक संयोजनमा CTEVT को {{ contract.name }} को पाठ्यक्रम
+                ({{ batch.duration }} घण्टा) अनुसार मिति {{ batch.start_date }} देखि {{ batch.end_date }} गते सम्म सञ्चालन भएको तालिममा {{ student.district }} वडा न.
+                {{ student.ward_no }},{{ student.palika }} बस्ने {{ student.father_name }} को {% if student.gender == "M" %} छोरा {% else %} छोरी{% endif %}  {{ student.name }} ले सहभागी भई तालिममा सफलतापूर्वक सिप हासिल
                 भएकोले यहाँको उत्तरोत्तर प्रगतिको कामना गर्दै यस स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ ।
             </p>
         </section>
@@ -223,24 +222,13 @@
         <hr>
         <section>
             <div style="height: 130px;" class="footer d-flex justify-between align-center">
+                {% for sponsors in sponsors %}
                 <div>
-                    {% if sponsor_image1 %}
-                    <img style="overflow: hidden;" class="image-3" src="{{MEDIA_URL}}{{ sponsor_image1 }}" alt="Sponsor Image 1">
+                    {% if sponsors.image %}
+                    <img style="overflow: hidden;" class="image-3" src="{{ sponsors.image.url }}" alt="Sponsor Image 1">
                     {% endif %}
                 </div>
-                <div>
-                    {% if sponsor_image2 %}
-                    <img style="overflow: hidden;" class="image-3" src="{{MEDIA_URL}}{{ sponsor_image2 }}" alt="sponsor_image2">
-                    {% endif %}
-                </div>
-                <div>
-                    <p style="overflow: hidden;" class="text-caption m-1 p-1 text-bold">{{ certified_date }}</p>
-                </div>
-                <div>
-                    {% if sponsor_image3 %}
-                    <img style="overflow: hidden;" class="image-3" src="{{MEDIA_URL}}{{ sponsor_image3 }}" alt="sponsor_image3">
-                    {% endif %}
-                </div>
+                {% endfor %}
             </div>
 
         </section>

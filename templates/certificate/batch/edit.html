@@ -62,30 +62,7 @@
             <form action="/batch/update-batch/{{edit_batch.id}}/" method="POST">
                 {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <div class="w-full">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Batch Name</label>
-                        <input type="text" name="name" id="name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            value="{{ edit_batch.name }}" required="">
-                    </div>
-                    <div class="w-full">
-                        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Batch Duration</label>
-                        <input type="text" name="duration" id="duration"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            value="{{ edit_batch.duration }}" required="">
-                    </div>
-                    <div class="w-full">
-                        <label for="time" class="block mb-2 text-sm font-medium text-gray-900">Batch Time</label>
-                        <input type="time" name="time" id="time"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            value="{{ edit_batch.time|time:"H:i" }}" required="">
-                    </div>
-                    <div class="w-full">
-                        <label for="seats" class="block mb-2 text-sm font-medium text-gray-900">Batch Seats</label>
-                        <input type="number" name="seats" id="seats"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            value="{{ edit_batch.seats }}" required="">
-                    </div>
+                   
                     <div class="w-full">
                         <label for="contract" class="block mb-2 text-sm font-medium text-gray-700">Contract</label>
                         <select name="contract" id="contract"
@@ -98,6 +75,37 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Batch Name</label>
+                        <input type="text" name="name" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            value="{{ edit_batch.name }}" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="seats" class="block mb-2 text-sm font-medium text-gray-900">Batch Seats</label>
+                        <input type="number" name="seats" id="seats"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            value="{{ edit_batch.seats }}" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Batch Duration</label>
+                        <input type="text" name="duration" id="duration"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            value="{{ edit_batch.duration }}" required="">
+                    </div>
+                     <div class="w-full">
+                        <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900">Start Date</label>
+                        <input type="date" name="start_date" id="start_date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch start_date" value="{{ edit_batch.start_date|date:'Y-m-d' }}" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900">End Date</label>
+                        <input type="date" name="end_date" id="end_date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch end date" value="{{ edit_batch.end_date|date:'Y-m-d'}}" required="">
+                    </div>
+                   
                     <div class="w-full">
                         <label for="trainer" class="block mb-2 text-sm font-medium text-gray-900">Trainer</label>
                         <div id="trainer-fields">

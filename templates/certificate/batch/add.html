@@ -78,34 +78,6 @@
                 {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="w-full">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
-                            Batch Name
-                        </label>
-                        <input type="text" name="name" id="name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Type batch name" required="">
-                    </div>
-                    <div class="w-full">
-                        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Batch
-                            Duration</label>
-                        <input type="text" name="duration" id="duration"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Batch duration" required="">
-                    </div>
-                    <div class="w-full">
-                        <label for="time" class="block mb-2 text-sm font-medium text-gray-900">Batch Time</label>
-                        <input type="time" name="time" id="time"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Batch time" required="">
-                    </div>
-                    <div class="w-full">
-                        <label for="seats" class="block mb-2 text-sm font-medium text-gray-900">Batch
-                            Seats</label>
-                        <input type="number" name="seats" id="seats"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            placeholder="Batch seats" required="">
-                    </div>
-                    <div class="w-full">
                         <label for="contract" class="block mb-2 text-sm font-medium text-gray-700">Contract</label>
                         <select name="contract" id="contract"
                             class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
@@ -118,6 +90,41 @@
                         <p class="text-red-500 text-sm">{{ form.errors.batch_trainer }}</p>
                         {% endif %}
                     </div>
+                    <div class="w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
+                            Batch Name
+                        </label>
+                        <input type="text" name="name" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type batch name" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="seats" class="block mb-2 text-sm font-medium text-gray-900">Batch
+                            Seats</label>
+                        <input type="number" name="seats" id="seats"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch seats" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Batch
+                            Credit Hours</label>
+                        <input type="text" name="duration" id="duration"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch duration" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900">Start Date</label>
+                        <input type="date" name="start_date" id="start_date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch start_date" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900">End Date</label>
+                        <input type="date" name="end_date" id="end_date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Batch end date" required="">
+                    </div>
+                   
                     <div class="w-full">
                         <label for="trainer" class="block mb-2 text-sm font-medium text-gray-900">Trainer</label>
                         <div id="trainer-fields">

@@ -45,6 +45,8 @@ urlpatterns = [
     path('batch/', include('batch.urls')),
     path('signatory/', include('signatory.urls')),
     path('trainee/', include('trainee.urls')),
+    path('sponsor/', include('sponsor.urls')),
+
     
 ]
 

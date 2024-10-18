@@ -4,5 +4,5 @@ from trainer.models import Trainer
 # Register your models here.
 @admin.register(Batch)
 class BatchAdmin(admin.ModelAdmin):
-    list_display = ('name', 'duration', 'time', 'seats')
+    list_display = ('name', 'duration', 'start_date', 'seats')
     search_fields = ('name', 'duration')

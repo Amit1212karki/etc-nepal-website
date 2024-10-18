@@ -8,6 +8,7 @@ from trainee.models import *
 from trainer.models import *
 from certificate.models import *
 from signatory.models import *
+from sponsor.models import *
 from django.template.loader import get_template
 from django.http import HttpResponse
 from etcportfolio import renderers
@@ -22,6 +23,8 @@ from django.http import HttpResponse
 from signatory.models import Signatory
 from django.conf import settings
 import os
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 
 # Create your views here.
 
@@ -337,3 +340,87 @@ def pdf_view2(request, *args, **kwargs):
         # return HttpResponse(data['sponsor_image'])
     
         return renderers.render_to_pdf_pdfkit('pdfs/certificate/certificate_two.html', data) 
+    
+
+
+def certificateFormGenerate(request):
+    # Retrieve all contracts
+    certificate_contract = Contract.objects.all()
+    certificate_sponsor = Sponsor.objects.all()
+    certificate_signature = Signatory.objects.all()
+
+    context = {
+        'certificate_contract': certificate_contract,  # Pass the list of contracts and their batches
+        'certificate_sponsor': certificate_sponsor,
+        'certificate_signature': certificate_signature,
+    }
+
+    return render(request, 'certificate/certificate/form.html', context)
+
+def get_batch_from_contract(request, id):
+    try:
+        contract = Contract.objects.get(pk=id)
+        # Get batches associated with the contract
+        batches = Batch.objects.filter(contract=contract).values('id', 'name', 'duration', 'start_date', 'end_date', 'seats')  # Adjust fields as necessary
+
+        # Convert the queryset to a list and return as JSON
+        return JsonResponse(list(batches), safe=False)
+    except Contract.DoesNotExist:
+        return JsonResponse({'error': 'Contract not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+def get_student_from_batch(request, id):
+    try:
+        batch = Batch.objects.get(pk=id)
+        # Get batches associated with the contract
+        students = Trainee.objects.filter(batch=batch,is_selected=True).values('id','name','image')
+
+        # Convert the queryset to a list and return as JSON
+        return JsonResponse(list(students), safe=False)
+    except Contract.DoesNotExist:
+        return JsonResponse({'error': 'Students not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+@require_GET
+def generate_certificate(request):
+    # Extract parameters from the request
+    student_id = request.GET.get('student_id')
+    contract_id = request.GET.get('contract_id')
+    batch_id = request.GET.get('batch_id')
+    certificate_format = request.GET.get('certificate_format')
+    selected_signatories = json.loads(request.GET.get('selected_signatories', '[]'))  # Parse JSON
+    selected_sponsors = json.loads(request.GET.get('selected_sponsors', '[]'))  # Parse JSON
+
+    # Fetch the related objects
+    student = Trainee.objects.get(pk=student_id)
+    contract = Contract.objects.get(pk=contract_id)
+    batch = Batch.objects.get(pk=batch_id)
+
+    # Fetch signatories
+    signatories = [Signatory.objects.get(pk=data) for data in selected_signatories]
+
+    # Fetch sponsors
+    sponsors = [Sponsor.objects.get(pk=data) for data in selected_sponsors]
+
+    context = {
+        "student": student,
+        "contract": contract,
+        "batch": batch,
+        "signatories": signatories,
+        "sponsors": sponsors
+    }
+
+    # Render the appropriate template based on the certificate format
+    if certificate_format == 'etc certificate':
+        return render(request, 'pdfs/certificate/college_certificate.html', context)
+    elif certificate_format == 'municipality certificate':
+        return render(request, 'pdfs/certificate/municipality_certificate.html', context)
+    else:
+        return render(request, 'pdfs/certificate/vocational_certificate.html', context)
+    
+
+
+
+
