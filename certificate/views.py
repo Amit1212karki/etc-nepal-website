@@ -54,8 +54,6 @@ def home(request):
     {'label': 'Total Batch', 'value': Batch.objects.count(), 'route': '/batch/'},
     {'label': 'Total Trainer', 'value': Trainer.objects.count(), 'route': '/trainer/'},
     {'label': 'Total Trainee', 'value': Trainee.objects.count(), 'route': '/trainee/'},
-    {'label': 'Total Certificate', 'value': Certificate.objects.count(), 'route': '/certificate/certificate-index/'},
-    {'label': 'Total Signatory', 'value': Signatory.objects.count(), 'route': '/signatory/'},
     ]
 
     home_total_trainee_by_month = Trainee.objects.annotate(month=TruncMonth('created_at')).values('month').annotate(count=Count('id')).order_by('month')

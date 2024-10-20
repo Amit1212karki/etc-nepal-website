@@ -41,56 +41,6 @@
                 <h3 class="text-lg font-semibold mb-4">Trainees Chart</h3>
                 <div id="traineeChart"></div>
             </div>
-
-            <div class="bg-white p-6 shadow rounded-lg mb-6 h-[60vh]">
-                <h3 class="text-lg font-semibold mb-4">Top Perfoming Batch</h3>
-                <div id="chart" class="h-[60vh]"></div>
-            </div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-[60vh]">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Product name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Inventory Count
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for product in inventory_product %}
-                        <tr
-                            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ product.name }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {% if product.inventory_count and product.inventory_count > 0 %}
-                                {{ product.inventory_count }} item is in stock.
-                                {% else %}
-                                Sorry, this item is out of stock.
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-
-        </div>
-
-
-
-        <div style="display: none;">
-            <div id="total-trainee-data">{{ total_trainee_data }}</div>
-            <div id="selected-trainee-data">{{ selected_trainee_data }}</div>
-            <div id="backendTopProductsData">{{ top_products_data }}</div>
-            <div id="chart-data" style="display: none;">{{ chart_data|safe }}</div>
-
         </div>
     </div>
 </section>

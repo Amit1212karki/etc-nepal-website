@@ -8,9 +8,9 @@
 
 <div class="container mx-auto">
     <div
-        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10">
+        class="px-2 py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10">
         <div>
-            <p>Signatories</p>
+            <p>Sponser</p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
                 <nav class="flex py-3 text-gray-700 rounded-lg " aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -78,9 +78,9 @@
                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900"> Upload Image </label>
                         <input type="file" name="image" id="image"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-                            <p class="text-sm text-gray-500">Current image: <img
+                            <p class="text-sm text-gray-500 my-5">Current image: <img
                                 src="{% if edit_sponsor.image%}{{ edit_sponsor.image.url }}{%endif%}"
-                                alt="Current Sponsor Image" class="w-16 h-16 rounded-full"></p>
+                                alt="Current Sponsor Image" class="w-20 h-20 rounded-full object-contain"></p>
                     </div>
                 </div>
 
