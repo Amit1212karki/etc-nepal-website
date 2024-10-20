@@ -9,41 +9,38 @@ from django.http import JsonResponse
 
 @login_required
 def trainerIndex(request):
-    search_query = request.GET.get('search','')
-    all_trainer = Trainer.objects.filter( Q(name__icontains=search_query | Q(qualifications__icontain=search_query))) if search_query else Trainer.objects.all()
+    search_query = request.GET.get('search', '')
+    all_trainer = Trainer.objects.filter(
+        Q(name__icontains=search_query) | Q(qualification__icontains=search_query)
+    ) if search_query else Trainer.objects.all()
 
     paginator = Paginator(all_trainer, 7)
-    page_number = request.GET.get('page',1)
+    page_number = request.GET.get('page', 1)
     trainer = paginator.get_page(page_number)
 
     total_entries = paginator.count
- 
-    total_page = paginator.num_pages
+    total_pages = paginator.num_pages 
     start_index = trainer.start_index()
-    has_next =   trainer.has_next(),
     end_index = trainer.end_index()
-    has_previous = trainer.has_previous()
-    current_page = trainer.number
-    next_page_number = trainer.next_page_number() if trainer.has_next() else None
-    previous_page_number = trainer.previous_page_number() if trainer.has_previous() else None
+
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         data = {
-            'trainer': list(trainer.object_list.values('name','contact','qualification','tot')),
-            'has_next': has_next,
-            'has_previous': has_previous,
-            'next_page_number': next_page_number,
-            'previous_page_number':previous_page_number,
-            'total_entries':total_entries,
-            'total_page':total_page,
-            'current_page':current_page,
-            'start_index':start_index,
-            'end_index':end_index,
-
+            'trainer': list(trainer.object_list.values('id', 'name', 'contact', 'qualification', 'tot')),
+            'has_next': trainer.has_next(),
+            'has_previous': trainer.has_previous(),
+            'next_page_number': trainer.next_page_number() if trainer.has_next() else None,
+            'previous_page_number': trainer.previous_page_number() if trainer.has_previous() else None,
+            'total_entries': total_entries,
+            'total_page': paginator.num_pages,
+            'total_pages': total_pages,
+            'current_page': trainer.number,
+            'start_index': start_index,
+            'end_index': end_index
         }
         return JsonResponse(data)
 
     context = {
-        'all_trainer':all_trainer
+        'all_trainer': trainer
     }
     return render(request, 'certificate/trainer/index.html', context)
 
