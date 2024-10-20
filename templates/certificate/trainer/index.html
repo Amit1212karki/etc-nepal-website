@@ -101,7 +101,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="trainer-table-body">
                 {% for trainer in all_trainer %}
                 <tr class="border-b  ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -152,6 +152,25 @@
         </table>
     </div>
 </div>
+
+<script>
+
+
+    let currentPage = 1;
+    let searchQuery = '';
+
+function fetchTrainer(page=1, query= ''){
+    axios.get('/trainer/',{
+        params: {
+            search: query,
+            page:page
+        },
+        Headers: {
+            'X-Requested-With' : 'XMLHttpRequest'
+        }
+    })
+}
+</script>
 
 
 {% endblock %}
