@@ -4,6 +4,6 @@ from django.db import models
 class Signatory(models.Model):
     name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255)
-    image = models.FileField(upload_to='signatory_image/')
+    institution = models.CharField(max_length=255,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

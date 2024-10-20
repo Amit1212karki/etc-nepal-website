@@ -3,23 +3,15 @@
 {% block title %}
 {{ block.super }} - About
 {% endblock %}
-
 {% block content %}
-
-
-
-
 <div class="container mx-auto">
-
     <div
-        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
+        class="px-2 py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
         <div class="">
             <p>
                 Signatory
             </p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
-
-
             <nav class="flex py-3 text-gray-700 rounded-lg " aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
@@ -67,16 +59,16 @@
     </div>
     <div class="relative overflow-x-auto bg-white ">
         {% if messages %}
-            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
-                {% for message in messages %}
-                {% if message.level == 25 %} {# SUCCESS level #}
-                <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
-                {% elif message.level == 40 %} {# ERROR level #}
-                <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
-                {% endif %}
-                {% endfor %}
-            </ul>
+        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+            {% for message in messages %}
+            {% if message.level == 25 %} {# SUCCESS level #}
+            <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+            {% elif message.level == 40 %} {# ERROR level #}
+            <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
             {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
 
@@ -86,7 +78,7 @@
                         Signatory Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Signature Image
+                        Signature Institution
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Designation
@@ -103,13 +95,11 @@
                         {{signatory.name}}
                     </th>
                     <td class="px-6 py-4">
-                        <img class="w-14 h-14 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                        src="{% if signatory.image %}{{ signatory.image.url }}{%endif%}" alt="Bordered avatar">
+                        {{signatory.institution}}
                     </td>
-                    
                     <td class="px-6 py-4">
                         {{signatory.designation}}
-                      </td>
+                    </td>
                     <td class="px-6 py-4 text-right flex gap-4">
                         <a href="/signatory/edit/{{signatory.id}}/" class="font-medium text-blue-600 hover:underline">
                             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

@@ -25,13 +25,13 @@ def signatoryStore(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         designation = request.POST.get('designation')
-        image = request.FILES.get('image')  
+        institution = request.POST.get('institution')  
 
-        if name and designation and image:
+        if name and designation and institution:
             signatory = Signatory.objects.create(
                 name=name,
                 designation=designation,
-                image=image
+                institution=institution
             )
             signatory.save()
             messages.success(request, 'Signatory successfully created.')

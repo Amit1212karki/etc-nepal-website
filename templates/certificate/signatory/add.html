@@ -3,14 +3,12 @@
 {% block title %}
 {{ block.super }} - Signatory
 {% endblock %}
-
 {% block content %}
-
 <div class="container mx-auto">
     <div
-        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10">
+        class="px-2 py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10">
         <div>
-            <p>Signatories</p>
+            <p>Signatory</p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
                 <nav class="flex py-3 text-gray-700 rounded-lg " aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -81,8 +79,8 @@
                             placeholder="Type Signatory Designation" required="">
                     </div>
                     <div class="w-full">
-                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900"> Upload Image </label>
-                        <input type="file" name="image" id="image"
+                        <label for="institution" class="block mb-2 text-sm font-medium text-gray-900">Institution</label>
+                        <input type="text" name="institution" id="image" placeholder="Type institution name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             required="">
                     </div>
