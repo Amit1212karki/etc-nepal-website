@@ -14,7 +14,7 @@ def contractIndex(request):
         Q(name__icontains=search_query) | Q(occupation__icontains=search_query)
     ) if search_query else Contract.objects.all()
     
-    paginator = Paginator(all_contract, 3)  
+    paginator = Paginator(all_contract, 7)  
     page_number = request.GET.get('page', 1)
     contracts = paginator.get_page(page_number)
 
@@ -26,7 +26,7 @@ def contractIndex(request):
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         data = {
-            'contracts': list(contracts.object_list.values('name', 'location', 'occupation', 'donation_by')),
+            'contracts': list(contracts.object_list.values('id','name', 'location', 'occupation', 'donation_by')),
             'has_next': contracts.has_next(),
             'has_previous': contracts.has_previous(),
             'next_page_number': contracts.next_page_number() if contracts.has_next() else None,

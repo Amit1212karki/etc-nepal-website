@@ -12,13 +12,12 @@
 <div class="container mx-auto">
 
     <div
-        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
+        class="px-2 py-5 text-lg font-semibold text-left rtl:text-right text-gray-900 flex items-center justify-between gap-10 ">
         <div class="">
             <p>
                 Contracts
             </p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
-
 
             <nav class="flex py-3 text-gray-700 rounded-lg " aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -59,43 +58,43 @@
             </p>
         </div>
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-       <div class="w-full sm:w-1/2">
+            <div class="w-full sm:w-1/2">
 
-            <label for="table-search" class="sr-only">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
-                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                            clip-rule="evenodd"></path>
-                    </svg>
+                <label for="table-search" class="sr-only">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <input type="text" id="table-search"
+                        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Search for contracts" onkeyup="searchContract()">
                 </div>
-                <input type="text" id="table-search"
-                    class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Search for documents" onkeyup="searchContract()">
+            </div>
+            <div class="w-full sm:w-auto sm:ms-4">
+                <button onclick="window.location.href='/contract/add-contract/'" type="button"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Add Contract
+                </button>
             </div>
         </div>
-        <div class="w-full sm:w-auto sm:ms-4">
-            <button onclick="window.location.href='/contract/add-contract/'" type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Add Contract
-            </button>
-        </div>
-       </div>
     </div>
     <div class="relative overflow-x-auto bg-white ">
         {% if messages %}
-            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
-                {% for message in messages %}
-                {% if message.level == 25 %} {# SUCCESS level #}
-                <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
-                {% elif message.level == 40 %} {# ERROR level #}
-                <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
-                {% endif %}
-                {% endfor %}
-            </ul>
+        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+            {% for message in messages %}
+            {% if message.level == 25 %} {# SUCCESS level #}
+            <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+            {% elif message.level == 40 %} {# ERROR level #}
+            <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
             {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
 
@@ -119,10 +118,10 @@
                 </tr>
             </thead>
             <tbody id="contract-table-body">
-                
+
             </tbody>
         </table>
-       
+
     </div>
     <div class="px-5 py-5 flex flex-col xs:flex-row items-center xs:justify-between" id="pagination-controls">
         <!-- Pagination content will be injected here by JavaScript -->
@@ -131,32 +130,33 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     let currentPage = 1;
-let searchQuery = '';
+    let searchQuery = '';
 
-function fetchContract(page = 1, query = '') {
-    axios.get('/contract/', {
-        params: {
-            search: query,
-            page: page
-        },
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-    })
-    .then(response => {
-        const contracts = response.data.contracts;
-        const data = response.data;
-        const tableBody = document.getElementById('contract-table-body');
-        const paginationControls = document.getElementById('pagination-controls');
-        
-        // Clear previous contract list
-        tableBody.innerHTML = '';
+    function fetchContract(page = 1, query = '') {
+        axios.get('/contract/', {
+            params: {
+                search: query,
+                page: page
+            },
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                const contracts = response.data.contracts;
+                const data = response.data;
+                const tableBody = document.getElementById('contract-table-body');
+                const paginationControls = document.getElementById('pagination-controls');
 
-        // Render new contract data
-        contracts.forEach(contract => {
-            const row = document.createElement('tr');
-            row.classList.add('border-b');
-            row.innerHTML = `
+                // Clear previous contract list
+                tableBody.innerHTML = '';
+
+                // Render new contract data
+                contracts.forEach(contract => {
+                    const row = document.createElement('tr');
+                    row.classList.add('border-b');
+                    row.innerHTML = `
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     ${contract.name}
                 </th>
@@ -182,72 +182,72 @@ function fetchContract(page = 1, query = '') {
                     </a>
                 </td>
             `;
-            tableBody.appendChild(row);
-        });
+                    tableBody.appendChild(row);
+                });
 
-        // Update pagination controls
-        paginationControls.innerHTML = '';
-        const paginationInfo = document.createElement('span');
-        paginationInfo.className = 'text-xs xs:text-sm text-gray-900';
-        paginationInfo.innerText = `Showing ${data.start_index} to ${data.end_index} of ${data.total_entries} entries`;
-        paginationControls.appendChild(paginationInfo);
+                // Update pagination controls
+                paginationControls.innerHTML = '';
+                const paginationInfo = document.createElement('span');
+                paginationInfo.className = 'text-xs xs:text-sm text-gray-900';
+                paginationInfo.innerText = `Showing ${data.start_index} to ${data.end_index} of ${data.total_entries} entries`;
+                paginationControls.appendChild(paginationInfo);
 
-        // Create pagination controls
-        const paginationContainer = document.createElement('div');
-        paginationContainer.className = 'flex items-center mt-4';
+                // Create pagination controls
+                const paginationContainer = document.createElement('div');
+                paginationContainer.className = 'flex items-center mt-4';
 
-        // Previous button
-        if (data.has_previous) {
-            const prevButton = document.createElement('a');
-            prevButton.href = 'javascript:void(0);';
-            prevButton.className = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
-            prevButton.innerText = 'Previous';
-            prevButton.onclick = () => fetchContract(data.previous_page_number, searchQuery);
-            paginationContainer.appendChild(prevButton);
-        }
+                // Previous button
+                if (data.has_previous) {
+                    const prevButton = document.createElement('a');
+                    prevButton.href = 'javascript:void(0);';
+                    prevButton.className = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                    prevButton.innerText = 'Previous';
+                    prevButton.onclick = () => fetchContract(data.previous_page_number, searchQuery);
+                    paginationContainer.appendChild(prevButton);
+                }
 
-        // Page numbers
-        for (let i = 1; i <= data.total_pages; i++) {
-            const pageButton = document.createElement('a');
-            pageButton.href = 'javascript:void(0);';
-            pageButton.className = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                // Page numbers
+                for (let i = 1; i <= data.total_pages; i++) {
+                    const pageButton = document.createElement('a');
+                    pageButton.href = 'javascript:void(0);';
+                    pageButton.className = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
 
-            if (i === data.current_page) {
-                pageButton.className += 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
-            } else {
-                pageButton.className += ' text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
-                pageButton.onclick = () => fetchContract(i, searchQuery);
-            }
+                    if (i === data.current_page) {
+                        pageButton.className += 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                    } else {
+                        pageButton.className += ' text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                        pageButton.onclick = () => fetchContract(i, searchQuery);
+                    }
 
-            pageButton.innerText = i;
-            paginationContainer.appendChild(pageButton);
-        }
+                    pageButton.innerText = i;
+                    paginationContainer.appendChild(pageButton);
+                }
 
-        // Next button
-        if (data.has_next) {
-            const nextButton = document.createElement('a');
-            nextButton.href = 'javascript:void(0);';
-            nextButton.className = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
-            nextButton.innerText = 'Next';
-            nextButton.onclick = () => fetchContract(data.next_page_number, searchQuery);
-            paginationContainer.appendChild(nextButton);
-        }
+                // Next button
+                if (data.has_next) {
+                    const nextButton = document.createElement('a');
+                    nextButton.href = 'javascript:void(0);';
+                    nextButton.className = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                    nextButton.innerText = 'Next';
+                    nextButton.onclick = () => fetchContract(data.next_page_number, searchQuery);
+                    paginationContainer.appendChild(nextButton);
+                }
 
-        paginationControls.appendChild(paginationContainer);
-    })
-    .catch(error => {
-        console.error('Error fetching contract:', error);
-    });
-}
+                paginationControls.appendChild(paginationContainer);
+            })
+            .catch(error => {
+                console.error('Error fetching contract:', error);
+            });
+    }
 
-// Function to handle searching
-function searchContract() {
-    searchQuery = document.getElementById('table-search').value;
-    fetchContract(1, searchQuery); // Reset to page 1 when searching
-}
+    // Function to handle searching
+    function searchContract() {
+        searchQuery = document.getElementById('table-search').value;
+        fetchContract(1, searchQuery); // Reset to page 1 when searching
+    }
 
-// Fetch initial contracts
-fetchContract(currentPage, searchQuery);
+    // Fetch initial contracts
+    fetchContract(currentPage, searchQuery);
 
 </script>
 
