@@ -31,19 +31,34 @@ def batchCreate(request):
 def batchStore(request):
     if request.method == "POST":
         name = request.POST.get('name')
-        duration = request.POST.get('duration')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
         seats = request.POST.get('seats')
         contract_id = request.POST.get('contract')
-        trainers = request.POST.getlist('trainer') 
+        trainers = request.POST.getlist('trainer')
+
+        # Calculate duration
+        from datetime import datetime
+        start = datetime.strptime(start_date, '%Y-%m-%d')
+        end = datetime.strptime(end_date, '%Y-%m-%d')
+        delta = end - start
+        days = delta.days
+
+        if days < 7:
+            duration = f"{days} day{'s' if days > 1 else ''}"
+        elif days < 30:
+            weeks = days // 7
+            duration = f"{weeks} week{'s' if weeks > 1 else ''}"
+        else:
+            months = days // 30
+            duration = f"{months} month{'s' if months > 1 else ''}"
 
         contract = get_object_or_404(Contract, id=contract_id)
         batch = Batch.objects.create(
             name=name,
             duration=duration,
-            start_date = start_date,
-            end_date= end_date,
+            start_date=start_date,
+            end_date=end_date,
             seats=seats,
             contract=contract
         )
@@ -55,7 +70,7 @@ def batchStore(request):
         messages.success(request, 'Batch successfully created.')
         return redirect('batch-index')
     else:
-         messages.error(request, 'Batch can not created. Something error!!')
+        messages.error(request, 'Batch cannot be created. Something went wrong!')
     return redirect('batch-create')
 
 @login_required
@@ -79,12 +94,26 @@ def batchUpdate(request, id):
 
     if request.method == "POST":
         name = request.POST.get('name')
-        duration = request.POST.get('duration')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
         seats = request.POST.get('seats')
         contract_id = request.POST.get('contract')
-        trainers = request.POST.getlist('trainer')  
+        trainers = request.POST.getlist('trainer')
+
+        from datetime import datetime
+        start = datetime.strptime(start_date, '%Y-%m-%d')
+        end = datetime.strptime(end_date, '%Y-%m-%d')
+        delta = end - start
+        days = delta.days
+
+        if days < 7:
+            duration = f"{days} day{'s' if days > 1 else ''}"
+        elif days < 30:
+            weeks = days // 7
+            duration = f"{weeks} week{'s' if weeks > 1 else ''}"
+        else:
+            months = days // 30
+            duration = f"{months} month{'s' if months > 1 else ''}"
 
         contract = get_object_or_404(Contract, id=contract_id)
         update_batch.name = name

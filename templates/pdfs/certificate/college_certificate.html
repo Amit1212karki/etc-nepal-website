@@ -1,238 +1,119 @@
 {% load static %}
+{% load translate_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pdf/style.css' %}">
     <title>Certificate</title>
 </head>
-<style>
-    /* Set A4 size in landscape mode */
-    @page {
-        size: A4 landscape;
-        margin: 0;
-    }
-
-    body {
-        /* width: 297mm; */
-        /* A4 width in landscape */
-        /* height: 100vh; */
-        /* A4 height in landscape */
-        margin: 0;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .body-background {
-        background-image: url('./assets/Emblem_of_Nepal.svg.png');
-        background-size: 600px;
-        /* Adjust the size to make it smaller */
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: rgba(255, 255, 255, 0.8);
-        /* Transparent color overlay */
-        background-blend-mode: lighten;
-        /* Blend the transparent color with the image */
-    }
-
-    .certificate-container {
-        border: 4px solid #5e0000;
-        padding: 20px;
-        height: 100%;
-    }
-
-    /* Ensure the main content fits within the A4 page size */
-    section {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .image-1 {
-        width: auto;
-        height: auto;
-        max-height: 120px;
-    }
-
-    .image-2 {
-        width: auto;
-        height: 50px;
-        max-height: 50px;
-    }
-
-    .image-3 {
-        width: auto;
-        height: 90px;
-        max-height: 90px;
-    }
-
-    .signature-image {
-        width: auto;
-        height: 60px;
-        max-height: 60px;
-    }
-
-    .image-passport {
-        width: 80px;
-        height: 100px;
-        object-fit: cover;
-        border: 1px solid #000;
-        border-radius: 2px;
-    }
-
-    .text-red {
-        color: rgb(133, 0, 0);
-        font-weight: 700;
-    }
-
-    .text-blue {
-        color: rgb(0, 0, 88);
-        font-weight: 700;
-    }
-
-    .text-bold {
-        font-weight: 700;
-    }
-
-    .d-flex {
-        display: flex;
-    }
-
-    .title {
-        font-size: 34px;
-        font-weight: 700;
-    }
-
-    .sub-title {
-        font-size: 24px;
-        font-weight: 700;
-    }
-
-    .text-caption {
-        font-size: 10px;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-
-    .text-left {
-        text-align: left;
-    }
-
-    .m-1 {
-        margin: 2px !important;
-    }
-
-    .p-1 {
-        padding: 2px !important;
-    }
-
-    .justify-around {
-        justify-content: space-around;
-    }
-
-    .justify-between {
-        justify-content: space-between;
-    }
-
-    .header {
-        height: 170px;
-    }
-
-    .footer {
-        height: 100%;
-    }
-
-    .align-center {
-        align-items: center;
-    }
-
-    .signature-line {
-        width: 50%;
-    }
-</style>
-
 <body>
-    <div class="certificate-container">
-        <section>
-            <div class="d-flex justify-between text-bold">
-                <p class="text-caption">सर्टिफिकेट नम्बर: {{ certificate_number }}</p>
-                <p class="text-caption">CTEVT दर्ता न. {{ ctevt_account_number }}</p>
-                <p class="text-caption">पान न: {{ pan_number }}</p>
-            </div>
-        </section>
 
+    <div class="certificate-container body-background" id="certificate-container" style="position: relative;height: 97vh;">
         <section>
             <div class="d-flex justify-around">
                 <div>
-                    <img class="image-1" src="http://127.0.0.1:8000/static/pdf/nepal_government.png" alt="">
+                    <img class="image-1" src="{% static 'pdf/logo etc.png' %}" alt="">
                 </div>
                 <div class="text-center">
                     <p class=" m-1 p-1 text-red title">एक्सपर्ट टेक्निकल कलेज नेपाल</p>
-                    <p class=" m-1 p-1 text-blue sub-title">इटहरी, सुनसरी</p>
+                    <p class=" m-1 p-1 text-red sub-title">इटहरी, सुनसरी</p>
                     <p class=" m-1 p-1 text-red sub-title">प्रमाण-पत्र</p>
                 </div>
                 <div>
-                    {% if student.image %}
-                    <img class="image-passport" src="{{student.image.url}}" alt="">
-                    {% endif %}
+                    <img class="image-passport" src="{{ student.image.url }}" alt="">
                 </div>
             </div>
         </section>
 
         <section>
-            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: {{student.id}}</p>
+            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: ____________</p>
         </section>
 
-        <section>
-            <p>{% for sponsor in sponsors %}{{ sponsor.name }}{% if not forloop.last %}, {% endif %}{% endfor %}, उदयपुरको आर्थिक सहयोग र
-                एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि. इटहरीको प्राविधिक संयोजनमा CTEVT को {{ contract.name }} को पाठ्यक्रम
-                ({{ batch.duration }} घण्टा) अनुसार मिति {{ batch.start_date }} देखि {{ batch.end_date }} गते सम्म सञ्चालन भएको तालिममा {{ student.district }} वडा न.
-                {{ student.ward_no }},{{ student.palika }} बस्ने {{ student.father_name }} को {% if student.gender == "M" %} छोरा {% else %} छोरी{% endif %}  {{ student.name }} ले सहभागी भई तालिममा सफलतापूर्वक सिप हासिल
-                भएकोले यहाँको उत्तरोत्तर प्रगतिको कामना गर्दै यस स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ ।
+        <section style="text-align: center; margin-top: 20px;">
+            <p class="text-bold">
+                {{ contract.donation_by }}को कार्यालयको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
+                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि २०७९/११/२३ गतेसम्म सञ्चालन भएको {{contract.occupation}} सम्बन्धी
+                तालिममा {{ student.palika }} 
+                वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.father_name }} छोरा श्री {{ student.name }} सफलतापूर्वक सिप
+                हासिल भएकोले स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ।
             </p>
         </section>
 
+        <section style="text-align: center;">
+            <div>
+                <div class="text-center">
+                    <p class=" m-1 p-1 text-red title">CERTIFICATE</p>
+                </div>
+            </div>
+            <div>
+                <p class="text-bold">This certificate is awarded to 
+                    {% if student.gender == 'Male' %}
+                        Mr.
+                    {% elif student.gender == 'Female' %}
+                        {% if student.marital_status == 'Married' %}
+                            Mrs.
+                        {% else %}
+                            Miss
+                        {% endif %}
+                    {% else %}
+                        Mx.
+                    {% endif %}
+                    {{student.name}} 
+                    {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %} 
+                    of Mr. {{student.father_name}}
+                    permanent resident of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} on his/her
+                    successful completion of training programme and acquiring skills on {{contract.occupation}} Training
+                    for {{batch.duration}} from {{batch.start_date}} to {{batch.end_date}}. This training programme is conducted by Expert Technical
+                    College Nepal Pvt. Ltd. Itahari with financial support of {{contract.donation_by}}.</p>
+            </div>
+        </section>
 
         <section>
-            <div class="d-flex justify-between">
+            <div class="d-flex justify-between" style="bottom: 20px;position: absolute;width: 96%;">
+                {% for trainer in batch.trainers %}
                 <div>
-                    <div class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt=""></div>
                     <hr>
+                    <p class="m-1 p-1 text-bold">{{trainer.name}}</p>
                     <p class="m-1 p-1">प्रशिक्षक </p>
                 </div>
+                {% endfor %}
+
                 {% for signatory in signatories %}
                 <div>
-                    <div class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt=""></div>
                     <hr>
-                    <p>{{ signatory.name }}</p>
-                    <p class="m-1 p-1"> {{ signatory.designation }} </p>
-                    <p class="m-1 p-1"> {{ signatory.address }}</p>
-                </div>
-                {% endfor %}
-
-            </div>
-
-        </section>
-
-        <hr>
-        <section>
-            <div style="height: 130px;" class="footer d-flex justify-between align-center">
-                {% for sponsors in sponsors %}
-                <div>
-                    {% if sponsors.image %}
-                    <img style="overflow: hidden;" class="image-3" src="{{ sponsors.image.url }}" alt="Sponsor Image 1">
-                    {% endif %}
+                    <p class="m-1 p-1 text-bold"> {{signatory.name}}</p>
+                    <p class="m-1 p-1"> {{signatory.designation}}</p>
+                    <p class="m-1 p-1"> {{signatory.institution}}</p>
                 </div>
                 {% endfor %}
             </div>
-
         </section>
     </div>
+    <style>
+        @media print {
+            .certificate-container {
+                margin-left: 0px;
+                /* Adjust this value to shift the certificate more or less to the left */
+            }
+        }
+    </style>
+
+    <div id="print-button" style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
+        <button onclick="printCertificate()"
+            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Print</button>
+    </div>
+
+    <script>
+        function printCertificate() {
+            var printButton = document.getElementById('print-button');
+            printButton.style.display = 'none';
+            window.print();
+            printButton.style.display = 'block';
+        }
+    </script>
 
 </body>
 
