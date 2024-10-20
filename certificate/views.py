@@ -389,9 +389,11 @@ def generate_certificate(request):
                 "name": sponsor.name,
                 "logo": sponsor.image,
             } for sponsor in sponsors
-        ]
+        ],
+        "municipality_name": request.GET.get('municipality_name'),
+        "municipality_address": request.GET.get('municipality_address'),
     }
-    print(certificate_format) 
+    
     # Render the appropriate template based on the certificate format
     if certificate_format == 'etc certificate':
         return render(request, 'pdfs/certificate/college_certificate.html', context)

@@ -10,7 +10,6 @@
     <title>Certificate</title>
 </head>
 <body>
-
     <div class="certificate-container body-background" id="certificate-container" style="position: relative;height: 97vh;">
         <section>
             <div class="d-flex justify-around">
@@ -20,7 +19,7 @@
                 <div class="text-center">
                     <p class=" m-1 p-1 text-red title">एक्सपर्ट टेक्निकल कलेज नेपाल</p>
                     <p class=" m-1 p-1 text-red sub-title">इटहरी, सुनसरी</p>
-                    <p class=" m-1 p-1 text-red sub-title">प्रमाण-पत्र</p>
+                    <p class="m-1 p-1 text-red title">प्रमाण-पत्र</p>
                 </div>
                 <div>
                     <img class="image-passport" src="{{ student.image.url }}" alt="">
@@ -35,17 +34,17 @@
         <section style="text-align: center; margin-top: 20px;">
             <p class="text-bold">
                 {{ contract.donation_by }}को कार्यालयको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
-                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि २०७९/११/२३ गतेसम्म सञ्चालन भएको {{contract.occupation}} सम्बन्धी
+                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि {{batch.end_date}} गतेसम्म सञ्चालन भएको {{contract.occupation}} सम्बन्धी
                 तालिममा {{ student.palika }} 
                 वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.father_name }} छोरा श्री {{ student.name }} सफलतापूर्वक सिप
                 हासिल भएकोले स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ।
             </p>
         </section>
 
-        <section style="text-align: center;">
+        <section style="text-align: center; margin-top: 20px;">
             <div>
                 <div class="text-center">
-                    <p class=" m-1 p-1 text-red title">CERTIFICATE</p>
+                    <p class="m-1 p-1 text-red title">CERTIFICATE</p>
                 </div>
             </div>
             <div>

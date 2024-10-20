@@ -10,80 +10,90 @@
 </head>
 
 <body class="">
-    <div class="certificate-container body-background">
+    <div class="certificate-container body-background" style="position: relative; height: 97vh;">
         <section>
             <div class="d-flex justify-around">
                 <div>
-                    <img class="image-1" src="./assets/Emblem_of_Nepal.svg.png" alt="">
+                    <img class="image-1" src="{% static 'pdf/nepal_government.png' %}" alt="">
                 </div>
                 <div class="text-center">
-                    <p class=" m-1 p-1 text-red title">गाउँ कार्यपालिकाको कार्यालय</p>
-                    <p class=" m-1 p-1 text-red sub-title">कठहरी, मोरङ</p>
-                    <p class=" m-1 p-1 text-red sub-title">प्रमाण-पत्र</p>
+                    <p class=" m-1 p-1 text-red title">{{municipality_name}}</p>
+                    <p class=" m-1 p-1 text-red sub-title">{{municipality_address}}</p>
+                    <p class=" m-1 p-1 text-red title">प्रमाण-पत्र</p>
                 </div>
                 <div>
-                    <img class="image-passport" src="./assets/person.jpg" alt="">
+                    <img class="image-passport" src="{{ student.image.url }}" alt="">
                 </div>
             </div>
         </section>
 
-        <section>
+        <section style="margin-top: 20px;">
             <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: ____________</p>
         </section>
 
-        <section>
-            <p class="text-bold">कठहरी गाउँपालिकाको कार्यालय मोरङको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
-                लि. इटहरीको सहकार्यमा
-                मिति २०७९/१०/२३ गते देखि २०७९/११/२३ गतेसम्म सञ्चालन भएको मोबाइल मर्मत सम्बन्धी तालिममा कठहरी
-                गाउँपालिकाका वडा नं १, मोरङ
-                बस्ने श्री जलोखर राजवंशीका छोरा श्री संजय कुमार राजवंशीलाई सफलतापूर्वक सिप हासिल भएकोले स–धन्यवाद सहित
-                यो
-                प्रमाण–पत्र प्रदान गरिएको छ।
+        <section style="text-align: center; margin-top: 20px;">
+            <p class="text-bold">
+                {{ contract.donation_by }}को कार्यालयको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
+                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि {{batch.end_date}} गतेसम्म सञ्चालन भएको
+                {{contract.occupation}} सम्बन्धी
+                तालिममा {{ student.palika }}
+                वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.father_name }} छोरा श्री {{ student.name }}
+                सफलतापूर्वक सिप
+                हासिल भएकोले स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ।
             </p>
         </section>
 
 
-        <section>
+        <section style="text-align: center;margin-top: 20px;">
             <div>
                 <div class="text-center">
-                    <p class=" m-1 p-1 text-red title">CERTIFICATE</p>
+                    <p class="m-1 p-1 text-red title">CERTIFICATE</p>
                 </div>
             </div>
             <div>
-                <p class="text-bold">This certificate is awarded to Mr. Sanjaya Kumar Rajbansi Son of Mr. Jalokhar
-                    Rajbansi permanent resident of Katahari Rural Municipality Ward No. 1, Morang on his/her successful
-                    completion of training programme and acquiring skills on Mobile Phone Repairing Training for 1 Month
-                    from 05 Feb 2023 to 05 March 2023. This training programme is conducted by Expert Technical College
-                    Nepal Pvt. Ltd. Itahari with financial support of Katahari Rural Municipality, Morang.</p>
+                <p class="text-bold">This certificate is awarded to
+                    {% if student.gender == 'Male' %}
+                    Mr.
+                    {% elif student.gender == 'Female' %}
+                    {% if student.marital_status == 'Married' %}
+                    Mrs.
+                    {% else %}
+                    Miss
+                    {% endif %}
+                    {% else %}
+                    Mx.
+                    {% endif %}
+                    {{student.name}}
+                    {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %}
+                    of Mr. {{student.father_name}}
+                    permanent resident of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} on
+                    his/her
+                    successful completion of training programme and acquiring skills on {{contract.occupation}} Training
+                    for {{batch.duration}} from {{batch.start_date}} to {{batch.end_date}}. This training programme is
+                    conducted by Expert Technical
+                    College Nepal Pvt. Ltd. Itahari with financial support of {{contract.donation_by}}.</p>
             </div>
         </section>
 
         <section>
-            <div class="d-flex justify-between">
+            <div class="d-flex justify-between" style="bottom: 20px;position: absolute;width: 96%;">
+                {% for trainer in batch.trainers %}
                 <div>
-                    <img class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt="">
                     <hr>
+                    <p class="m-1 p-1 text-bold">{{trainer.name}}</p>
                     <p class="m-1 p-1">प्रशिक्षक </p>
                 </div>
+                {% endfor %}
 
+                {% for signatory in signatories %}
                 <div>
-                    <img class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt="">
                     <hr>
-                    <p class="m-1 p-1 text-bold"> रोहिणी आचार्य</p>
-                    <p class="m-1 p-1">उपाध्यक्ष </p>
-                    <p class="m-1 p-1">कठहरी गाउँपालिका</p>
-                    <p class="m-1 p-1">मोरङ</p>
+                    <p class="m-1 p-1 text-bold"> {{signatory.name}}</p>
+                    <p class="m-1 p-1"> {{signatory.designation}}</p>
+                    <p class="m-1 p-1"> {{signatory.institution}}</p>
                 </div>
-
-                <div>
-                    <img class="signature-image" src="assets/1200px-Todd_Strasser_signature.png" alt="">
-                    <hr>
-                    <p class="m-1 p-1 text-bold">हेमराज दाहाल</p>
-                    <p class="m-1 p-1">संस्थान प्रमुख</p>
-                    <p class="m-1 p-1"> एक्सपर्ट टेक्निकल कलेज नेपाल</p>
-                    <p class="m-1 p-1"> इटहरी, सुनसरी</p>
-                </div>
-
+                {% endfor %}
+            </div>
         </section>
     </div>
 

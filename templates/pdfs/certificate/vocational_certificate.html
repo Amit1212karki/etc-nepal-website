@@ -1,431 +1,115 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Post+No+Bills+Colombo&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Port+Lligat+Sans&display=swap" rel="stylesheet" /> -->
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'pdf/style.css' %}">
+    <title>Certificate</title>
 </head>
-<style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        font-size: 14px;
-    }
-/* 
-    .v1_2 {
-        width: 100%;
-        height: 832px;
-        background: rgba(255, 255, 255, 1);
-        opacity: 1;
-        position: relative;
-        top: 0px;
-        left: 0px;
-        overflow: hidden;
-    } */
-
-    .v2_64 {
-        width: 843px;
-        height: 596px;
-        background: rgba(255, 255, 255, 1);
-        opacity: 1;
-        position: absolute;
-        top: 145px;
-        left: 360px;
-        border: 1px solid rgba(0, 0, 0, 1);
-        overflow: hidden;
-    }
-
-    .v1_5 {
-        width: 115px;
-        height: 97px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 166px;
-        left: 388px;
-        overflow: hidden;
-    }
-
-    .v2_73 {
-        width: 77px;
-        height: 64px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 672px;
-        left: 754px;
-        overflow: hidden;
-    }
-
-    .v1_8 {
-        width: 476px;
-        color: rgba(175, 0, 0, 1);
-        position: absolute;
-        top: 251px;
-        left: 544px;
-        font-family: Poppins;
-        font-weight: Medium;
-        font-size: 20px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_12 {
-        width: 329px;
-        color: rgba(175, 0, 0, 1);
-        position: absolute;
-        top: 222px;
-        left: 617px;
-        font-family: Post No Bills Colombo;
-        font-weight: Bold;
-        font-size: 20px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_16 {
-        width: 239px;
-        color: rgba(5, 9, 137, 1);
-        position: absolute;
-        top: 198px;
-        left: 662px;
-        font-family: Post No Bills Colombo;
-        font-weight: Bold;
-        font-size: 14px;
-        opacity: 1;
-        text-align: center;
-    }
-
-    .v2_17 {
-        width: 185px;
-        color: rgba(207, 6, 6, 1);
-        position: absolute;
-        top: 163px;
-        left: 689px;
-        font-family: Post No Bills Colombo;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: center;
-    }
-
-    .v2_69 {
-        width: 781px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 308px;
-        left: 392px;
-        font-family: Port Lligat Sans;
-        font-weight: Regular;
-        font-size: 14px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_70 {
-        width: 781px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 400px;
-        left: 392px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_30 {
-        width: 128px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 707px;
-        left: 388px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 10px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_71 {
-        width: 128px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 707px;
-        left: 915px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 10px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_74 {
-        width: 56px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 633px;
-        left: 765px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 10px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_31 {
-        width: 169px;
-        height: 47px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 691px;
-        left: 522px;
-        overflow: hidden;
-    }
-
-    .v2_33 {
-        width: 106px;
-        height: 27px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 701px;
-        left: 1051px;
-        overflow: hidden;
-    }
-
-    .v2_15 {
-        width: 100px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 578px;
-        left: 388px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_19 {
-        width: 150px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 599px;
-        left: 388px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_20 {
-        width: 230px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 620px;
-        left: 388px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_21 {
-        width: 88px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 641px;
-        left: 388px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_27 {
-        width: 224px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        opacity: 1;
-        position: absolute;
-        top: 572px;
-        left: 388px;
-        border: 0.5px solid rgba(0, 0, 0, 1);
-    }
-
-    .v2_72 {
-        width: 763px;
-        background: url("../images/v2_72.png");
-        opacity: 1;
-        position: absolute;
-        top: 664px;
-        left: 388px;
-        border: 0.5px solid rgba(0, 0, 0, 1);
-    }
-
-    .v2_41 {
-        width: 165px;
-        height: 42px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 515px;
-        left: 399px;
-        overflow: hidden;
-    }
-
-    .v2_22 {
-        width: 128px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 584px;
-        left: 927px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_23 {
-        width: 132px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 605px;
-        left: 927px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_24 {
-        width: 129px;
-        color: rgba(0, 0, 0, 1);
-        position: absolute;
-        top: 625px;
-        left: 927px;
-        font-family: Poppins;
-        font-weight: Regular;
-        font-size: 12px;
-        opacity: 1;
-        text-align: left;
-    }
-
-    .v2_28 {
-        width: 224px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        opacity: 1;
-        position: absolute;
-        top: 572px;
-        left: 927px;
-        border: 0.5px solid rgba(0, 0, 0, 1);
-    }
-
-    .v2_43 {
-        width: 165px;
-        height: 42px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 518px;
-        left: 943px;
-        overflow: hidden;
-    }
-
-    .v1_6 {
-        width: 83px;
-        height: 46px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 147px;
-        left: 1063px;
-        overflow: hidden;
-    }
-
-    .v2_13 {
-        width: 88px;
-        height: 88px;
-        background: url("http://127.0.0.1:8000/static/pdf/nepal_government.png");
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        opacity: 1;
-        position: absolute;
-        top: 198px;
-        left: 1063px;
-        overflow: hidden;
-    }
-</style>
 
 <body>
-    <div class="v1_2">
-        <div class="v2_64"></div>
-        <div class="v1_5"></div>
-        <div class="v2_73"></div><span class="v1_8">Vocational Skill Training Completion Certificate</span><span
-            class="v2_12">व्यवसायिक सिप तालिम समापन प्रमाण-पत्र</span><span class="v2_16">ग्रामीण उद्यम तथा विप्रेषण
-            आयोजना (समृद्धि)</span><span class="v2_17">नेपाल सरकार
-            श्रम, रोजगार तथा सामाजिक सुरक्षा मन्त्रालय</span><span class="v2_69"> यो प्रमाणपत्र यस.प. न. ०३ वडा न. मोरङ
-            जिल्ला निवासी श्री उदय नारायण माझीको छोरा जन्म मिति २०६०/१२/२९ श्री रितेश कुमार माझीले ग्रामीण उद्यम तथा
-            विप्रेषण आयोजना (समृद्धि) अन्तर्गत हेल्वेटास नेपालको प्राविधिक सहयोगमा २०७९ बि.स. भाद्र ६ देखि २०७९ फागुन ११
-            सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले विराटनगर महानगरपालिकामा सञ्चालित रेफ्रिजेरेसन एर कन्डिसन जुनियर
-            मेकानिक बिषयमा सिटिभिटिको ३९० घण्टको पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो
-            प्रमाणपत्र प्रदान गरिएको छ ।</span><span class="v2_70">This is to certify that Mr. Ritesh Kumar Majhi born
-            on 12 Apr 2003 A.D., son of Mr. Udha Narayan Majhi and inhabitant of Biratnagar Metropolitan City Ward No.
-            03, Morang District has successfully completed the vocational skill training on Refrigeration & Air
-            Condition Junior Mechanic from 22 Aug 2022 to 23 Feb 2023 A.D. at Biratnagar Metropolitan City implemented
-            by Expert Technical College Nepal Pvt. Ltd. under Rural Enterprises and Remittances Project (RERP)-SAMRIDDHI
-            and with Technical Assistance of Helvetas Nepal based on CTEVT curriculum of 390 hours.</span><span
-            class="v2_30">Training implemented by:</span><span class="v2_71">Training implemented by:</span><span
-            class="v2_74">2022, sep 11</span>
-        <div class="v2_31"></div>
-        <div class="v2_33"></div>
-        <span class="v2_15">Hemraj Dahal</span>
-        <span class="v2_19">Executive
-            Director</span><span class="v2_20">Expert Technical College Nepal Pvt. Ltd</span><span
-            class="v2_21">Itahari, sunsari</span>
-        <div class="v2_27"></div>
-        <div class="v2_72"></div>
-        <div class="v2_41"></div><span class="v2_22">Saroj Prsad Guragain</span><span class="v2_23">Project Manager,
-            RERP</span><span class="v2_24">Government of Nepal</span>
-        <div class="v2_28"></div>
-        <div class="v2_43"></div>
-        <div class="v1_6"></div>
-        <div class="v2_13"></div>
+    <!-- A4 sized certificate container -->
+    <div class="certificate-container">
+        <!-- Header -->
+        <section>
+            <div class="header d-flex justify-around align-center">
+                <div class="">
+                    <img class="image-1" src="{%static 'pdf/Emblem_of_Nepal.svg.png'%}" alt="">
+                </div>
+                <div class="text-center">
+                    <p class="text-red m-1 p-1">नेपाल सरकार</p>
+                    <p class="text-red m-1 p-1">श्रम, रोजगार तथा सामाजिक सुरक्षा मन्त्रालय</p>
+                    <p class="text-blue sub-title m-1 p-1">ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि)</p>
+                    <p class="text-red title m-1 p-1">Vocational Skill Training Completion Certificate</p>
+                </div>
+                <div>
+                    <div>
+                        <img class="image-2" src="./assets/HEL_Logo_3d_Bangladesh_colour_web.png" alt="">
+                    </div>
+                    <div>
+                        <img class="image image-passport" src="{{ student.image.url }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Body -->
+        <section>
+            <div>
+                <p>यो प्रमाणपत्र यस.प. न. {{student.ward_no}} वडा न. {{student.district}} जिल्ला निवासी श्री {{student.father_name}} छोरा जन्म मिति {{student.date_of_birth_ad}}
+                    श्री {{student.name}} {{contract.name}} अन्तर्गत {% for sponser in sponsors %} {{sponser.name}}, {% endfor %} को
+                    प्राविधिक सहयोगमा {{batch.start_date}} देखि {{batch.end_date}} सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले
+                    {{contract.location}}मा सञ्चालित {{contract.occupation}} बिषयमा सिटिभिटिको {{batch.duration}} को
+                    पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।</p>
+            </div>
+            <div>
+                <p>This is to certify that  
+                    {% if student.gender == 'Male' %}
+                    Mr.
+                    {% elif student.gender == 'Female' %}
+                    {% if student.marital_status == 'Married' %}
+                    Mrs.
+                    {% else %}
+                    Miss
+                    {% endif %}
+                    {% else %}
+                    Mx.
+                    {% endif %}
+                    {{student.name}} born on {{student.date_of_birth_ad}}, {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %}
+                    of Mr. {{student.father_name}} and
+                    inhabitant of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} District has successfully completed the
+                    vocational skill training on {{contract.occupation}} from {{batch.start_date}} to {{batch.end_date}}
+                    A.D. at {{contract.location}} implemented by Expert Technical College Nepal Pvt. Ltd. under {{contract.name}} and with assistance of {{sponsers}} {% for sponser in sponsors %} {{sponser.name}}, {% endfor %} 
+                    on {{ batch.duration }} long curriculum based on CTEVT.</p>
+            </div>
+        </section>
+
+        <!-- Signature Section -->
+        <section >
+            <div class="d-flex justify-between p-1 header" style="align-items: end;">
+                <div class="text-left">
+                    <hr width="260px">
+                     <p class="m-1 p-1 text-bold">Hemraj Dahal</p>
+                     <p class="m-1 p-1">Executive Director</p>
+                     <p class="m-1 p-1">Expert Technical College Nepal Pvt. Ltd</p>
+                     <p class="m-1 p-1">Itahari, Sunsari</p>
+                </div>
+                <div>
+                    <p>Date: 2024/04/07</p>
+                </div>
+                {% for signatory in signatories %}
+                <div style="text-align:right">
+                    <hr width="260px">
+                     <p class="m-1 p-1 text-bold">{{signatory.name}}</p>
+                     <p class="m-1 p-1">{{signatory.designation}}</p>
+                     <p class="m-1 p-1">{{signatory.institution}}</p>
+                     <p class="m-1 p-1"> </p>
+
+                </div>
+                {% endfor %}
+            </div>
+            
+        </section>
+
+        <hr>
+        <!-- Footer -->
+        <section>
+            <div class="d-flex justify-between">
+                <div>
+                    <p>Training implemented by:</p>
+                    <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt="">
+                </div>
+                <div>
+                    <img class="image-1" src="{%static 'pdf/Emblem_of_Nepal.svg.png'%}" alt="">
+                </div>
+                <div>
+                    <p>Training Sponsored by:</p>
+                    <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt="">
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 
