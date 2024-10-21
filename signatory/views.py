@@ -2,15 +2,44 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Signatory
 from django.contrib import messages
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 # Create your views here.
 
 @login_required
 def signatoryIndex(request):
-    all_signatories = Signatory.objects.all()
+    search_query = request.GET.get('search','')
+    all_signatories = Signatory.objects.filter(
+        Q(name__icontains=search_query) |  Q(designation__icontains=search_query) |  Q(institution__icontains=search_query)
+    ) if search_query else Signatory.objects.all()
+    
+    paginator = Paginator(all_signatories, 7)
+    page_number = request.GET.get('page',1)
+    signatories = paginator.get_page(page_number) 
+    total_entries = paginator.count
+    total_pages = paginator.num_pages
+    start_index = signatories.start_index()
+    end_index = signatories.end_index()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = {
+            'signatories':list(signatories.object_list.values('id','name','institution','designation')),
+            'has_next': signatories.has_next(),
+            'has_previous': signatories.has_previous(),
+            'next_page_number': signatories.next_page_number() if signatories.has_next() else None,
+            'previous_page_number': signatories.previous_page_number() if signatories.has_previous() else None,
+            'total_entries': total_entries,
+            'total_page': paginator.num_pages,
+            'total_pages': total_pages,
+            'current_page': signatories.number,
+            'start_index': start_index,
+            'end_index': end_index
+        }
+        return JsonResponse(data)
 
     context = {
-        'all_signatories': all_signatories
+        'all_signatories': signatories
     }
     return render(request, 'certificate/signatory/index.html', context)
 

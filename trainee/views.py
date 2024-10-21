@@ -5,9 +5,11 @@ from batch.models import *
 from location.models import *
 from .models import *
 from django.contrib import messages
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -30,7 +32,47 @@ def toggle_selection(request, trainee_id):
 
 @login_required
 def traineeIndex(request):
-    all_trainee = Trainee.objects.all()
+    search_query = request.GET.get('search','')
+    all_trainee = Trainee.objects.filter(
+        Q(name__icontains=search_query)
+    ) if search_query else Trainee.objects.all()
+
+    paginator = Paginator(all_trainee, 7)
+    page_number = request.GET.get('page', 1)
+    trainee = paginator.get_page(page_number)
+
+    total_entries = paginator.count
+    total_pages = paginator.num_pages
+    start_index = trainee.start_index()
+    end_index = trainee.end_index()
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = {
+            'trainee': [
+                {
+                    'id': trainee.id,
+                    'name': trainee.name,
+                    'image': trainee.image.url if trainee.image else None,
+                    'contract': trainee.contract,
+                    'batch': trainee.batch,
+                    'phone_no': trainee.phone_no,
+                    'is_selected':trainee.is_selected,
+                }
+                for trainee in trainee.object_list
+            ],
+            'has_next': trainee.has_next(),
+            'has_previous': trainee.has_previous(),
+            'next_page_number': trainee.next_page_number() if trainee.has_next() else None,
+            'previous_page_number': trainee.previous_page_number() if trainee.has_previous() else None,
+            'total_entries': total_entries,
+            'total_pages': total_pages,
+            'current_page': trainee.number,
+            'start_index': start_index,
+            'end_index': end_index,
+        }
+
+        return JsonResponse(data)
+
     context = {
         'all_trainee':all_trainee
     }
