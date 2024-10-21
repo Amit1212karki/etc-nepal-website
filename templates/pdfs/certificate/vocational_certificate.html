@@ -1,4 +1,5 @@
 {% load static %}
+{% load translate_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,8 +40,8 @@
         <section>
             <div>
                 <p>यो प्रमाणपत्र यस.प. न. {{student.ward_no}} वडा न. {{student.district}} जिल्ला निवासी श्री {{student.father_name}} छोरा जन्म मिति {{student.date_of_birth_ad}}
-                    श्री {{student.name}} {{contract.name}} अन्तर्गत {% for sponser in sponsors %} {{sponser.name}}, {% endfor %} को
-                    प्राविधिक सहयोगमा {{batch.start_date}} देखि {{batch.end_date}} सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले
+                    श्री {{student.name}}, {{contract.name}} अन्तर्गत {% for sponser in sponsors %} {{sponser.name}}, {% endfor %} को
+                    प्राविधिक सहयोगमा {{batch.start_date|convert_to_nepali_date}} देखि {{batch.end_date|convert_to_nepali_date}} सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले
                     {{contract.location}}मा सञ्चालित {{contract.occupation}} बिषयमा सिटिभिटिको {{batch.duration}} को
                     पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।</p>
             </div>
@@ -111,6 +112,28 @@
             </div>
         </section>
     </div>
+    <style>
+        @media print {
+            .certificate-container {
+                margin-left: 0px;
+                /* Adjust this value to shift the certificate more or less to the left */
+            }
+        }
+    </style>
+
+    <div id="print-button" style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
+        <button onclick="printCertificate()"
+            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Print</button>
+    </div>
+
+    <script>
+        function printCertificate() {
+            var printButton = document.getElementById('print-button');
+            printButton.style.display = 'none';
+            window.print();
+            printButton.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

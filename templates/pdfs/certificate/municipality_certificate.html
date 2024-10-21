@@ -1,4 +1,5 @@
 {% load static %}
+{% load translate_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +35,7 @@
         <section style="text-align: center; margin-top: 20px;">
             <p class="text-bold">
                 {{ contract.donation_by }}को कार्यालयको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
-                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि {{batch.end_date}} गतेसम्म सञ्चालन भएको
+                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date|convert_to_nepali_date }} गते देखि {{batch.end_date|convert_to_nepali_date}} गतेसम्म सञ्चालन भएको
                 {{contract.occupation}} सम्बन्धी
                 तालिममा {{ student.palika }}
                 वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.father_name }} छोरा श्री {{ student.name }}
