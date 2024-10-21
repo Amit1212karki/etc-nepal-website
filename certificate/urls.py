@@ -9,7 +9,6 @@ urlpatterns = [
      
      # certificate generation urls
      path('certificate-index/', certificateFormGenerate, name='certificate-index'),
-
      # certificate axios url 
      path('get-batch-from-contract/<int:id>/',get_batch_from_contract),
      path('get-student-from-batch/<int:id>/',get_student_from_batch),
