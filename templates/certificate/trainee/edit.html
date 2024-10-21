@@ -62,6 +62,14 @@
                             required>
                     </div>
                     <div class="w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
+                             Name In Nepali
+                        </label>
+                        <input type="text" name="nepali_name" id="name" value="{{ trainee.nepali_name }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee name in nepali" required="">
+                    </div>
+                    <div class="w-full">
                         <label for="contract" class="block mb-2 text-sm font-medium text-gray-700">
                             Contract</label>
                         <select name="contract" id="contract" required
@@ -137,14 +145,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             required>
                     </div>
-                    <div class="w-full">
-                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900"> Image</label>
-                        <input type="file" name="image" id="image"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-                        <p class="text-sm text-gray-500">Current image: <img
-                                src="{% if trainee.image%}{{ trainee.image.url }}{%endif%}" alt="Current Trainee Image"
-                                class="w-16 h-16 rounded-full"></p>
-                    </div>
+                    
                     <div class="w-full">
                         <label for="marital_status" class="block mb-2 text-sm font-medium text-gray-700">Marital
                             Status</label>
@@ -186,7 +187,14 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Type trainee father name" required="">
                     </div>
-
+                    <div class="w-full">
+                        <label for="father_name" class="block mb-2 text-sm font-medium text-gray-900">
+                             Father Name In Nepali
+                        </label>
+                        <input type="text" name="nepali_father_name" id="father_name"  value="{{ trainee.nepali_father_name }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type trainee father name in nepali" required="">
+                    </div>
                     <div class="w-full">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
                              Email
@@ -214,7 +222,6 @@
                             {% endfor %}
                         </select>
                     </div>
-
                     <div class="w-full">
                         <label for="district" class="block mb-2 text-sm font-medium text-gray-700">
                             District</label>
@@ -245,7 +252,6 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Type trainee citizenship no" required="">
                     </div>
-
                     <div class="w-full">
                         <label for="citizenship_no" class="block mb-2 text-sm font-medium text-gray-900">
                              Citizenship No
@@ -272,6 +278,14 @@
                             value="{{ trainee.issue_district }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Type trainee issue district" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900"> Image</label>
+                        <input type="file" name="image" id="image"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                        <p class="text-sm text-gray-500">Current image: <img
+                                src="{% if trainee.image%}{{ trainee.image.url }}{%endif%}" alt="Current Trainee Image"
+                                class="w-16 h-16 rounded-full"></p>
                     </div>
                     <div class="w-full">
                         <label for="citizenship_front_image" class="block mb-2 text-sm font-medium text-gray-900">

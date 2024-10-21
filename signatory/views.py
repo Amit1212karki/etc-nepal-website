@@ -25,13 +25,20 @@ def signatoryStore(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         designation = request.POST.get('designation')
-        institution = request.POST.get('institution')  
+        institution = request.POST.get('institution')
+        nepali_name = request.POST.get('nepali_name')  
+        nepali_designation = request.POST.get('nepali_designation')  
+        nepali_institution = request.POST.get('nepali_institution')  
+
 
         if name and designation and institution:
             signatory = Signatory.objects.create(
                 name=name,
                 designation=designation,
-                institution=institution
+                institution=institution,
+                nepali_name = nepali_name,
+                nepali_designation = nepali_designation,
+                nepali_institution = nepali_institution,
             )
             signatory.save()
             messages.success(request, 'Signatory successfully created.')
@@ -56,12 +63,17 @@ def signatoryUpdate(request, id):
     if request.method == 'POST':
         signatory.name = request.POST.get('name')
         signatory.designation = request.POST.get('designation')
+        signatory.institution = request.POST.get('institution')
+
+        signatory.nepali_name = request.POST.get('nepali_name')  
+        signatory.nepali_designation = request.POST.get('nepali_designation')  
+        signatory.nepali_institution = request.POST.get('nepali_institution') 
         
         # Update the image only if a new one is provided
         if 'image' in request.FILES:
             signatory.image = request.FILES['image']
 
-        if signatory.name and signatory.designation:
+        if signatory.name and signatory.designation and signatory.institution and signatory.nepali_name and signatory.nepali_designation and signatory.nepali_institution :
             signatory.save()
             messages.success(request, 'Signatory successfully updated.')
             return redirect('signatory-index')

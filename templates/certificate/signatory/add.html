@@ -67,8 +67,14 @@
                 {% csrf_token %}
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="w-full">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Signatory Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name <span class="ms-1 text-sm font-bold text-red-500">*</span></label>
                         <input type="text" name="name" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type Signatory Name" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name In Nepali</label>
+                        <input type="text" name="nepali_name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Type Signatory Name" required="">
                     </div>
@@ -79,8 +85,20 @@
                             placeholder="Type Signatory Designation" required="">
                     </div>
                     <div class="w-full">
+                        <label for="designation" class="block mb-2 text-sm font-medium text-gray-900">Designation In Nepali</label>
+                        <input type="text" name="nepali_designation" id="designation"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type Signatory Designation" required="">
+                    </div>
+                    <div class="w-full">
                         <label for="institution" class="block mb-2 text-sm font-medium text-gray-900">Institution</label>
                         <input type="text" name="institution" id="image" placeholder="Type institution name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="institution" class="block mb-2 text-sm font-medium text-gray-900">Institution In Nepali</label>
+                        <input type="text" name="nepali_institution" id="image" placeholder="Type institution name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             required="">
                     </div>

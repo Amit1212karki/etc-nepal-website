@@ -64,16 +64,34 @@
                             placeholder="Type Name" required="">
                     </div>
                     <div class="w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name In Nepali</label>
+                        <input type="text" name="nepali_name" value="{{ signatory.nepali_name }}" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type Signatory Name" required="">
+                    </div>
+                    <div class="w-full">
                         <label for="designation" class="block mb-2 text-sm font-medium text-gray-900">Designation</label>
                         <input type="text" name="designation" value="{{ signatory.designation }}" id="designation"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Type Designation" required="">
                     </div>
                     <div class="w-full">
+                        <label for="designation" class="block mb-2 text-sm font-medium text-gray-900">Designation In Nepali</label>
+                        <input type="text" name="nepali_designation" value="{{ signatory.nepali_designation }}" id="designation"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            placeholder="Type Signatory Designation" required="">
+                    </div>
+                    <div class="w-full">
                         <label for="designation" class="block mb-2 text-sm font-medium text-gray-900">Institution</label>
                         <input type="text" name="institution" value="{{ signatory.institution }}" id="institution"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                             placeholder="Type Designation" required="">
+                    </div>
+                    <div class="w-full">
+                        <label for="institution" class="block mb-2 text-sm font-medium text-gray-900">Institution In Nepali</label>
+                        <input type="text" name="nepali_institution" value="{{ signatory.nepali_institution }}" id="image" placeholder="Type institution name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                            required="">
                     </div>
                 </div>
                 <button type="submit"

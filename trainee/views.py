@@ -68,6 +68,7 @@ def traineeStore(request):
         ward_no  =  request.POST.get('ward_no')
         occupation = request.POST.get('occupation')
         name = request.POST.get('name')
+        nepali_name = request.POST.get('nepali_name')
         gender = request.POST.get('gender')
         date_of_birth_ad = request.POST.get('dob')
         date_of_birth_bs = request.POST.get('dob_bs')
@@ -82,6 +83,7 @@ def traineeStore(request):
         ethnic_group = request.POST.get('ethnic_group')
         mother_name = request.POST.get('mother_name')
         father_name = request.POST.get('father_name')
+        nepali_father_name = request.POST.get('nepali_father_name')
         citizenship_no = request.POST.get('citizenship_no')
         issue_date = request.POST.get('issue_date')
         issue_district = request.POST.get('issue_district')
@@ -112,6 +114,7 @@ def traineeStore(request):
             ward_no=ward_no,
             occupation = occupation,
             name = name,
+            nepali_name = nepali_name,
             gender = gender,
             date_of_birth_ad=date_of_birth_ad,
             date_of_birth_bs=date_of_birth_bs,
@@ -120,6 +123,7 @@ def traineeStore(request):
             ethnic_group=ethnic_group,
             mother_name=mother_name,
             father_name=father_name,
+            nepali_father_name = nepali_father_name,
             citizenship_no=citizenship_no,
             issue_date=issue_date,
             issue_district=issue_district,
@@ -171,6 +175,7 @@ def traineeUpdate(request, id):
         ward_no  =  request.POST.get('ward_no')
         occupation = request.POST.get('occupation')
         name = request.POST.get('name')
+        nepali_name = request.POST.get('nepali_name')
         gender = request.POST.get('gender')
         date_of_birth_ad = request.POST.get('dob')
         date_of_birth_bs = request.POST.get('dob_bs')
@@ -185,6 +190,7 @@ def traineeUpdate(request, id):
         ethnic_group = request.POST.get('ethnic_group')
         mother_name = request.POST.get('mother_name')
         father_name = request.POST.get('father_name')
+        nepali_father_name = request.POST.get('nepali_father_name')
         citizenship_no = request.POST.get('citizenship_no')
         issue_date = request.POST.get('issue_date')
         issue_district = request.POST.get('issue_district')
@@ -211,6 +217,7 @@ def traineeUpdate(request, id):
         update_trainee.ward_no=ward_no
         update_trainee.occupation = occupation
         update_trainee.name = name
+        update_trainee.nepali_name = nepali_name
         update_trainee.gender = gender
         update_trainee.date_of_birth_ad=date_of_birth_ad
         update_trainee.date_of_birth_bs=date_of_birth_bs
@@ -219,6 +226,7 @@ def traineeUpdate(request, id):
         update_trainee.ethnic_group=ethnic_group
         update_trainee.mother_name=mother_name
         update_trainee.father_name=father_name
+        update_trainee.nepali_father_name = nepali_father_name
         update_trainee.citizenship_no=citizenship_no
         update_trainee.issue_date=issue_date
         update_trainee.issue_district=issue_district

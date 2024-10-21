@@ -239,7 +239,7 @@
                             actionsCell.classList.add('px-6', 'py-4');
 
                             // Correctly formatting the onclick function
-                            actionsCell.innerHTML = `<button class="text-white bg-blue-400 px-2 py-3 hover:underline" onclick="generateCertificate(${student.id})">Action</button>`;
+                            actionsCell.innerHTML = `<button class="focus:outline-none transition duration-300 ease-in-out transform bg-blue-400 hover:underline text-white rounded-lg px-4 py-2" onclick="generateCertificate(${student.id})">Action</button>`;
                             row.appendChild(actionsCell);
 
                             tableBody.appendChild(row);

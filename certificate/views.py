@@ -85,9 +85,7 @@ def home(request):
         'labels':labels,
         'values':values,
     }
-
-
-
+    
     return render(request, 'certificate/home.html', context)
 
 @login_required
@@ -278,6 +276,7 @@ def generate_certificate(request):
     context = {
         "student": {
             "name": student.name,
+            "nepali_name": student.nepali_name,
             "image": student.image,
             "gender": student.get_gender_display(),
             "date_of_birth_ad": student.date_of_birth_ad,
@@ -287,6 +286,7 @@ def generate_certificate(request):
             "ethnic_group": student.ethnic_group,
             "mother_name": student.mother_name,
             "father_name": student.father_name,
+            "nepali_father_name":student.nepali_father_name,
             "citizenship_no": student.citizenship_no,
             "issue_date": student.issue_date,
             "issue_district": student.issue_district,
@@ -295,16 +295,23 @@ def generate_certificate(request):
             "qualification": student.qualification,
             "province": student.province.name if student.province else None,
             "district": student.district.name if student.district else None,
+            "nepali_district": student.district.nepali_name if student.district else None,
             "palika": student.palika.name if student.palika else None,
+            "nepali_palika_name": student.palika.nepali_name if student.palika else None,
             "ward_no": student.ward_no,
             "occupation": student.occupation,
         },
         "contract": {
             "id": contract.id,
             "name": contract.name,
+            "nepali_name": contract.nepali_name,
             "location": contract.location,
+            "nepali_location": contract.nepali_location,
             "occupation": contract.occupation,
+            "nepali_occupation": contract.nepali_occupation,
             "donation_by": contract.donation_by,
+            "nepali_donation_by": contract.nepali_donation_by,
+
         },
         "batch": {
             "id": batch.id,
