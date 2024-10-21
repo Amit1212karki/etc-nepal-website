@@ -14,7 +14,7 @@ def contractIndex(request):
         Q(name__icontains=search_query) | Q(occupation__icontains=search_query)
     ) if search_query else Contract.objects.all()
     
-    paginator = Paginator(all_contract, 7)  
+    paginator = Paginator(all_contract, 2)  
     page_number = request.GET.get('page', 1)
     contracts = paginator.get_page(page_number)
 

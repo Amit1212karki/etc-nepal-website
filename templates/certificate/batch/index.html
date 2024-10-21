@@ -81,7 +81,7 @@
             </div>
 
         </div>
-        
+
     </div>
 
     <div class="relative overflow-x-auto bg-white ">
@@ -186,6 +186,130 @@
         <!-- Pagination content will be injected here by JavaScript -->
     </div>
 </div>
+<script>
+    let currentPage = 1;
+    let searchQuery = '';
+
+    function fetchBatch(page = 1, query = '') {
+        axios.get('/batch/', {
+            params: {
+                search: query,
+                page: page,
+            },
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => {
+                const batches = response.data.batches;
+                const trainerNames = trainers.map(trainer => trainer.name);
+                // Assuming the response contains a property `data` which is an array of batches
+                const data = response.data; // Update this line based on your actual response structure
+                const tableBody = document.getElementById('batch-table-body');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                batches.forEach(batch => {
+                    const row = `
+                    <tr class="border-b">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.name}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.duration}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.start_date}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.end_date}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.seats}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.contract}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            ${batch.trainers.map(trainer => trainer.name).join(', ') || 'No trainers assigned'}
+                        </th>
+                        <td class="px-6 py-4 text-right flex gap-4">
+                            <a href="/batch/edit-batch/${batch.id}/" class="font-medium text-blue-600 hover:underline">
+                                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
+                                </svg>
+                            </a>
+                            <a href="/batch/delete-batch/${batch.id}/" class="font-medium text-red-600 hover:underline">
+                                <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                    tableBody.innerHTML += row; // Append the new row to the table body
+                });
+
+                /// Update pagination controls
+                paginationControls.innerHTML = '';
+                const paginationInfo = document.createElement('span');
+                paginationInfo.className = 'text-xs xs:text-sm text-gray-900';
+                paginationInfo.innerText = `Showing ${data.start_index} to ${data.end_index} of ${data.total_entries} entries`;
+                paginationControls.appendChild(paginationInfo);
+
+                // Create pagination controls
+                const paginationContainer = document.createElement('div');
+                paginationContainer.className = 'flex items-center mt-4';
+
+                // Previous button
+                if (data.has_previous) {
+                    const prevButton = document.createElement('a');
+                    prevButton.href = 'javascript:void(0);';
+                    prevButton.className = 'text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2';
+                    prevButton.innerText = 'Previous';
+                    prevButton.onclick = () => fetchBatch(data.previous_page_number, searchQuery);
+                    paginationContainer.appendChild(prevButton);
+                }
+
+                // Page numbers
+                for (let i = 1; i <= data.total_pages; i++) {
+                    const pageButton = document.createElement('a');
+                    pageButton.href = 'javascript:void(0);';
+                    pageButton.className = 'text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2';
+                    if (i === data.current_page) {
+                        pageButton.className += 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                    } else {
+                        pageButton.className += ' text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
+                        pageButton.onclick = () => fetchBatch(i, searchQuery);
+                    }
+                    pageButton.innerText = i;
+                    paginationContainer.appendChild(pageButton);
+                }
+
+                // Next button
+                if (data.has_next) {
+                    const nextButton = document.createElement('a');
+                    nextButton.href = 'javascript:void(0);';
+                    nextButton.className = 'text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2';
+                    nextButton.innerText = 'Next';
+                    nextButton.onclick = () => fetchBatch(data.next_page_number, searchQuery);
+                    paginationContainer.appendChild(nextButton);
+                }
+
+                paginationControls.appendChild(paginationContainer);
+            })
+            .catch(error => {
+                console.error('Error fetching trainers:', error);
+            });
+    }
+
+    function searchBatch() {
+        searchQuery = document.getElementById('table-search').value;
+        fetchBatch(1, searchQuery); // Reset to first page on new search
+    }
+
+    // Initial fetch
+    fetchBatch(currentPage, searchQuery);
+</script>
 
 
 {% endblock %}
