@@ -1,4 +1,5 @@
 {% load static %}
+{% load translate_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,6 +112,28 @@
             </div>
         </section>
     </div>
+    <style>
+        @media print {
+            .certificate-container {
+                margin-left: 0px;
+                /* Adjust this value to shift the certificate more or less to the left */
+            }
+        }
+    </style>
+
+    <div id="print-button" style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
+        <button onclick="printCertificate()"
+            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Print</button>
+    </div>
+
+    <script>
+        function printCertificate() {
+            var printButton = document.getElementById('print-button');
+            printButton.style.display = 'none';
+            window.print();
+            printButton.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>
