@@ -1,5 +1,4 @@
 {% load static %}
-{% load translate_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,17 +8,18 @@
     <link rel="stylesheet" href="{% static 'pdf/style.css' %}">
     <title>Certificate</title>
 </head>
-<body>
-    <div class="certificate-container body-background" id="certificate-container" style="position: relative;height: 97vh;">
+
+<body class="">
+    <div class="certificate-container body-background" style="position: relative; height: 97vh;">
         <section>
             <div class="d-flex justify-around">
                 <div>
-                    <img class="image-1" src="{% static 'pdf/logo etc.png' %}" alt="">
+                    <img class="image-1" src="{% static 'pdf/nepal_government.png' %}" alt="">
                 </div>
                 <div class="text-center">
-                    <p class=" m-1 p-1 text-red title">एक्सपर्ट टेक्निकल कलेज नेपाल</p>
-                    <p class=" m-1 p-1 text-red sub-title">इटहरी, सुनसरी</p>
-                    <p class="m-1 p-1 text-red title">प्रमाण-पत्र</p>
+                    <p class=" m-1 p-1 text-red title">{{municipality_name}}</p>
+                    <p class=" m-1 p-1 text-red sub-title">{{municipality_address}}</p>
+                    <p class=" m-1 p-1 text-red title">प्रमाण-पत्र</p>
                 </div>
                 <div>
                     <img class="image-passport" src="{{ student.image.url }}" alt="">
@@ -27,45 +27,50 @@
             </div>
         </section>
 
-        <section>
+        <section style="margin-top: 20px;">
             <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: ____________</p>
         </section>
 
         <section style="text-align: center; margin-top: 20px;">
             <p class="text-bold">
                 {{ contract.donation_by }}को कार्यालयको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
-                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि {{batch.end_date}} गतेसम्म सञ्चालन भएको {{contract.occupation}} सम्बन्धी
-                तालिममा {{ student.palika }} 
-                वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.father_name }} छोरा श्री {{ student.name }} सफलतापूर्वक सिप
+                लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि {{batch.end_date}} गतेसम्म सञ्चालन भएको
+                {{contract.occupation}} सम्बन्धी
+                तालिममा {{ student.palika }}
+                वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.father_name }} छोरा श्री {{ student.name }}
+                सफलतापूर्वक सिप
                 हासिल भएकोले स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ।
             </p>
         </section>
 
-        <section style="text-align: center; margin-top: 20px;">
+
+        <section style="text-align: center;margin-top: 20px;">
             <div>
                 <div class="text-center">
                     <p class="m-1 p-1 text-red title">CERTIFICATE</p>
                 </div>
             </div>
             <div>
-                <p class="text-bold">This certificate is awarded to 
+                <p class="text-bold">This certificate is awarded to
                     {% if student.gender == 'Male' %}
-                        Mr.
+                    Mr.
                     {% elif student.gender == 'Female' %}
-                        {% if student.marital_status == 'Married' %}
-                            Mrs.
-                        {% else %}
-                            Miss
-                        {% endif %}
+                    {% if student.marital_status == 'Married' %}
+                    Mrs.
                     {% else %}
-                        Mx.
+                    Miss
                     {% endif %}
-                    {{student.name}} 
-                    {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %} 
+                    {% else %}
+                    Mx.
+                    {% endif %}
+                    {{student.name}}
+                    {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %}
                     of Mr. {{student.father_name}}
-                    permanent resident of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} on his/her
+                    permanent resident of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} on
+                    his/her
                     successful completion of training programme and acquiring skills on {{contract.occupation}} Training
-                    for {{batch.duration}} from {{batch.start_date}} to {{batch.end_date}}. This training programme is conducted by Expert Technical
+                    for {{batch.duration}} from {{batch.start_date}} to {{batch.end_date}}. This training programme is
+                    conducted by Expert Technical
                     College Nepal Pvt. Ltd. Itahari with financial support of {{contract.donation_by}}.</p>
             </div>
         </section>
@@ -91,6 +96,7 @@
             </div>
         </section>
     </div>
+
     <style>
         @media print {
             .certificate-container {

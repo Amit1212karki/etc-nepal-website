@@ -1,0 +1,173 @@
+/* Set A4 size in landscape mode */
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+.body-background {
+    background-image: url('./assets/Emblem_of_Nepal.svg.png');
+    background-size: 600px; /* Adjust the size to make it smaller */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent color overlay */
+    background-blend-mode: lighten; /* Blend the transparent color with the image */
+}
+
+.certificate-container{
+    border: 4px solid #5e0000;
+    padding: 50px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Ensure the main content fits within the A4 page size */
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image-1 {
+    width: auto;
+    height: auto;
+    max-height: 120px;
+}
+
+.image-2 {
+    width: auto;
+    height: 50px;
+    max-height: 50px;
+}
+
+.image-3 {
+    width: auto;
+    height: 90px;
+    max-height: 90px;
+}
+
+.signature-image {
+    width: auto;
+    height:60px;
+    max-height:60px;
+}
+
+.image-passport {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #000;
+    border-radius: 2px;
+}
+
+.text-red {
+    color: rgb(133, 0, 0);
+    font-weight: 700;
+}
+
+.text-blue {
+    color: rgb(0, 0, 88);
+    font-weight: 700;
+}
+.text-bold{
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.title {
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.sub-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.text-caption {
+    font-size: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.m-1 {
+    margin: 2px !important;
+}
+
+.p-1 {
+    padding: 2px !important;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.header{
+    height: 170px;
+}
+
+.footer{
+    height: 100%;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.signature-line {
+    width: 50%;
+}
+
+@media print {
+
+    /* Force landscape orientation */
+    @page {
+        size: A4 landscape;
+        margin: 0;
+        /* Remove default margins */
+    }
+
+    /* Full page print without any margin */
+    body {
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 97vh;
+        /* Full viewport height */
+    }
+
+    /* Hide the print button during printing */
+    button {
+        display: none;
+    }
+
+    /* Ensure the certificate container is centered and scaled to fit the page */
+    .certificate-container {
+        width: 100%;
+        /* Adjust the width for scaling */
+        height: 100%;
+        max-height: 100%;
+        /* Ensure it fits vertically */
+        padding: 10;
+        box-sizing: border-box;
+        /* Ensure padding is included in width/height */
+    }
+}

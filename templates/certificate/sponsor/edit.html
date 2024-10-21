@@ -3,7 +3,6 @@
 {% block title %}
 {{ block.super }} - sponsor
 {% endblock %}
-
 {% block content %}
 
 <div class="container mx-auto">
@@ -80,7 +79,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
                             <p class="text-sm text-gray-500 my-5">Current image: <img
                                 src="{% if edit_sponsor.image%}{{ edit_sponsor.image.url }}{%endif%}"
-                                alt="Current Sponsor Image" class="w-20 h-20 rounded-full object-contain"></p>
+                                alt="Current Sponsor Image" class="w-20 h-20 object-contain mt-5"></p>
                     </div>
                 </div>
 

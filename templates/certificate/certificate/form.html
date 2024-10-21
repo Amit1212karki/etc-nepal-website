@@ -75,34 +75,51 @@
                     </select>
                 </div>
                 <div class="w-full">
-                    <label for="formate" class="block mb-2 text-sm font-medium text-gray-700">Certificate Formate
+                    <label for="formate" class="block mb-2 text-sm font-medium text-gray-700">Certificate Format
                         Type</label>
                     <select id="formate" name="formate" required
                         class="mt-1 block py-2 px-2 w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
-                        <option value="">Select Formate</option>
+                        <option value="">Select Format</option>
                         <option value="etc certificate">ETC Certificate</option>
-                        <option value="municipality">Municipality Certificate</option>
-                        <option value="certificate_three">Certificate Three</option>
-                        <option value="certificate_four">Certificate Four</option>
+                        <option value="municipality certificate">Municipality Certificate</option>
+                        <option value="vocational certificate">Vocational Certificate</option>
                     </select>
+                    <div id="municipality-fields" class="w-full hidden mt-4">
+                        <div class="mb-4">
+                            <label for="municipality_name" class="block mb-2 text-sm font-medium text-gray-700">Municipality Name</label>
+                            <input type="text" id="municipality_name" name="municipality_name" 
+                                   class="mt-1 block w-full py-2 px-2 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="municipality_address" class="block mb-2 text-sm font-medium text-gray-700">Municipality Address</label>
+                            <input type="text" id="municipality_address" name="municipality_address" 
+                                   class="mt-1 block w-full py-2 px-2 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 sm:text-sm">
+                        </div>
+                    </div>
+                  
                 </div>
+                
                 <div class="w-full">
-                    <label for="sponsor_image2" class="block mb-2 text-sm font-medium text-gray-900">Signature</label>
-                    {% for signatory in certificate_signature %}
-                    <input name="signatory[]" id="signatory-{{ signatory.id }}" type="checkbox"
-                        value="{{ signatory.id }}"
-                        class="w-4 h-4 ml-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                    <label for="signatory-{{signatory.id}}" class="ms-2 text-sm font-medium text-gray-900">{{signatory.name }}</label>
-                    {% endfor %}
+                    <div class="w-full mb-4">
+                        <label for="sponsor_image2" class="block mb-2 text-sm font-medium text-gray-900">Signature</label>
+                        {% for signatory in certificate_signature %}
+                        <input name="signatory[]" id="signatory-{{ signatory.id }}" type="checkbox"
+                            value="{{ signatory.id }}"
+                            class="w-4 h-4 ml-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                        <label for="signatory-{{signatory.id}}" class="ms-2 text-sm font-medium text-gray-900">{{signatory.name }}</label>
+                        {% endfor %}
+                    </div>
+                    <div class="w-full">
+                        <label for="sponsor_image2" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
+                        {% for sponsor in certificate_sponsor %}
+                        <input name="sponsor[]" id="sponsor-{{ sponsor.id }}" type="checkbox" value="{{ sponsor.id }}"
+                            class="w-4 h-4 ml-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                        <label for="sponsor-{{sponsor.id}}" class="ms-2 text-sm font-medium text-gray-900">{{sponsor.name}}</label>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="w-full">
-                    <label for="sponsor_image2" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
-                    {% for sponsor in certificate_sponsor %}
-                    <input name="sponsor[]" id="sponsor-{{ sponsor.id }}" type="checkbox" value="{{ sponsor.id }}"
-                        class="w-4 h-4 ml-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                    <label for="sponsor-{{sponsor.id}}" class="ms-2 text-sm font-medium text-gray-900">{{sponsor.name}}</label>
-                    {% endfor %}
-                </div>
+                
+               
             </div>
             <div class="relative overflow-x-auto bg-white mt-5">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -122,13 +139,41 @@
     </section>
 </div>
 
-
 <script>
+
     let contract_id;
     let batch_id;
     let certificate_format;
     let selected_signatories = [];
     let selected_sponsors = [];
+    let municipality_name = '';
+    let municipality_address = '';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const formateSelect = document.getElementById('formate');
+        const municipalityFields = document.getElementById('municipality-fields');
+
+        formateSelect.addEventListener('change', function() {
+            if (this.value === 'municipality certificate') {
+                municipalityFields.classList.remove('hidden');
+            } else {
+                municipalityFields.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('municipality_name').addEventListener('input', function() {
+            municipality_name = this.value;
+            console.log('Municipality Name:', municipality_name);
+        });
+
+        document.getElementById('municipality_address').addEventListener('input', function() {
+            municipality_address = this.value;
+            console.log('Municipality Address:', municipality_address);
+        });
+    });
+
+
+    
 
     document.addEventListener('DOMContentLoaded', function () {
         const contractSelect = document.getElementById('contract');
@@ -251,6 +296,8 @@
         url += `&certificate_format=${certificate_format}`;
         url += `&selected_signatories=${encodeURIComponent(JSON.stringify(selected_signatories))}`;
         url += `&selected_sponsors=${encodeURIComponent(JSON.stringify(selected_sponsors))}`;
+        url += `&municipality_name=${municipality_name}`;
+        url += `&municipality_address=${municipality_address}`;
 
         // Open the constructed URL in a new tab
         window.open(url, '_blank');

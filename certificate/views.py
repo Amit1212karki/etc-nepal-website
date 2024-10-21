@@ -204,10 +204,6 @@ def generate(request):
 
 
 def certificateForm(request):
-    # all_signatory = 
-    # context = {
-    # "all_signatory": 
-    # }
     return render(request, "certificate/certificate/certificate-form.html")
 
 def certificateForm2(request):
@@ -216,130 +212,7 @@ def certificateForm2(request):
     "all_signatory": all_signatory
     }
     return render(request, "certificate/certificate/certificate-form2.html", context)
-
-def pdf_view(request, *args, **kwargs):
-    if request.method == 'POST':
-        # Get form data from the POST request
-        data = {
-            "title": request.POST.get('title'),
-            "title_np": request.POST.get('title_np'),
-            "trainee_name": request.POST.get('trainee_name'),
-            "name_np": request.POST.get('name_np'),
-            "father_name": request.POST.get('father_name'),
-            "father_name_np": request.POST.get('father_name_np'),
-            "date_of_birth_ad": request.POST.get('date_of_birth_ad'),
-            "date_of_birth_bs": request.POST.get('date_of_birth_bs'),
-            "district": request.POST.get('district'),
-            "district_np": request.POST.get('district_np'),
-            "municipality": request.POST.get('municipality'),
-            "municipality_np": request.POST.get('municipality_np'),
-            "ward_no": request.POST.get('ward_no'),
-            "ward_no_np": request.POST.get('ward_no_np'),
-            "training_name": request.POST.get('training_name'),
-            "training_name_np": request.POST.get('training_name_np')
-        }
-        
-        if 'image' in request.FILES:
-            image = request.FILES['image']
-            image_data = image.read()
-
-            # Get MIME type of the image
-            mime_type, _ = mimetypes.guess_type(image.name)
-
-            # Convert image to base64 and include MIME type
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
-            data['image'] = f"data:{mime_type};base64,{image_base64}"
-            
-        if 'sponsor_image' in request.FILES:
-            image = request.FILES['sponsor_image']
-            image_data = image.read()
-
-            # Get MIME type of the image
-            mime_type, _ = mimetypes.guess_type(image.name)
-
-            # Convert image to base64 and include MIME type
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
-            data['sponsor_image'] = f"data:{mime_type};base64,{image_base64}"
-
-            # Debug: Check if the base64 string is being generated correctly
-
-        # Render PDF using PDFKit
-        # return HttpResponse(data['sponsor_image'])
     
-        return renderers.render_to_pdf_pdfkit('pdfs/certificate/index.html', data) 
-    
-def pdf_view2(request, *args, **kwargs):
-    if request.method == 'POST':
-        # Get form data from the POST request
-        data = {
-                    'certificate_number': request.POST.get('certificate_number'),
-                    'ctevt_account_number': request.POST.get('ctevt_account_number'),
-                    'pan_number': request.POST.get('pan_number'),
-                    'sponsor': request.POST.get('sponsor'),
-                    'course': request.POST.get('course'),
-                    'creditHr': request.POST.get('creditHr'),
-                    'start_date': request.POST.get('start_date'),
-                    'end_date': request.POST.get('end_date'),
-                    'municipality': request.POST.get('municipality'),
-                    'ward_no': request.POST.get('ward_no'),
-                    'city': request.POST.get('city'),
-                    'parents_name': request.POST.get('parents_name'),
-                    'trainee_name': request.POST.get('trainee_name'),
-                    'certified_date': request.POST.get('certified_date'),
-                }
-        
-        if 'image' in request.FILES:
-            image = request.FILES['image']
-            image_data = image.read()
-
-            # Get MIME type of the image
-            mime_type, _ = mimetypes.guess_type(image.name)
-
-            # Convert image to base64 and include MIME type
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
-            data['image'] = f"data:{mime_type};base64,{image_base64}"
-            
-        if 'sponsor_image1' in request.FILES:
-            image = request.FILES['sponsor_image1']
-            image_data = image.read()
-
-            # Get MIME type of the image
-            mime_type, _ = mimetypes.guess_type(image.name)
-
-            # Convert image to base64 and include MIME type
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
-            data['sponsor_image1'] = f"data:{mime_type};base64,{image_base64}"
-            
-        if 'sponsor_image2' in request.FILES:
-            image = request.FILES['sponsor_image2']
-            image_data = image.read()
-
-            # Get MIME type of the image
-            mime_type, _ = mimetypes.guess_type(image.name)
-
-            # Convert image to base64 and include MIME type
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
-            data['sponsor_image2'] = f"data:{mime_type};base64,{image_base64}"
-            
-        if 'sponsor_image3' in request.FILES:
-            image = request.FILES['sponsor_image3']
-            image_data = image.read()
-
-            # Get MIME type of the image
-            mime_type, _ = mimetypes.guess_type(image.name)
-
-            # Convert image to base64 and include MIME type
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
-            data['sponsor_image3'] = f"data:{mime_type};base64,{image_base64}"
-
-            # Debug: Check if the base64 string is being generated correctly
-
-        # Render PDF using PDFKit
-        # return HttpResponse(data['sponsor_image'])
-    
-        return renderers.render_to_pdf_pdfkit('pdfs/certificate/certificate_two.html', data) 
-    
-
 
 def certificateFormGenerate(request):
     # Retrieve all contracts
@@ -403,13 +276,69 @@ def generate_certificate(request):
     sponsors = [Sponsor.objects.get(pk=data) for data in selected_sponsors]
 
     context = {
-        "student": student,
-        "contract": contract,
-        "batch": batch,
-        "signatories": signatories,
-        "sponsors": sponsors
+        "student": {
+            "name": student.name,
+            "image": student.image,
+            "gender": student.get_gender_display(),
+            "date_of_birth_ad": student.date_of_birth_ad,
+            "date_of_birth_bs": student.date_of_birth_bs,
+            "age": student.age,
+            "marital_status": student.get_marital_status_display(),
+            "ethnic_group": student.ethnic_group,
+            "mother_name": student.mother_name,
+            "father_name": student.father_name,
+            "citizenship_no": student.citizenship_no,
+            "issue_date": student.issue_date,
+            "issue_district": student.issue_district,
+            "phone_no": student.phone_no,
+            "email": student.email,
+            "qualification": student.qualification,
+            "province": student.province.name if student.province else None,
+            "district": student.district.name if student.district else None,
+            "palika": student.palika.name if student.palika else None,
+            "ward_no": student.ward_no,
+            "occupation": student.occupation,
+        },
+        "contract": {
+            "id": contract.id,
+            "name": contract.name,
+            "location": contract.location,
+            "occupation": contract.occupation,
+            "donation_by": contract.donation_by,
+        },
+        "batch": {
+            "id": batch.id,
+            "name": batch.name,
+            "duration": batch.duration,
+            "start_date": batch.start_date,
+            "end_date": batch.end_date,
+            "seats": batch.seats,
+            "trainers": [
+                {
+                    "id": trainer.id,
+                    "name": trainer.name,
+                } for trainer in batch.trainer.all()
+            ],
+        },
+        "signatories": [
+            {
+                "id": signatory.id,
+                "name": signatory.name,
+                "designation": signatory.designation,
+                "institution": signatory.institution,
+            } for signatory in signatories
+        ],
+        "sponsors": [
+            {
+                "id": sponsor.id,
+                "name": sponsor.name,
+                "logo": sponsor.image,
+            } for sponsor in sponsors
+        ],
+        "municipality_name": request.GET.get('municipality_name'),
+        "municipality_address": request.GET.get('municipality_address'),
     }
-
+    
     # Render the appropriate template based on the certificate format
     if certificate_format == 'etc certificate':
         return render(request, 'pdfs/certificate/college_certificate.html', context)
