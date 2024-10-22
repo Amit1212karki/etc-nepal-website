@@ -29,7 +29,29 @@ def batchIndex(request):
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         data = {
-            'batches': list(batches.object_list.values('id','name','duration','start_date','end_date','seats','trainer')),
+            'batches': [
+                {
+                    'id':batch.id,
+                    'name': batch.name,
+                    'duration': batch.duration,
+                    'start_date': batch.start_date,
+                    'end_date': batch.end_date,
+                    'seats': batch.seats,
+
+                    'trainers': [
+                        {
+                            'id': trainer.id,
+                            'name': trainer.name,
+                        }
+                        for trainer in batch.trainer.all()
+                    ],
+                    'contract': {
+                        'id': batch.contract.id,
+                        'name': batch.contract.name,
+                    }
+                }
+                for batch in batches.object_list
+            ],
             'has_next': batches.has_next(),
             'has_previous': batches.has_previous(),
             'next_page_number': batches.next_page_number() if batches.has_next() else None,

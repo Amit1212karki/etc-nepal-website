@@ -53,8 +53,14 @@ def traineeIndex(request):
                     'id': trainee.id,
                     'name': trainee.name,
                     'image': trainee.image.url if trainee.image else None,
-                    'contract': trainee.contract,
-                    'batch': trainee.batch,
+                    'contract': {
+                        'id': trainee.contract.id,  # or use t.contract.name if you have a name field
+                        'name': trainee.contract.name  # assuming Contract model has a name field
+                    },
+                    'batch': {
+                        'id': trainee.batch.id,  # similarly for Batch, extract relevant fields
+                        'name': trainee.batch.name
+                    },
                     'phone_no': trainee.phone_no,
                     'is_selected':trainee.is_selected,
                 }

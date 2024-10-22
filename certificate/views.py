@@ -25,7 +25,11 @@ from django.conf import settings
 import os
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
-
+import re
+import qrcode
+import io
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 # Create your views here.
 
 def loginPage(request):
@@ -273,6 +277,45 @@ def generate_certificate(request):
     # Fetch sponsors
     sponsors = [Sponsor.objects.get(pk=data) for data in selected_sponsors]
 
+    # Prepare data for the QR code (including trainee details, batch, and contract)
+    qr_data = {
+        "trainee_name": student.name,
+        "trainee_nepali_name": student.nepali_name,
+        "contract_name": contract.name,
+        "batch_name": batch.name,
+        "start_date": str(batch.start_date),
+        "end_date": str(batch.end_date),
+        "trainee_detail_url": request.build_absolute_uri(f"/trainee/details/{student.id}/"),
+        "contract_location": contract.location,
+        "contract_occupation": contract.occupation,
+        "sponsors": [{"name": sponsor.name, "logo": sponsor.image.url if sponsor.image else None} for sponsor in sponsors],
+        "signatories": [{"name": signatory.name, "designation": signatory.designation} for signatory in signatories],
+    }
+
+    def sanitize_filename(name):
+        return re.sub(r'[\/:*?"<>|]', '_', name)
+
+    sanitized_name = sanitize_filename(student.name)
+    qr_code_filename = f'qr_codes/{sanitized_name}_{student.id}_qr.png'
+
+    # Generate the QR code with the above data
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(json.dumps(qr_data))  # Convert dictionary to JSON string
+    qr.make(fit=True)
+
+    img = qr.make_image(fill='black', back_color='white')
+
+    # Save QR code to a BytesIO object
+    qr_io = io.BytesIO()
+    img.save(qr_io, 'PNG')
+    qr_io.seek(0)
+
+    # Save the QR code image in the media folder
+    default_storage.save(qr_code_filename, ContentFile(qr_io.read()))
+
+    qr_code_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{qr_code_filename}")
+
+    # Add the QR code path to the context
     context = {
         "student": {
             "name": student.name,
@@ -324,6 +367,7 @@ def generate_certificate(request):
                 {
                     "id": trainer.id,
                     "name": trainer.name,
+                    "nepali_name": trainer.nepali_name,
                 } for trainer in batch.trainer.all()
             ],
         },
@@ -331,21 +375,27 @@ def generate_certificate(request):
             {
                 "id": signatory.id,
                 "name": signatory.name,
+                "nepali_name": signatory.nepali_name,
                 "designation": signatory.designation,
+                "nepali_designation": signatory.nepali_designation,
                 "institution": signatory.institution,
+                "nepali_institution": signatory.nepali_institution,
+
             } for signatory in signatories
         ],
         "sponsors": [
             {
                 "id": sponsor.id,
                 "name": sponsor.name,
-                "logo": sponsor.image,
+                "nepali_name": sponsor.nepali_name,
+                "logo": sponsor.image.url if sponsor.image else None,
             } for sponsor in sponsors
         ],
         "municipality_name": request.GET.get('municipality_name'),
         "municipality_address": request.GET.get('municipality_address'),
+        'qr_code': qr_code_url,  # Pass the QR code path to the template
     }
-    
+
     # Render the appropriate template based on the certificate format
     if certificate_format == 'etc certificate':
         return render(request, 'pdfs/certificate/college_certificate.html', context)
@@ -353,8 +403,3 @@ def generate_certificate(request):
         return render(request, 'pdfs/certificate/municipality_certificate.html', context)
     else:
         return render(request, 'pdfs/certificate/vocational_certificate.html', context)
-    
-
-
-
-

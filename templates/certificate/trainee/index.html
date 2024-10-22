@@ -118,54 +118,7 @@
                     </tr>
                 </thead>
                 <tbody id="trainee-table-body">
-                    {% for trainee in all_trainee %}
-                    <tr class="border-b  ">
-                        <td class="px-6 py-4">
-                            <img class="w-14 h-14 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                                src="{% if trainee.image %}{{ trainee.image.url }}{%endif%}" alt="Bordered avatar">
-                        </td>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            {{trainee.name}}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{trainee.contract}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{trainee.batch}}
-                        </td>
-                        <td class="px-6 py-4">
-                            <button
-                                class="focus:outline-none transition duration-300 ease-in-out transform {{ trainee.is_selected|yesno:'bg-green-500 text-white, bg-gray-300 text-gray-600' }} rounded-lg px-4 py-2"
-                                onclick="toggleSelection({{ trainee.id }})">{{ trainee.is_selected|yesno:'Selected, NotSelected' }}
-                            </button>
-                        </td>
-                        <td class="px-6 py-4">
-                            {{trainee.phone_no}}
-
-                        </td>
-
-                        <td class="px-6 py-4 text-right flex gap-4">
-                            <a href="{% url 'trainee-edit' trainee.id %}"
-                                class="font-medium text-blue-600 hover:underline">
-                                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                                </svg>
-                            </a>
-                            <a href="/trainee/delete-trainee/{{trainee.id}}/"
-                                class="font-medium text-red-600 hover:underline">
-                                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
+    
                 </tbody>
             </table>
         </div>
@@ -213,22 +166,20 @@
                     ${trainee.name}
                 </td>
                  <td class="px-6 py-4">
-                    ${trainee.contract}
+                    ${trainee.contract.name}
                 </td>
                  <td class="px-6 py-4">
-                    ${trainee.batch}
+                    ${trainee.batch.name}
                 </td>
-                 <td class="px-6 py-4">
-                    ${trainee.institution}
+                <td class="px-6 py-4">
+                    <button
+                        class="focus:outline-none transition duration-300 ease-in-out transform ${trainee.is_selected ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'} rounded-lg px-4 py-2"
+                      >
+                        ${trainee.is_selected ? 'Selected' : 'Not Selected'}
+                    </button>
                 </td>
-                 <td class="px-6 py-4">
-                            <button
-                                class="focus:outline-none transition duration-300 ease-in-out transform {{ trainee.is_selected|yesno:'bg-green-500 text-white, bg-gray-300 text-gray-600' }} rounded-lg px-4 py-2"
-                                onclick="toggleSelection({{ trainee.id }})">{{ trainee.is_selected|yesno:'Selected, NotSelected' }}
-                            </button>
-                        </td>
-                         <td class="px-6 py-4">
-                    ${trainee.institution}
+                <td class="px-6 py-4">
+                    ${trainee.phone_no}
                 </td>
                   
                 <td class="px-6 py-4 text-right flex gap-4">

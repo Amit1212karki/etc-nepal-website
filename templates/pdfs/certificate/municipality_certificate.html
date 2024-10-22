@@ -37,8 +37,8 @@
                 {{ contract.nepali_donation_by }}को कार्यालयको आर्थिक सहयोगमा एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.
                 लि. इटहरीको सहकार्यमा मिति {{ batch.start_date }} गते देखि {{batch.end_date}} गतेसम्म सञ्चालन भएको
                 {{contract.nepali_occupation}} सम्बन्धी
-                तालिममा {{ student.nepali_palika_name }} वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.nepali_father_name }} छोरा श्री {{ student.nepali_name }}
-                सफलतापूर्वक सिप
+                तालिममा {{ student.nepali_palika_name }} वडा नं {{ student.ward_no }}, मोरङ बस्ने श्री {{ student.nepali_father_name }}का {% if student.gender == 'Male' %} छोरा {% else %} छोरी {% endif %}श्री {{ student.nepali_name }}
+                ले सफलतापूर्वक सिप
                 हासिल भएकोले स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ।
             </p>
         </section>
@@ -64,7 +64,7 @@
                     Mx.
                     {% endif %}
                     {{student.name}}
-                    {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %}
+                    {% if student.gender == 'Male' %}Son{% else %}Daughter{% endif %}
                     of Mr. {{student.father_name}}
                     permanent resident of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} on
                     his/her
@@ -78,19 +78,21 @@
         <section>
             <div class="d-flex justify-between" style="bottom: 20px;position: absolute;width: 96%;">
                 {% for trainer in batch.trainers %}
-                <div>
-                    <hr>
-                    <p class="m-1 p-1 text-bold">{{trainer.name}}</p>
+                <div class="grid place-items-center text-center">
+                    <hr class="w-full">
+                    <p class="m-1 p-1 text-bold">{{trainer.nepali_name}}</p>
                     <p class="m-1 p-1">प्रशिक्षक </p>
                 </div>
                 {% endfor %}
-
-                {% for signatory in signatories %}
                 <div>
-                    <hr>
-                    <p class="m-1 p-1 text-bold"> {{signatory.name}}</p>
-                    <p class="m-1 p-1"> {{signatory.designation}}</p>
-                    <p class="m-1 p-1"> {{signatory.institution}}</p>
+                    <img class="image-1" src="{{ qr_code }}" alt="">
+                </div>
+                {% for signatory in signatories %}
+                <div class="grid place-items-center text-center">
+                    <hr class="w-full">
+                    <p class="m-1 p-1 text-bold"> {{signatory.nepali_name}}</p>
+                    <p class="m-1 p-1"> {{signatory.nepali_designation}}</p>
+                    <p class="m-1 p-1"> {{signatory.nepali_institution}}</p>
                 </div>
                 {% endfor %}
             </div>
