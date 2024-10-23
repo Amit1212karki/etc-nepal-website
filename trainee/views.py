@@ -5,9 +5,21 @@ from batch.models import *
 from location.models import *
 from .models import *
 from django.contrib import messages
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.http import JsonResponse
+import qrcode
+import json
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from io import BytesIO
+from django.conf import settings
+from datetime import datetime
+from dateutil import parser
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -30,7 +42,55 @@ def toggle_selection(request, trainee_id):
 
 @login_required
 def traineeIndex(request):
-    all_trainee = Trainee.objects.all()
+    search_query = request.GET.get('search','')
+    all_trainee = Trainee.objects.filter(
+        Q(name__icontains=search_query)
+    ) if search_query else Trainee.objects.all()
+
+    paginator = Paginator(all_trainee, 7)
+    page_number = request.GET.get('page', 1)
+    trainee = paginator.get_page(page_number)
+
+    total_entries = paginator.count
+    total_pages = paginator.num_pages
+    start_index = trainee.start_index()
+    end_index = trainee.end_index()
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = {
+            'trainee': [
+                {
+                    'id': trainee.id,
+                    'name': trainee.name,
+                    'image': trainee.image.url if trainee.image else None,
+                    'qr_code': trainee.qr_code_image.url if trainee.qr_code_image else None,
+
+                    'contract': {
+                        'id': trainee.contract.id,  # or use t.contract.name if you have a name field
+                        'name': trainee.contract.name  # assuming Contract model has a name field
+                    },
+                    'batch': {
+                        'id': trainee.batch.id,  # similarly for Batch, extract relevant fields
+                        'name': trainee.batch.name
+                    },
+                    'phone_no': trainee.phone_no,
+                    'is_selected':trainee.is_selected,
+                }
+                for trainee in trainee.object_list
+            ],
+            'has_next': trainee.has_next(),
+            'has_previous': trainee.has_previous(),
+            'next_page_number': trainee.next_page_number() if trainee.has_next() else None,
+            'previous_page_number': trainee.previous_page_number() if trainee.has_previous() else None,
+            'total_entries': total_entries,
+            'total_pages': total_pages,
+            'current_page': trainee.number,
+            'start_index': start_index,
+            'end_index': end_index,
+        }
+
+        return JsonResponse(data)
+
     context = {
         'all_trainee':all_trainee
     }
@@ -68,9 +128,17 @@ def traineeStore(request):
         ward_no  =  request.POST.get('ward_no')
         occupation = request.POST.get('occupation')
         name = request.POST.get('name')
+        nepali_name = request.POST.get('nepali_name')
         gender = request.POST.get('gender')
         date_of_birth_ad = request.POST.get('dob')
         date_of_birth_bs = request.POST.get('dob_bs')
+        try:
+            if date_of_birth_bs:
+                parsed_date_bs = parser.parse(date_of_birth_bs)
+                date_of_birth_bs = parsed_date_bs.strftime('%Y-%m-%d')
+        except (ValueError, parser.ParserError):
+            messages.error(request, 'Invalid BS date format. Please enter a valid date.')
+            return redirect('trainee-create')
         
 
         age  =  request.POST.get('age')
@@ -82,8 +150,16 @@ def traineeStore(request):
         ethnic_group = request.POST.get('ethnic_group')
         mother_name = request.POST.get('mother_name')
         father_name = request.POST.get('father_name')
+        nepali_father_name = request.POST.get('nepali_father_name')
         citizenship_no = request.POST.get('citizenship_no')
         issue_date = request.POST.get('issue_date')
+        try:
+            if issue_date:
+                parsed_issue_date = parser.parse(issue_date)
+                issue_date = parsed_issue_date.strftime('%Y-%m-%d')
+        except (ValueError, parser.ParserError):
+            messages.error(request, 'Invalid issue date format. Please enter a valid date.')
+            return redirect('trainee-create')
         issue_district = request.POST.get('issue_district')
         phone_no = request.POST.get('contact')
         email = request.POST.get('email')
@@ -112,6 +188,7 @@ def traineeStore(request):
             ward_no=ward_no,
             occupation = occupation,
             name = name,
+            nepali_name = nepali_name,
             gender = gender,
             date_of_birth_ad=date_of_birth_ad,
             date_of_birth_bs=date_of_birth_bs,
@@ -120,6 +197,7 @@ def traineeStore(request):
             ethnic_group=ethnic_group,
             mother_name=mother_name,
             father_name=father_name,
+            nepali_father_name = nepali_father_name,
             citizenship_no=citizenship_no,
             issue_date=issue_date,
             issue_district=issue_district,
@@ -131,7 +209,46 @@ def traineeStore(request):
             citizenship_back_image=citizenship_back_image,
             is_selected= (is_selected == 'yes')
         )
+        trainee_detail_url = request.build_absolute_uri(reverse('certificate-scan', kwargs={'id': store_trainee.id}))
+
+
+        qr_data = {
+            "url": request.build_absolute_uri(trainee_detail_url),
+            "name": name,
+            "nepali_name": nepali_name,
+            "gender": gender,
+            "date_of_birth_ad": date_of_birth_ad,
+            "age": age,
+            "contact": phone_no,
+            "email": email,
+            "occupation": occupation,
+            "contract": contract.name,
+            "batch": batch.name,
+            "province": province.name,
+            "district": district.name,
+            "palika": palika.name,
+            "ward_no": ward_no,
+        }
+
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr.add_data(json.dumps(qr_data))
+        qr.make(fit=True)
+
+        img = qr.make_image(fill='black', back_color='white')
+
+        # Save QR code to a BytesIO object
+        qr_io = BytesIO()
+        img.save(qr_io, 'PNG')
+        qr_io.seek(0)
+
+        # Save the QR code image in the media folder
+        qr_code_filename = f'trainee/qr_code_images/{store_trainee.id}_qr.png'
+        default_storage.save(qr_code_filename, ContentFile(qr_io.read()))
+
+        # Update the Trainee object with the QR code path
+        store_trainee.qr_code_image = qr_code_filename  # save the relative path
         store_trainee.save()
+
         batch.seats -=1
         batch.save()
         messages.success(request, 'Trainee added successfully')
@@ -171,6 +288,7 @@ def traineeUpdate(request, id):
         ward_no  =  request.POST.get('ward_no')
         occupation = request.POST.get('occupation')
         name = request.POST.get('name')
+        nepali_name = request.POST.get('nepali_name')
         gender = request.POST.get('gender')
         date_of_birth_ad = request.POST.get('dob')
         date_of_birth_bs = request.POST.get('dob_bs')
@@ -185,6 +303,7 @@ def traineeUpdate(request, id):
         ethnic_group = request.POST.get('ethnic_group')
         mother_name = request.POST.get('mother_name')
         father_name = request.POST.get('father_name')
+        nepali_father_name = request.POST.get('nepali_father_name')
         citizenship_no = request.POST.get('citizenship_no')
         issue_date = request.POST.get('issue_date')
         issue_district = request.POST.get('issue_district')
@@ -211,6 +330,7 @@ def traineeUpdate(request, id):
         update_trainee.ward_no=ward_no
         update_trainee.occupation = occupation
         update_trainee.name = name
+        update_trainee.nepali_name = nepali_name
         update_trainee.gender = gender
         update_trainee.date_of_birth_ad=date_of_birth_ad
         update_trainee.date_of_birth_bs=date_of_birth_bs
@@ -219,6 +339,7 @@ def traineeUpdate(request, id):
         update_trainee.ethnic_group=ethnic_group
         update_trainee.mother_name=mother_name
         update_trainee.father_name=father_name
+        update_trainee.nepali_father_name = nepali_father_name
         update_trainee.citizenship_no=citizenship_no
         update_trainee.issue_date=issue_date
         update_trainee.issue_district=issue_district

@@ -4,4 +4,5 @@ from django.db import models
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=255)
+    nepali_name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='sponsor_images/')

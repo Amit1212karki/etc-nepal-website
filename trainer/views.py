@@ -52,6 +52,7 @@ def trainerCreate(request):
 def trainerStore(request):
     if request.method == 'POST':
         name = request.POST.get('name')
+        nepali_name = request.POST.get('nepali_name')
         contact = request.POST.get('contact')
         qualification = request.POST.get('qualification')
         tot = request.POST.get('tot')
@@ -59,6 +60,7 @@ def trainerStore(request):
         trainer = Trainer.objects.create(
             name = name,
             contact = contact,
+            nepali_name = nepali_name,
             qualification = qualification,
             tot=(tot == 'yes')
         )
@@ -84,12 +86,13 @@ def trainerUpdate(request, id):
     update_trainer = Trainer.objects.get(id=id)
     if request.method == 'POST':
         update_trainer.name = request.POST.get('name')
+        update_trainer.nepali_name = request.POST.get('nepali_name')
         update_trainer.contact = request.POST.get('contact')
         update_trainer.qualification = request.POST.get('qualification')
         tot = request.POST.get('tot', 'no')  # Default to 'no'
         update_trainer.tot = True if tot == 'yes' else False
 
-        if update_trainer.name and update_trainer.contact and update_trainer.qualification:
+        if update_trainer.name and update_trainer.nepali_name and update_trainer.contact and update_trainer.qualification:
             update_trainer.save()
             messages.success(request,'Trainer successfully updated.')
             return redirect('trainer-index')

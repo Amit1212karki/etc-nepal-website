@@ -56,12 +56,21 @@ def contractStore(request):
         location = request.POST.get('location')
         occupation = request.POST.get('occupation')
         donation_by = request.POST.get('donation')
+        nepali_name = request.POST.get('nepali_name')
+        nepali_location = request.POST.get('nepali_location')
+        nepali_occupation = request.POST.get('nepali_occupation')
+        nepali_donation = request.POST.get('nepali_donation')
+
 
         contract = Contract.objects.create(
             name=name,
             location=location,
             occupation=occupation,
-            donation_by=donation_by
+            donation_by=donation_by,
+            nepali_name = nepali_name,
+            nepali_location = nepali_location,
+            nepali_occupation = nepali_occupation,
+            nepali_donation_by = nepali_donation,
         )
         contract.save()
         messages.success(request, 'Contract successfully created.')
@@ -88,8 +97,12 @@ def contractUpdate(request, id):
         update_contract.location = request.POST.get('location')
         update_contract.occupation = request.POST.get('occupation')
         update_contract.donation_by = request.POST.get('donation')
+        update_contract.nepali_location = request.POST.get('nepali_location')
+        update_contract.nepali_name = request.POST.get('nepali_name')
+        update_contract.nepali_occupation = request.POST.get('nepali_occupation')
+        update_contract.nepali_donation_by = request.POST.get('nepali_donation')
 
-        if update_contract.name and update_contract.location and update_contract.occupation and update_contract.donation_by:
+        if update_contract.name and update_contract.location and update_contract.occupation and update_contract.donation_by and update_contract.nepali_name and update_contract.nepali_location and update_contract.nepali_occupation and update_contract.nepali_donation_by:
             update_contract.save()
             messages.success(request, 'Contract successfully updated.')
             return redirect('contract-index')
