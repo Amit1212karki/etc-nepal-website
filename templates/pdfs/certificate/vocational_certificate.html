@@ -20,17 +20,20 @@
                     <img class="image-1" src="{%static 'pdf/Emblem_of_Nepal.svg.png'%}" alt="">
                 </div>
                 <div class="text-center">
-                    <p class="text-red m-1 p-1">नेपाल सरकार</p>
-                    <p class="text-red m-1 p-1">श्रम, रोजगार तथा सामाजिक सुरक्षा मन्त्रालय</p>
-                    <p class="text-blue sub-title m-1 p-1">ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि)</p>
-                    <p class="text-red title m-1 p-1">Vocational Skill Training Completion Certificate</p>
+                    <p class="text-red m-1 p-1">{{vocational_first_heading}}</p>
+                    <p class="text-red m-1 p-1">{{vocational_second_heading}}</p>
+                    <p class="text-blue sub-title m-1 p-1">{{vocational_third_heading}}</p>
+                    <p class="text-red title m-1 p-1">{{vocational_fourth_heading}}</p>
+
                 </div>
                 <div>
                     <div>
                         <img class="image-2" src="./assets/HEL_Logo_3d_Bangladesh_colour_web.png" alt="">
                     </div>
                     <div>
-                        <img class="image image-passport" src="{{ student.image.url }}" alt="">
+                        {% if student.image and student.image.url %}
+                            <img class="image-passport" src="{{ student.image.url }}" alt="Student Image">
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -108,7 +111,9 @@
                     <img class="image-2" src="{% static 'pdf/logo etc.png' %}" alt="">
                 </div>
                 <div>
-                    <img class="image-1" src="{{ qr_code }}" alt="">
+                    {% if student.qr_code %}
+                        <img class="image-1" src="{{ student.qr_code }}" alt="QR Code Image">
+                    {% endif %}
                 </div>
                 <div>
                     <p>Training Sponsored by:</p>

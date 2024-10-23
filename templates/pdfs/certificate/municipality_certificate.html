@@ -19,6 +19,7 @@
                 </div>
                 <div class="text-center">
                     <p class=" m-1 p-1 text-red title">{{municipality_name}}</p>
+                    <p class=" m-1 p-1 text-red title">{{municipality_second_name}}</p>
                     <p class=" m-1 p-1 text-red sub-title">{{municipality_address}}</p>
                     <p class=" m-1 p-1 text-red title">प्रमाण-पत्र</p>
                 </div>
@@ -85,7 +86,9 @@
                 </div>
                 {% endfor %}
                 <div>
-                    <img class="image-1" src="{{ qr_code }}" alt="">
+                    {% if student.qr_code %}
+                        <img class="image-1" src="{{ student.qr_code }}" alt="QR Code Image">
+                    {% endif %}
                 </div>
                 {% for signatory in signatories %}
                 <div class="grid place-items-center text-center">

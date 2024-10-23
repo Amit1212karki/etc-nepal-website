@@ -9,27 +9,16 @@ from trainer.models import *
 from certificate.models import *
 from signatory.models import *
 from sponsor.models import *
-from django.template.loader import get_template
-from django.http import HttpResponse
-from etcportfolio import renderers
-import base64
-from datetime import datetime
-import mimetypes
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 import json
-from django.template.loader import get_template
-from django.http import HttpResponse
 from signatory.models import Signatory
 from django.conf import settings
 import os
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
-import re
-import qrcode
-import io
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
+
+
 # Create your views here.
 
 def loginPage(request):
@@ -43,6 +32,7 @@ def loginView(request):
             user = authenticate(request, username=name, password=password)
             if user is not None:
                 auth_login(request, user)
+                messages.success(request, f'Welcome back, {request.user.username}! You\'ve successfully logged in.')
                 return redirect('/certificate/dashboard/')
             else:
                 messages.error(request,'Provided credintial is invalid !!')
@@ -277,45 +267,6 @@ def generate_certificate(request):
     # Fetch sponsors
     sponsors = [Sponsor.objects.get(pk=data) for data in selected_sponsors]
 
-    # Prepare data for the QR code (including trainee details, batch, and contract)
-    qr_data = {
-        "trainee_name": student.name,
-        "trainee_nepali_name": student.nepali_name,
-        "contract_name": contract.name,
-        "batch_name": batch.name,
-        "start_date": str(batch.start_date),
-        "end_date": str(batch.end_date),
-        "trainee_detail_url": request.build_absolute_uri(f"/trainee/details/{student.id}/"),
-        "contract_location": contract.location,
-        "contract_occupation": contract.occupation,
-        "sponsors": [{"name": sponsor.name, "logo": sponsor.image.url if sponsor.image else None} for sponsor in sponsors],
-        "signatories": [{"name": signatory.name, "designation": signatory.designation} for signatory in signatories],
-    }
-
-    def sanitize_filename(name):
-        return re.sub(r'[\/:*?"<>|]', '_', name)
-
-    sanitized_name = sanitize_filename(student.name)
-    qr_code_filename = f'qr_codes/{sanitized_name}_{student.id}_qr.png'
-
-    # Generate the QR code with the above data
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(json.dumps(qr_data))  # Convert dictionary to JSON string
-    qr.make(fit=True)
-
-    img = qr.make_image(fill='black', back_color='white')
-
-    # Save QR code to a BytesIO object
-    qr_io = io.BytesIO()
-    img.save(qr_io, 'PNG')
-    qr_io.seek(0)
-
-    # Save the QR code image in the media folder
-    default_storage.save(qr_code_filename, ContentFile(qr_io.read()))
-
-    qr_code_url = request.build_absolute_uri(f"{settings.MEDIA_URL}{qr_code_filename}")
-
-    # Add the QR code path to the context
     context = {
         "student": {
             "name": student.name,
@@ -343,6 +294,8 @@ def generate_certificate(request):
             "nepali_palika_name": student.palika.nepali_name if student.palika else None,
             "ward_no": student.ward_no,
             "occupation": student.occupation,
+            'qr_code': student.qr_code_image.url if student.qr_code_image else None, 
+
         },
         "contract": {
             "id": contract.id,
@@ -392,8 +345,13 @@ def generate_certificate(request):
             } for sponsor in sponsors
         ],
         "municipality_name": request.GET.get('municipality_name'),
+        "municipality_second_name": request.GET.get('municipality_second_name'),
         "municipality_address": request.GET.get('municipality_address'),
-        'qr_code': qr_code_url,  # Pass the QR code path to the template
+        "vocational_first_heading": request.GET.get('vocational_first_heading'),
+        "vocational_second_heading": request.GET.get('vocational_second_heading'),
+        "vocational_third_heading": request.GET.get('vocational_third_heading'),
+        "vocational_fourth_heading": request.GET.get('vocational_fourth_heading'),
+        
     }
 
     # Render the appropriate template based on the certificate format
@@ -403,3 +361,9 @@ def generate_certificate(request):
         return render(request, 'pdfs/certificate/municipality_certificate.html', context)
     else:
         return render(request, 'pdfs/certificate/vocational_certificate.html', context)
+
+
+
+def trainee_details(request, id):
+    trainee = get_object_or_404(Trainee, id=id)
+    return render(request, 'certificate/detail.html', {'trainee': trainee})

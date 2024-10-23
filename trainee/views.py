@@ -10,6 +10,16 @@ import json
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
+import qrcode
+import json
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from io import BytesIO
+from django.conf import settings
+from datetime import datetime
+from dateutil import parser
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -53,6 +63,8 @@ def traineeIndex(request):
                     'id': trainee.id,
                     'name': trainee.name,
                     'image': trainee.image.url if trainee.image else None,
+                    'qr_code': trainee.qr_code_image.url if trainee.qr_code_image else None,
+
                     'contract': {
                         'id': trainee.contract.id,  # or use t.contract.name if you have a name field
                         'name': trainee.contract.name  # assuming Contract model has a name field
@@ -120,6 +132,13 @@ def traineeStore(request):
         gender = request.POST.get('gender')
         date_of_birth_ad = request.POST.get('dob')
         date_of_birth_bs = request.POST.get('dob_bs')
+        try:
+            if date_of_birth_bs:
+                parsed_date_bs = parser.parse(date_of_birth_bs)
+                date_of_birth_bs = parsed_date_bs.strftime('%Y-%m-%d')
+        except (ValueError, parser.ParserError):
+            messages.error(request, 'Invalid BS date format. Please enter a valid date.')
+            return redirect('trainee-create')
         
 
         age  =  request.POST.get('age')
@@ -134,6 +153,13 @@ def traineeStore(request):
         nepali_father_name = request.POST.get('nepali_father_name')
         citizenship_no = request.POST.get('citizenship_no')
         issue_date = request.POST.get('issue_date')
+        try:
+            if issue_date:
+                parsed_issue_date = parser.parse(issue_date)
+                issue_date = parsed_issue_date.strftime('%Y-%m-%d')
+        except (ValueError, parser.ParserError):
+            messages.error(request, 'Invalid issue date format. Please enter a valid date.')
+            return redirect('trainee-create')
         issue_district = request.POST.get('issue_district')
         phone_no = request.POST.get('contact')
         email = request.POST.get('email')
@@ -183,7 +209,46 @@ def traineeStore(request):
             citizenship_back_image=citizenship_back_image,
             is_selected= (is_selected == 'yes')
         )
+        trainee_detail_url = request.build_absolute_uri(reverse('certificate-scan', kwargs={'id': store_trainee.id}))
+
+
+        qr_data = {
+            "url": request.build_absolute_uri(trainee_detail_url),
+            "name": name,
+            "nepali_name": nepali_name,
+            "gender": gender,
+            "date_of_birth_ad": date_of_birth_ad,
+            "age": age,
+            "contact": phone_no,
+            "email": email,
+            "occupation": occupation,
+            "contract": contract.name,
+            "batch": batch.name,
+            "province": province.name,
+            "district": district.name,
+            "palika": palika.name,
+            "ward_no": ward_no,
+        }
+
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr.add_data(json.dumps(qr_data))
+        qr.make(fit=True)
+
+        img = qr.make_image(fill='black', back_color='white')
+
+        # Save QR code to a BytesIO object
+        qr_io = BytesIO()
+        img.save(qr_io, 'PNG')
+        qr_io.seek(0)
+
+        # Save the QR code image in the media folder
+        qr_code_filename = f'trainee/qr_code_images/{store_trainee.id}_qr.png'
+        default_storage.save(qr_code_filename, ContentFile(qr_io.read()))
+
+        # Update the Trainee object with the QR code path
+        store_trainee.qr_code_image = qr_code_filename  # save the relative path
         store_trainee.save()
+
         batch.seats -=1
         batch.save()
         messages.success(request, 'Trainee added successfully')

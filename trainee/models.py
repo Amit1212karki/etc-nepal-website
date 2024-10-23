@@ -51,6 +51,7 @@ class Trainee(models.Model):
     is_selected = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    qr_code_image = models.ImageField(upload_to='trainee/qr_code_images/', blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -209,5 +209,15 @@
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
+
+    setTimeout(function() {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            messageList.classList.add('opacity-0'); // Add opacity transition class to fade out
+            setTimeout(function() {
+                messageList.remove(); // Remove the message list from DOM after fading out
+            }, 500); // 500ms matches the transition duration to ensure smooth removal
+        }
+    }, 5000);
 </script>
 {% endblock %}

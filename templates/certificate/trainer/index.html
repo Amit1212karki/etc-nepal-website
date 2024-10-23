@@ -80,9 +80,9 @@
         <ul id="message-list" class="transition-opacity duration-500 opacity-100">
             {% for message in messages %}
             {% if message.level == 25 %} {# SUCCESS level #}
-            <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+            <li class="text-black bg-green-100 p-2 rounded text-center">{{ message }}</li>
             {% elif message.level == 40 %} {# ERROR level #}
-            <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+            <li class="text-black bg-red-100 p-2 rounded text-center">{{ message }}</li>
             {% endif %}
             {% endfor %}
         </ul>
@@ -238,7 +238,15 @@
 
         // Initial fetch
         fetchTrainer(currentPage, searchQuery);
-    </script>
-
-
+    
+    setTimeout(function() {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            messageList.classList.add('opacity-0'); // Add opacity transition class to fade out
+            setTimeout(function() {
+                messageList.remove(); // Remove the message list from DOM after fading out
+            }, 500); // 500ms matches the transition duration to ensure smooth removal
+        }
+    }, 5000);
+</script>
     {% endblock %}
