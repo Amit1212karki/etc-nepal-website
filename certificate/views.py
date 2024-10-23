@@ -9,17 +9,9 @@ from trainer.models import *
 from certificate.models import *
 from signatory.models import *
 from sponsor.models import *
-from django.template.loader import get_template
-from django.http import HttpResponse
-from etcportfolio import renderers
-import base64
-from datetime import datetime
-import mimetypes
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 import json
-from django.template.loader import get_template
-from django.http import HttpResponse
 from signatory.models import Signatory
 from django.conf import settings
 import os
