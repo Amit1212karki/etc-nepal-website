@@ -20,17 +20,20 @@
                     <img class="image-1" src="{%static 'pdf/Emblem_of_Nepal.svg.png'%}" alt="">
                 </div>
                 <div class="text-center">
-                    <p class="text-red m-1 p-1">नेपाल सरकार</p>
-                    <p class="text-red m-1 p-1">श्रम, रोजगार तथा सामाजिक सुरक्षा मन्त्रालय</p>
-                    <p class="text-blue sub-title m-1 p-1">ग्रामीण उद्यम तथा विप्रेषण आयोजना (समृद्धि)</p>
-                    <p class="text-red title m-1 p-1">Vocational Skill Training Completion Certificate</p>
+                    <p class="text-red m-1 p-1">{{vocational_first_heading}}</p>
+                    <p class="text-red m-1 p-1">{{vocational_second_heading}}</p>
+                    <p class="text-blue sub-title m-1 p-1">{{vocational_third_heading}}</p>
+                    <p class="text-red title m-1 p-1">{{vocational_fourth_heading}}</p>
+
                 </div>
                 <div>
                     <div>
                         <img class="image-2" src="./assets/HEL_Logo_3d_Bangladesh_colour_web.png" alt="">
                     </div>
                     <div>
-                        <img class="image image-passport" src="{{ student.image.url }}" alt="">
+                        {% if student.image and student.image.url %}
+                            <img class="image-passport" src="{{ student.image.url }}" alt="Student Image">
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -39,14 +42,20 @@
         <!-- Body -->
         <section>
             <div>
-                <p>यो प्रमाणपत्र यस.प. न. {{student.ward_no}} वडा न. {{student.district}} जिल्ला निवासी श्री {{student.father_name}} छोरा जन्म मिति {{student.date_of_birth_ad}}
-                    श्री {{student.name}}, {{contract.name}} अन्तर्गत {% for sponser in sponsors %} {{sponser.name}}, {% endfor %} को
-                    प्राविधिक सहयोगमा {{batch.start_date|convert_to_nepali_date}} देखि {{batch.end_date|convert_to_nepali_date}} सम्म एक्सपर्ट टेक्निकल कलेज नेपाल प्रा.लि.ले
-                    {{contract.location}}मा सञ्चालित {{contract.occupation}} बिषयमा सिटिभिटिको {{batch.duration}} को
-                    पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।</p>
+                <p>यो प्रमाणपत्र वडा न. {{student.ward_no}} {{student.nepali_district}} जिल्ला निवासी श्री
+                    {{student.nepali_father_name}}का {% if student.gender == 'Male' %} छोरा {% else %} छोरी {% endif %}
+                    जन्म मिति {{student.date_of_birth_bs}}
+                    श्री {{student.nepali_name}} ले {{contract.nepali_name}} अन्तर्गत {% for sponser in sponsors %}
+                    {{sponser.name}}, {% endfor %} को
+                    प्राविधिक सहयोगमा {{batch.start_date}} देखि {{batch.end_date}} सम्म एक्सपर्ट टेक्निकल कलेज नेपाल
+                    प्रा.लि.ले
+                    {{contract.nepali_location}}मा सञ्चालित {{contract.nepali_occupation}} बिषयमा सिटिभिटिको
+                    {{batch.duration}} को
+                    पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।
+                </p>
             </div>
             <div>
-                <p>This is to certify that  
+                <p>This is to certify that
                     {% if student.gender == 'Male' %}
                     Mr.
                     {% elif student.gender == 'Female' %}
@@ -58,56 +67,61 @@
                     {% else %}
                     Mx.
                     {% endif %}
-                    {{student.name}} born on {{student.date_of_birth_ad}}, {% if student.gender == 'M' %}Son{% else %}Daughter{% endif %}
+                    {{student.name}} born on {{student.date_of_birth_ad}}, {% if student.gender == 'Male' %}Son{% else%} Daughter {% endif %}
                     of Mr. {{student.father_name}} and
-                    inhabitant of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} District has successfully completed the
+                    inhabitant of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} District has
+                    successfully completed the
                     vocational skill training on {{contract.occupation}} from {{batch.start_date}} to {{batch.end_date}}
-                    A.D. at {{contract.location}} implemented by Expert Technical College Nepal Pvt. Ltd. under {{contract.name}} and with assistance of {{sponsers}} {% for sponser in sponsors %} {{sponser.name}}, {% endfor %} 
+                    A.D. at {{contract.location}} implemented by Expert Technical College Nepal Pvt. Ltd. under
+                    {{contract.name}} and with assistance of {{sponsers}} {% for sponser in sponsors %}
+                    {{sponser.name}}, {% endfor %}
                     on {{ batch.duration }} long curriculum based on CTEVT.</p>
             </div>
         </section>
 
         <!-- Signature Section -->
-        <section >
+        <section>
             <div class="d-flex justify-between p-1 header" style="align-items: end;">
                 <div class="text-left">
                     <hr width="260px">
-                     <p class="m-1 p-1 text-bold">Hemraj Dahal</p>
-                     <p class="m-1 p-1">Executive Director</p>
-                     <p class="m-1 p-1">Expert Technical College Nepal Pvt. Ltd</p>
-                     <p class="m-1 p-1">Itahari, Sunsari</p>
+                    <p class="m-1 p-1 text-bold">हेमराज दाहाल</p>
+                    <p class="m-1 p-1">कार्यकारी निर्देशक</p>
+                    <p class="m-1 p-1">एक्स्पर्ट टेक्निकल कलेज नेपाल प्रा. लि.</p>
+                    <p class="m-1 p-1">इटहरी, सुनसरी</p>
                 </div>
                 <div>
                     <p>Date: 2024/04/07</p>
                 </div>
                 {% for signatory in signatories %}
-                <div style="text-align:right">
-                    <hr width="260px">
-                     <p class="m-1 p-1 text-bold">{{signatory.name}}</p>
-                     <p class="m-1 p-1">{{signatory.designation}}</p>
-                     <p class="m-1 p-1">{{signatory.institution}}</p>
-                     <p class="m-1 p-1"> </p>
-
+                <div class="grid place-items-center text-center">
+                    <hr class="w-full">
+                    <p class="m-1 p-1 text-bold"> {{signatory.nepali_name}}</p>
+                    <p class="m-1 p-1"> {{signatory.nepali_designation}}</p>
+                    <p class="m-1 p-1"> {{signatory.nepali_institution}}</p>
                 </div>
                 {% endfor %}
             </div>
-            
         </section>
-
         <hr>
         <!-- Footer -->
         <section>
             <div class="d-flex justify-between">
                 <div>
                     <p>Training implemented by:</p>
-                    <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt="">
+                    <img class="image-2" src="{% static 'pdf/logo etc.png' %}" alt="">
                 </div>
                 <div>
-                    <img class="image-1" src="{%static 'pdf/Emblem_of_Nepal.svg.png'%}" alt="">
+                    {% if student.qr_code %}
+                        <img class="image-1" src="{{ student.qr_code }}" alt="QR Code Image">
+                    {% endif %}
                 </div>
                 <div>
                     <p>Training Sponsored by:</p>
-                    <img class="image-2" src="./assets/Emblem_of_Nepal.svg.png" alt="">
+                    {% for sponsor in sponsors %}
+                    {% if sponsor.logo %}
+                    <img class="image-2" src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </section>

@@ -13,6 +13,8 @@ class Trainee(models.Model):
     ward_no = models.CharField(max_length=255)
     occupation = models.CharField(max_length=255)
     name = models.CharField(max_length=500)
+    nepali_name = models.CharField(max_length=500)
+
 
     GENDER_CHOICES = [
         ('M', 'Male'),
@@ -36,6 +38,7 @@ class Trainee(models.Model):
     ethnic_group = models.CharField(max_length=255)
     mother_name = models.CharField(max_length=255)
     father_name = models.CharField(max_length=255)
+    nepali_father_name = models.CharField(max_length=255)
     citizenship_no = models.CharField(max_length=100)
     issue_date = models.DateField()
     issue_district = models.CharField(max_length=255)
@@ -48,6 +51,7 @@ class Trainee(models.Model):
     is_selected = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    qr_code_image = models.ImageField(upload_to='trainee/qr_code_images/', blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -4,14 +4,67 @@ from contract.models import *
 from trainer.models import *
 from .models import *
 from django.contrib import messages
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 # Create your views here.
 @login_required
 def batchIndex(request):
-    all_batch = Batch.objects.all()
+    search_query = request.GET.get('search','')
+    all_batch = Batch.objects.filter(
+        Q(name__icontains=search_query)
+    ) if search_query else Batch.objects.all()
+
+    paginator = Paginator(all_batch, 7)
+    page_number = request.GET.get('page',1)
+    batches = paginator.get_page(page_number)
+
+
+    total_entries = paginator.count
+    total_pages = paginator.num_pages
+    start_index = batches.start_index()
+    end_index = batches.end_index()
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = {
+            'batches': [
+                {
+                    'id':batch.id,
+                    'name': batch.name,
+                    'duration': batch.duration,
+                    'start_date': batch.start_date,
+                    'end_date': batch.end_date,
+                    'seats': batch.seats,
+
+                    'trainers': [
+                        {
+                            'id': trainer.id,
+                            'name': trainer.name,
+                        }
+                        for trainer in batch.trainer.all()
+                    ],
+                    'contract': {
+                        'id': batch.contract.id,
+                        'name': batch.contract.name,
+                    }
+                }
+                for batch in batches.object_list
+            ],
+            'has_next': batches.has_next(),
+            'has_previous': batches.has_previous(),
+            'next_page_number': batches.next_page_number() if batches.has_next() else None,
+            'previous_page_number': batches.previous_page_number() if batches.has_previous() else None,
+            'total_entries': total_entries,
+            'total_pages': total_pages,
+            'current_page': batches.number,
+            'start_index': start_index,
+            'end_index': end_index,
+        }
+        return JsonResponse(data)
     context = {
-        'all_batch':all_batch
+        'all_batch': batches
     }
     return render(request, 'certificate/batch/index.html', context)
 
