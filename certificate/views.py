@@ -366,4 +366,4 @@ def generate_certificate(request):
 
 def trainee_details(request, id):
     trainee = get_object_or_404(Trainee, id=id)
-    return render(request, 'certificate/detail.html', {'trainee': trainee})
+    return render(request, 'certificate/certificate/detail.html', {'trainee': trainee})
