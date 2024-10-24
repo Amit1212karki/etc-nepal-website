@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Trainee Details</title>
 </head>
+
 <body>
     <h1>Trainee Details</h1>
     <p>Name: {{ trainee.name }}</p>
@@ -21,5 +23,13 @@
     <p>Palika: {{ trainee.palika.name }}</p>
     <p>Ward No: {{ trainee.ward_no }}</p>
     <!-- Add more fields as needed -->
+    {% if trainee.image %}
+    <img src="{{ trainee.image }}" alt="Trainee Image">
+    {% endif %}
+
+    {% if trainee.qr_code %}
+    <img src="{{ trainee.qr_code }}" alt="QR Code">
+    {% endif %}
 </body>
+
 </html>
