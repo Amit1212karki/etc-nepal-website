@@ -12,8 +12,6 @@
                 Sponsor
             </p>
             <p class="mt-1 text-sm font-normal text-gray-500 ">
-
-
             <nav class="flex py-3 text-gray-700 rounded-lg " aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
@@ -36,7 +34,6 @@
                             <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Sponsor</span>
                         </div>
                     </li>
-
                     <li aria-current="page">
                         <div class="flex items-center">
                             <svg class="rtl:rotate-180  w-3 h-3 mx-1 text-gray-700" aria-hidden="true"
@@ -54,7 +51,6 @@
         </div>
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <div class="w-full sm:w-1/2">
-
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
@@ -143,6 +139,15 @@
                 // Clear previous sponsor list
                 tableBody.innerHTML = '';
 
+                if (data.sponsors.length === 0) {
+                    const row = document.createElement('tr');
+                    row.classList.add('border-b');
+                    row.innerHTML = `
+                <td colspan="7" class="text-center px-6 py-4 text-gray-500">No sponsors found.</td>
+            `;
+                    tableBody.appendChild(row);
+                    return;
+                }
                 // Render new sponsor datasponsor
                 sponsors.forEach(sponsor => {
                     const row = document.createElement('tr');

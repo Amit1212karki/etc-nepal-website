@@ -67,7 +67,14 @@
             // Clear previous data
             tableBody.innerHTML = '';
             paginationControls.innerHTML = '';
-
+            if (data.notices.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td colspan="2" class="text-center px-6 py-4 text-gray-500">No notices found.</td>
+            `;
+            tableBody.appendChild(row);
+            return; // Exit the function early if no notices
+            }
             // Populate table with new data
             data.notices.forEach(notice => {
                 const row = document.createElement('tr');

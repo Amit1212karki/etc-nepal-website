@@ -72,6 +72,15 @@
             tableBody.innerHTML = '';
             paginationControls.innerHTML = '';
 
+            if (data.documents.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td colspan="2" class="text-center px-6 py-4 text-gray-500">No documents found.</td>
+            `;
+            tableBody.appendChild(row);
+            return; 
+            }
+
             // Populate table with new data
             data.documents.forEach(etc_document => {
                 const row = document.createElement('tr');

@@ -103,15 +103,20 @@
             </h3>
             <div class="mt-6 overflow-hidden">
                 <!-- Slider Container -->
+                {% for partner in partner %}
                 <ul class="grid grid-cols-1 sm:grid-cols-4  items-center">
-                    {% for partner in partner %}
                     <li class="col-span-1 px-4 text-center my-5 sm:my-0">
                         <img src="{{ partner.image.url }}" alt="{{ partner.name }}"
                             class="w-full aspect-[3/1] object-contain mb-3">
                         <span class="pt-3">{{partner.name}}</span>
                     </li>
-                    {% endfor %}
+                   
                 </ul>
+                {% empty %}
+                <div class="w-full ">
+                    <p class="w-full text-center text-gray-500">No partner available at the moment.</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -594,8 +599,8 @@
     <div class="">
         <!-- Ongoing Projects Tab -->
         <div x-show="openTab === 1">
+            {% for ongoing in project_ongoing %}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
-                {% for ongoing in project_ongoing %}
                 <article class="overflow-hidden rounded-sm border border-gray-100 bg-white border border-gray-200">
                     <img alt="{{ ongoing.title }}" src="{{ ongoing.image.url }}" class="h-56 w-full object-cover" />
 
@@ -623,18 +628,18 @@
                         </div>
                     </div>
                 </article>
-                {% empty %}
-                <div class="w-full">
-                    <p class="w-full">No ongoing projects available at the moment.</p>
-                </div>
-                {% endfor %}
             </div>
+            {% empty %}
+            <div class="w-full text-center">
+                <p class="w-full text-gray-500">No ongoing projects available at the moment.</p>
+            </div>
+            {% endfor %}
         </div>
 
         <!-- Completed Projects Tab -->
         <div x-show="openTab === 2">
+            {% for completed in project_completed %}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {% for completed in project_completed %}
                 <article class="overflow-hidden rounded-sm border border-gray-100 bg-white border border-gray-200">
                     <img alt="{{ completed.title }}" src="{{ completed.image.url }}" class="h-56 w-full object-cover" />
                     <div class="p-4 sm:p-6">
@@ -661,12 +666,12 @@
                         </div>
                     </div>
                 </article>
-                {% empty %}
-                <div class="w-full">
-                    <p class="w-full">No ongoing projects available at the moment.</p>
-                </div>
-                {% endfor %}
             </div>
+            {% empty %}
+            <div class="w-full text-center">
+                <p class="w-full text-gray-500">No completed projects available at the moment.</p>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -679,8 +684,8 @@
         </div>
     </div>
     <div class="pb-10">
+        {% for item in success_items %}
         <div class="grid lg:grid-cols-3 gap-10">
-            {% for item in success_items %}
             <div class="bg-gray-200 flex flex-col justify-center items-center p-5 rounded-sm">
                 <span
                     class="flex tabular-nums text-blue-600 text-7xl font-extrabold mb-2 transition-[_--num] duration-[3s] ease-out [counter-set:_num_var(--num)] supports-[counter-set]:before:content-[counter(num)]"
@@ -695,12 +700,13 @@
                     {{ item.description|truncatechars:200 }}
                 </span>
             </div>
-            {% empty %}
-            <div class="w-full">
-                <p class="w-full">No stories available at the moment.</p>
-            </div>
-            {% endfor %}
+
         </div>
+        {% empty %}
+        <div class="w-full text-center">
+            <p class="w-full text-gray-500">No success history available at the moment.</p>
+        </div>
+        {% endfor %}
     </div>
 </section>
 <section class="other px-20 pb-14">
@@ -743,10 +749,14 @@
                 <a href="/course/single-course/{{ course.id }}/">
                     <li class="hover:text-black">{{course.title}}</li>
                 </a>
+                {% empty %}
+                <div class="w-full">
+                    <p class="w-full hover:text-black">No course available at the moment.</p>
+                </div>
                 {% endfor %}
             </ul>
             <div>
-                <a href="#"
+                <a href="/course/"
                     class="bg-white text-black py-3 px-2 w-[90%] flex items-center justify-center absolute bottom-3 left-5">
                     Read more
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -795,13 +805,12 @@
             <span class="text-gray-500">Find out our publication published by out team members</span>
         </div>
         <a href="/news/"
-        class="group inline-flex items-center gap-1 text-sm font-medium text-blue-900 hover:text-yellow-600">
-        Find out more
-        <span aria-hidden="true"
-            class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
-            &rarr;
-        </span>
-    </a>
+            class="group inline-flex items-center gap-1 text-sm font-medium text-blue-900 hover:text-yellow-600">
+            Find out more
+            <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
+                &rarr;
+            </span>
+        </a>
     </div>
     {% if news %}
     <div class="news-container pb-5 ">
