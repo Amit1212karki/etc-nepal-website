@@ -12,7 +12,7 @@ urlpatterns = [
      # certificate axios url 
      path('get-batch-from-contract/<int:id>/',get_batch_from_contract),
      path('get-student-from-batch/<int:id>/',get_student_from_batch),
-     path('generate/',generate_certificate),
+     path('generate/',generate_certificate, name='generate-certificate'),
 
      path('certificate-qr-scan/<int:id>/', trainee_details, name='certificate-scan')
 
