@@ -57,7 +57,6 @@
         </div>
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <div class="w-full sm:w-1/2">
-
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
@@ -159,6 +158,16 @@
 
                 // Clear previous trainee list
                 tableBody.innerHTML = '';
+
+                if (data.batches.length === 0) {
+                    const row = document.createElement('tr');
+                    row.classList.add('border-b');
+                    row.innerHTML = `
+                <td colspan="7" class="text-center px-6 py-4 text-gray-500">No batches found.</td>
+            `;
+                    tableBody.appendChild(row);
+                    return;
+                }
 
                 // Render new trainee datatrainee
                 batches.forEach(batch => {
@@ -278,11 +287,11 @@
     fetchBatch(currentPage, searchQuery);
 
 
-    setTimeout(function() {
+    setTimeout(function () {
         const messageList = document.getElementById('message-list');
         if (messageList) {
             messageList.classList.add('opacity-0'); // Add opacity transition class to fade out
-            setTimeout(function() {
+            setTimeout(function () {
                 messageList.remove(); // Remove the message list from DOM after fading out
             }, 500); // 500ms matches the transition duration to ensure smooth removal
         }

@@ -10,10 +10,9 @@
             members.</span>
     </div>
 </div>
-
-<div class="news-container px-14">
+{% if images %}
+<div class="image-container px-14">
     <div class="flex flex-wrap">
-        {% if images %}
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             {% for image in images %}
             <a href="/image/image/{{ image.id }}/">
@@ -27,12 +26,12 @@
             </a>
             {% endfor %}
         </div>
-        {% else %}
-        <div class="flex justify-center items-center w-full py-8">
-            <p class="text-lg text-gray-600">No images available at the moment.</p>
-        </div>
-        {% endif %}
     </div>
 </div>
+{% else %}
+<div class="col-span-4 mb-14">
+    <p class="text-center text-gray-500">No images gallery available at the moment.</p>
+</div>
+{% endif %}
 
 {% endblock %}

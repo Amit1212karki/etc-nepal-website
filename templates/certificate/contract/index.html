@@ -152,6 +152,16 @@
                 // Clear previous contract list
                 tableBody.innerHTML = '';
 
+                if (data.contracts.length === 0) {
+                    const row = document.createElement('tr');
+                    row.classList.add('border-b');
+                    row.innerHTML = `
+                <td colspan="7" class="text-center px-6 py-4 text-gray-500">No contracts found.</td>
+            `;
+                    tableBody.appendChild(row);
+                    return;
+                }
+
                 // Render new contract data
                 contracts.forEach(contract => {
                     const row = document.createElement('tr');

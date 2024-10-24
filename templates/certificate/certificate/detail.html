@@ -3,33 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Trainee Details</title>
+    <title>Trainee Qr Details</title>
 </head>
 
 <body>
-    <h1>Trainee Details</h1>
-    <p>Name: {{ trainee.name }}</p>
-    <p>Nepali Name: {{ trainee.nepali_name }}</p>
-    <p>Gender: {{ trainee.get_gender_display }}</p>
-    <p>Date of Birth (AD): {{ trainee.date_of_birth_ad }}</p>
-    <p>Age: {{ trainee.age }}</p>
-    <p>Contact: {{ trainee.phone_no }}</p>
-    <p>Email: {{ trainee.email }}</p>
-    <p>Occupation: {{ trainee.occupation }}</p>
-    <p>Contract: {{ trainee.contract.name }}</p>
-    <p>Batch: {{ trainee.batch.name }}</p>
-    <p>Province: {{ trainee.province.name }}</p>
-    <p>District: {{ trainee.district.name }}</p>
-    <p>Palika: {{ trainee.palika.name }}</p>
-    <p>Ward No: {{ trainee.ward_no }}</p>
-    <!-- Add more fields as needed -->
-    {% if trainee.image %}
-    <img src="{{ trainee.image }}" alt="Trainee Image">
-    {% endif %}
+    <div class="section">
+        <h1>Trainee Details</h1>
+        <p>Name: {{ trainee.name }}</p>
+        <p>Nepali Name: {{ trainee.nepali_name }}</p>
+        <p>Gender: {{ trainee.get_gender_display }}</p>
+        <p>Date of Birth (AD): {{ trainee.date_of_birth_ad }}</p>
+        <p>Age: {{ trainee.age }}</p>
+        <p>Contact: {{ trainee.phone_no }}</p>
+        <p>Email: {{ trainee.email }}</p>
+        <p>Occupation: {{ trainee.occupation }}</p>
+        <p>Contract: {{ trainee.contract.name }}</p>
+        <p>Batch: {{ trainee.batch.name }}</p>
+        <p>Province: {{ trainee.province.name }}</p>
+        <p>District: {{ trainee.district.name }}</p>
+        <p>Palika: {{ trainee.palika.name }}</p>
+        <p>Ward No: {{ trainee.ward_no }}</p>
+        <!-- Add more fields as needed -->
+        {% if trainee.image %}
+        <img src="{{ trainee.image.url }}" alt="Trainee Image">
+        {% endif %}
 
-    {% if trainee.qr_code %}
-    <img src="{{ trainee.qr_code }}" alt="QR Code">
-    {% endif %}
+        {% if trainee.qr_code %}
+        <img src="{{ trainee.qr_code.url }}" alt="QR Code">
+        {% endif %}
+    </div>
 </body>
 
 </html>

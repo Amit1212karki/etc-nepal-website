@@ -70,6 +70,15 @@
             tableBody.innerHTML = '';
             paginationControls.innerHTML = '';
 
+            if (data.publications.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td colspan="2" class="text-center px-6 py-4 text-gray-500">No publications found.</td>
+            `;
+            tableBody.appendChild(row);
+            return; 
+            }
+
             // Populate table with new data
             data.publications.forEach(publication => {
                 const row = document.createElement('tr');

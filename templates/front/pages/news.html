@@ -3,17 +3,16 @@
 {% block title %}News{% endblock %}
 
 {% block content %}
-<div class="header px-20 py-14">
+<div class="header px-14 py-14">
     <div class="title-content">
         <h1 class="text-3xl font-bold text-blue-600">News</h1>
         <span class="text-gray-500">Find out our publication published by out team members</span>
     </div>
 </div>
 
-
-<div class="news-container px-20">
+{% if page_obj.object_list %}
+<div class="news-container px-14">
     <div class="grid grid-cols-4 gap-4">
-        {% if page_obj.object_list %}
         <!-- Loop through the news articles -->
         {% for news in page_obj %}
         <div class="col-span-1">
@@ -88,7 +87,7 @@
     </span>
 </div>
 {% else %}
-<div class="col-span-4">
+<div class="col-span-4 mb-14">
     <p class="text-center text-gray-500">No news articles available at the moment.</p>
 </div>
 {% endif %}
