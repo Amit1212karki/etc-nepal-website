@@ -364,8 +364,5 @@ def generate_certificate(request):
 
 
 def trainee_details(request, id):
-    trainee = get_object_or_404(Trainee, id=id)
-    print(os.path.abspath('templates/certificate/certificate/detail.html'))
-
-    if request.content_type == 'text/html':
-        return render(request, 'certificate/certificate/detail.html', {'trainee': trainee})
+   trainee = get_object_or_404(Trainee, id=id)
+   return render(request, 'certificate/certificate/detail.html', {'trainee': trainee})
