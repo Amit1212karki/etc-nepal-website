@@ -25,6 +25,7 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('', index),
     path('about/', about, name='about'),
+    path('admission/', include('admission.urls')),
     path('vission/', vission, name='vission'),
     path('mission/', mission, name='mission'),
     path('goal/', goal, name='goal'),

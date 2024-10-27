@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     'trainee',
     'signatory',
     'sponsor',
-    'core'
+    'core',
+    'admission',
 ]
 
 MIDDLEWARE = [
