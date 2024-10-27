@@ -37,17 +37,28 @@
         </div>
 
         <div class="grid grid-cols-2  gap-x-4">
-            <div class="bg-white p-6 shadow rounded-lg mb-6 col-span-2 h-[60vh]">
+            <div class="bg-white p-6 shadow rounded-lg mb-6">
+                <h3 class="text-lg font-semibold mb-4"> Top Porfoming Batch Chart</h3>
+                <div id="chart"></div>
+            </div>
+            <div class="bg-white p-6 shadow rounded-lg mb-6">
+                <h3 class="text-lg font-semibold mb-4"> Bar Graph</h3>
+                <div id="chart"></div>
+            </div>
+            <div class="bg-white p-6 shadow rounded-lg mb-6 col-span-2 ">
                 <h3 class="text-lg font-semibold mb-4">Trainees Chart</h3>
                 <div id="traineeChart"></div>
             </div>
-        </div>
-
-        <div class="bg-white p-6 shadow rounded-lg mb-6 col-span-2 h-[60vh]">
-            <h3 class="text-lg font-semibold mb-4"> Chart</h3>
-            <div id="chart"></div>
+            
         </div>
     </div>
+
+    <div style="display: none;">
+        <div id="total-trainee-data">{{ total_trainee_data }}</div>
+        <div id="selected-trainee-data">{{ selected_trainee_data }}</div>
+        <div id="backendTopProductsData">{{ top_products_data }}</div>
+    </div>
+
 </section>
 
 
@@ -68,7 +79,7 @@
 
 
         // Full list of months
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
         // Create a dictionary to map months to trainee counts
         var totalTraineesMap = {};

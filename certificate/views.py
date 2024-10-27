@@ -72,6 +72,8 @@ def home(request):
         }
         for data in home_selected_trainee_by_month
     ]
+
+    
     context = {
         'data_list':data_list,
         'total_trainee_data': json.dumps(total_trainee_data),  
