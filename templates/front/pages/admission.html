@@ -17,17 +17,17 @@
 <div>
     <section class="px-10 mt-2 mb-2 space-y-8 md:px-24">
         <div class="grid grid-cols-1 md:grid-cols-1 gap-10">
-        {% if messages %}
-        <ul id="message-list" class="transition-opacity duration-500 opacity-100">
-            {% for message in messages %}
-            {% if message.level == 25 %} {# SUCCESS level #}
-            <li class="text-black bg-green-100 p-2 rounded text-center">{{ message }}</li>
-            {% elif message.level == 40 %} {# ERROR level #}
-            <li class="text-black bg-red-100 p-2 rounded text-center">{{ message }}</li>
+            {% if messages %}
+            <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                {% for message in messages %}
+                {% if message.level == 25 %} {# SUCCESS level #}
+                <li class="text-black bg-green-100 p-2 rounded text-center">{{ message }}</li>
+                {% elif message.level == 40 %} {# ERROR level #}
+                <li class="text-black bg-red-100 p-2 rounded text-center">{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
             {% endif %}
-            {% endfor %}
-        </ul>
-        {% endif %}
         <form action="/admission/store-admission/" method="POST" class="space-y-6"
             enctype="multipart/form-data">
             {% csrf_token %}
@@ -299,6 +299,17 @@
 </div>
 
 <script>
+
+setTimeout(function () {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            messageList.classList.remove('opacity-100');
+            messageList.classList.add('opacity-0');
+            setTimeout(function () {
+                messageList.classList.add('hidden');
+            }, 500);
+        }
+    }, 5000); 
     // Calculate age when a date is selected
     document.getElementById('dob').addEventListener('change', function () {
         const dob = new Date(this.value);
@@ -374,15 +385,5 @@
         alert("No batch available for the selected contract. Please create a batch first.");
     }
 });
-setTimeout(function () {
-        const messageList = document.getElementById('message-list');
-        if (messageList) {
-            messageList.classList.remove('opacity-100');
-            messageList.classList.add('opacity-0');
-            setTimeout(function () {
-                messageList.classList.add('hidden');
-            }, 500);
-        }
-    }, 5000);
 </script>
 {% endblock %}

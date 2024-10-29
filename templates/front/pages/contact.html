@@ -26,9 +26,9 @@
                    <ul id="message-list" class="transition-opacity duration-500 opacity-100">
                        {% for message in messages %}
                        {% if message.level == 25 %} {# SUCCESS level #}
-                       <li class="text-black bg-green-100 p-2 rounded">{{ message }}</li>
+                       <li class="text-black bg-green-100 p-2 rounded text-center">{{ message }}</li>
                        {% elif message.level == 40 %} {# ERROR level #}
-                       <li class="text-black bg-red-100 p-2 rounded">{{ message }}</li>
+                       <li class="text-black bg-red-100 p-2 rounded text-center">{{ message }}</li>
                        {% endif %}
                        {% endfor %}
                    </ul>
@@ -151,15 +151,10 @@
         </div>
     </section>
 </div>
-
-
-
-
-
 <!-- Map at the bottom -->
 <div class="mt-6">
     <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7064.950946180724!2d85.33696308963546!3d27.702602203792477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199c57ba27b5%3A0xde93b6685bb60872!2sOld%20Baneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1716721656436!5m2!1sen!2snp"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.126643869152!2d87.2725356!3d26.6592922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDM5JzMyLjIiTiA4N8KwMTYnMjEuMiJF!5e0!3m2!1sen!2s!4v1674054103345!5m2!1sen!2s"
         width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
