@@ -11,9 +11,10 @@
 </head>
 
 <body onload="printCertificate()">
-    <div class="certificate-container body-background" id="certificate-container" style="position: relative; height: 97vh;">
+    <div class="certificate-container body-background" id="certificate-container"
+        style="position: relative; height: 97vh;">
         <div style="position: absolute; top: 0; left: 0; width: 100%;">
-            <img src="{% static 'images/certificate/muncipaility.png' %}" width="100%" height="650" alt="">
+            <img src="{% static 'images/certificate/muncipaility.png' %}" width="100%" height="100%" alt="">
         </div>
         <section>
             <div class="d-flex justify-around">
@@ -24,10 +25,11 @@
                     <p class=" m-1 p-1 text-red title">{{municipality_name}}</p>
                     <p class=" m-1 p-1 text-red title">{{municipality_second_name}}</p>
                     <p class=" m-1 p-1 text-red sub-title">{{municipality_address}}</p>
-                    <p class="m-1 p-1 title" style="position: relative;">
-                        <img src="{% static 'images/certificate/shape.png' %}" style="position: absolute; left: 0; width: 100%;" alt="">
-                        <span style="position: absolute; left: 4.5vw; top: 1; color: white; z-index: 1000;">प्रमाण-पत्र</span>
-                    </p>
+                    <div style="display:flex ; justify-content: center;">
+                        <p class="m-1 p-1 title certificate-title">
+                            प्रमाण-पत्र
+                        </p>
+                    </div>
                 </div>
                 <div>
                     <img class="image-passport" src="{{ student.image.url }}" alt="">
@@ -41,15 +43,16 @@
 
         <section style="text-align: center; margin-top: 20px;">
             <p class="text-bold">
-                <span style="color: green;">{{ contract.nepali_donation_by }}को</span> कार्यालयको आर्थिक सहयोगमा
+                <span style="color: green;">{{ contract.nepali_donation_by }}</span> कार्यालयको आर्थिक सहयोगमा
                 <span style="color: blueviolet;"> एक्सपर्ट टेक्निकल कलेज नेपाल प्रा. लि.</span> इटहरीको सहकार्यमा मिति
-                 <span style="color: navy;">{{ batch.start_date }}</span> गते देखि
-                <span style="color: navy;">{{ batch.end_date }}</span> गतेसम्म सञ्चालन भएको
+                <span style="color: navy;">{{ batch.start_date | convert_to_nepali_date }}</span> गते देखि
+                <span style="color: navy;">{{ batch.end_date | convert_to_nepali_date }}</span> गतेसम्म सञ्चालन भएको
                 <span style="color: green;">{{ contract.nepali_occupation }}</span> सम्बन्धी
-                तालिममा <span style="color: red;">{{ student.nepali_palika_name }}</span> 
-                वडा नं <span style="color: red;">{{ student.ward_no }}</span>, मोरङ बस्ने श्री 
-                <span style="color: red;">{{ student.nepali_father_name }}</span> का 
-                {% if student.gender == 'Male' %} <span style="color: red;">छोरा</span> {% else %}<span style="color: red;"> छोरी</span> {% endif %}
+                तालिममा <span style="color: red;">{{ student.nepali_palika_name }}</span>
+                वडा नं <span style="color: red;">{{ student.ward_no }}</span>, मोरङ बस्ने श्री
+                <span style="color: red;">{{ student.nepali_father_name }}</span> का
+                {% if student.gender == 'Male' %} <span >छोरा</span> {% else %}<span
+                    style="color: red;"> छोरी</span> {% endif %}
                 <span style="color: red;"> श्री {{ student.nepali_name }}</span>
                 ले सफलतापूर्वक सिप हासिल भएकोले स–धन्यवाद सहित यो प्रमाण–पत्र प्रदान गरिएको छ।
             </p>
@@ -57,7 +60,7 @@
         </section>
 
 
-        <section style="text-align: center; margin-top: 20px;">
+        <section style="text-align: center; margin-top: 10px;">
             <div>
                 <div class="text-center">
                     <p class="m-1 p-1 text-red title" style="text-decoration: underline;">CERTIFICATE</p>
@@ -72,10 +75,14 @@
                     <span style="color: red;">{{ student.name }}</span>
                     {% if student.gender == 'Male' %}Son{% else %}Daughter{% endif %}
                     of Mr. <span style="color: red;">{{ student.father_name }}</span>,
-                    permanent resident of <span style="color: red;">{{ student.palika }}</span> Ward No. <span style="color: red;">{{ student.ward_no }}</span>, <span style="color: red;">{{ student.district }}</span> on
-                    his/her successful completion of training programme and acquiring skills on <span style="color: green;">{{ contract.occupation }}</span> Training
-                    for <span style="color: navy;">{{ batch.duration }}</span> from <span style="color: navy;">{{ batch.start_date }}</span> to <span style="color: navy;">{{ batch.end_date }}</span>. This training programme is
-                    conducted by <span style="color: blueviolet;">Expert Technical College Nepal Pvt. Ltd.</span> Itahari with financial support of <span style="color: green;">{{ contract.donation_by }}</span>.
+                    permanent resident of <span style="color: red;">{{ student.palika }}</span> Ward No. <span
+                        style="color: red;">{{ student.ward_no }}</span>, <span style="color: red;">{{ student.district }}</span> on
+                    his/her successful completion of training programme and acquiring skills on <span
+                        style="color: green;">{{ contract.occupation }}</span> Training
+                    for <span style="color: navy;">{{ batch.duration }}</span> from <span style="color: navy;">{{ batch.start_date }}</span> to <span style="color: navy;">{{ batch.end_date }}</span>. This
+                    training programme is
+                    conducted by <span style="color: blueviolet;">Expert Technical College Nepal Pvt. Ltd.</span>
+                    Itahari with financial support of <span style="color: green;">{{ contract.donation_by }}</span>.
                 </p>
             </div>
         </section>
@@ -91,7 +98,7 @@
                 {% endfor %}
                 <div>
                     {% if student.qr_code %}
-                        <img class="image-1" src="{{ student.qr_code }}" alt="QR Code Image">
+                    <img class="image-1" src="{{ student.qr_code }}" alt="QR Code Image">
                     {% endif %}
                 </div>
                 {% for signatory in signatories %}
@@ -110,12 +117,20 @@
         function printCertificate() {
             window.print();
         }
-
-        // Close page after print dialog is closed
-        window.onafterprint = function() {
-            window.close();
-        }
     </script>
 </body>
+
+<style>
+    .certificate-title {
+        color: white;
+        background-image: url("{% static 'images/certificate/shape.png' %}");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        padding: 0.5em;
+        width: 20vw;
+    }
+</style>
 
 </html>

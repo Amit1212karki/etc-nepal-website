@@ -13,12 +13,15 @@
 }
 
 .certificate-container{
-    /* border: 4px solid #5e0000; */
     padding: 250px;
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
     padding: 60px;
+}
+
+.certificate-container{
+    height: 70vh;
 }
 
 /* Ensure the main content fits within the A4 page size */
@@ -32,7 +35,7 @@ section {
 .image-1 {
     width: auto;
     height: auto;
-    max-height: 100px;
+    max-height: 150px;
 }
 
 .image-2 {
@@ -54,8 +57,8 @@ section {
 }
 
 .image-passport {
-    width: 80px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border: 1px solid #000;
     border-radius: 2px;
@@ -73,7 +76,7 @@ section {
 }
 .text-bold{
     font-weight: 700;
-    font-size: 14px;
+    font-size: 25px;
 }
 
 .d-flex {
@@ -81,17 +84,17 @@ section {
 }
 
 .title {
-    font-size: 18px;
+    font-size: 30px;
     font-weight: 700;
 }
 
 .sub-title {
-    font-size: 14px;
+    font-size: 25px;
     font-weight: 700;
 }
 
 .text-caption {
-    font-size: 10px;
+    font-size: 20px;
 }
 
 .text-center {
@@ -134,6 +137,9 @@ section {
     width: 50%;
 }
 
+.signatory-section{
+    margin-top: 10vh;
+}
 @media print {
 
     /* Force landscape orientation */
@@ -141,6 +147,12 @@ section {
         size: A4 landscape;
         margin: 0;
         /* Remove default margins */
+    }
+
+    .image-1 {
+        width: auto;
+        height: auto;
+        max-height: 100px;
     }
 
     /* Full page print without any margin */
@@ -154,27 +166,59 @@ section {
         /* Full viewport height */
     }
 
-    /* Hide the print button during printing */
-    button {
-        display: none;
-    }
-
     /* Ensure the certificate container is centered and scaled to fit the page */
     .certificate-container {
         width: 100%;
         /* Adjust the width for scaling */
         height: 100%;
-        max-height: 100%;
+        max-height: 100vh;
         /* Ensure it fits vertically */
         padding: 60px;
         box-sizing: border-box;
         /* Ensure padding is included in width/height */
         
     }
+    
+    .text-bold{
+        font-weight: 700;
+        font-size: 14px;
+    }
 
     .title span {
         color: white !important; /* Ensure text color stays white */
         background-color: rgba(0, 0, 0, 0); /* Set transparent or solid background if needed */
         z-index: 1000; /* Increase z-index to ensure overlay */
+    }
+
+    .signatory-section{
+        margin-top: 10vh;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 700;
+    }
+    
+    .sub-title {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .image-passport {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border: 1px solid #000;
+        border-radius: 2px;
+        margin-top: 1.25rem;
+    }   
+
+    .certificate-title{
+        width: 20vw;
+    }
+
+    .certificate-title {
+        -webkit-print-color-adjust: exact; /* Ensures color accuracy */
+        print-color-adjust: exact; /* For non-WebKit browsers */
     }
 }
