@@ -8,18 +8,17 @@
     background-image: url('./assets/Emblem_of_Nepal.svg.png');
     background-size: 600px; /* Adjust the size to make it smaller */
     background-repeat: no-repeat;
-    background-position: center;
-    background-color: rgba(255, 255, 255, 0.8); /* Transparent color overlay */
+    background-position: center; /* Transparent color overlay */
     background-blend-mode: lighten; /* Blend the transparent color with the image */
 }
 
 .certificate-container{
-    border: 4px solid #5e0000;
-    padding: 50px;
+    /* border: 4px solid #5e0000; */
+    padding: 250px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 60px;
 }
 
 /* Ensure the main content fits within the A4 page size */
@@ -33,7 +32,7 @@ section {
 .image-1 {
     width: auto;
     height: auto;
-    max-height: 120px;
+    max-height: 100px;
 }
 
 .image-2 {
@@ -60,7 +59,8 @@ section {
     object-fit: cover;
     border: 1px solid #000;
     border-radius: 2px;
-}
+    margin-top: 1.25rem;
+}   
 
 .text-red {
     color: rgb(133, 0, 0);
@@ -73,7 +73,7 @@ section {
 }
 .text-bold{
     font-weight: 700;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .d-flex {
@@ -81,12 +81,12 @@ section {
 }
 
 .title {
-    font-size: 34px;
+    font-size: 18px;
     font-weight: 700;
 }
 
 .sub-title {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 700;
 }
 
@@ -166,8 +166,15 @@ section {
         height: 100%;
         max-height: 100%;
         /* Ensure it fits vertically */
-        padding: 10;
+        padding: 60px;
         box-sizing: border-box;
         /* Ensure padding is included in width/height */
+        
+    }
+
+    .title span {
+        color: white !important; /* Ensure text color stays white */
+        background-color: rgba(0, 0, 0, 0); /* Set transparent or solid background if needed */
+        z-index: 1000; /* Increase z-index to ensure overlay */
     }
 }

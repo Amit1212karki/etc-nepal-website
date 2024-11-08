@@ -9,73 +9,82 @@
     <link rel="stylesheet" href="{% static 'pdf/style.css' %}">
     <title>Certificate</title>
 </head>
-
-<body>
-    <!-- A4 sized certificate container -->
-    <div class="certificate-container">
-        <!-- Header -->
+<body onload="printertificate()">
+    <div class="certificate-container body-background" id="certificate-container" style="position: relative; height: 97vh;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%;">
+            <img src="{% static 'images/certificate/college.png' %}" width="100%" height="650" alt="">
+        </div>
         <section>
-            <div class="header d-flex justify-around align-center">
-                <div class="">
-                    <img class="image-1" src="{%static 'pdf/Emblem_of_Nepal.svg.png'%}" alt="">
+            <div class="d-flex justify-around">
+                <div>
+                    <img class="image-1" src="{% static 'pdf/nepal_government.png' %}" alt="">
                 </div>
                 <div class="text-center">
                     <p class="text-red m-1 p-1">{{vocational_first_heading}}</p>
                     <p class="text-red m-1 p-1">{{vocational_second_heading}}</p>
                     <p class="text-blue sub-title m-1 p-1">{{vocational_third_heading}}</p>
                     <p class="text-red title m-1 p-1">{{vocational_fourth_heading}}</p>
+                    <p class="m-1 p-1 title" style="position: relative;">
+                        <img src="{% static 'images/certificate/shape.png' %}" style="position: absolute; left: 0; width: 100%;" alt="">
+                        <span style="position: absolute; left: 0; top: 1; color: black; z-index: 500;">प्रमाण-पत्र</span>
+                    </p>
 
                 </div>
                 <div>
-                    <div>
-                        <img class="image-2" src="./assets/HEL_Logo_3d_Bangladesh_colour_web.png" alt="">
-                    </div>
-                    <div>
                         {% if student.image and student.image.url %}
                             <img class="image-passport" src="{{ student.image.url }}" alt="Student Image">
                         {% endif %}
-                    </div>
                 </div>
             </div>
         </section>
-
+        <section style="margin-top: 2px;">
+            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: ____________</p>
+        </section>
         <!-- Body -->
-        <section>
+        <section style=" margin-top:1px;">
             <div>
-                <p>यो प्रमाणपत्र वडा न. {{student.ward_no}} {{student.nepali_district}} जिल्ला निवासी श्री
-                    {{student.nepali_father_name}}का {% if student.gender == 'Male' %} छोरा {% else %} छोरी {% endif %}
-                    जन्म मिति {{student.date_of_birth_bs}}
-                    श्री {{student.nepali_name}} ले {{contract.nepali_name}} अन्तर्गत {% for sponser in sponsors %}
-                    {{sponser.name}}, {% endfor %} को
-                    प्राविधिक सहयोगमा {{batch.start_date}} देखि {{batch.end_date}} सम्म एक्सपर्ट टेक्निकल कलेज नेपाल
-                    प्रा.लि.ले
-                    {{contract.nepali_location}}मा सञ्चालित {{contract.nepali_occupation}} बिषयमा सिटिभिटिको
-                    {{batch.duration}} को
+                <p>यो प्रमाणपत्र वडा न. <span style="color:red;">{{student.ward_no}}</span> <span style="color:red;">{{student.nepali_district}}</span> जिल्ला निवासी श्री
+                    <span style="color:red;">{{student.nepali_father_name}}</span>का {% if student.gender == 'Male' %} <span style="color:red;">छोरा</span> {% else %} <span style="color:red;">छोरी</span> {% endif %}
+                    जन्म मिति <span style="color:red;">{{student.date_of_birth_bs}}</span>
+                    श्री <span style="color:red;">{{student.nepali_name}}</span> ले <span style="color:green;">{{contract.nepali_name}}</span> अन्तर्गत {% for sponser in sponsors %}
+                    <span style="color:darkgreen;">{{sponser.name}}</span>, {% endfor %} को
+                    प्राविधिक सहयोगमा <span style="color:navy;">{{batch.start_date}}</span> देखि <span style="color:navy;">{{batch.end_date}}</span> सम्म <span style="color:blueviolet;">एक्सपर्ट टेक्निकल कलेज नेपाल
+                    प्रा.लि.ले </span>
+                    <span style="color:green;">{{contract.nepali_location}}</span>मा सञ्चालित <span style="color:green;">{{contract.nepali_occupation}}</span> बिषयमा सिटिभिटिको
+                    <span style="color:navy;">{{batch.duration}}</span> को
                     पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।
                 </p>
+            </div>
+        </section>
+        
+        <section style="margin-top: 5px;">
+            <div>
+                <div class="text-center">
+                    <p class="m-1 p-1 text-red title">CERTIFICATE</p>
+                </div>
             </div>
             <div>
                 <p>This is to certify that
                     {% if student.gender == 'Male' %}
-                    Mr.
+                    <span style="color: red;">Mr.</span>
                     {% elif student.gender == 'Female' %}
                     {% if student.marital_status == 'Married' %}
-                    Mrs.
+                    <span style="color: red;">Mrs.</span>
                     {% else %}
-                    Miss
+                    <span style="color: red;">Miss</span>
                     {% endif %}
                     {% else %}
-                    Mx.
+                    <span style="color: red;">Mx.</span>
                     {% endif %}
-                    {{student.name}} born on {{student.date_of_birth_ad}}, {% if student.gender == 'Male' %}Son{% else%} Daughter {% endif %}
-                    of Mr. {{student.father_name}} and
-                    inhabitant of {{student.palika}} Ward No. {{student.ward_no}}, {{student.district}} District has
+                    <span style="color: red;">{{student.name}}</span> born on <span style="color: red;">{{student.date_of_birth_ad}}</span>, {% if student.gender == 'Male' %}<span style="color: red;">Son</span> {% else%} <span style="color: red;">Daughter</span> {% endif %}
+                    of<span style="color: red;"> Mr. {{student.father_name}}</span> and
+                    inhabitant of <span style="color: red;">{{student.palika}}</span> Ward No. <span style="color: red;">{{student.ward_no}}</span>, <span style="color: red;">{{student.district}}</span> District has
                     successfully completed the
-                    vocational skill training on {{contract.occupation}} from {{batch.start_date}} to {{batch.end_date}}
-                    A.D. at {{contract.location}} implemented by Expert Technical College Nepal Pvt. Ltd. under
-                    {{contract.name}} and with assistance of {{sponsers}} {% for sponser in sponsors %}
-                    {{sponser.name}}, {% endfor %}
-                    on {{ batch.duration }} long curriculum based on CTEVT.</p>
+                    vocational skill training on <span style="color: green;">{{contract.occupation}}</span> from <span style="color: navy;">{{batch.start_date}}</span> to <span style="color: navy;">{{batch.end_date}}</span>
+                    A.D. at <span style="color: green;">{{contract.location}}</span> implemented by <span >Expert Technical College Nepal Pvt. Ltd.</span> under
+                    <span style="color: green;">{{contract.name}}</span> and with assistance of {% for sponser in sponsors %}
+                    <span style="color: darkgreen;">{{sponser.name}}</span>, {% endfor %}
+                    on <span style="color: navy;">{{ batch.duration }}</span> long curriculum based on CTEVT.</p>
             </div>
         </section>
 
@@ -126,26 +135,14 @@
             </div>
         </section>
     </div>
-    <style>
-        @media print {
-            .certificate-container {
-                margin-left: 0px;
-                /* Adjust this value to shift the certificate more or less to the left */
-            }
-        }
-    </style>
-
-    <div id="print-button" style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
-        <button onclick="printCertificate()"
-            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Print</button>
-    </div>
-
     <script>
         function printCertificate() {
-            var printButton = document.getElementById('print-button');
-            printButton.style.display = 'none';
             window.print();
-            printButton.style.display = 'block';
+        }
+
+        // Close page after print dialog is closed
+        window.onafterprint = function() {
+            window.close();
         }
     </script>
 </body>
