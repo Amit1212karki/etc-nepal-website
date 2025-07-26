@@ -1,0 +1,54 @@
+{% extends 'front/layout/main.html' %} 
+{% load static %}
+{% block title %}
+{{ block.super }} - About
+{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-600">Objective</h1>
+        <span class="text-gray-500">Find out our publications published by our team members</span>
+    </div>
+    <nav class="absolute  bg-blue-600 bg-opacity-50 text-white p-3 rounded-md m-4 w-max" aria-label="breadcrumb">
+        <ol class="list-reset flex text-left">
+            <li><a href="/" class="hover:text-yellow-300">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="/objective/" class="hover:text-yellow-300">Objective</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li>About etc </li>
+        </ol>
+    </nav>
+</div>
+<div>
+    <section class="px-12 mt-6 p-6 space-y-8 md:px-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Text Section -->
+            <div class="col text-justify">
+                <h1 class="text-3xl font-bold" id="intro2">Objectives</h1>
+                <p class="text-muted-foreground mt-4" id="2desc1">
+                    1. Enhance Employment Opportunities: Provide tailored vocational and technical training programs aimed at increasing the employability of marginalized groups, including school dropouts and unemployed youths.
+                    <br><br>
+                    2. Empower Youth for Self-Sufficiency: Equip individuals with market-relevant skills to enable them to secure self-employment or wage employment, contributing to economic self-sufficiency.
+                    <br><br>
+                    3. Promote Environmentally Sustainable Practices: Incorporate environmentally friendly approaches into skill enhancement training to align with sustainable development goals and social responsibility.
+                    <br><br>
+                    4. Foster Capacity Building and Professional Development: Conduct research, workshops, seminars, and capacity-building initiatives aimed at upgrading the technical and social skills of trainees in line with modern technologies.
+                    <br><br>
+                    5. Facilitate Career Guidance and Counseling: Provide career counseling services to unemployed youths, helping them make informed decisions regarding career paths and foreign employment opportunities.
+                    <br><br>
+                    6. Develop Training Materials Aligned with Market Needs: Prepare high-quality training materials, such as manuals, notes, and brochures, based on in-depth job market research to ensure relevance and impact.
+                    <br><br>
+                    7. Contribute to Nation Building through Skilled Workforce Development: Support national development efforts by providing a skilled workforce that contributes to various sectors, thus helping reduce poverty and fostering economic growth.
+                </p>
+            </div>
+
+            <!-- Image Section -->
+            <div class="col flex items-center">
+                <img src="{% static 'images/home.jpg' %}" alt="ETC" class="w-full h-full rounded-lg object-cover"
+                    style="border: 5px solid #f59e0b;">
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

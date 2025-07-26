@@ -1,0 +1,175 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-600">Contact Us </h1>
+        <span class="text-gray-500">If you have any enquiry, feel free to contact us. Leave us
+            your details and our team will handle the rest.</span>
+    </div>
+</div>
+
+<div>
+    <section class="px-10 mt-2  space-y-8 md:px-24">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-10">
+            <div class="grid grid-cols-6 gap-6">
+                <!-- Form to contact -->
+                <div class="col-span-6 lg:col-span-4">
+                   <div class="block my-3">
+                       <p class="text-gray-600 mt-2">Please fill out the form below to begin your journey with us. Make sure to provide accurate information so we can assist you better. We look forward to welcoming you!</p>
+                   </div>
+                   {% if messages %}
+                   <ul id="message-list" class="transition-opacity duration-500 opacity-100">
+                       {% for message in messages %}
+                       {% if message.level == 25 %} {# SUCCESS level #}
+                       <li class="text-black bg-green-100 p-2 rounded text-center">{{ message }}</li>
+                       {% elif message.level == 40 %} {# ERROR level #}
+                       <li class="text-black bg-red-100 p-2 rounded text-center">{{ message }}</li>
+                       {% endif %}
+                       {% endfor %}
+                   </ul>
+                   {% endif %}
+                   <form action="/contact/store-contact/" method="POST" class="space-y-6"
+                       enctype="multipart/form-data">
+                       {% csrf_token %}
+                       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <div>
+                               <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                               <input type="text" name="name" id="name"
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                           </div>
+                           <div>
+                               <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                               <input type="email" name="email" id="email"
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+           
+                           </div>
+                           <div>
+                               <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                               <input type="text" name="phone" id="phone"
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                           </div>
+                           <div>
+                               <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                               <input type="text" name="subject" id="subject"
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                           </div>
+                       </div>
+                       <div>
+                           <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                           <textarea name="message" id="message" rows="4"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-100 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                       </div>
+                       <div>
+           
+                           <div class="g-recaptcha" data-sitekey="{{ recaptcha_site }}"></div>
+                           {% if form.captcha.errors %}
+                           <div class="text-red-500 text-sm mt-2">{{ form.captcha.errors }}</div>
+                           {% endif %}
+           
+                       </div>
+                       <div>
+                           <button type="submit"
+                               class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                               Send Message
+                           </button>
+                       </div>
+                   </form>
+               </div>
+               <!-- Contact information -->
+               <div class="col-span-6 lg:col-span-2 bg-blue-50 p-6 rounded-lg">
+                   <div class="block mb-3">
+                       <h2 class="text-3xl font-bold">Get in Touch Today</h2>
+                       <p class="text-gray-600 mt-2">We’re here to assist with any questions or feedback!</p>
+                   </div>
+                   <div class="mb-6">
+                       <video width="100%" autoplay muted playsinline loop>
+                           <source src="{% static 'front/assets/videos/video.mp4' %}" type="video/mp4">
+                           Your browser does not support the video tag.
+                       </video>
+                   </div>
+                   <p class="text-gray-600 mt-2">Prefer reaching out directly? Feel free to use the contact details below to get in touch with us:</p>
+           
+                   <div class="mt-4 space-y-4">
+                       <div class="flex items-center">
+                           <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
+                               xmlns="http://www.w3.org/2000/svg">
+                               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                               <g id="SVGRepo_iconCarrier">
+                                   <path
+                                       d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z"
+                                       stroke="#1C274C" stroke-width="2" stroke-linecap="round"
+                                       stroke-linejoin="round"></path>
+                                   <path
+                                       d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
+                                       stroke="#1C274C" stroke-width="2" stroke-linecap="round"
+                                       stroke-linejoin="round"></path>
+                               </g>
+                           </svg>
+                           &nbsp; Itahari, Sunsari
+                       </div>
+                       <div class="flex items-center">
+                           <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
+                               xmlns="http://www.w3.org/2000/svg">
+                               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                               <g id="SVGRepo_iconCarrier">
+                                   <path
+                                       d="M10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1147 9.8278 10.1147 9.8278 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C14.1588 20.0658 10.9183 19.5829 7.6677 16.3323C4.41713 13.0817 3.93421 9.84122 4.00655 7.93309C4.04952 6.7996 4.7008 5.77423 5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617Z"
+                                       fill="#1C274C"></path>
+                               </g>
+                           </svg>
+                           &nbsp;
+                           9876543211</span> <br>
+                           &nbsp;
+                           9802833011</span> <br>
+                           &nbsp;
+                           9862165238</span> <br>
+                       </div>
+                       <div class="flex items-start">
+                           <svg class="mt-1" width="18px" height="18px" viewBox="0 0 24 24" fill="none"
+                               xmlns="http://www.w3.org/2000/svg">
+                               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                               <g id="SVGRepo_iconCarrier">
+                                   <path
+                                       d="M4 18L9 12M20 18L15 12M3 8L10.225 12.8166C10.8665 13.2443 11.1872 13.4582 11.5339 13.5412C11.8403 13.6147 12.1597 13.6147 12.4661 13.5412C12.8128 13.4582 13.1335 13.2443 13.775 12.8166L21 8M6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V8.2C21 7.0799 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19Z"
+                                       stroke="#1C274C" stroke-width="2" stroke-linecap="round"
+                                       stroke-linejoin="round"></path>
+                               </g>
+                           </svg>
+                           &nbsp; info@etcnepal.com.np
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Map at the bottom -->
+<div class="mt-6">
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.126643869152!2d87.2725356!3d26.6592922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDM5JzMyLjIiTiA4N8KwMTYnMjEuMiJF!5e0!3m2!1sen!2s!4v1674054103345!5m2!1sen!2s"
+        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</div>
+<script>
+    // Set a timeout to hide the message after 5 seconds (5000 milliseconds)
+    setTimeout(function () {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            messageList.classList.remove('opacity-100');
+            messageList.classList.add('opacity-0');
+            setTimeout(function () {
+                messageList.classList.add('hidden');
+            }, 500);
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
+{% endblock %}

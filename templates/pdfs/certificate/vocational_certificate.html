@@ -1,0 +1,171 @@
+{% load static %}
+{% load translate_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pdf/style.css' %}">
+    <title>Certificate</title>
+</head>
+
+<body onload="printertificate()">
+    <div class="certificate-container" id="certificate-container" style="position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%;">
+            <img src="{% static 'images/certificate/college.png' %}" width="100%" height="100%" alt="">
+        </div>
+        <section>
+            <div class="d-flex justify-around">
+                <div>
+                    <img class="image-1" src="{% static 'pdf/nepal_government.png' %}" alt="">
+                </div>
+                <div class="text-center">
+                    <p class="text-red m-1 p-1">{{vocational_first_heading}}</p>
+                    <p class="text-red m-1 p-1">{{vocational_second_heading}}</p>
+                    <p class="text-blue sub-title m-1 p-1">{{vocational_third_heading}}</p>
+                    <p class="text-red title m-1 p-1">{{vocational_fourth_heading}}</p>
+                    <div style="display:flex ; align-items: center;">
+                        <p class="m-1 p-1 title certificate-title">
+                            प्रमाण-पत्र
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    {% if student.image and student.image.url %}
+                    <img class="image-passport" src="{{ student.image.url }}" alt="Student Image">
+                    {% else %}
+                    <p>No image available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 2px;">
+            <p class="m-1 p-1 text-caption">प्रमाण-पत्र न: ____________</p>
+        </section>
+        <!-- Body -->
+        <section style=" margin-top:1px;">
+            <div>
+                <p class="text-bold">यो प्रमाणपत्र वडा न. <span style="color:red;">{{student.ward_no}}</span> <span style="color:red;">{{student.nepali_palika_name}}</span>, <span
+                        style="color:red;">{{student.nepali_district}}</span> जिल्ला निवासी श्री
+                    <span style="color:red;">{{student.nepali_father_name}}</span> का {% if student.gender == 'Male' %}
+                    <span style="color:red;">छोरा</span> {% else %} <span style="color:red;">छोरी</span> {% endif %}
+                    जन्म मिति <span style="color:red;">{{student.date_of_birth_bs}}</span>
+                    श्री <span style="color:red;">{{student.nepali_name}}</span> ले <span
+                        style="color:green;">{{contract.nepali_name}}</span> अन्तर्गत {% for sponser in sponsors %}
+                    <span style="color:darkgreen;">{{sponser.name}}</span>, {% endfor %} को
+                    प्राविधिक सहयोगमा <span style="color:navy;">{{batch.start_date | convert_to_nepali_date}}</span> देखि <span
+                        style="color:navy;">{{batch.end_date | convert_to_nepali_date}}</span> सम्म <span style="color:blueviolet;">एक्सपर्ट
+                        टेक्निकल कलेज नेपाल
+                        प्रा.लि.ले </span>
+                    <span style="color:green;">{{contract.nepali_location}}</span>मा सञ्चालित <span
+                        style="color:green;">{{contract.nepali_occupation}}</span> बिषयमा सिटिभिटिको
+                    <!-- <span style="color:navy;">{{batch.duration}}</span> को -->
+                    पाठ्यक्रमको तालिममा सहभागी भई सफलतापूर्वक समाप्त गर्नुभएको हुनाले यो प्रमाणपत्र प्रदान गरिएको छ ।
+                </p>
+            </div>
+        </section>
+
+        <section style="margin-top: 5px;">
+            <div>
+                <div class="text-center">
+                    <p class="m-1 p-1 text-red title">CERTIFICATE</p>
+                </div>
+            </div>
+            <div>
+                <p class="text-bold">This is to certify that
+                    {% if student.gender == 'Male' %}
+                    <span style="color: red;">Mr.</span>
+                    {% elif student.gender == 'Female' %}
+                    {% if student.marital_status == 'Married' %}
+                    <span style="color: red;">Mrs.</span>
+                    {% else %}
+                    <span style="color: red;">Miss</span>
+                    {% endif %}
+                    {% else %}
+                    <span style="color: red;">Mx.</span>
+                    {% endif %}
+                    <span style="color: red;">{{student.name}}</span> born on <span
+                        style="color: red;">{{student.date_of_birth_ad}}</span>, {% if student.gender == 'Male' %}<span
+                        style="color: red;">Son</span> {% else%} <span style="color: red;">Daughter</span> {% endif %}
+                    of<span style="color: red;"> Mr. {{student.father_name}}</span> and
+                    inhabitant of <span style="color: red;">{{student.palika}}</span> Ward No. <span
+                        style="color: red;">{{student.ward_no}}</span>, <span
+                        style="color: red;">{{student.district}}</span> District has
+                    successfully completed the
+                    vocational skill training on <span style="color: green;">{{contract.occupation}}</span> from <span
+                        style="color: navy;">{{batch.start_date}}</span> to <span
+                        style="color: navy;">{{batch.end_date}}</span>
+                    A.D. at <span style="color: green;">{{contract.location}}</span> implemented by <span>Expert
+                        Technical College Nepal Pvt. Ltd.</span> under
+                    <span style="color: green;">{{contract.name}}</span> and with assistance of {% for sponser in sponsors %}
+                    <span style="color: darkgreen;">{{sponser.name}}</span>, {% endfor %}
+                    on <span style="color: navy;">{{ batch.duration }}</span> long curriculum based on CTEVT.
+                </p>
+            </div>
+        </section>
+
+        <!-- Signature Section -->
+        <section>
+            <div class="d-flex justify-between p-1 header" style="align-items: end;">
+                <div class="text-left">
+                    <hr width="260px">
+                    <p class="m-1 p-1 text-bold">हेमराज दाहाल</p>
+                    <p class="m-1 p-1">कार्यकारी निर्देशक</p>
+                    <p class="m-1 p-1">एक्स्पर्ट टेक्निकल कलेज नेपाल प्रा. लि.</p>
+                    <p class="m-1 p-1">इटहरी, सुनसरी</p>
+                </div>
+                <div>
+                    {% if student.qr_code %}
+                    <img class="image-1" src="{{ student.qr_code }}" alt="QR Code Image">
+                    {% endif %}
+                </div>
+                {% for signatory in signatories %}
+                <div class="grid place-items-center text-center">
+                    <hr class="w-full">
+                    <p class="m-1 p-1 text-bold"> {{signatory.nepali_name}}</p>
+                    <p class="m-1 p-1"> {{signatory.nepali_designation}}</p>
+                    <p class="m-1 p-1"> {{signatory.nepali_institution}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <hr>
+        <!-- Footer -->
+        <section style="margin-top: 1vh;">
+            <div class="d-flex justify-between">
+                <div>
+                    <p>Training implemented by:</p>
+                    <img class="image-2" src="{% static 'pdf/logo_etc.png' %}" width="100%" alt="">
+                </div>
+                <div>
+                    <p>Training Sponsored by:</p>
+                    {% for sponsor in sponsors %}
+                    {% if sponsor.logo %}
+                    <img class="image-2" src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        function printCertificate() {
+            window.print();
+        }
+    </script>
+</body>
+<style>
+    .certificate-title {
+        color: white;
+        background-image: url("{% static 'images/certificate/shape.png' %}");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        padding: 0.5em;
+        width: 20vw;
+    }
+</style>
+
+</html>

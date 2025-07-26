@@ -1,0 +1,95 @@
+{% extends 'front/layout/main.html' %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-600">News</h1>
+        <span class="text-gray-500">Find out our publication published by out team members</span>
+    </div>
+</div>
+
+{% if page_obj.object_list %}
+<div class="news-container px-14">
+    <div class="grid grid-cols-4 gap-4">
+        <!-- Loop through the news articles -->
+        {% for news in page_obj %}
+        <div class="col-span-1">
+            <a href="/news/single-news/{{news.id}}/">
+                <div class="border hover:border-blue-600 transition duration-300 rounded-sm">
+                    <div class="relative w-full h-64 border-b ">
+                        <img class="absolute inset-0 w-full h-full object-cover rounded-t-sm" src="{{ news.image.url }}"
+                            alt="{{ news.title }}">
+                    </div>
+                    <div class="p-4 md:p-5 bg-white">
+                        <h3 class="text-lg text-gray-800">
+                            {{ news.title|truncatechars:50 }}
+                        </h3>
+                        <p class="mt-1 text-gray-500">
+                            {{ news.description|truncatechars:100 }}
+                        </p>
+                        <div class="flex justify-between items-center mt-5">
+                            <p class="text-xs text-gray-500 dark:text-neutral-500">
+                                Uploaded {{ news.created_at|timesince }} ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="pagination col-span-4 mt-8 flex justify-center pb-14">
+    <span class="inline-flex items-center -space-x-px">
+        {% if page_obj.has_previous %}
+        <a href="?page=1"
+            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-[rgba(202,138,4,var(--tw-bg-opacity))] hover:text-white">
+            &laquo; First
+        </a>
+        <a href="?page={{ page_obj.previous_page_number }}"
+            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[rgba(202,138,4,var(--tw-bg-opacity))] hover:text-white">
+            Previous
+        </a>
+        {% else %}
+        <span
+            class="py-2 px-3 ml-0 leading-tight text-gray-300 bg-white border border-gray-200 rounded-l-lg cursor-not-allowed">
+            &laquo; First
+        </span>
+        <span class="py-2 px-3 leading-tight text-gray-300 bg-white border border-gray-200 cursor-not-allowed">
+            Previous
+        </span>
+        {% endif %}
+
+        <span class="py-2 px-3 leading-tight bg-white border border-gray-300 text-gray-700">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"
+            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[rgba(202,138,4,var(--tw-bg-opacity))] hover:text-white">
+            Next
+        </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}"
+            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-[rgba(202,138,4,var(--tw-bg-opacity))] hover:text-white">
+            Last &raquo;
+        </a>
+        {% else %}
+        <span class="py-2 px-3 leading-tight text-gray-300 bg-white border border-gray-200 cursor-not-allowed">
+            Next
+        </span>
+        <span
+            class="py-2 px-3 leading-tight text-gray-300 bg-white border border-gray-200 rounded-r-lg cursor-not-allowed">
+            Last &raquo;
+        </span>
+        {% endif %}
+    </span>
+</div>
+{% else %}
+<div class="col-span-4 mb-14">
+    <p class="text-center text-gray-500">No news articles available at the moment.</p>
+</div>
+{% endif %}
+
+{% endblock %}

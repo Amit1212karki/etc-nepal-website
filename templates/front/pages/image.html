@@ -1,0 +1,70 @@
+{% extends 'front/layout/main.html' %}
+
+{% block title %}Image Gallery{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-600">Image Gallery</h1>
+        <span class="text-gray-500">Explore the publications and projects brought to you by our dedicated team
+            members.</span>
+    </div>
+</div>
+{% if images %}
+<div class="image-container px-14 mb-5">
+    <div class="flex flex-wrap">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {% for image in images %}
+            <a href="/image/image/{{ image.id }}/">
+                <div class="relative overflow-hidden rounded-lg h-72 group">
+                    <img class="object-cover w-full h-full" src="{{ image.cover.url }}" alt="{{ image.title }}">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-lg font-bold absolute top-4 left-4">{{ image.title|truncatechars:50 }}</p>
+                        <p class="text-white text-sm absolute bottom-4 left-4">{{ image.created_at|date:"M d, Y" }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="mt-8">
+        <nav class="flex justify-center">
+            <ul class="inline-flex items-center -space-x-px">
+                {% if images.has_previous %}
+                <li>
+                    <a href="?page=1" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">First</a>
+                </li>
+                <li>
+                    <a href="?page={{ images.previous_page_number }}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in images.paginator.page_range %}
+                {% if images.number == num %}
+                <li>
+                    <a href="?page={{ num }}" class="py-2 px-3 leading-tight text-blue-600 border border-gray-300 bg-gray-200">{{ num }}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="?page={{ num }}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if images.has_next %}
+                <li>
+                    <a href="?page={{ images.next_page_number }}" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">Next</a>
+                </li>
+                <li>
+                    <a href="?page={{ images.paginator.num_pages }}" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% else %}
+<div class="col-span-4 mb-14">
+    <p class="text-center text-gray-500">No images gallery available at the moment.</p>
+</div>
+{% endif %}
+
+{% endblock %}

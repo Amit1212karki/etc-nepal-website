@@ -1,0 +1,122 @@
+{% extends 'front/layout/main.html' %}
+{% load static %}
+{% block title %}Notices{% endblock %}
+
+{% block content %}
+<div class="header px-14 py-14">
+    <div class="title-content">
+        <h1 class="text-3xl font-bold text-blue-600">Notices</h1>
+        <span class="text-gray-500">Find out our notices published by our team members</span>
+    </div>
+</div>
+
+<div class="relative overflow-x-auto sm:rounded-lg px-10">
+    <div class="flex flex-wrap items-center justify-between pb-4">
+        <!-- Search Bar aligned to the right -->
+        <div class="relative ml-auto w-full sm:w-auto">
+            <label for="table-search" class="sr-only">Search</label>
+            <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
+                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <input type="text" id="table-search"
+                class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Search for notices" onkeyup="searchNotices()">
+        </div>
+    </div>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3">Notice title</th>
+                <th scope="col" class="px-6 py-3">Action</th>
+            </tr>
+        </thead>
+        <tbody id="notices-table-body">
+            <!-- Content will be injected here by JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="flex justify-between mt-4" id="pagination-controls">
+        <!-- Pagination controls will be injected here by JavaScript -->
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    let currentPage = 1;
+    let searchQuery = '';
+
+    function fetchNotices(page = 1, query = '') {
+        axios.get('/notice/', {
+            params: {
+                search: query,
+                page: page
+            },
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            const data = response.data;
+            const tableBody = document.getElementById('notices-table-body');
+            const paginationControls = document.getElementById('pagination-controls');
+            
+            // Clear previous data
+            tableBody.innerHTML = '';
+            paginationControls.innerHTML = '';
+            if (data.notices.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td colspan="2" class="text-center px-6 py-4 text-gray-500">No notices found.</td>
+            `;
+            tableBody.appendChild(row);
+            return; // Exit the function early if no notices
+            }
+            // Populate table with new data
+            data.notices.forEach(notice => {
+                const row = document.createElement('tr');
+                row.className = 'bg-white border-b hover:bg-gray-50';
+                row.innerHTML = `
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${notice.title}</th>
+                    <td class="px-6 py-4"><a href="${notice.pdf}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" download>Download</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Handle pagination
+            if (data.has_previous) {
+                const prevButton = document.createElement('a');
+                prevButton.href = 'javascript:void(0);';
+                prevButton.className = 'px-4 py-2 bg-blue-500 text-white rounded';
+                prevButton.innerText = 'Previous';
+                prevButton.onclick = () => fetchNotices(data.previous_page_number, searchQuery);
+                paginationControls.appendChild(prevButton);
+            }
+
+            if (data.has_next) {
+                const nextButton = document.createElement('a');
+                nextButton.href = 'javascript:void(0);';
+                nextButton.className = 'px-4 py-2 bg-blue-500 text-white rounded';
+                nextButton.innerText = 'Next';
+                nextButton.onclick = () => fetchNotices(data.next_page_number, searchQuery);
+                paginationControls.appendChild(nextButton);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching notices:', error);
+        });
+    }
+
+    function searchNotices() {
+        searchQuery = document.getElementById('table-search').value;
+        fetchNotices(currentPage, searchQuery);
+    }
+
+    // Initial fetch
+    fetchNotices(currentPage, searchQuery);
+</script>
+{% endblock %}

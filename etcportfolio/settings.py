@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,19 +26,44 @@ SECRET_KEY = 'django-insecure-r8uzd#455h$3cgjn1w(nk*d^^%_t*^7zx1d(vq1mxv*pz*4024
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['etcnepal.com.np','*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'notice',git remove 
+    'notice',
+    'news',
+    'project',
+    'image',
+    'video',
+    'publication',
+    'team',
+    'contact',
+    'django_recaptcha',
+    'document',
+    'partners',
+    'records',
+    'certificate',
+    'course',
+    'ckeditor',
+    'ckeditor_uploader',
+    'location',
+    'contract',
+    'trainer',
+    'batch',
+    'trainee',
+    'signatory',
+    'sponsor',
+    'core',
+    'admission',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'etcportfolio.urls'
@@ -55,7 +82,7 @@ ROOT_URLCONF = 'etcportfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,9 +143,52 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# URL to use when referring to static files (in templates, etc.)
 STATIC_URL = 'static/'
+
+# Directory where Django will look for static files during development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Directory where static files will be collected for production (when running 'collectstatic')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
+# media
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SITE_TITLE = 'ETC'
+
+JAZZMIN_SETTINGS = {
+
+    "site_title": "ETC",
+    "site_header": "ETC",
+    "site_brand": "ETC",
+    "copyright": "Developed by Hunchha Digital PVT. LTD",
+    
+}
+
+APPEND_SLASH = False
+
+RECAPTCHA_PUBLIC_KEY = '6LeyfQ4qAAAAADZRq0llG77QeLWzU_G7BC954p8I'
+RECAPTCHA_PRIVATE_KEY = '6LeyfQ4qAAAAAPEo4sBUxphXd73c6c_cjitRFVTe'
+
+RECAPTCHA_DEFAULT_ERROR_MESSAGE = 'Invalid reCAPTCHA. Please try again.'
+
+# SESSION_COOKIE_AGE = 1800 
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
+
+LOGIN_URL = '/certificate/'

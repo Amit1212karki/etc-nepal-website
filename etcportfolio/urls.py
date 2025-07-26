@@ -15,8 +15,42 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('contact/', include('contact.urls')),
+    path('', index),
+    path('about/', about, name='about'),
+    path('admission/', include('admission.urls')),
+    path('vission/', vission, name='vission'),
+    path('mission/', mission, name='mission'),
+    path('goal/', goal, name='goal'),
+    path('objective/', objective, name='objective'),
+    path('hr-diagram/', hrDiagram, name='hr-diagram'),
+    path('publications/', include('publication.urls')),
+    path('news/', include('news.urls')),
+    path('projects/', include('project.urls')),
+    path('notice/', include('notice.urls')),
+    path('teams/', include('team.urls')),
+    path('image/', include('image.urls')),
+    path('video/', include('video.urls')),
+    path('etc_document/', include('document.urls')),
+    path('course/', include('course.urls')),
+    path('certificate/', include('certificate.urls')),
+    path('contract/', include('contract.urls')),
+    path('trainer/', include('trainer.urls')),
+    path('batch/', include('batch.urls')),
+    path('signatory/', include('signatory.urls')),
+    path('trainee/', include('trainee.urls')),
+    path('sponsor/', include('sponsor.urls')),
+
+    
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
